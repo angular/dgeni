@@ -1,0 +1,21 @@
+{
+  "name": "angular-doc-gen",
+  "version": "0.0.0",
+  "description": "Generate the angularjs documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Pete Bacon Darwin",
+  "license": "MIT",
+  "dependencies": {
+    "q": "~0.9.7",
+    "q-io": "~1.10.6",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.11.0",
+    "rewire": "~2.0.0"
+  }
+}
