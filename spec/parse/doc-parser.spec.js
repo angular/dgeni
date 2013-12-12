@@ -1,6 +1,6 @@
 var rewire = require('rewire');
-var docParser = rewire('../lib/doc-parser');
-var docsFromJsFile = require('./data/docsFromJsFile');
+var docParser = rewire('../../lib/parse/doc-parser');
+var docsFromJsFile = require('../data/docsFromJsFile');
 
 describe("doc-parser", function() {
 
@@ -41,7 +41,7 @@ describe("doc-parser", function() {
 
     beforeEach(function() {
       processTag = docParser.__get__('processTag');
-      doc = { file: 'file.js', params: [] };
+      doc = { file: 'file.js', params: [], pageClassName:'api' };
       line = 'some line of text from the doc';
     });
 
@@ -57,13 +57,37 @@ describe("doc-parser", function() {
         expect(doc.params.length).toEqual(1);
         expect(doc.params[0]).toEqual({
           name: 'paramName',
-          description: 'description text',
+          description: '<div class="api"><p>description text</p>\n</div>',
           type: 'string',
           optional: false,
           default: undefined
         });
       });
     });
+
+    describe("returns", function() {
+      
+    });
+
+    describe("requires", function() {
+      
+    });
+
+    describe("property", function() {
+      
+    });
+
+    describe("eventType", function() {
+      
+    });
+  });
+
+  describe("initDoc", function() {
+    
+  });
+
+  describe("updateMetaData", function() {
+    
   });
 
   xdescribe("parse", function() {
