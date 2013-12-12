@@ -8,8 +8,9 @@ describe("doc-extractors", function() {
       expect(docExtractors.extractNgdoc('foo/bar.ngdoc', 'A load of content')).toEqual([{
         content: 'A load of content',
         file: 'foo/bar.ngdoc',
+        folder: 'foo',
         id: 'bar',
-        type: 'ngdoc'
+        fileType: 'ngdoc'
       }]
       );
     });

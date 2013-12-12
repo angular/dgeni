@@ -1,8 +1,9 @@
 module.exports = [
 {
   file : 'some/file.js',
+  folder: 'some',
   startingLine : 3,
-  type : 'js',
+  fileType : 'js',
   content:
     "@ngdoc object\n" +
     "@name ng/$controllerProvider\n" +
@@ -15,8 +16,9 @@ module.exports = [
 },
 {
   file: 'some/file.js',
+  folder: 'some',
   startingLine: 18,
-  type: 'js',
+  fileType : 'js',
   content:
     "@ngdoc function\n" +
     "@name ng/$controllerProvider#register\n" +
@@ -28,8 +30,9 @@ module.exports = [
 },
 {
   file: 'some/file.js',
+  folder: 'some',
   startingLine: 39,
-  type: 'js',
+  fileType : 'js',
   content:
      "@ngdoc function\n" +
      "@name ng/$controller\n" +

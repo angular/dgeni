@@ -35,6 +35,7 @@ describe("doc-parser", function() {
 
   describe("processTag", function() {
     var processTag, doc, line;
+
     function createTag(name, text) {
       return { name: name, text: [text]};
     }
@@ -45,8 +46,8 @@ describe("doc-parser", function() {
       line = 'some line of text from the doc';
     });
 
-    describe("param", function() {
-      it("should throw an error if there tag is badly formatted", function() {
+    describe("param tag", function() {
+      it("should throw an error if the tag is badly formatted", function() {
         var tag = createTag('param', '{missing end brace from param tag');
         expect(function() { processTag(tag, doc, line); }).toThrow();
       });
@@ -57,7 +58,7 @@ describe("doc-parser", function() {
         expect(doc.params.length).toEqual(1);
         expect(doc.params[0]).toEqual({
           name: 'paramName',
-          description: '<div class="api"><p>description text</p>\n</div>',
+          description: 'description text',
           type: 'string',
           optional: false,
           default: undefined
@@ -65,21 +66,37 @@ describe("doc-parser", function() {
       });
     });
 
-    describe("returns", function() {
-      
+    describe("returns/return tag", function() {
+      it("should throw an error if the tag is badly formatted", function() {
+      });      
+      it("should add a XXX object to the doc", function() {
+      });
     });
 
-    describe("requires", function() {
-      
+    describe("requires tag", function() {
+      it("should throw an error if the tag is badly formatted", function() {
+      });      
+      it("should add a XXX object to the doc", function() {
+      });
     });
 
-    describe("property", function() {
-      
+    describe("property tag", function() {
+      it("should throw an error if the tag is badly formatted", function() {
+      });      
+      it("should add a XXX object to the doc", function() {
+      });
     });
 
-    describe("eventType", function() {
-      
+    describe("eventType tag", function() {
+      it("should throw an error if the tag is badly formatted", function() {
+      });      
+      it("should add a XXX object to the doc", function() {
+      });
     });
+
+    describe("other tags", function() {
+
+    })
   });
 
   describe("initDoc", function() {
