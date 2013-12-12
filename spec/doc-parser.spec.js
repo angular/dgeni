@@ -1,39 +1,48 @@
 var rewire = require('rewire');
-var docParser = rewire('../../lib/parse/doc-parser');
-var docsFromJsFile = require('../data/docsFromJsFile');
+var docParser = rewire('../lib/doc-parser');
+var docsFromJsFile = require('./data/docsFromJsFile');
 
 describe("doc-parser", function() {
 
-  describe("getShortName", function() {
-    it("should pull the last segment off the document name", function() {
-      var getShortName = docParser.__get__('getShortName');
-      expect(getShortName({ name: 'angular.injector'})).toBe('angular.injector');
-      expect(getShortName({ name: 'ng/directive/input/email'})).toBe('email');
+  describe("addMetaData", function() {
+    var addMetaData, doc;
+    beforeEach(function() {
+      addMetaData = docParser.__get__('addMetaData');
     });
-  });
 
-  describe("getId", function() {
-    it("should use the id if provided or default to name", function() {
-      var getId = docParser.__get__('getId');
-      expect(getId({ id: 'some/id', name: 'some/name'})).toBe('some/id');
-      expect(getId({ name: 'some/name'})).toBe('some/name');
-    });
-  });
+    it("should use doc.id if provided or default to doc.name", function() {
+      doc = { id: 'some/id', name: 'some/name'};
+      addMetaData(doc);
+      expect(doc.id).toBe('some/id');
 
-  describe("getModuleName", function() {
-    it("should pull the first segment off the document id", function() {
-      var getModuleName = docParser.__get__('getModuleName');
-      expect(getModuleName({ id: 'some/name'})).toBe('some');
-      expect(getModuleName({ id: 'x.y'})).toBe('x');
+      doc = { name: 'some/name'};
+      addMetaData(doc);
+      expect(doc.id).toBe('some/name');
     });
+
+    it('should calculate the path of an ngdoc document', function() {
+      doc = { fileType: 'ngdoc', folder: 'a/b/c'};
+      addMetaData(doc);
+      expect(doc.path).toEqual('a/b/c');
+    });
+
+    it('should calculate properties for a js document', function() {
+      doc = { fileType: 'js', name: 'x/y/z'};
+      addMetaData(doc);
+      expect(doc.path).toEqual('api/x/y/z');
+      expect(doc.moduleName).toEqual('x');
+      expect(doc.shortName).toEqual('z');
+    });
+
     it("should convert 'angular' to 'ng'", function() {
-      var getModuleName = docParser.__get__('getModuleName');
-      expect(getModuleName({ id: 'angular.thing'})).toBe('ng');
+      doc = { fileType: 'js', name: 'angular.abc'};
+      addMetaData(doc);
+      expect(doc.moduleName).toEqual('ng');
     });
   });
 
 
-  describe("processTag", function() {
+  xdescribe("processTag", function() {
     var processTag, doc, line;
 
     function createTag(name, text) {
