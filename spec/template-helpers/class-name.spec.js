@@ -1,4 +1,4 @@
-var className = require('../../lib/utils/class-name');
+var className = require('../../lib/template-helpers/class-name');
 
 describe("class-name", function() {
   describe("prepareClassName", function() {

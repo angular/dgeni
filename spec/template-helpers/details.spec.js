@@ -1,6 +1,6 @@
-var parser = require('../../lib/content-parsers/details');
+var parser = require('../../lib/template-helpers/details');
 
-describe("content-parsers/details", function() {
+describe("template-helpers/details", function() {
   it("should extract //!details directives and replace with HTML", function() {
     expect(parser('//!details="REGEX" path/to/local/docs/file.html\n' +
                   'some text containing REGEX inside\n'))

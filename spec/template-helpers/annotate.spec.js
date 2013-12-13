@@ -1,6 +1,6 @@
-var parser = require('../../lib/content-parsers/annotate');
+var parser = require('../../lib/template-helpers/annotate');
 
-describe("content-parsers/annotate", function() {
+describe("template-helpers/annotate", function() {
   it("should extract //!annotate directives and replace with HTML", function() {
     expect(parser('//!annotate="some" a title|annotation thing\nsome content\n'))
       .toEqual(

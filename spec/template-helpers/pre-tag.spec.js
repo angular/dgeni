@@ -1,6 +1,6 @@
-var parser = require('../../lib/content-parsers/pre-tag');
+var parser = require('../../lib/template-helpers/pre-tag');
 
-describe("content-parsers/pre-tag", function() {
+describe("template-helpers/pre-tag", function() {
   it("should add pretty print css classes", function() {
     var placeholders = jasmine.createSpyObj('placeholders', ['add', 'get']);
 

@@ -1,6 +1,6 @@
-var parser = require('../../lib/content-parsers/install-module');
+var parser = require('../../lib/template-helpers/install-module');
 
-describe("content-parsers/install-module", function() {
+describe("template-helpers/install-module", function() {
   it("should replace the {@installModule moduleName} directive with content", function() {
     var html = parser('{@installModule animate}');
     expect(html).toContain('<h1>Installation</h1>');
