@@ -1,4 +1,4 @@
-var htmlFormatter = require('../../lib/write/html-formatter');
+var htmlFormatter = require('../../lib/utils/html-formatter');
 var DOM = htmlFormatter.DOM;
 var normalizeHeaderToId = htmlFormatter.normalizeHeaderToId;
 

@@ -13,7 +13,8 @@
     "q": "~0.9.7",
     "q-io": "~1.10.6",
     "lodash": "~2.4.1",
-    "marked": "~0.2.9"
+    "marked": "~0.2.9",
+    "optimist": "~0.6.0"
   },
   "devDependencies": {
     "jasmine-node": "~1.11.0",

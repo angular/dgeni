@@ -14,7 +14,7 @@ describe("doc-writer", function() {
     });
 
     // Reset the writer before each test
-    writer = rewire('../../lib/write/doc-writer');
+    writer = rewire('../../lib/utils/doc-writer');
     writer.__set__('fs', mockFs);
   });
 

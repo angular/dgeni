@@ -1,7 +1,6 @@
 module.exports = [
 {
   file : 'some/file.js',
-  folder: 'some',
   startingLine : 3,
   fileType : 'js',
   content:
@@ -16,7 +15,6 @@ module.exports = [
 },
 {
   file: 'some/file.js',
-  folder: 'some',
   startingLine: 18,
   fileType : 'js',
   content:
@@ -30,7 +28,6 @@ module.exports = [
 },
 {
   file: 'some/file.js',
-  folder: 'some',
   startingLine: 39,
   fileType : 'js',
   content:

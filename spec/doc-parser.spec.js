@@ -1,6 +1,5 @@
 var rewire = require('rewire');
 var docParser = rewire('../lib/doc-parser');
-var docsFromJsFile = require('./data/docsFromJsFile');
 
 describe("doc-parser", function() {
 
@@ -38,88 +37,6 @@ describe("doc-parser", function() {
       doc = { fileType: 'js', name: 'angular.abc'};
       addMetaData(doc);
       expect(doc.moduleName).toEqual('ng');
-    });
-  });
-
-
-  xdescribe("processTag", function() {
-    var processTag, doc, line;
-
-    function createTag(name, text) {
-      return { name: name, text: [text]};
-    }
-
-    beforeEach(function() {
-      processTag = docParser.__get__('processTag');
-      doc = { file: 'file.js', params: [], pageClassName:'api' };
-      line = 'some line of text from the doc';
-    });
-
-    describe("param tag", function() {
-      it("should throw an error if the tag is badly formatted", function() {
-        var tag = createTag('param', '{missing end brace from param tag');
-        expect(function() { processTag(tag, doc, line); }).toThrow();
-      });
-
-      it("should add a params object to the doc", function() {
-        var tag = createTag('param', '{string} paramName description text');
-        processTag(tag, doc);
-        expect(doc.params.length).toEqual(1);
-        expect(doc.params[0]).toEqual({
-          name: 'paramName',
-          description: 'description text',
-          type: 'string',
-          optional: false,
-          default: undefined
-        });
-      });
-    });
-
-    describe("returns/return tag", function() {
-      it("should throw an error if the tag is badly formatted", function() {
-      });      
-      it("should add a XXX object to the doc", function() {
-      });
-    });
-
-    describe("requires tag", function() {
-      it("should throw an error if the tag is badly formatted", function() {
-      });      
-      it("should add a XXX object to the doc", function() {
-      });
-    });
-
-    describe("property tag", function() {
-      it("should throw an error if the tag is badly formatted", function() {
-      });      
-      it("should add a XXX object to the doc", function() {
-      });
-    });
-
-    describe("eventType tag", function() {
-      it("should throw an error if the tag is badly formatted", function() {
-      });      
-      it("should add a XXX object to the doc", function() {
-      });
-    });
-
-    describe("other tags", function() {
-
-    })
-  });
-
-  describe("initDoc", function() {
-    
-  });
-
-  describe("updateMetaData", function() {
-    
-  });
-
-  xdescribe("parse", function() {
-    it("should parse the contents and extract the data from the @ tags", function() {
-      var parsedDoc = docParser(docsFromJsFile[0]);
-      expect(parsedDoc.file);
     });
   });
 });
