@@ -10,7 +10,7 @@ var docExtractors = [
 ];
 var readFiles = fileReaderFactory(docExtractors);
 
-var ngDocProcessorFactory = require('../lib/ngdoc');
+var ngDocProcessorFactory = require('../lib/ngdoc-parser');
 var ngdocTagHandlers = [
   require('../lib/ngdoc-tags/eventType'),
   require('../lib/ngdoc-tags/param'),
@@ -19,7 +19,10 @@ var ngdocTagHandlers = [
   require('../lib/ngdoc-tags/returns'),
   require('../lib/ngdoc-tags/default'),
 ];
-var inlineTagHandlers = [];
+var inlineTagHandlers = [
+  require('../lib/ngdoc-tags/inline/link'),
+  require('../lib/ngdoc-tags/inline/noop'),
+];
 var ngdocPlugins = [
   require('../lib/ngdoc-plugins/calculate-id'),
   require('../lib/ngdoc-plugins/calculate-path')

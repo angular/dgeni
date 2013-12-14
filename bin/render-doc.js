@@ -12,7 +12,7 @@ var docExtractors = [
 var readFiles = fileReaderFactory(docExtractors);
 
 // Doc processing
-var ngDocProcessorFactory = require('../lib/ngdoc');
+var ngDocProcessorFactory = require('../lib/ngdoc-parser');
 var ngdocTagHandlers = [
   require('../lib/ngdoc-tags/eventType'),
   require('../lib/ngdoc-tags/param'),
@@ -21,12 +21,18 @@ var ngdocTagHandlers = [
   require('../lib/ngdoc-tags/returns'),
   require('../lib/ngdoc-tags/default'),
 ];
-var inlineTagHandlers = [];
+var inlineTagHandlers = [
+  require('../lib/ngdoc-tags/inline/link'),
+  require('../lib/ngdoc-tags/inline/noop'),
+];
 var ngdocPlugins = [
   require('../lib/ngdoc-plugins/calculate-id'),
   require('../lib/ngdoc-plugins/calculate-path')
 ];
 var processDoc = ngDocProcessorFactory(ngdocTagHandlers, inlineTagHandlers, ngdocPlugins);
+
+// Doc collection processing
+var mergeDocs = require('../lib/doc-merger');
 
 // Doc rendering
 var docRendererFactory = require('../lib/doc-renderer');
@@ -41,6 +47,9 @@ readFiles(filePath)
     docs.forEach(function(doc) {
       processDoc(doc);
       console.log('Processed doc', doc.id);
+    });
+    docs = mergeDocs(docs);
+    docs.forEach(function(doc) {
       var renderedFilePath = renderDoc('partial.html', doc);
       console.log('Rendered doc', renderedFilePath);
     });

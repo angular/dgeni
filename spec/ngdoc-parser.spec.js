@@ -1,4 +1,4 @@
-var ngDocProcessorFactory = require('../lib/ngdoc');
+var ngDocProcessorFactory = require('../lib/ngdoc-parser');
 
 describe("ngdoc", function() {
   var tagHandlerSpy, inlineTagHandlerSpy, processDoc;
