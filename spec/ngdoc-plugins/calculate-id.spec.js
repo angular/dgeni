@@ -16,4 +16,9 @@ describe("calculate-id ngdoc plugin", function() {
     idFromName.after(doc);
     expect(doc.id).toEqual('module:a.filter:b');
   });
+  it("should calculate the id as a module if only the name is given", function() {
+    var doc = { fileType: 'js', ngdoc: 'overview', name: 'b'};
+    idFromName.after(doc);
+    expect(doc.id).toEqual('module:b');
+  });
 });

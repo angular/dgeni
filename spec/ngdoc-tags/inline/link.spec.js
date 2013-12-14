@@ -21,6 +21,7 @@ describe("link inline ngdoc tag", function() {
     expect(tagHandler(someDoc, 'link', 'filter:currency')).toEqual('<a href="/api/ng/filter/currency"><code>currency</code></a>');
     expect(tagHandler(someDoc, 'link', 'module:ng.$compile')).toEqual('<a href="/api/ng/$compile"><code>$compile</code></a>');
 
+    expect(tagHandler(someDoc, 'link', 'module:ngRoute')).toEqual('<a href="/api/ngRoute"><code>ngRoute</code></a>');
     expect(tagHandler(someDoc, 'link', 'module:ngRoute.directive:ngView')).toEqual('<a href="/api/ngRoute/directive/ngView"><code>ngView</code></a>');
 
     expect(tagHandler(someDoc, 'link', 'global:angular.element')).toEqual('<a href="/api/angular.element"><code>angular.element</code></a>');
