@@ -3,6 +3,7 @@ var myArgs = require('optimist')
   .demand(1)
   .argv;
 
+// File reading
 var fileReaderFactory = require('../lib/doc-extractor');
 var docExtractors = [
   require('../lib/doc-extractors/ngdoc'),
@@ -10,6 +11,7 @@ var docExtractors = [
 ];
 var readFiles = fileReaderFactory(docExtractors);
 
+// Doc processing
 var ngDocProcessorFactory = require('../lib/ngdoc');
 var ngdocTagHandlers = [
   require('../lib/ngdoc-tags/eventType'),
@@ -26,18 +28,20 @@ var ngdocPlugins = [
 ];
 var processDoc = ngDocProcessorFactory(ngdocTagHandlers, inlineTagHandlers, ngdocPlugins);
 
-var partialGeneratorFactory = require('../lib/partial-generator');
-var generatePartial = partialGeneratorFactory(myArgs.templates, myArgs.output);
+// Doc rendering
+var docRendererFactory = require('../lib/doc-renderer');
+var renderDoc = docRendererFactory(myArgs.templates, myArgs.output);
 
+// Main work
 var filePath = myArgs._[0];
-
 console.log('Reading files from ', filePath);
 readFiles(filePath)
   .then(function(docs) {
     console.log('Read', docs.length, 'docs');
     docs.forEach(function(doc) {
-      console.log('Processing doc');
       processDoc(doc);
-      generatePartial('partial.html', doc);
+      console.log('Processed doc', doc.id);
+      var renderedFilePath = renderDoc('partial.html', doc);
+      console.log('Rendered doc', renderedFilePath);
     });
   }).done();
