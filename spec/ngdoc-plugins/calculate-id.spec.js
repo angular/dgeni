@@ -11,9 +11,9 @@ describe("calculate-id ngdoc plugin", function() {
     idFromName.after(doc);
     expect(doc.id).toEqual('b');
   });
-  it("should calculate the id from the filename if no id or name exist", function() {
-    var doc = { file: 'a/b.js', fileType: 'js'};
+  it("should calculate the id from the doc meta data if doc is from a JS file and id exists", function() {
+    var doc = { fileType: 'js', module: 'a', ngdoc: 'filter', name: 'b'};
     idFromName.after(doc);
-    expect(doc.id).toEqual('b');
+    expect(doc.id).toEqual('module:a.filter:b');
   });
 });
