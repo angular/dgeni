@@ -1,5 +1,5 @@
 var myArgs = require('optimist')
-  .usage('Usage: $0 path/to/files')
+  .usage('Usage: $0 path/to/files --templates=path/to/templates --output=path/to/output/folder')
   .demand(1)
   .argv;
 
@@ -26,6 +26,9 @@ var ngdocPlugins = [
 ];
 var processDoc = ngDocProcessorFactory(ngdocTagHandlers, inlineTagHandlers, ngdocPlugins);
 
+var partialGeneratorFactory = require('../lib/partial-generator');
+var generatePartial = partialGeneratorFactory(myArgs.templates, myArgs.output);
+
 var filePath = myArgs._[0];
 
 console.log('Reading files from ', filePath);
@@ -33,7 +36,8 @@ readFiles(filePath)
   .then(function(docs) {
     console.log('Read', docs.length, 'docs');
     docs.forEach(function(doc) {
+      console.log('Processing doc');
       processDoc(doc);
-      console.log('============================ Doc =====================\n', doc);
+      generatePartial('partial.html', doc);
     });
-  });
+  }).done();
