@@ -1,0 +1,1 @@
+node ../bin/render-docs.js src --templates=./templates/ --output=./build/partials

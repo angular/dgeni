@@ -5,7 +5,7 @@
 /**
  * @ngdoc filter
  * @module ngSanitize
- * @name filter:linky
+ * @name linky
  * @function
  *
  * @description
