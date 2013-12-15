@@ -11,10 +11,23 @@ describe("calculate-id ngdoc plugin", function() {
     idFromName.after(doc);
     expect(doc.id).toEqual('b');
   });
-  it("should calculate the id from the doc meta data if doc is from a JS file and id exists", function() {
+  it("should calculate the id from the doc meta data if doc is from a JS file and no id exists", function() {
     var doc = { fileType: 'js', module: 'a', ngdoc: 'filter', name: 'b'};
     idFromName.after(doc);
     expect(doc.id).toEqual('module:a.filter:b');
+
+    var doc = { fileType: 'js', module: 'a', ngdoc: 'directive', name: 'b'};
+    idFromName.after(doc);
+    expect(doc.id).toEqual('module:a.directive:b');
+
+    var doc = { fileType: 'js', module: 'a', ngdoc: 'global', name: 'b'};
+    idFromName.after(doc);
+    expect(doc.id).toEqual('module:a.global:b');
+
+    var doc = { fileType: 'js', module: 'a', ngdoc: 'type', name: 'b'};
+    idFromName.after(doc);
+    expect(doc.id).toEqual('module:a.filter:b');
+
   });
   it("should calculate the id as a module if only the name is given", function() {
     var doc = { fileType: 'js', ngdoc: 'overview', name: 'b'};

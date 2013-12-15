@@ -13,7 +13,7 @@ describe("calculate-path", function() {
     calculatePath.after(doc);
     expect(doc.path).toEqual('api/ng/directive/input.checkbox');
 
-    doc = { fileType: 'js', section: 'api', ngdoc: 'function', module: 'ng', name: '$compile' };
+    doc = { fileType: 'js', section: 'api', ngdoc: 'service', module: 'ng', name: '$compile' };
     calculatePath.after(doc);
     expect(doc.path).toEqual('api/ng/$compile');
 
@@ -21,8 +21,14 @@ describe("calculate-path", function() {
     calculatePath.after(doc);
     expect(doc.path).toEqual('api/ng/filter/currency');
 
-    doc = { fileType: 'js', section: 'api', ngdoc: 'function', name: 'angular.forEach' };
+    doc = { fileType: 'js', section: 'api', ngdoc: 'function', name: 'angular.forEach', module:'ng' };
     calculatePath.after(doc);
-    expect(doc.path).toEqual('api/angular.forEach');
+    expect(doc.path).toEqual('api/ng/global/angular.forEach');
+
+    doc = { fileType: 'js', section: 'error', ngdoc: 'error', name: 'angular.forEach', module:'ng' };
+    calculatePath.after(doc);
+    expect(doc.path).toEqual('api/ng/global/angular.forEach');
+
+
   });
 });

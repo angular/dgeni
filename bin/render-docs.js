@@ -10,6 +10,11 @@ var setup = require('./lib/default-setup');
 var docRendererFactory = require('../lib/doc-renderer');
 var renderDoc = docRendererFactory(myArgs.templates, myArgs.output);
 
+// Extra data
+var git = {
+  tag: "v1.2.6-build.1989+sha.b0474cb"
+};
+
 // Main work
 console.log('Reading files from ', filePath);
 setup.readFiles(filePath)
@@ -21,7 +26,7 @@ setup.readFiles(filePath)
     });
     docs = setup.mergeDocs(docs);
     docs.forEach(function(doc) {
-      var renderedFilePath = renderDoc('partial.html', doc);
+      var renderedFilePath = renderDoc('partial.html', { doc: doc, git: git });
       console.log('Rendered doc', renderedFilePath);
     });
   }).done();
