@@ -4,7 +4,6 @@ ngRouteModule.directive('ngView', ngViewFactory);
 
 /**
  * @ngdoc directive
- * @module ngRoute
  * @name ngView
  * @restrict ECA
  *
@@ -161,7 +160,6 @@ ngRouteModule.directive('ngView', ngViewFactory);
 
 /**
  * @ngdoc event
- * @module ngRoute
  * @name directive:ngView#$viewContentLoaded
  * @eventType emit on the current ngView scope
  * @description

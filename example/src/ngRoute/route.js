@@ -22,7 +22,6 @@ var ngRouteModule = angular.module('ngRoute', ['ng']).
 
 /**
  * @ngdoc service
- * @module ngRoute
  * @name $routeProvider
  * @function
  *
@@ -45,7 +44,6 @@ function $RouteProvider(){
 
   /**
    * @ngdoc method
-   * @module ngRoute
    * @name $routeProvider#when
    *
    * @param {string} path Route path (matched against `$location.path`). If `$location.path`
@@ -208,7 +206,6 @@ function $RouteProvider(){
 
   /**
    * @ngdoc method
-   * @module ngRoute
    * @name $routeProvider#otherwise
    *
    * @description
@@ -236,7 +233,6 @@ function $RouteProvider(){
 
     /**
      * @ngdoc service
-     * @module ngRoute
      * @name $route
      * @requires $location
      * @requires $routeParams
@@ -367,7 +363,6 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @module ngRoute
      * @name $route#$routeChangeStart
      * @eventType broadcast on root scope
      * @description
@@ -384,7 +379,6 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @module ngRoute
      * @name $route#$routeChangeSuccess
      * @eventType broadcast on root scope
      * @description
@@ -400,7 +394,6 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @module ngRoute
      * @name $route#$routeChangeError
      * @eventType broadcast on root scope
      * @description
@@ -414,7 +407,6 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @module ngRoute
      * @name $route#$routeUpdate
      * @eventType broadcast on root scope
      * @description
@@ -429,7 +421,6 @@ function $RouteProvider(){
 
           /**
            * @ngdoc method
-           * @module ngRoute
            * @name $route#reload
            *
            * @description

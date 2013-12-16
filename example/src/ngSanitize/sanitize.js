@@ -37,9 +37,7 @@ var $sanitizeMinErr = angular.$$minErr('$sanitize');
 
 /**
  * @ngdoc service
- * @module ngSanitize
  * @name $sanitize
- * @function
  *
  * @description
  *   The input is sanitized by parsing the html into tokens. All safe tokens (from a whitelist) are
