@@ -1,4 +1,4 @@
-var mergeDocs = require('../../../lib/doc-parser/doc-parser-plugins/doc-merger');
+var mergeDocs = require('../../../lib/doc-processor/doc-processor-plugins/doc-merger');
 
 describe('doc-merger', function() {
   var docs, mergedDocs;

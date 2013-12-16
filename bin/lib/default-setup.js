@@ -19,10 +19,10 @@ var parseDocs = function(docs) {
 };
 
 // Additional processing of extracted docs
-var mergeDocs = require('../../lib/doc-parser/doc-parser-plugins/doc-merger');
+var mergeDocs = require('../../lib/doc-processor/doc-processor-plugins/doc-merger');
 
 // Doc processing
-var docParserFactory = require('../../lib/doc-parser');
+var docParserFactory = require('../../lib/doc-processor');
 var processDocs = docParserFactory([parseDocs, mergeDocs]);
 
 module.exports = {

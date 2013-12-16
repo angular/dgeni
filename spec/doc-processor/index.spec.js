@@ -1,6 +1,6 @@
-var docParserFactory = require('../../lib/doc-parser');
+var docParserFactory = require('../../lib/doc-processor');
 
-describe("doc-parser", function() {
+describe("doc-processor", function() {
 
   it("should call each of the plugins in turn, passing the docs object to each", function() {
     var log = [], docs = ['a', 'b'];
