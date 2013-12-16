@@ -17,16 +17,11 @@ var git = {
 
 // Main work
 console.log('Reading files from ', filePath);
-setup.readFiles(filePath)
-  .then(function(docs) {
-    console.log('Read', docs.length, 'docs');
-    docs.forEach(function(doc) {
-      setup.processDoc(doc);
-      console.log('Processed doc', doc.id);
-    });
-    docs = setup.mergeDocs(docs);
-    docs.forEach(function(doc) {
-      var renderedFilePath = renderDoc('partial.html', { doc: doc, git: git });
-      console.log('Rendered doc', renderedFilePath);
-    });
-  }).done();
+setup.readFiles(filePath).then(function(docs) {
+  console.log('Read', docs.length, 'docs');
+  docs = setup.processDocs(docs);
+  docs.forEach(function(doc) {
+    var renderedFilePath = renderDoc({ doc: doc, git: git });
+    console.log('Rendered doc', renderedFilePath);
+  });
+}).done();

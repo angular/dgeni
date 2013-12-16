@@ -1,35 +1,31 @@
+var _ = require('lodash');
+
+// Extracting docs from files
 var fileReaderFactory = require('../../lib/doc-extractor');
-var docExtractors = [
-    require('../../lib/doc-extractors/ngdoc'),
-    require('../../lib/doc-extractors/js')
-  ];
+var docExtractors = require('../../lib/doc-extractor/doc-extractors');
+var readFiles = fileReaderFactory(docExtractors);
+
+// Processing ngdoc tags in extracted docs
 var ngDocProcessorFactory =  require('../../lib/ngdoc-parser');
-var ngdocTagHandlers = [
-  require('../../lib/ngdoc-tags/eventType'),
-  require('../../lib/ngdoc-tags/param'),
-  require('../../lib/ngdoc-tags/property'),
-  require('../../lib/ngdoc-tags/requires'),
-  require('../../lib/ngdoc-tags/returns'),
-  require('../../lib/ngdoc-tags/default'),
-];
-var inlineTagHandlers = [
-  require('../../lib/ngdoc-tags/inline/link'),
-  require('../../lib/ngdoc-tags/inline/noop'),
-];
-var ngdocPlugins = [
-  require('../../lib/ngdoc-plugins/calculate-id'),
-  require('../../lib/ngdoc-plugins/calculate-section'),
-  require('../../lib/ngdoc-plugins/calculate-path')
-];
+var ngdocTagHandlers = require('../../lib/ngdoc-parser/ngdoc-tags');
+var inlineTagHandlers = require('../../lib/ngdoc-parser/ngdoc-tags/inline');
+var ngdocPlugins = require('../../lib/ngdoc-parser/ngdoc-plugins');
+var parseDoc = ngDocProcessorFactory(ngdocTagHandlers, inlineTagHandlers, ngdocPlugins);
+var parseDocs = function(docs) {
+  _.forEach(docs, function(doc) {
+    parseDoc(doc);
+  });
+  return docs;
+};
+
+// Additional processing of extracted docs
+var mergeDocs = require('../../lib/doc-parser/doc-parser-plugins/doc-merger');
+
+// Doc processing
+var docParserFactory = require('../../lib/doc-parser');
+var processDocs = docParserFactory([parseDocs, mergeDocs]);
 
 module.exports = {
-  // File reading
-  readFiles: fileReaderFactory(docExtractors),
-
-  // Doc processing
-  processDoc: ngDocProcessorFactory(ngdocTagHandlers, inlineTagHandlers, ngdocPlugins),
-
-  // Doc collection processing
-  mergeDocs: require('../../lib/doc-merger'),
-
+  readFiles: readFiles,
+  processDocs: processDocs
 };

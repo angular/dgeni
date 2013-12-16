@@ -3,14 +3,10 @@ var myArgs = require('optimist')
   .demand(1)
   .argv;
 
-var fileReaderFactory = require('../lib/doc-extractor');
-var docExtractors = [
-  require('../lib/doc-extractors/ngdoc'),
-  require('../lib/doc-extractors/js')
-];
-
 var filePath = myArgs._[0];
-var readFiles = fileReaderFactory(docExtractors);
+
+var readFiles = require('./lib/default-setup').readFiles;
+
 readFiles(filePath).then(function(docs) {
   console.log(docs);
 });
