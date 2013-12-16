@@ -4,7 +4,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
 
 
 /**
- * @ngdoc object
+ * @ngdoc service
  * @module ngRoute
  * @name $routeParams
  * @requires $route
