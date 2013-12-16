@@ -24,16 +24,14 @@
   </div>
 
   <h2 id="usage">Usage</h2>
+  {$ doc.restrict $}
   <div class="usage">
-    {% if doc.restrict.indexOf('E') != -1 %}
+    {% if doc.restrict.element %}
     <p>This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>.</p>
     {% endif %}
-    <ul>
-    {% for ch in doc.restrict %}
-    <li>as {$ ch $},
-      <pre class="prettyprint linenums">
-        {$ '`<a></a>`' | marked $}
-    </li>
-    {% endfor %}
+    
+    {% if doc.restrict.element %}
+      <pre class="prettyprint linenums">{$ '`<' + doc.name + '>...</' + doc.name + '>`' | marked $}</pre>
+    {% endif %}
   </div>
 </div>
