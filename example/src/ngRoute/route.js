@@ -10,7 +10,7 @@
  * The `ngRoute` module provides routing and deeplinking services and directives for angular apps.
  *
  * ## Example
- * See {@link module:ngRoute.$route#example $route} for an example of configuring and using `ngRoute`.
+ * See {@link $route#example $route} for an example of configuring and using `ngRoute`.
  * 
  * {@installModule route}
  *
@@ -47,7 +47,6 @@ function $RouteProvider(){
    * @ngdoc method
    * @module ngRoute
    * @name $routeProvider#when
-   * @methodOf module:ngRoute.$routeProvider
    *
    * @param {string} path Route path (matched against `$location.path`). If `$location.path`
    *    contains redundant trailing slash or is missing one, the route will still match and the
@@ -75,8 +74,8 @@ function $RouteProvider(){
    *    Object properties:
    *
    *    - `controller` – `{(string|function()=}` – Controller fn that should be associated with
-   *      newly created scope or the name of a {@link global:angular.Module#controller registered
-   *      controller} if passed as a string.
+   *      newly created scope or the name of a {@link module:ng.global:angular.Module#controller
+   *      registered controller} if passed as a string.
    *    - `controllerAs` – `{string=}` – A controller alias name. If present the controller will be
    *      published to scope under the `controllerAs` name.
    *    - `template` – `{string=|function()=}` – html template as a string or a function that
@@ -211,7 +210,6 @@ function $RouteProvider(){
    * @ngdoc method
    * @module ngRoute
    * @name $routeProvider#otherwise
-   * @methodOf module:ngRoute.$routeProvider
    *
    * @description
    * Sets route definition that will be used on route change when no other route definition
@@ -371,7 +369,6 @@ function $RouteProvider(){
      * @ngdoc event
      * @module ngRoute
      * @name $route#$routeChangeStart
-     * @eventOf module:ngRoute.$route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted before a route change. At this  point the route services starts
@@ -389,7 +386,6 @@ function $RouteProvider(){
      * @ngdoc event
      * @module ngRoute
      * @name $route#$routeChangeSuccess
-     * @eventOf module:ngRoute.$route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted after a route dependencies are resolved.
@@ -406,7 +402,6 @@ function $RouteProvider(){
      * @ngdoc event
      * @module ngRoute
      * @name $route#$routeChangeError
-     * @eventOf module:ngRoute.$route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted if any of the resolve promises are rejected.
@@ -421,7 +416,6 @@ function $RouteProvider(){
      * @ngdoc event
      * @module ngRoute
      * @name $route#$routeUpdate
-     * @eventOf module:ngRoute.$route
      * @eventType broadcast on root scope
      * @description
      *
@@ -437,7 +431,6 @@ function $RouteProvider(){
            * @ngdoc method
            * @module ngRoute
            * @name $route#reload
-           * @methodOf module:ngRoute.$route
            *
            * @description
            * Causes `$route` service to reload the current route even if
