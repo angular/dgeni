@@ -1,20 +1,39 @@
-{% if doc.section == 'api' %}
 <a href='http://github.com/angular/angular.js/tree/{$ git.tag $}/{$ doc.file $}#L{$ doc.startingLine $}'
    class='view-source btn btn-action'>
   <i class="icon-zoom-in">&nbsp;</i>View Source
 </a>
-{% endif %}
+
 <a href='http://github.com/angular/angular.js/edit/master/{$ doc.file $}'
    class='improve-docs btn btn-primary'>
   <i class="icon-edit">&nbsp;</i>Improve this doc
 </a>
 
-<h1>
+<h1 ng:non-bindable>
   <code>{$ doc.name $}</code>
   <div><span class='hint'></span></div>
 </h1>
-  {% if doc.deprecated %}
 
-  {% endif %}
-</h1>
-{$ doc.description $}
+{% if doc.deprecated %}
+
+{% endif %}
+
+<div>
+  <h2 id="description">Description</h2>
+  <div class="description">
+    {$ doc.description | marked $}
+  </div>
+
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+    {% if doc.restrict.indexOf('E') != -1 %}
+    <p>This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>.</p>
+    {% endif %}
+    <ul>
+    {% for ch in doc.restrict %}
+    <li>as {$ ch $},
+      <pre class="prettyprint linenums">
+        {$ '`<a></a>`' | marked $}
+    </li>
+    {% endfor %}
+  </div>
+</div>

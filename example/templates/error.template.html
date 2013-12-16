@@ -1,20 +1,14 @@
-{% if doc.section == 'api' %}
-<a href='http://github.com/angular/angular.js/tree/{$ git.tag $}/{$ doc.file $}#L{$ doc.startingLine $}'
-   class='view-source btn btn-action'>
-  <i class="icon-zoom-in">&nbsp;</i>View Source
-</a>
-{% endif %}
 <a href='http://github.com/angular/angular.js/edit/master/{$ doc.file $}'
    class='improve-docs btn btn-primary'>
   <i class="icon-edit">&nbsp;</i>Improve this doc
 </a>
 
 <h1>
-  <code>{$ doc.name $}</code>
-  <div><span class='hint'></span></div>
+  <code>{$ doc.fullName $}</code>
+  <div><span class='hint'>error in code</span></div>
 </h1>
-  {% if doc.deprecated %}
 
-  {% endif %}
-</h1>
-{$ doc.description $}
+<h2>Description</h2>
+<div class="description">
+  {$ doc.description | marked $}
+</div>
