@@ -7,6 +7,12 @@ function toUpperCase(prop) {
   }
 }
 
+function deleteBad(prop, key) {
+  if ( key !== 'bad' ) {
+    return prop;
+  }
+}
+
 describe("for-each-recursive", function() {
   it("should apply the function to all top level properties that are not enumerable", function() {
     expect(forEachRecursive(['a','b','c'], toUpperCase)).toEqual(['A', 'B', 'C']);
@@ -23,5 +29,9 @@ describe("for-each-recursive", function() {
     ], toUpperCase)).toEqual([
       { a: 'A', b: [ 'X', 'Y', 'Z'], c: { i: 'I', j:'J', k:'K'}, d: [ [ { m: [ { n: 'O' }]}]]}
     ]);
+  });
+
+  it("should provide the key to the handler function", function() {
+    expect(forEachRecursive({ a: 'a', b:'b', 'bad': 'xxx'}, deleteBad)).toEqual({ a: 'a', b:'b' });
   });
 });
