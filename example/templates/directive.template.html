@@ -1,3 +1,5 @@
+{% import "lib/general.html" as macros %}
+
 <a href='http://github.com/angular/angular.js/tree/{$ git.tag $}/{$ doc.file $}#L{$ doc.startingLine $}'
    class='view-source btn btn-action'>
   <i class="icon-zoom-in">&nbsp;</i>View Source
@@ -14,7 +16,7 @@
 </h1>
 
 {% if doc.deprecated %}
-
+  macros.notice('Deprecated API', 'deprecated', doc.deprecated);
 {% endif %}
 
 <div>
@@ -24,14 +26,21 @@
   </div>
 
   <h2 id="usage">Usage</h2>
-  {$ doc.restrict $}
   <div class="usage">
+  {% if doc.usage %}
+    {$ doc.usage | marked $}
+  {% else %}
+    {% marked %}
+
     {% if doc.restrict.element %}
     <p>This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>.</p>
     {% endif %}
-    
+
     {% if doc.restrict.element %}
-      <pre class="prettyprint linenums"><{$ doc.name $}>...</{$doc.name $}></pre>
+    * as element: `<{$ doc.name $}>...</{$ doc.name $}>`
     {% endif %}
+
+    {% endmarked %}
+  {% endif %}
   </div>
 </div>

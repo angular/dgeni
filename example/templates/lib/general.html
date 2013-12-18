@@ -1,0 +1,12 @@
+{% macro notice(name, legend, msg) %}
+{% if msg %}
+<fieldset class="{$ name $}">
+	<legend>{$ legend $}</legend>
+	{$ msg | marked $}
+</fieldset>
+{% endif %}
+{% endmacro %}
+
+{% macro params() %}
+
+{% endmacro %}
