@@ -13,9 +13,19 @@ describe("marked custom tag extension", function() {
     expect(extension.tags).toEqual(['marked']);
   });
 
-  it("should call the mock marked function when processing", function() {
-    extension.process(null, function() { return 'some content'; });
-    expect(markedMock).toHaveBeenCalledWith('some content');
+  describe("process", function() {
+    
+    it("should call the mock marked function when processing", function() {
+      extension.process(null, function() { return 'some content'; });
+      expect(markedMock).toHaveBeenCalledWith('some content');
+    });
+
+    it("should trim indentation from content", function() {
+      var trimSpy = jasmine.createSpy('trimSpy');
+      extension.__set__('trimIndentation', trimSpy);
+      extension.process(null, function() { return 'some content'; });
+      expect(trimSpy).toHaveBeenCalledWith('some content');
+    });
   });
 
   describe("parse", function() {
