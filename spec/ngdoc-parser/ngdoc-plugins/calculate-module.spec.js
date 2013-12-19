@@ -12,9 +12,9 @@ describe("calculate-module ngdoc plugin", function() {
     plugin.after(doc);
     expect(doc.module).toEqual('a');
   });
-  it("should calculate the module from the file if it's a js", function() {
+  it("should calculate the module from the second segment of the file if it's a js", function() {
     var doc = { file: path.normalize('a/b/c/d.js'), fileType:'js'};
     plugin.after(doc);
-    expect(doc.module).toEqual('a');
+    expect(doc.module).toEqual('b');
   });
 });

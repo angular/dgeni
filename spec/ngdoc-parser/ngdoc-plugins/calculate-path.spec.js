@@ -29,7 +29,7 @@ describe("calculate-path", function() {
     calculatePath.after(doc);
     expect(doc.path).toEqual('api/ng/global/angular.forEach.html');
 
-    doc = { fileType: 'js', section: 'api', ngdoc: 'module', name: 'ngSanitize' };
+    doc = { fileType: 'js', section: 'api', ngdoc: 'module', name: 'ngSanitize', module: 'ngSanitize' };
     calculatePath.after(doc);
     expect(doc.path).toEqual('api/ngSanitize/index.html');
   });
