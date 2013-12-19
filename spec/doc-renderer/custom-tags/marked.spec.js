@@ -5,7 +5,7 @@ describe("marked custom tag extension", function() {
   var markedMock;
 
   beforeEach(function() {
-    markedMock = jasmine.createSpy('marked');
+    markedMock = jasmine.createSpy('marked').andCallFake(function(str) {return str;});
     extension.__set__('marked', markedMock);
   });
    
@@ -21,10 +21,12 @@ describe("marked custom tag extension", function() {
     });
 
     it("should trim indentation from content", function() {
-      var trimSpy = jasmine.createSpy('trimSpy');
+      var trimSpy = jasmine.createSpyObj('trimSpy', ['calcIndent', 'trimIndent', 'reindent']);
       extension.__set__('trimIndentation', trimSpy);
       extension.process(null, function() { return 'some content'; });
-      expect(trimSpy).toHaveBeenCalledWith('some content');
+      expect(trimSpy.calcIndent).toHaveBeenCalled();
+      expect(trimSpy.trimIndent).toHaveBeenCalled();
+      expect(trimSpy.reindent).toHaveBeenCalled();
     });
   });
 
