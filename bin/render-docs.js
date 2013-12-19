@@ -21,6 +21,9 @@ docGenerator.readFiles(filePath)
   .then(function(docs) {
     console.log('Read', docs.length, 'docs');
     docs = docGenerator.processDocs(docs);
+    _.forEach(docs, function(doc) {
+      console.log('Processed doc', doc.id);
+    });
     return renderDocs(docs, {git: git});
   })
 
