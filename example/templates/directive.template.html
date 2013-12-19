@@ -38,7 +38,7 @@
     {% endif %}
 
     {% if doc.restrict.element %}
-    * as element: `<{$ doc.name | dashCase $} {$ renderParams(doc)$} > ... </{$ doc.name | dashCase $}>`
+    * as element: `<{$ doc.name | dashCase $} {$ renderAttributes(doc.params)$} > ... </{$ doc.name | dashCase $}>`
     {% endif %}
 
     {% endmarked %}

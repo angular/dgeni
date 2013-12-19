@@ -1,4 +1,3 @@
-{% macro renderParams(self, params, prefix, infix, suffix, skipSelf) -%}
-{% for param in params -%}
-{%- endfor %}
+{% macro renderAttributes(params) -%}
+{% for param in params %}{$ params.name | dashCase $}="..." {% endfor %}
 {%- endmacro %}
