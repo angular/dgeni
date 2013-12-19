@@ -1,13 +1,12 @@
 var calculatePath = require('../../../lib/ngdoc-parser/ngdoc-plugins/calculate-path');
-var path = require('path');
 
 describe("calculate-path", function() {
   it("should calculate the path for ngdoc files from the file name", function() {
-    var doc = { fileType: 'ngdoc', file: path.normalize('guide/services/manage-dependencies.ngdoc') };
+    var doc = { fileType: 'ngdoc', file: 'guide/services/manage-dependencies.ngdoc' };
     calculatePath.after(doc);
     expect(doc.path).toEqual('guide/services/manage-dependencies.html');
 
-    doc = { fileType: 'ngdoc', file: path.normalize('error/$compile/ctreq.ngdoc')};
+    doc = { fileType: 'ngdoc', file: 'error/$compile/ctreq.ngdoc'};
     calculatePath.after(doc);
     expect(doc.path).toEqual('error/$compile/ctreq.html');
   });

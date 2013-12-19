@@ -92,10 +92,11 @@ We ought to consolidate to:
 * `function` - for global functions
 * `object` - for global objects
 * `interface` - for global interfaces
+* `type` - for constructors
 * `module` - instead of `overview` for modules
 * `service` - instead of object/function for angular services
 * `serviceProvider` - instead of function/object for angular service providers
-* `directive` - as-is
+* `directive` - as-is (but also include inputTypes, e.g input[checkbox])
 * `filter` - as-is
 * `method` - as-is
 * `property` - as-is (but change angular.version to object)

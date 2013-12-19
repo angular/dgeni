@@ -1,5 +1,4 @@
 var Q = require('q');
-var path = require('path');
 var MockFS = require('q-io/fs-mock');
 var rewire = require('rewire');
 var fileReaderFactory = rewire('../../lib/doc-extractor');
