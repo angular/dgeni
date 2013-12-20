@@ -24,6 +24,8 @@ describe("code-name", function() {
     it("returns an absolute name given a doc and name in a different module", function() {
       expect(codeName.absoluteName({ module: 'ng', ngdoc: 'filter', name: 'currency'}, 'module:ngRoute.directive:ngView'))
         .toEqual('module:ngRoute.directive:ngView');
+      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'filter', name: 'currency'}, 'module:ngRoute.$route'))
+        .toEqual('module:ngRoute.$route');
     });
   });
 
@@ -41,6 +43,11 @@ describe("code-name", function() {
     describe('for real urls', function() {
       it("should replace urls containing slashes with HTML anchors to the same url", function() {
         var someDoc = { };
+
+        expect(codeName.getLinkInfo(someDoc, '/some/absolute/url')).toEqual({ url: "/some/absolute/url", title: "url", type: 'url'});
+        expect(codeName.getLinkInfo(someDoc, 'some/relative/url')).toEqual({ url: "some/relative/url", title: "url", type: 'url'});
+        expect(codeName.getLinkInfo(someDoc, '../some/other/relative/url')).toEqual({ url: "../some/other/relative/url", title: "url", type: 'url'});
+        expect(codeName.getLinkInfo(someDoc, 'http://www.google.com')).toEqual({ url: "http://www.google.com", title: "www.google.com", type: 'url'});
 
         expect(codeName.getLinkInfo(someDoc, '/some/absolute/url', 'some link')).toEqual({ url: "/some/absolute/url", title: "some link", type: 'url'});
         expect(codeName.getLinkInfo(someDoc, 'some/relative/url', 'some other link')).toEqual({ url: "some/relative/url", title: "some other link", type: 'url'});
