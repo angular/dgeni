@@ -9,7 +9,7 @@ describe("extractNgdoc", function() {
   });
   describe("process", function() {
     it('should return an object containing info about the file and its contents', function() {
-      expect(ngdocExtractor.process('foo/bar.ngdoc', 'A load of content')).toEqual([{
+      expect(ngdocExtractor.processFile('foo/bar.ngdoc', 'A load of content')).toEqual([{
         content: 'A load of content',
         file: 'foo/bar.ngdoc',
         fileType: 'ngdoc'

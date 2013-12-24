@@ -17,14 +17,14 @@ fileReaderFactory.__set__('fs', fs);
 
 var mockNgDocExtractor = {
   pattern: /\.ngdoc$/,
-  process: function(file, content) {
+  processFile: function(file, content) {
     return [{ content: content, file: file, fileType: 'ngdoc' }];
   }
 };
 
 var mockJsExtractor = {
   pattern: /\.js$/,
-  process: function(file, content) {
+  processFile: function(file, content) {
     return [{ content: content, file: file, fileType: 'js' }];
   }
 };

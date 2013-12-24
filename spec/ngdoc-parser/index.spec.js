@@ -58,6 +58,18 @@ describe("ngdoc", function() {
     expect(inlineTagHandlerSpy).toHaveBeenCalledWith(expectedTag, 'inline', '`unusual chars`');
   });
 
+  it("should not call subsequent tag handlers if a tag handler returns a truthy value", function() {
+    tagHandlerSpy2 = jasmine.createSpy('tagHandler').andCallFake(function(tag) { log(tag.doc, 'TAG'); tag.doc.tagContent = tag.text; return true;});
+    inlineTagHandlerSpy2 = jasmine.createSpy('inlineTagHandler').andCallFake(function(tag) { log(tag.doc, 'INLINE_TAG'); return function getText() { return 'PROCESSED TAG'; };} );
+    processDoc = ngDocProcessorFactory([tagHandlerSpy, tagHandlerSpy2], [inlineTagHandlerSpy, inlineTagHandlerSpy2], []);
+    doc = { content: '@tag containing an {@inline `unusual chars`} within'};
+    processDoc(doc);
+    expect(tagHandlerSpy).toHaveBeenCalled();
+    expect(tagHandlerSpy2).not.toHaveBeenCalled();
+    expect(inlineTagHandlerSpy).toHaveBeenCalled();
+    expect(inlineTagHandlerSpy2).not.toHaveBeenCalled();
+  });
+
   it("should call the tag handlers and plugins in the right order", function() {
     doc = { content: '@tag {@inline}', log: [] };
     processDoc(doc);

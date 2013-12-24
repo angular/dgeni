@@ -12,7 +12,7 @@ describe("js doc extractor", function() {
   });
   describe("process", function() {
     it('should return a collection of documents extracted from the file', function() {
-      var docs = jsExtractor.process('some/file.js', srcJsContent);
+      var docs = jsExtractor.processFile('some/file.js', srcJsContent);
       docs.length = 3;
       expect(docs[0]).toEqual(docsFromJsContent[0]);
       expect(docs[1]).toEqual(docsFromJsContent[1]);
