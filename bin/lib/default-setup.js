@@ -12,10 +12,7 @@ var ngdocPlugins = require('../../lib/ngdoc-parser/ngdoc-plugins');
 var parseDoc = ngDocProcessorFactory(ngdocTagHandlers, inlineTagHandlers, ngdocPlugins);
 
 // Doc processor plugins
-var docProcessorPlugins = [
-  require('../../lib/doc-processor/doc-processor-plugins/ngdoc-parser')(parseDoc),
-  require('../../lib/doc-processor/doc-processor-plugins/doc-merger')
-];
+var docProcessorPlugins = require('../../lib/doc-processor/doc-processor-plugins/meta-data');
 
 // Doc processing
 var docParserFactory = require('../../lib/doc-processor');

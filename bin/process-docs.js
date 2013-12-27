@@ -11,6 +11,10 @@ setup.readFiles(filePath).then(function(docs) {
   console.log('Read', docs.length, 'docs');
   docs = setup.processDocs(docs);
   docs.forEach(function(doc) {
-    console.log('============================ Doc =====================\n', doc);
+    console.log('============================ Doc =====================\n');
+    console.log('docType:', doc.docType);
+    console.log('module:', doc.module);
+    console.log('id:', doc.id);
+    console.log('path:', doc.path);
   });
 }).done();
