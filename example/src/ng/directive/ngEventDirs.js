@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngClick
+ * @name ngClick
  *
  * @description
  * The ngClick directive allows you to specify custom behavior when
@@ -59,7 +59,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngDblclick
+ * @name ngDblclick
  *
  * @description
  * The `ngDblclick` directive allows you to specify custom behavior on a dblclick event.
@@ -75,7 +75,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngMousedown
+ * @name ngMousedown
  *
  * @description
  * The ngMousedown directive allows you to specify custom behavior on mousedown event.
@@ -91,7 +91,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngMouseup
+ * @name ngMouseup
  *
  * @description
  * Specify custom behavior on mouseup event.
@@ -106,7 +106,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngMouseover
+ * @name ngMouseover
  *
  * @description
  * Specify custom behavior on mouseover event.
@@ -122,7 +122,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngMouseenter
+ * @name ngMouseenter
  *
  * @description
  * Specify custom behavior on mouseenter event.
@@ -138,7 +138,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngMouseleave
+ * @name ngMouseleave
  *
  * @description
  * Specify custom behavior on mouseleave event.
@@ -154,7 +154,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngMousemove
+ * @name ngMousemove
  *
  * @description
  * Specify custom behavior on mousemove event.
@@ -170,7 +170,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngKeydown
+ * @name ngKeydown
  *
  * @description
  * Specify custom behavior on keydown event.
@@ -186,7 +186,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngKeyup
+ * @name ngKeyup
  *
  * @description
  * Specify custom behavior on keyup event.
@@ -202,7 +202,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngKeypress
+ * @name ngKeypress
  *
  * @description
  * Specify custom behavior on keypress event.
@@ -218,7 +218,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngSubmit
+ * @name ngSubmit
  *
  * @description
  * Enables binding angular expressions to onsubmit events.
@@ -271,7 +271,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngFocus
+ * @name ngFocus
  *
  * @description
  * Specify custom behavior on focus event.
@@ -286,7 +286,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngBlur
+ * @name ngBlur
  *
  * @description
  * Specify custom behavior on blur event.
@@ -301,7 +301,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngCopy
+ * @name ngCopy
  *
  * @description
  * Specify custom behavior on copy event.
@@ -316,7 +316,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngCut
+ * @name ngCut
  *
  * @description
  * Specify custom behavior on cut event.
@@ -331,7 +331,7 @@ forEach(
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngPaste
+ * @name ngPaste
  *
  * @description
  * Specify custom behavior on paste event.

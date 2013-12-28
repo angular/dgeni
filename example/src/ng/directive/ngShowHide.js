@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngShow
+ * @name ngShow
  *
  * @description
  * The `ngShow` directive shows or hides the given HTML element based on the expression
@@ -151,7 +151,7 @@ var ngShowDirective = ['$animate', function($animate) {
 
 /**
  * @ngdoc directive
- * @name ng.directive:ngHide
+ * @name ngHide
  *
  * @description
  * The `ngHide` directive shows or hides the given HTML element based on the expression
