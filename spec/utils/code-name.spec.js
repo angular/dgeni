@@ -1,40 +1,40 @@
 var codeName = require('../../lib/utils/code-name');
 
 describe("code-name", function() {
-  xdescribe("absoluteName", function() {
+  describe("getAbsoluteCodeName", function() {
     it("returns an absolute name given a doc and name in the same module and type", function() {
-      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'directive', name: 'ngShow'}, 'ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'ngClass'))
         .toEqual('module:ng.directive:ngClass');
 
-      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'directive', name: 'ngShow'}, 'directive:ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
 
-      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
     });
 
     it("returns an absolute name given a doc and name in the same module but different type", function() {
-      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'filter', name: 'currency'}, 'directive:ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
 
-      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'filter', name: 'currency'}, 'module:ng.directive:ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'module:ng.directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
     });
 
     it("returns an absolute name given a doc and name in a different module", function() {
-      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'filter', name: 'currency'}, 'module:ngRoute.directive:ngView'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'module:ngRoute.directive:ngView'))
         .toEqual('module:ngRoute.directive:ngView');
-      expect(codeName.absoluteName({ module: 'ng', ngdoc: 'filter', name: 'currency'}, 'module:ngRoute.$route'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'module:ngRoute.$route'))
         .toEqual('module:ngRoute.$route');
     });
   });
 
   xdescribe("relativeName", function() {
     it("returns an relative name given a doc and an absolute name", function() {
-      expect(codeName.relativeName({ module: 'ng', ngdoc: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
+      expect(codeName.relativeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
         .toEqual('ngClass');
 
-      expect(codeName.relativeName({ module: 'ng', ngdoc: 'directive', name: 'ngShow'}, 'module:ng.filter:currency'))
+      expect(codeName.relativeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'module:ng.filter:currency'))
         .toEqual('filter:currency');
     });
   });
@@ -60,7 +60,7 @@ describe("code-name", function() {
       var someDoc;
 
       beforeEach(function() {
-        someDoc = { module: 'ng', name:'ngClass', ngdoc:'directive', section: 'api' };
+        someDoc = { module: 'ng', name:'ngClass', type:'directive', section: 'api' };
       });
 
 
