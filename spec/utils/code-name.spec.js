@@ -2,39 +2,39 @@ var codeName = require('../../lib/utils/code-name');
 
 describe("code-name", function() {
   describe("getAbsoluteCodeName", function() {
-    it("returns an absolute name given a doc and name in the same module and type", function() {
-      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'ngClass'))
+    it("returns an absolute name given a doc and name in the same module and componentType", function() {
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'directive', name: 'ngShow'}, 'ngClass'))
         .toEqual('module:ng.directive:ngClass');
 
-      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'directive:ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'directive', name: 'ngShow'}, 'directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
 
-      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
     });
 
-    it("returns an absolute name given a doc and name in the same module but different type", function() {
-      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'directive:ngClass'))
+    it("returns an absolute name given a doc and name in the same module but different componentType", function() {
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'filter', name: 'currency'}, 'directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
 
-      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'module:ng.directive:ngClass'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'filter', name: 'currency'}, 'module:ng.directive:ngClass'))
         .toEqual('module:ng.directive:ngClass');
     });
 
     it("returns an absolute name given a doc and name in a different module", function() {
-      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'module:ngRoute.directive:ngView'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'filter', name: 'currency'}, 'module:ngRoute.directive:ngView'))
         .toEqual('module:ngRoute.directive:ngView');
-      expect(codeName.getAbsoluteCodeName({ module: 'ng', type: 'filter', name: 'currency'}, 'module:ngRoute.$route'))
+      expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'filter', name: 'currency'}, 'module:ngRoute.$route'))
         .toEqual('module:ngRoute.$route');
     });
   });
 
   xdescribe("relativeName", function() {
     it("returns an relative name given a doc and an absolute name", function() {
-      expect(codeName.relativeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
+      expect(codeName.relativeName({ module: 'ng', componentType: 'directive', name: 'ngShow'}, 'module:ng.directive:ngClass'))
         .toEqual('ngClass');
 
-      expect(codeName.relativeName({ module: 'ng', type: 'directive', name: 'ngShow'}, 'module:ng.filter:currency'))
+      expect(codeName.relativeName({ module: 'ng', componentType: 'directive', name: 'ngShow'}, 'module:ng.filter:currency'))
         .toEqual('filter:currency');
     });
   });
@@ -60,40 +60,40 @@ describe("code-name", function() {
       var someDoc;
 
       beforeEach(function() {
-        someDoc = { module: 'ng', name:'ngClass', type:'directive', section: 'api' };
+        someDoc = { module: 'ng', name:'ngClass', componentType:'directive', section: 'api' };
       });
 
 
       it("should replace relative references to code in the current module with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'ngShow')).toEqual({ url: "/api/ng/directive/ngShow", title: "ngShow", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'directive:ngShow')).toEqual({ url: "/api/ng/directive/ngShow", title: "ngShow", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'ngShow')).toEqual({ url: "/api/ng/directive/ngShow.html", title: "ngShow", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'directive:ngShow')).toEqual({ url: "/api/ng/directive/ngShow.html", title: "ngShow", type: "code"});
 
-        expect(codeName.getLinkInfo(someDoc, 'input[checkbox]')).toEqual({ url: "/api/ng/directive/input[checkbox]", title: "input[checkbox]", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'filter:currency')).toEqual({ url: "/api/ng/filter/currency", title: "currency", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'module:ng.$compile')).toEqual({ url: "/api/ng/$compile", title: "$compile", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'input[checkbox]')).toEqual({ url: "/api/ng/directive/input[checkbox].html", title: "input[checkbox]", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'filter:currency')).toEqual({ url: "/api/ng/filter/currency.html", title: "currency", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ng.$compile')).toEqual({ url: "/api/ng/$compile.html", title: "$compile", type: "code"});
       });
       
 
       it("should replace references to modules with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'module:ng')).toEqual({ url: "/api/ng", title: "ng", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'module:ngRoute')).toEqual({ url: "/api/ngRoute", title: "ngRoute", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'module:ngSanitize')).toEqual({ url: "/api/ngSanitize", title: "ngSanitize", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ng')).toEqual({ url: "/api/ng/index.html", title: "ng", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ngRoute')).toEqual({ url: "/api/ngRoute/index.html", title: "ngRoute", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ngSanitize')).toEqual({ url: "/api/ngSanitize/index.html", title: "ngSanitize", type: "code"});
       });
       
 
       it("should replace references to code in other modules with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'module:ngRoute.directive:ngView')).toEqual({ url: "/api/ngRoute/directive/ngView", title: "ngView", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ngRoute.directive:ngView')).toEqual({ url: "/api/ngRoute/directive/ngView.html", title: "ngView", type: "code"});
       });
       
 
       it("should replace references to code in the global namespace with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'global:angular.element')).toEqual({ url: "/api/ng/global/angular.element", title: "angular.element", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'module:ngMock.global:angular.mock.dump')).toEqual({ url: "/api/ngMock/global/angular.mock.dump", title: "angular.mock.dump", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'global:angular.element')).toEqual({ url: "/api/ng/global/angular.element.html", title: "angular.element", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ngMock.global:angular.mock.dump')).toEqual({ url: "/api/ngMock/global/angular.mock.dump.html", title: "angular.mock.dump", type: "code"});
       });
 
 
       it("should replace code references to members of objects with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'module:ng.$location#methods_search', 'search()')).toEqual({ url: "/api/ng/$location#methods_search", title: "search()", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ng.$location#methods_search', 'search()')).toEqual({ url: "/api/ng/$location.html#methods_search", title: "search()", type: "code"});
       });
     });
 

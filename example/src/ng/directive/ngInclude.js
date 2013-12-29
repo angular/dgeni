@@ -131,8 +131,8 @@
 
 /**
  * @ngdoc event
- * @name ngInclude#$includeContentRequested
- * @eventOf ng.directive:ngInclude
+ * @name $includeContentRequested
+ * @eventOf directive:ngInclude
  * @eventType emit on the scope ngInclude was declared in
  * @description
  * Emitted every time the ngInclude content is requested.
