@@ -1,5 +1,7 @@
 var plugin = require('../../../../lib/doc-processor/doc-processor-plugins/extract-meta-data/requires');
+
 describe("requires doc processor plugin", function() {
+
   it("should extract an array of requires information from the tags", function() {
     var doc = {
       module: 'ng',
