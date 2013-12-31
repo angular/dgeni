@@ -44,7 +44,8 @@ function $RouteProvider(){
 
   /**
    * @ngdoc method
-   * @name $routeProvider#when
+   * @name when
+   * @methodOf $routeProvider
    *
    * @param {string} path Route path (matched against `$location.path`). If `$location.path`
    *    contains redundant trailing slash or is missing one, the route will still match and the
@@ -206,7 +207,8 @@ function $RouteProvider(){
 
   /**
    * @ngdoc method
-   * @name $routeProvider#otherwise
+   * @name otherwise
+   * @methodOf $routeProvider
    *
    * @description
    * Sets route definition that will be used on route change when no other route definition
@@ -363,7 +365,8 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $route#$routeChangeStart
+     * @name $routeChangeStart
+     * @eventOf $route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted before a route change. At this  point the route services starts
@@ -379,7 +382,8 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $route#$routeChangeSuccess
+     * @name $routeChangeSuccess
+     * @eventOf $route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted after a route dependencies are resolved.
@@ -394,7 +398,8 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $route#$routeChangeError
+     * @name $routeChangeError
+     * @eventOf $route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted if any of the resolve promises are rejected.
@@ -407,7 +412,8 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $route#$routeUpdate
+     * @name $routeUpdate
+     * @eventOf $route
      * @eventType broadcast on root scope
      * @description
      *
@@ -421,7 +427,8 @@ function $RouteProvider(){
 
           /**
            * @ngdoc method
-           * @name $route#reload
+           * @name reload
+           * @methodOf $route
            *
            * @description
            * Causes `$route` service to reload the current route even if

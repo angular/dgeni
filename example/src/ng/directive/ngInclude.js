@@ -141,8 +141,8 @@
 
 /**
  * @ngdoc event
- * @name ngInclude#$includeContentLoaded
- * @eventOf ng.directive:ngInclude
+ * @name $includeContentLoaded
+ * @eventOf directive:ngInclude
  * @eventType emit on the current ngInclude scope
  * @description
  * Emitted every time the ngInclude content is reloaded.
