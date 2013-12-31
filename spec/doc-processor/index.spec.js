@@ -1,15 +1,17 @@
-var docParserFactory = require('../../lib/doc-processor');
+var docProcessorFactory = require('../../lib/doc-processor');
 
 describe("doc-processor", function() {
 
   it("should call each of the plugins in turn, passing the docs object to each", function() {
-    var log = [], docs = ['a', 'b'];
-    plugin1 = function(docs) { log.push('plugin1'); return docs;};
-    plugin2 = function(docs) { log.push('plugin2'); return docs;};
+    var log = [], docs = [ { content: 'a'}, { content: 'b'}];
+    before = { before: function(docs) { log.push('before'); return docs; } };
+    each = { each: function(doc) { log.push('each:' + doc.content); } };
+    after = { after: function(docs) { log.push('after'); return docs; } };
 
-    var parseDocs = docParserFactory([plugin1, plugin2]);
-    var parsedDocs = parseDocs(docs);
-    expect(log).toEqual(['plugin1', 'plugin2']);
-    expect(parsedDocs).toEqual(docs);
+    var process = docProcessorFactory([before, each, after]);
+    var processedDocs = process(docs);
+    expect(log).toEqual(['before', 'each:a', 'each:b', 'after']);
+    expect(processedDocs).toEqual(docs);
   });
+
 });
