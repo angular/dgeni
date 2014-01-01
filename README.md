@@ -21,43 +21,32 @@ from the following file types:
 * JavaScript - Strip ngdocs out of comments in JavaScript files. Can produce more than one doc per
   file
 
+### ngdoc Parsing
+
+Once we have a document read in from a file we parse it (using doctrine) to extract the ngdoc tags.
+The doctrine library creates an object structure for each tag that is found. It does not parse
+inline tags.
+
 ### Doc Processing
 
-Once we have a document read in from a file we process it with document processor plugins. We have
-the following plugins:
+The collection of tags contains simple information extracted from the tag itself.
+We need to do more work with this to get the full meta data required for rendering. This is done
+by the doc-processor plugins.
 
-* ngdoc parser - parse the ngdoc tags
-* doc merger - merge child documents (e.g. docs that refer to methods or events on other objects)
-  into their parent documents
-* link checker - check that links refer to docs that exist in the docs that have been found
+Each plugin can provide the following functions:
+
+* before: this function is executed at the start of processing.  It is passed the entire collection
+of documents and it should return the processed document collection.
+* each: this function is executed for each document in the collection.  It is passed the document
+that is being processed.
+* after: this function is executed at the end of processing after all the "each" functions have been
+called.  It is passed the entire collection of documents and it should return the processed document
+collection.
+
 
 ### HTML Rendering
 
-Now we render each of these documents as an HTML page. We use the nunjucks JavaScript template
+We render each of these documents as an HTML page. We use the nunjucks JavaScript template
 tool-kit to generate HTML based on the data in each document. We create a filter that can render
 text as markdown and will highlight code.
 
-### ngdoc Parsing
-
-The ngdoc parser itself is modular.  Each tag (and inline tag) is defined independently and you can
-add custom tags easily.  Further, you can provide plug-ins that do additional parsing before and
-after processing of each docs tags.  The following tags are supported out of the box:
-
-* eventType - adds eventType and eventTarget properties to the doc
-* param - adds param info to a collection of params on the doc
-* property - adds property info to a collection of properties on the doc
-* requires - adds requires info to a collection of requires on the doc
-* returns - adds a returns information object to the doc
-* *default* - this is the catch-all, which simply applies the value of the tag to the corresponding
-  property on the doc (e.g. `@module ng` -> `doc.module = 'ng'`)
-
-There is only one built-in in-line tag.
-
-* link (*in-line*) - add a new link to the doc.links property and replace the tag with an anchor
-
-The built-in plug-ins compute the value of the following meta properties:
-
-* section - the section is the top level path segment in the navigation.
-* path - the path to the final rendered file
-* id - a string that uniquely identifies a doc - if the doc is describing a code component then this
-  corresponds to the unique code reference name (e.g. module:ngRoute.directive:ngView).
