@@ -4,11 +4,8 @@ var _ = require('lodash');
 var fileReaderFactory = require('../../lib/doc-extractor');
 var docExtractors = require('../../lib/doc-extractor/doc-extractors');
 
-// Processing ngdoc tags in extracted docs
-var ngDocProcessorFactory =  require('../../lib/ngdoc-parser');
-
 // Doc processor plugins
-var docProcessorPlugins = require('../../lib/doc-processor/doc-processor-plugins');
+var docProcessorPlugins = require('../../lib/doc-processor/plugins');
 
 // Doc processing
 var docParserFactory = require('../../lib/doc-processor');

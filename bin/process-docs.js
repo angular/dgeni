@@ -16,5 +16,6 @@ setup.readFiles(filePath).then(function(docs) {
     console.log('module:', doc.module);
     console.log('id:', doc.id);
     console.log('path:', doc.path);
+    console.log(doc);
   });
 }).done();
