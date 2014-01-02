@@ -341,6 +341,19 @@ describe('extract-tags', function() {
   });
 
 
+  describe("element", function() {
+    it("should apply the tag to the doc.element property", function() {
+      setTag('element', 'input');
+      plugin.each(doc);
+      expect(doc.element).toEqual('input');
+    });
+    it("should default to ANY if the document is a directive", function() {
+      plugin.each(doc);
+      expect(doc.element).toEqual('ANY');
+    });
+  });
+
+
   describe("requires", function() {
 
     it("should extract an array of requires information from the tags", function() {
