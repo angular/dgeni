@@ -1,6 +1,6 @@
-{% import "lib/helpers.macro.html" as helpers %}
-
+{% import "lib/helpers.macro.html" as helpers -%}
 {$ helpers.viewSourceButton(doc, git) $}
+
 {$ helpers.improveDocButton(doc) $}
 
 <h1 ng:non-bindable>
@@ -22,22 +22,64 @@
     {% for require in doc.requires %}<li>{$ require | codeLink(doc) $}</li>{% endfor %}
   </ul>
   {% endif %}
+
   <h2 id="usage">Usage</h2>
   <div class="usage">
   {% if doc.usage %}
     {$ doc.usage | marked $}
   {% else %}
-    {% marked %}
-
+    <ul>
     {% if doc.restrict.element %}
-    <p>This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>.</p>
-    {% endif %}
+      <li>as element:
+      {% if doc.name.indexOf('ng') == 0 -%}
+      (This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>).
+      {%- endif %}
+      {% code -%}
+      <{$ doc.name | dashCase $}{% for param in doc.params %}
+        {$ helpers.renderAttributeParam(param) $}{% endfor %}>
+      ...
+      </{$ doc.name | dashCase $}>
+      {%- endcode %}
+      </li>
+    {% endif -%}
 
-    {% if doc.restrict.element %}
-    * as element: `<{$ doc.name | dashCase $} {$ helpers.renderAttributes(doc.params)$} > ... </{$ doc.name | dashCase $}>`
-    {% endif %}
+    {%- if doc.restrict.attribute -%}
+      <li>as attribute:
+        {% code -%}
+        <{$ doc.element $}{% for param in doc.params %} {$ helpers.renderAttributeParam(param) $}{% endfor %}>
+        ...
+        </{$ doc.element $}>
+        {%- endcode %}
+      </li>
+    {% endif -%}
 
-    {% endmarked %}
-  {% endif %}
+    {%- if doc.restrict.cssClass -%}
+      <li>as CSS class:
+        {% code -%}
+        <{$ doc.element $} class="{% for param in doc.params %} {$ helpers.renderCssParam(param) $}{% endfor %}"> ... </{$ doc.element $}>
+        {%- endcode %}
+      </li>
+    {% endif -%}
+    
+  {%- endif %}
   </div>
+
+  <h2>Directive Info</h2>
+  <ul>
+    {% if doc.scope %}<li></li>
+  </ul>
+
+  {%- if doc.animations -%}
+  <h2>Animations</h2>
+  {$ doc.animations | marked $}
+  {$ 'module:ngAnimate.$animate' | codeLink(doc, 'Click here') $} to learn more about the steps involved in the animation.
+  {%- endif -%}
+
+
+  {%- if doc.examples %}
+  <h2 id="example">Example</h2>
+  {%- for example in doc.examples -%}
+    {$ example | marked $}
+  {%- endfor -%}
+  {%- endif %}  
 </div>
