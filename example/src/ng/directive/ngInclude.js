@@ -23,8 +23,8 @@
  * access on some browsers.
  *
  * @animations
- * enter - animation is used to bring new content into the browser.
- * leave - animation is used to animate existing content away.
+ * * enter - animation is used to bring new content into the browser.
+ * * leave - animation is used to animate existing content away.
  *
  * The enter and leave animation occur concurrently.
  *

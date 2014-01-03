@@ -66,7 +66,8 @@
 
   <h2>Directive Info</h2>
   <ul>
-    {% if doc.scope %}<li></li>
+    {% if doc.scope %}<li>This directive creates new scope.</li>{% endif %}
+    <li>This directive executes at priority level {$ doc.priority $}.</li>
   </ul>
 
   {%- if doc.animations -%}
