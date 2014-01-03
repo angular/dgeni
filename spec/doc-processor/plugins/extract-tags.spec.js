@@ -206,21 +206,21 @@ describe('extract-tags', function() {
       {
         name: 'paramName',
         description: 'description of param',
-        type: 'string',
+        type: { description: 'string', optional: false },
         optional: false
       });
       expect(doc.params[1]).toEqual(
       {
         name: 'optionalParam',
         description: 'description of optional param',
-        type: 'string=',
+        type: { description: 'string', optional: true },
         optional: true
       });
       expect(doc.params[2]).toEqual(
       {
         name: 'paramWithDefault',
         description: 'description of param with default',
-        type: 'string=',
+        type: { description: 'string', optional: true },
         optional: true,
         default: 'xyz'
       });
@@ -240,7 +240,7 @@ describe('extract-tags', function() {
 
       plugin.each(doc);
       expect(doc.properties).toEqual([{
-        type: 'string',
+        type: { description: 'string', optional: false },
         name: 'propertyName',
         description: 'description of property'
       }]);
@@ -299,7 +299,7 @@ describe('extract-tags', function() {
       });
       plugin.each(doc);
       expect(doc.returns).toEqual({
-        type: 'string',
+        type: { description: 'string', optional: false },
         description: 'description of returns'
       });
     });
@@ -322,7 +322,7 @@ describe('extract-tags', function() {
       });
       plugin.each(doc);
       expect(doc.returns).toEqual({
-        type: 'string',
+        type: { description: 'string', optional: false },
         description: 'description of returns'
       });
     });
@@ -335,8 +335,8 @@ describe('extract-tags', function() {
     it("should add an eventType and eventTarget property to the doc", function() {
       setTag('eventType', 'broadcast on module:ng.directive:ngInclude');
       plugin.each(doc);
-      expect(doc.eventType.type).toEqual('broadcast');
-      expect(doc.eventType.on).toEqual('module:ng.directive:ngInclude');
+      expect(doc.eventType).toEqual('broadcast');
+      expect(doc.eventTarget).toEqual('module:ng.directive:ngInclude');
     });
   });
 
