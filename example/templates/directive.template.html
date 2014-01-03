@@ -11,17 +11,8 @@
 {$ notice('deprecated', 'Deprecated API', doc.deprecated) if doc.deprecated $}
 
 <div>
-  <h2 id="description">Description</h2>
-  <div class="description">
-    {$ doc.description | marked $}
-  </div>
-
-  {% if doc.requires %}
-  <h2 id="dependencies">Dependencies</h2>
-  <ul>
-    {% for require in doc.requires %}<li>{$ require | codeLink(doc) $}</li>{% endfor %}
-  </ul>
-  {% endif %}
+  {% include "lib/description.template.html" %}
+  {% include "lib/dependencies.template.html" %}
 
   <h2 id="usage">Usage</h2>
   <div class="usage">
@@ -70,17 +61,9 @@
     <li>This directive executes at priority level {$ doc.priority $}.</li>
   </ul>
 
-  {%- if doc.animations -%}
-  <h2>Animations</h2>
-  {$ doc.animations | marked $}
-  {$ 'module:ngAnimate.$animate' | codeLink(doc, 'Click here') $} to learn more about the steps involved in the animation.
-  {%- endif -%}
+  {% include "lib/animations.template.html" %}
+  {% include "lib/params.template.html" %}
+  {% include "lib/events.template.html" %}
+  {% include "lib/examples.template.html" %}
 
-
-  {%- if doc.examples %}
-  <h2 id="example">Example</h2>
-  {%- for example in doc.examples -%}
-    {$ example | marked $}
-  {%- endfor -%}
-  {%- endif %}  
 </div>

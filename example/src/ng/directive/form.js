@@ -76,9 +76,9 @@ function FormController(element, attrs) {
   }
 
   /**
-   * @ngdoc function
-   * @name form.FormController#$addControl
-   * @methodOf ng.directive:form.FormController
+   * @ngdoc method
+   * @name $addControl
+   * @methodOf global:form.FormController
    *
    * @description
    * Register a control with the form.
@@ -97,9 +97,9 @@ function FormController(element, attrs) {
   };
 
   /**
-   * @ngdoc function
-   * @name form.FormController#$removeControl
-   * @methodOf ng.directive:form.FormController
+   * @ngdoc method
+   * @name $removeControl
+   * @methodOf global:form.FormController
    *
    * @description
    * Deregister a control from the form.
@@ -118,9 +118,9 @@ function FormController(element, attrs) {
   };
 
   /**
-   * @ngdoc function
-   * @name form.FormController#$setValidity
-   * @methodOf ng.directive:form.FormController
+   * @ngdoc method
+   * @name $setValidity
+   * @methodOf global:form.FormController
    *
    * @description
    * Sets the validity of a form control.
@@ -166,9 +166,9 @@ function FormController(element, attrs) {
   };
 
   /**
-   * @ngdoc function
-   * @name form.FormController#$setDirty
-   * @methodOf ng.directive:form.FormController
+   * @ngdoc method
+   * @name $setDirty
+   * @methodOf global:form.FormController
    *
    * @description
    * Sets the form to a dirty state.
@@ -184,9 +184,9 @@ function FormController(element, attrs) {
   };
 
   /**
-   * @ngdoc function
-   * @name form.FormController#$setPristine
-   * @methodOf ng.directive:form.FormController
+   * @ngdoc method
+   * @name $setPristine
+   * @methodOf global:form.FormController
    *
    * @description
    * Sets the form to its pristine state.

@@ -1,0 +1,5 @@
+{%- if doc.animations %}
+<h2>Animations</h2>
+{$ doc.animations | marked $}
+{$ 'module:ngAnimate.$animate' | codeLink(doc, 'Click here') $} to learn more about the steps involved in the animation.
+{%- endif -%}
