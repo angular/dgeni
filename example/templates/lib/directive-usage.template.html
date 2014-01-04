@@ -9,30 +9,36 @@
     {% if doc.name.indexOf('ng') == 0 -%}
     (This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>).
     {%- endif %}
-    {% code -%}
-    <{$ doc.name | dashCase $}{% for param in doc.params %}
-      {$ helpers.renderAttributeParam(param) $}{% endfor %}>
+    {% code %}
+    <{$ doc.name | dashCase $}
+      {%- for param in doc.params %}
+      {$ helpers.renderElementParam(param) $}
+      {%- endfor %}>
     ...
     </{$ doc.name | dashCase $}>
-    {%- endcode %}
+    {% endcode %}
     </li>
   {% endif -%}
 
   {%- if doc.restrict.attribute -%}
     <li>as attribute:
-      {% code -%}
-      <{$ doc.element $}{% for param in doc.params %} {$ helpers.renderAttributeParam(param) $}{% endfor %}>
+      {% code %}
+      <{$ doc.element $}
+        {%- for param in doc.params %}
+        {$ helpers.renderAttributeParam(param) $}
+        {%- endfor %}>
       ...
       </{$ doc.element $}>
-      {%- endcode %}
+      {% endcode %}
     </li>
   {% endif -%}
 
   {%- if doc.restrict.cssClass -%}
     <li>as CSS class:
-      {% code -%}
-      <{$ doc.element $} class="{% for param in doc.params %} {$ helpers.renderCssParam(param) $}{% endfor %}"> ... </{$ doc.element $}>
-      {%- endcode %}
+      {% code %}
+      {% set sep = joiner(' ') %}
+      <{$ doc.element $} class="{% for param in doc.params %}{$ sep() $}{$ helpers.renderCssParam(param) $}{% endfor %}"> ... </{$ doc.element $}>
+      {% endcode %}
     </li>
   {% endif -%}
   

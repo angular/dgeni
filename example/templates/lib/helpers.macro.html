@@ -13,14 +13,20 @@
 </fieldset>
 {% endmacro %}
 
+{% macro renderElementParam(param) -%}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.alias or param.name | dashCase $}="{{$ param.type.description $}}"
+  {%- if param.type.optional %}]{% endif -%}
+{%- endmacro%}
+
 {% macro renderAttributeParam(param) -%}
-  {%- if param.optional %}[{% endif -%}
-  {$ param.name | dashCase $}="{{$ param.type $}}"
-  {%- if param.optional %}]{% endif -%}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.name | dashCase $}="{{$ param.type.description $}}"
+  {%- if param.type.optional %}]{% endif -%}
 {%- endmacro%}
 
 {% macro renderCssParam(param) -%}
-  {%- if param.optional %}[{% endif -%}
-  {$ param.name | dashCase $}:{{$ param.type $}};
-  {%- if param.optional %}]{% endif -%}
-{%- endmacro %}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.name | dashCase $}: {{$ param.type.description $}};
+  {%- if param.type.optional %}]{% endif -%}
+{% endmacro%}

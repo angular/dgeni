@@ -194,7 +194,8 @@ describe('extract-tags', function() {
       var tags = doctrine.parse(
         '@param {string} paramName description of param\n' +
         '@param {string=} optionalParam description of optional param\n' +
-        '@param {string} [paramWithDefault=xyz] description of param with default',
+        '@param {string} [paramWithDefault=xyz] description of param with default\n' +
+        '@param {string} paramName|alias description of param with alias',
         { sloppy: true } // to allow square brackets in param name
       ).tags;
 
@@ -220,6 +221,13 @@ describe('extract-tags', function() {
         description: 'description of param with default',
         type: { description: 'string', optional: true, typeList: ['string']  },
         default: 'xyz'
+      });
+      expect(doc.params[3]).toEqual(
+      {
+        name: 'paramName',
+        description: 'description of param with alias',
+        type: { description: 'string', optional: false, typeList: ['string']  },
+        alias: 'alias'
       });
     });
   });
