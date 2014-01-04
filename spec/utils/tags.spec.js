@@ -15,7 +15,8 @@ describe("get-type", function() {
     var tag = doctrine.parse('@param string abc').tags[0];
     expect(tags.getType(tag)).toEqual({
       description: 'string',
-      optional: false
+      optional: false,
+      typeList: ['string']
     });
   });
 
@@ -23,7 +24,8 @@ describe("get-type", function() {
     var tag = doctrine.parse('@param string= abc').tags[0];
     expect(tags.getType(tag)).toEqual({
       description: 'string',
-      optional: true
+      optional: true,
+      typeList: ['string']
     });
   });
 
@@ -32,7 +34,7 @@ describe("get-type", function() {
     expect(tags.getType(tag)).toEqual({
       description: '(function (*)|string|Array.<(function (*)|string)>)',
       optional: false,
-      subTypes: [
+      typeList: [
         'function (*)',
         'string',
         'Array.<(function (*)|string)>'

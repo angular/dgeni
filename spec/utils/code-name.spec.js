@@ -65,12 +65,12 @@ describe("code-name", function() {
 
 
       it("should replace relative references to code in the current module with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'ngShow')).toEqual({ url: "/api/ng/directive/ngShow.html", title: "ngShow", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'directive:ngShow')).toEqual({ url: "/api/ng/directive/ngShow.html", title: "ngShow", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'ngShow')).toEqual({ url: "/api/ng/directive/ngShow", title: "ngShow", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'directive:ngShow')).toEqual({ url: "/api/ng/directive/ngShow", title: "ngShow", type: "code"});
 
-        expect(codeName.getLinkInfo(someDoc, 'input[checkbox]')).toEqual({ url: "/api/ng/directive/input[checkbox].html", title: "input[checkbox]", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'filter:currency')).toEqual({ url: "/api/ng/filter/currency.html", title: "currency", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'module:ng.$compile')).toEqual({ url: "/api/ng/$compile.html", title: "$compile", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'input[checkbox]')).toEqual({ url: "/api/ng/directive/input[checkbox]", title: "input[checkbox]", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'filter:currency')).toEqual({ url: "/api/ng/filter/currency", title: "currency", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ng.$compile')).toEqual({ url: "/api/ng/$compile", title: "$compile", type: "code"});
       });
       
 
@@ -82,18 +82,18 @@ describe("code-name", function() {
       
 
       it("should replace references to code in other modules with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'module:ngRoute.directive:ngView')).toEqual({ url: "/api/ngRoute/directive/ngView.html", title: "ngView", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ngRoute.directive:ngView')).toEqual({ url: "/api/ngRoute/directive/ngView", title: "ngView", type: "code"});
       });
       
 
       it("should replace references to code in the global namespace with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'global:angular.element')).toEqual({ url: "/api/ng/global/angular.element.html", title: "angular.element", type: "code"});
-        expect(codeName.getLinkInfo(someDoc, 'module:ngMock.global:angular.mock.dump')).toEqual({ url: "/api/ngMock/global/angular.mock.dump.html", title: "angular.mock.dump", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'global:angular.element')).toEqual({ url: "/api/ng/global/angular.element", title: "angular.element", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ngMock.global:angular.mock.dump')).toEqual({ url: "/api/ngMock/global/angular.mock.dump", title: "angular.mock.dump", type: "code"});
       });
 
 
       it("should replace code references to members of objects with HTML anchors to the correct url", function() {
-        expect(codeName.getLinkInfo(someDoc, 'module:ng.$location#methods_search', 'search()')).toEqual({ url: "/api/ng/$location.html#methods_search", title: "search()", type: "code"});
+        expect(codeName.getLinkInfo(someDoc, 'module:ng.$location#methods_search', 'search()')).toEqual({ url: "/api/ng/$location#methods_search", title: "search()", type: "code"});
       });
     });
 

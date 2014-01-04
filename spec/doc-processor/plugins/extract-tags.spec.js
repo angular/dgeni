@@ -206,22 +206,19 @@ describe('extract-tags', function() {
       {
         name: 'paramName',
         description: 'description of param',
-        type: { description: 'string', optional: false },
-        optional: false
+        type: { description: 'string', optional: false, typeList: ['string'] }
       });
       expect(doc.params[1]).toEqual(
       {
         name: 'optionalParam',
         description: 'description of optional param',
-        type: { description: 'string', optional: true },
-        optional: true
+        type: { description: 'string', optional: true, typeList: ['string']  }
       });
       expect(doc.params[2]).toEqual(
       {
         name: 'paramWithDefault',
         description: 'description of param with default',
-        type: { description: 'string', optional: true },
-        optional: true,
+        type: { description: 'string', optional: true, typeList: ['string']  },
         default: 'xyz'
       });
     });
@@ -235,12 +232,12 @@ describe('extract-tags', function() {
         title: 'property',
         name: 'propertyName',
         description: 'description of property',
-        type: { type: 'NameExpression', name: 'string' }
+        type: { type: 'NameExpression', name: 'string', typeList: ['string']  }
       });
 
       plugin.each(doc);
       expect(doc.properties).toEqual([{
-        type: { description: 'string', optional: false },
+        type: { description: 'string', optional: false, typeList: ['string']  },
         name: 'propertyName',
         description: 'description of property'
       }]);
@@ -299,7 +296,7 @@ describe('extract-tags', function() {
       });
       plugin.each(doc);
       expect(doc.returns).toEqual({
-        type: { description: 'string', optional: false },
+        type: { description: 'string', optional: false, typeList: ['string']  },
         description: 'description of returns'
       });
     });
@@ -322,7 +319,7 @@ describe('extract-tags', function() {
       });
       plugin.each(doc);
       expect(doc.returns).toEqual({
-        type: { description: 'string', optional: false },
+        type: { description: 'string', optional: false, typeList: ['string']  },
         description: 'description of returns'
       });
     });

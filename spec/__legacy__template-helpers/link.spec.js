@@ -1,4 +1,4 @@
-var tagHandler = require('../../../../lib/ngdoc-parser/ngdoc-tags/inline/link.js');
+//var tagHandler = require('../../lib/__legacy__template-helpers/link.js');
 
 xdescribe("link inline ngdoc tag", function() {
 
