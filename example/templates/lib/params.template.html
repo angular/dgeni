@@ -11,13 +11,9 @@
   <tbody>
     {% for param in doc.params %}
     <tr>
-      <td>{$ param.name $}{% if param.optional %}<div><em>(optional)</em></div>{% endif %}</td>
+      <td>{$ param.name $}{% if param.type.optional %}<div><em>(optional)</em></div>{% endif %}</td>
       <td>
-        {%- if param.type.subTypes -%}
-          {% for subType in param.type.subTypes %}<a href="" class="{$ subType $}">{$ subType $}</a>{% endfor %}
-        {%- else -%}
-          <a href="" class="{$ param.type.description $}">{$ param.type.description $}</a>
-        {%- endif -%}
+        {% for subType in param.type.typeList %}<a href="" class="{$ subType $}">{$ subType $}</a>{% endfor %}
       </td>
       <td>
         {$ param.description | marked $}
