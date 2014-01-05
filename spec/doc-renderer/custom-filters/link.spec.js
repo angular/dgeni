@@ -1,9 +1,9 @@
-var filter = require('../../../lib/doc-renderer/custom-filters/code-link');
+var filter = require('../../../lib/doc-renderer/custom-filters/link');
 
-describe("code-link filter", function() {
+describe("link filter", function() {
 
-  it("should have the name 'codeLink'", function() {
-    expect(filter.name).toEqual('codeLink');
+  it("should have the name 'link'", function() {
+    expect(filter.name).toEqual('link');
   });
 
   beforeEach(function() {

@@ -41,7 +41,7 @@ var nullFormCtrl = {
  * `FormController` keeps track of all its controls and nested forms as well as state of them,
  * such as being valid/invalid or dirty/pristine.
  *
- * Each {@link ng.directive:form form} directive creates an instance
+ * Each {@link directive:form form} directive creates an instance
  * of `FormController`.
  *
  */
@@ -215,7 +215,7 @@ function FormController(element, attrs) {
  * @restrict EAC
  *
  * @description
- * Nestable alias of {@link ng.directive:form `form`} directive. HTML
+ * Nestable alias of {@link directive:form `form`} directive. HTML
  * does not allow nesting of form elements. It is useful to nest forms, for example if the validity of a
  * sub-group of controls needs to be determined.
  *
@@ -231,19 +231,19 @@ function FormController(element, attrs) {
  *
  * @description
  * Directive that instantiates
- * {@link ng.directive:form.FormController FormController}.
+ * {@link global:form.FormController FormController}.
  *
  * If the `name` attribute is specified, the form controller is published onto the current scope under
  * this name.
  *
- * # Alias: {@link ng.directive:ngForm `ngForm`}
+ * # Alias: {@link directive:ngForm `ngForm`}
  *
  * In Angular forms can be nested. This means that the outer form is valid when all of the child
  * forms are valid as well. However, browsers do not allow nesting of `<form>` elements, so
- * Angular provides the {@link ng.directive:ngForm `ngForm`} directive which behaves identically to
+ * Angular provides the {@link directive:ngForm `ngForm`} directive which behaves identically to
  * `<form>` but can be nested.  This allows you to have nested forms, which is very useful when
  * using Angular validation directives in forms that are dynamically generated using the
- * {@link ng.directive:ngRepeat `ngRepeat`} directive. Since you cannot dynamically generate the `name`
+ * {@link directive:ngRepeat `ngRepeat`} directive. Since you cannot dynamically generate the `name`
  * attribute of input elements using interpolation, you have to wrap each set of repeated inputs in an
  * `ngForm` directive and nest these in an outer `form` element.
  *
@@ -268,12 +268,12 @@ function FormController(element, attrs) {
  * You can use one of the following two ways to specify what javascript method should be called when
  * a form is submitted:
  *
- * - {@link ng.directive:ngSubmit ngSubmit} directive on the form element
- * - {@link ng.directive:ngClick ngClick} directive on the first
+ * - {@link directive:ngSubmit ngSubmit} directive on the form element
+ * - {@link directive:ngClick ngClick} directive on the first
   *  button or input field of type submit (input[type=submit])
  *
- * To prevent double execution of the handler, use only one of the {@link ng.directive:ngSubmit ngSubmit}
- * or {@link ng.directive:ngClick ngClick} directives.
+ * To prevent double execution of the handler, use only one of the {@link directive:ngSubmit ngSubmit}
+ * or {@link directive:ngClick ngClick} directives.
  * This is because of the following form submission rules in the HTML specification:
  *
  * - If a form has only one input field then hitting enter in this field triggers form submit
