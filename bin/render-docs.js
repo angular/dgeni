@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var log = require('../lib/utils/log');
 var myArgs = require('optimist')
   .usage('Usage: $0 path/to/files --templates=path/to/templates --output=path/to/output/folder')
   .demand(1)
@@ -15,21 +16,21 @@ var git = {
 };
 
 // Main work
-console.log('Reading files from ', filePath);
+log.info('Reading files from ', filePath);
 docGenerator.readFiles(filePath)
 
   .then(function(docs) {
-    console.log('Read', docs.length, 'docs');
+    log.info('Read', docs.length, 'docs');
     docs = docGenerator.processDocs(docs);
     _.forEach(docs, function(doc) {
-      console.log('Processed doc', doc.id);
+      log.info('Processed doc', doc.id);
     });
     return renderDocs(docs, {git: git});
   })
 
   .then(function(renderedFilePaths) {
     _.forEach(renderedFilePaths, function(renderedFilePath) {
-      console.log('Rendered doc', renderedFilePath);
+      log.info('Rendered doc', renderedFilePath);
     });
   })
 
