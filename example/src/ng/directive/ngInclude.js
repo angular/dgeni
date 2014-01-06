@@ -9,11 +9,11 @@
  * Fetches, compiles and includes an external HTML fragment.
  *
  * By default, the template URL is restricted to the same domain and protocol as the
- * application document. This is done by calling {@link $sce#methods_getTrustedResourceUrl
+ * application document. This is done by calling {@link module:ng.$sce#methods_getTrustedResourceUrl
  * `$sce.getTrustedResourceUrl`} on it. To load templates from other domains or protocols
  * you may either {@link module:ng.$sceDelegateProvider#methods_resourceUrlWhitelist whitelist them} or
  * {@link module:ng.$sce#methods_trustAsResourceUrl wrap them} as trusted values. Refer to Angular's {@link
- * ng.$sce Strict Contextual Escaping}.
+ * module:ng.$sce Strict Contextual Escaping}.
  *
  * In addition, the browser's
  * {@link https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_XMLHttpRequest

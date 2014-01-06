@@ -4,14 +4,14 @@
 
 /**
  * @ngdoc filter
- * @name linky
+ * @name ngSanitize.filter:linky
  * @function
  *
  * @description
  * Finds links in text input and turns them into html links. Supports http/https/ftp/mailto and
  * plain email address links.
  *
- * Requires the {@link module:ngSanitize} module to be installed.
+ * Requires the {@link ngSanitize `ngSanitize`} module to be installed.
  *
  * @param {string} text Input text.
  * @param {string} target Window (_blank|_self|_parent|_top) or named frame to open links in.

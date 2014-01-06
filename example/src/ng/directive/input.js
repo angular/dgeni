@@ -975,9 +975,9 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   }
 
   /**
-   * @ngdoc function
-   * @name ngModel.NgModelController#$render
-   * @methodOf ng.global:ngModel.NgModelController
+   * @ngdoc method
+   * @name $render
+   * @methodOf global:ngModel.NgModelController
    *
    * @description
    * Called when the view needs to be updated. It is expected that the user of the ng-model
@@ -986,9 +986,9 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   this.$render = noop;
 
   /**
-   * @ngdoc function
-   * @name { ng.global:ngModel.NgModelController#$isEmpty
-   * @methodOf ng.global:ngModel.NgModelController
+   * @ngdoc method
+   * @name $isEmpty
+   * @methodOf global:ngModel.NgModelController
    *
    * @description
    * This is called when we need to determine if the value of the input is empty.
@@ -1022,9 +1022,9 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   }
 
   /**
-   * @ngdoc function
-   * @name ngModel.NgModelController#$setValidity
-   * @methodOf ng.global:ngModel.NgModelController
+   * @ngdoc method
+   * @name $setValidity
+   * @methodOf global:ngModel.NgModelController
    *
    * @description
    * Change the validity state, and notifies the form when the control changes validity. (i.e. it
@@ -1066,9 +1066,9 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   };
 
   /**
-   * @ngdoc function
-   * @name ngModel.NgModelController#$setPristine
-   * @methodOf ng.global:ngModel.NgModelController
+   * @ngdoc method
+   * @name $setPristine
+   * @methodOf global:ngModel.NgModelController
    *
    * @description
    * Sets the control to its pristine state.
@@ -1083,9 +1083,9 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   };
 
   /**
-   * @ngdoc function
-   * @name ngModel.NgModelController#$setViewValue
-   * @methodOf ng.global:ngModel.NgModelController
+   * @ngdoc method
+   * @name $setViewValue
+   * @methodOf global:ngModel.NgModelController
    *
    * @description
    * Update the view value.
@@ -1192,12 +1192,12 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  * For basic examples, how to use `ngModel`, see:
  *
  *  - {@link directive:input input}
- *    - {@link directive:input.text text}
- *    - {@link directive:input.checkbox checkbox}
- *    - {@link directive:input.radio radio}
- *    - {@link directive:input.number number}
- *    - {@link directive:input.email email}
- *    - {@link directive:input.url url}
+ *    - {@link directive:input[text] text}
+ *    - {@link directive:input[checkbox] checkbox}
+ *    - {@link directive:input[radio] radio}
+ *    - {@link directive:input[number] number}
+ *    - {@link directive:input[email] email}
+ *    - {@link directive:input[url] url}
  *  - {@link directive:select select}
  *  - {@link directive:textarea textarea}
  *

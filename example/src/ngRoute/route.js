@@ -21,7 +21,7 @@ var ngRouteModule = angular.module('ngRoute', ['ng']).
                         provider('$route', $RouteProvider);
 
 /**
- * @ngdoc service
+ * @ngdoc provider
  * @name $routeProvider
  * @function
  *
