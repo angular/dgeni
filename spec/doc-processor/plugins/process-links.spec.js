@@ -1,14 +1,15 @@
 var _ = require('lodash');
+var logger = require('winston');
 var rewire = require('rewire');
 var plugin = rewire('../../../lib/doc-processor/plugins/process-links');
 
-
 describe("process-links doc-processor plugin", function() {
-  var doc, links, log;
+  var doc, links, logLevel;
 
   beforeEach(function() {
-    log = [];
-    plugin.__set__('console', { log: function(value) { log.push(value); } });
+    logLevel = logger.level;
+    logger.level = 'warn';
+    spyOn(logger, 'warn');
     plugin.before();
     doc = {
       componentType: 'directive',
@@ -24,6 +25,10 @@ describe("process-links doc-processor plugin", function() {
     plugin.each(doc);
     plugin.after([doc]);
     links = plugin.__get__('links');
+  });
+
+  afterEach(function() {
+    logger.level = logLevel;
   });
 
   it("should convert url links to anchors", function() {
@@ -62,15 +67,12 @@ describe("process-links doc-processor plugin", function() {
   });
 
   it("should check that any links in the links property of a doc reference a valid doc", function() {
-    expect(log).toEqual([
-      '=== links ===',
-      [
-        'some/url',
-        '/src/ngOther/directive/ngDirective',
-        '/src/ng/directive/ngInclude'
-      ],
-      'Invalid link, "/src/ngOther/directive/ngDirective" in doc "some/file.js" at line 200',
-      'Invalid link, "/src/ng/directive/ngInclude" in doc "some/file.js" at line 200'
+    expect(logger.warn).toHaveBeenCalled();
+    expect(logger.warn.calls[0].args).toEqual([
+      'In doc "some/file.js" at line 200: Invalid link, "/src/ngOther/directive/ngDirective"'
+    ]);
+    expect(logger.warn.calls[1].args).toEqual([
+      'In doc "some/file.js" at line 200: Invalid link, "/src/ng/directive/ngInclude"'
     ]);
   });
 });

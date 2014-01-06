@@ -36,9 +36,9 @@ describe("getLinkInfo", function() {
     
 
     it("should replace references to modules with HTML anchors to the correct url", function() {
-      expect(getLinkInfo(someDoc, 'module:ng').anchorElement).toEqual('<a href="/api/ng/index.html"><code class="prettyprint linenum"><span class="title">ng</span></code></a>');
-      expect(getLinkInfo(someDoc, 'module:ngRoute').anchorElement).toEqual('<a href="/api/ngRoute/index.html"><code class="prettyprint linenum"><span class="title">ngRoute</span></code></a>');
-      expect(getLinkInfo(someDoc, 'module:ngSanitize').anchorElement).toEqual('<a href="/api/ngSanitize/index.html"><code class="prettyprint linenum"><span class="title">ngSanitize</span></code></a>');
+      expect(getLinkInfo(someDoc, 'module:ng').anchorElement).toEqual('<a href="/api/ng"><code class="prettyprint linenum"><span class="title">ng</span></code></a>');
+      expect(getLinkInfo(someDoc, 'module:ngRoute').anchorElement).toEqual('<a href="/api/ngRoute"><code class="prettyprint linenum"><span class="title">ngRoute</span></code></a>');
+      expect(getLinkInfo(someDoc, 'module:ngSanitize').anchorElement).toEqual('<a href="/api/ngSanitize"><code class="prettyprint linenum"><span class="title">ngSanitize</span></code></a>');
     });
     
 
