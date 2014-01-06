@@ -44,15 +44,15 @@ describe("code-name", function() {
       it("should replace urls containing slashes with HTML anchors to the same url", function() {
         var someDoc = { };
 
-        expect(codeName.getLinkInfo(someDoc, '/some/absolute/url')).toEqual({ url: "/some/absolute/url", title: "url", type: 'url', anchorElement : '<a href="/some/absolute/url">url</a>'});
-        expect(codeName.getLinkInfo(someDoc, 'some/relative/url')).toEqual({ url: "some/relative/url", title: "url", type: 'url', anchorElement : '<a href="some/relative/url">url</a>'});
-        expect(codeName.getLinkInfo(someDoc, '../some/other/relative/url')).toEqual({ url: "../some/other/relative/url", title: "url", type: 'url', anchorElement : '<a href="../some/other/relative/url">url</a>'});
-        expect(codeName.getLinkInfo(someDoc, 'http://www.google.com')).toEqual({ url: "http://www.google.com", title: "www.google.com", type: 'url', anchorElement : '<a href="http://www.google.com">www.google.com</a>'});
+        expect(codeName.getLinkInfo(someDoc, '/some/absolute/url')).toEqual({ doc: someDoc, url: "/some/absolute/url", title: "url", type: 'url', anchorElement : '<a href="/some/absolute/url">url</a>'});
+        expect(codeName.getLinkInfo(someDoc, 'some/relative/url')).toEqual({ doc: someDoc, url: "some/relative/url", title: "url", type: 'url', anchorElement : '<a href="some/relative/url">url</a>'});
+        expect(codeName.getLinkInfo(someDoc, '../some/other/relative/url')).toEqual({ doc: someDoc, url: "../some/other/relative/url", title: "url", type: 'url', anchorElement : '<a href="../some/other/relative/url">url</a>'});
+        expect(codeName.getLinkInfo(someDoc, 'http://www.google.com')).toEqual({ doc: someDoc, url: "http://www.google.com", title: "www.google.com", type: 'url', anchorElement : '<a href="http://www.google.com">www.google.com</a>'});
 
-        expect(codeName.getLinkInfo(someDoc, '/some/absolute/url', 'some link')).toEqual({ url: "/some/absolute/url", title: "some link", type: 'url', anchorElement : '<a href="/some/absolute/url">some link</a>'});
-        expect(codeName.getLinkInfo(someDoc, 'some/relative/url', 'some other link')).toEqual({ url: "some/relative/url", title: "some other link", type: 'url', anchorElement : '<a href="some/relative/url">some other link</a>'});
-        expect(codeName.getLinkInfo(someDoc, '../some/other/relative/url', 'some link')).toEqual({ url: "../some/other/relative/url", title: "some link", type: 'url', anchorElement : '<a href="../some/other/relative/url">some link</a>'});
-        expect(codeName.getLinkInfo(someDoc, 'http://www.google.com', 'Google')).toEqual({ url: "http://www.google.com", title: "Google", type: 'url', anchorElement : '<a href="http://www.google.com">Google</a>'});
+        expect(codeName.getLinkInfo(someDoc, '/some/absolute/url', 'some link')).toEqual({ doc: someDoc, url: "/some/absolute/url", title: "some link", type: 'url', anchorElement : '<a href="/some/absolute/url">some link</a>'});
+        expect(codeName.getLinkInfo(someDoc, 'some/relative/url', 'some other link')).toEqual({ doc: someDoc, url: "some/relative/url", title: "some other link", type: 'url', anchorElement : '<a href="some/relative/url">some other link</a>'});
+        expect(codeName.getLinkInfo(someDoc, '../some/other/relative/url', 'some link')).toEqual({ doc: someDoc, url: "../some/other/relative/url", title: "some link", type: 'url', anchorElement : '<a href="../some/other/relative/url">some link</a>'});
+        expect(codeName.getLinkInfo(someDoc, 'http://www.google.com', 'Google')).toEqual({ doc: someDoc, url: "http://www.google.com", title: "Google", type: 'url', anchorElement : '<a href="http://www.google.com">Google</a>'});
       });
     });
 
