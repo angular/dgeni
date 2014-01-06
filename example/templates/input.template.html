@@ -19,7 +19,7 @@
   {% if doc.requires %}
   <h2 id="dependencies">Dependencies</h2>
   <ul>
-    {% for require in doc.requires %}<li>{$ require | codeLink(doc) $}</li>{% endfor %}
+    {% for require in doc.requires %}<li>{$ require | link(doc) $}</li>{% endfor %}
   </ul>
   {% endif %}
   <h2 id="usage">Usage</h2>
