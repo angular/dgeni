@@ -695,7 +695,7 @@ function checkboxInputType(scope, element, attr, ctrl) {
  * @description
  * HTML textarea element control with angular data-binding. The data-binding and validation
  * properties of this element are exactly the same as those of the
- * {@link ng.directive:input input element}.
+ * {@link directive:input input element}.
  *
  * @param {string} ngModel Assignable angular expression to data-bind to.
  * @param {string=} name Property name of the form under which the control is published.
@@ -838,7 +838,7 @@ var VALID_CLASS = 'ng-valid',
        the control reads value from the DOM.  Each function is called, in turn, passing the value
        through to the next. Used to sanitize / convert the value as well as validation.
        For validation, the parsers should update the validity state using
-       {@link ng.directive:ngModel.NgModelController#methods_$setValidity $setValidity()},
+       {@link global:ngModel.NgModelController#methods_$setValidity $setValidity()},
        and return `undefined` for invalid values.
 
  *
@@ -977,7 +977,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc function
    * @name ngModel.NgModelController#$render
-   * @methodOf ng.directive:ngModel.NgModelController
+   * @methodOf ng.global:ngModel.NgModelController
    *
    * @description
    * Called when the view needs to be updated. It is expected that the user of the ng-model
@@ -987,8 +987,8 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   /**
    * @ngdoc function
-   * @name { ng.directive:ngModel.NgModelController#$isEmpty
-   * @methodOf ng.directive:ngModel.NgModelController
+   * @name { ng.global:ngModel.NgModelController#$isEmpty
+   * @methodOf ng.global:ngModel.NgModelController
    *
    * @description
    * This is called when we need to determine if the value of the input is empty.
@@ -1024,7 +1024,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc function
    * @name ngModel.NgModelController#$setValidity
-   * @methodOf ng.directive:ngModel.NgModelController
+   * @methodOf ng.global:ngModel.NgModelController
    *
    * @description
    * Change the validity state, and notifies the form when the control changes validity. (i.e. it
@@ -1068,7 +1068,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc function
    * @name ngModel.NgModelController#$setPristine
-   * @methodOf ng.directive:ngModel.NgModelController
+   * @methodOf ng.global:ngModel.NgModelController
    *
    * @description
    * Sets the control to its pristine state.
@@ -1085,14 +1085,14 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc function
    * @name ngModel.NgModelController#$setViewValue
-   * @methodOf ng.directive:ngModel.NgModelController
+   * @methodOf ng.global:ngModel.NgModelController
    *
    * @description
    * Update the view value.
    *
    * This method should be called when the view value changes, typically from within a DOM event handler.
-   * For example {@link ng.directive:input input} and
-   * {@link ng.directive:select select} directives call it.
+   * For example {@link directive:input input} and
+   * {@link directive:select select} directives call it.
    *
    * It will update the $viewValue, then pass this value through each of the functions in `$parsers`,
    * which includes any validators. The value that comes out of this `$parsers` pipeline, be applied to
@@ -1169,7 +1169,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  *
  * @description
  * The `ngModel` directive binds an `input`,`select`, `textarea` (or custom form control) to a
- * property on the scope using {@link ng.directive:ngModel.NgModelController NgModelController},
+ * property on the scope using {@link global:ngModel.NgModelController NgModelController},
  * which is created and exposed by this directive.
  *
  * `ngModel` is responsible for:
@@ -1179,7 +1179,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  * - Providing validation behavior (i.e. required, number, email, url).
  * - Keeping the state of the control (valid/invalid, dirty/pristine, validation errors).
  * - Setting related css classes on the element (`ng-valid`, `ng-invalid`, `ng-dirty`, `ng-pristine`).
- * - Registering the control with its parent {@link ng.directive:form form}.
+ * - Registering the control with its parent {@link directive:form form}.
  *
  * Note: `ngModel` will try to bind to the property given by evaluating the expression on the
  * current scope. If the property doesn't already exist on this scope, it will be created
@@ -1191,15 +1191,15 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  *
  * For basic examples, how to use `ngModel`, see:
  *
- *  - {@link ng.directive:input input}
- *    - {@link ng.directive:input.text text}
- *    - {@link ng.directive:input.checkbox checkbox}
- *    - {@link ng.directive:input.radio radio}
- *    - {@link ng.directive:input.number number}
- *    - {@link ng.directive:input.email email}
- *    - {@link ng.directive:input.url url}
- *  - {@link ng.directive:select select}
- *  - {@link ng.directive:textarea textarea}
+ *  - {@link directive:input input}
+ *    - {@link directive:input.text text}
+ *    - {@link directive:input.checkbox checkbox}
+ *    - {@link directive:input.radio radio}
+ *    - {@link directive:input.number number}
+ *    - {@link directive:input.email email}
+ *    - {@link directive:input.url url}
+ *  - {@link directive:select select}
+ *  - {@link directive:textarea textarea}
  *
  */
 var ngModelDirective = function() {

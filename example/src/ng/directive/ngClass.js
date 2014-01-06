@@ -188,8 +188,8 @@ function classDirective(name, selector) {
    The ngClass directive still supports CSS3 Transitions/Animations even if they do not follow the ngAnimate CSS naming structure.
    Upon animation ngAnimate will apply supplementary CSS classes to track the start and end of an animation, but this will not hinder
    any pre-existing CSS transitions already on the element. To get an idea of what happens during a class-based animation, be sure
-   to view the step by step details of {@link ngAnimate.$animate#methods_addclass $animate.addClass} and
-   {@link ngAnimate.$animate#methods_removeclass $animate.removeClass}.
+   to view the step by step details of {@link module:ngAnimate.$animate#methods_addclass $animate.addClass} and
+   {@link module:ngAnimate.$animate#methods_removeclass $animate.removeClass}.
  */
 var ngClassDirective = classDirective('', true);
 
@@ -200,11 +200,11 @@ var ngClassDirective = classDirective('', true);
  *
  * @description
  * The `ngClassOdd` and `ngClassEven` directives work exactly as
- * {@link ng.directive:ngClass ngClass}, except they work in
+ * {@link module:ng.directive:ngClass ngClass}, except they work in
  * conjunction with `ngRepeat` and take effect only on odd (even) rows.
  *
  * This directive can be applied only within the scope of an
- * {@link ng.directive:ngRepeat ngRepeat}.
+ * {@link module:ng.directive:ngRepeat ngRepeat}.
  *
  * @element ANY
  * @param {expression} ngClassOdd {@link guide/expression Expression} to eval. The result
@@ -248,11 +248,11 @@ var ngClassOddDirective = classDirective('Odd', 0);
  *
  * @description
  * The `ngClassOdd` and `ngClassEven` directives work exactly as
- * {@link ng.directive:ngClass ngClass}, except they work in
+ * {@link module:ng.directive:ngClass ngClass}, except they work in
  * conjunction with `ngRepeat` and take effect only on odd (even) rows.
  *
  * This directive can be applied only within the scope of an
- * {@link ng.directive:ngRepeat ngRepeat}.
+ * {@link module:ng.directive:ngRepeat ngRepeat}.
  *
  * @element ANY
  * @param {expression} ngClassEven {@link guide/expression Expression} to eval. The

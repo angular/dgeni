@@ -69,7 +69,7 @@ forEach(
  * a dblclick. (The Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -85,7 +85,7 @@ forEach(
  * mousedown. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -101,7 +101,7 @@ forEach(
  * mouseup. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 /**
@@ -116,7 +116,7 @@ forEach(
  * mouseover. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -132,7 +132,7 @@ forEach(
  * mouseenter. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -148,7 +148,7 @@ forEach(
  * mouseleave. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -164,7 +164,7 @@ forEach(
  * mousemove. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -180,7 +180,7 @@ forEach(
  * keydown. (Event object is available as `$event` and can be interrogated for keyCode, altKey, etc.)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -196,7 +196,7 @@ forEach(
  * keyup. (Event object is available as `$event` and can be interrogated for keyCode, altKey, etc.)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -212,7 +212,7 @@ forEach(
  * keypress. (Event object is available as `$event` and can be interrogated for keyCode, altKey, etc.)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 
@@ -281,7 +281,7 @@ forEach(
  * focus. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 /**
@@ -296,7 +296,7 @@ forEach(
  * blur. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 /**
@@ -311,7 +311,7 @@ forEach(
  * copy. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 /**
@@ -326,7 +326,7 @@ forEach(
  * cut. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
 
 /**
@@ -341,5 +341,5 @@ forEach(
  * paste. (Event object is available as `$event`)
  *
  * @example
- * See {@link ng.directive:ngClick ngClick}
+ * See {@link module:ng.directive:ngClick ngClick}
  */
