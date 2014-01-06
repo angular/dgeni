@@ -11,7 +11,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * @description
  * The `$routeParams` service allows you to retrieve the current set of route parameters.
  *
- * Requires the {@link ngRoute `ngRoute`} module to be installed.
+ * Requires the {@link module:ngRoute `ngRoute`} module to be installed.
  *
  * The route parameters are a combination of {@link module:ng.$location}'s
  * {@link module:ng.$location#methods_search `search()`} and {@link module:ng.$location#methods_path `path()`}.

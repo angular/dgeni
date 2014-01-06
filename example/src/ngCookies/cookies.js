@@ -13,8 +13,8 @@
  *
  * <div doc-module-components="ngCookies"></div>
  *
- * See {@link ngCookies.$cookies `$cookies`} and
- * {@link ngCookies.$cookieStore `$cookieStore`} for usage.
+ * See {@link $cookies} and
+ * {@link $cookieStore} for usage.
  */
 
 
@@ -30,7 +30,7 @@ angular.module('ngCookies', ['ng']).
    * Only a simple Object is exposed and by adding or removing properties to/from
    * this object, new cookies are created/deleted at the end of current $eval.
    *
-   * Requires the {@link ngCookies `ngCookies`} module to be installed.
+   * Requires the {@link module:ngCookies} module to be installed.
    *
    * @example
    <doc:example>
@@ -138,7 +138,7 @@ angular.module('ngCookies', ['ng']).
    * Objects put or retrieved from this storage are automatically serialized or
    * deserialized by angular's toJson/fromJson.
    *
-   * Requires the {@link ngCookies `ngCookies`} module to be installed.
+   * Requires the {@link module:ngCookies} module to be installed.
    *
    * @example
    */

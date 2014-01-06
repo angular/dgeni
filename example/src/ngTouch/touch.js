@@ -13,7 +13,7 @@
  *
  * {@installModule touch}
  *
- * See {@link ngTouch.$swipe `$swipe`} for usage.
+ * See {@link $swipe} for usage.
  *
  * <div doc-module-components="ngTouch"></div>
  *

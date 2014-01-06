@@ -15,11 +15,11 @@ angular.mock = {};
  * @name $browser
  *
  * @description
- * This service is a mock implementation of {@link ng.$browser}. It provides fake
+ * This service is a mock implementation of {@link module:ng.$browser}. It provides fake
  * implementation for commonly used browser apis that are hard to test, e.g. setTimeout, xhr,
  * cookies, etc...
  *
- * The api of this service is the same as that of the real {@link ng.$browser $browser}, except
+ * The api of this service is the same as that of the real {@link module:ng.$browser $browser}, except
  * that there are several helper methods available which can be used in tests.
  */
 angular.mock.$BrowserProvider = function() {
@@ -102,7 +102,7 @@ angular.mock.$Browser = function() {
    * @description
    * Flushes all pending requests and executes the defer callbacks.
    *
-   * @param {number=} number of milliseconds to flush. See {@link #defer.now}
+   * @param {number=} number of milliseconds to flush. See {@link $browser#defer.now}
    */
   self.defer.flush = function(delay) {
     if (angular.isDefined(delay)) {
@@ -490,7 +490,7 @@ angular.mock.$LogProvider = function() {
  * @param {number=} [count=0] Number of times to repeat. If not set, or 0, will repeat
  *   indefinitely.
  * @param {boolean=} [invokeApply=true] If set to `false` skips model dirty checking, otherwise
- *   will invoke `fn` within the {@link ng.$rootScope.Scope#methods_$apply $apply} block.
+ *   will invoke `fn` within the {@link module:ng.global:$rootScope.Scope#methods_$apply $apply} block.
  * @returns {promise} A promise which will be notified on each iteration.
  */
 angular.mock.$IntervalProvider = function() {
@@ -914,10 +914,10 @@ angular.mock.dump = function(object) {
  * @name $httpBackend
  * @description
  * Fake HTTP backend implementation suitable for unit testing applications that use the
- * {@link ng.$http $http service}.
+ * {@link module:ng.$http $http service}.
  *
  * *Note*: For fake HTTP backend implementation suitable for end-to-end testing or backend-less
- * development please see {@link ngMockE2E.$httpBackend e2e $httpBackend mock}.
+ * development please see {@link module:ngMockE2E.$httpBackend e2e $httpBackend mock}.
  *
  * During unit testing, we want our unit tests to run quickly and have no external dependencies so
  * we don’t want to send {@link https://developer.mozilla.org/en/xmlhttprequest XHR} or
@@ -1672,7 +1672,7 @@ function MockXhr() {
  * @name $timeout
  * @description
  *
- * This service is just a simple decorator for {@link ng.$timeout $timeout} service
+ * This service is just a simple decorator for {@link module:ng.$timeout $timeout} service
  * that adds a "flush" and "verifyNoPendingTasks" methods.
  */
 
@@ -1763,7 +1763,7 @@ angular.module('ngMock', ['ng']).provider({
  *
  * The `ngMockE2E` is an angular module which contains mocks suitable for end-to-end testing.
  * Currently there is only one mock present in this module -
- * the {@link ngMockE2E.$httpBackend e2e $httpBackend} mock.
+ * the {@link module:ngMockE2E.$httpBackend e2e $httpBackend} mock.
  */
 angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
   $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
@@ -1775,7 +1775,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
  * @module ngMockE2E
  * @description
  * Fake HTTP backend implementation suitable for end-to-end testing or backend-less development of
- * applications that use the {@link ng.$http $http service}.
+ * applications that use the {@link module:ng.$http $http service}.
  *
  * *Note*: For fake http backend implementation suitable for unit testing please see
  * {@link $httpBackend unit-testing $httpBackend mock}.
@@ -2053,7 +2053,7 @@ if(window.jasmine || window.mocha) {
    * *NOTE*: This function is also published on window for easy access.<br>
    *
    * The inject function wraps a function into an injectable function. The inject() creates new
-   * instance of {@link AUTO.$injector $injector} per test, which is then used for
+   * instance of {@link module:AUTO.$injector $injector} per test, which is then used for
    * resolving references.
    *
    *
@@ -2087,7 +2087,7 @@ if(window.jasmine || window.mocha) {
    *
    * ```
    *
-   * See also {@link angular.mock.module angular.mock.module}
+   * See also {@link module:ngMock.global:angular.mock.module angular.mock.module}
    *
    * ## Example
    * Example of what a typical jasmine tests looks like with the inject method.

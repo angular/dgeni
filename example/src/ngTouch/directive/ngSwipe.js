@@ -12,7 +12,7 @@
  * Though ngSwipeLeft is designed for touch-based devices, it will work with a mouse click and drag
  * too.
  *
- * Requires the {@link ngTouch `ngTouch`} module to be installed.
+ * Requires the {@link module:ngTouch `ngTouch`} module to be installed.
  *
  * @element ANY
  * @param {expression} ngSwipeLeft {@link guide/expression Expression} to evaluate
@@ -42,7 +42,7 @@
  * Though ngSwipeRight is designed for touch-based devices, it will work with a mouse click and drag
  * too.
  *
- * Requires the {@link ngTouch `ngTouch`} module to be installed.
+ * Requires the {@link module:ngTouch `ngTouch`} module to be installed.
  *
  * @element ANY
  * @param {expression} ngSwipeRight {@link guide/expression Expression} to evaluate

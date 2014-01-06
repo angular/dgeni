@@ -26,7 +26,7 @@
  * | Directive                                                 | Supported Animations                               |
  * |---------------------------------------------------------- |----------------------------------------------------|
  * | {@link module:ng.directive:ngRepeat#usage_animations ngRepeat}         | enter, leave and move                              |
- * | {@link ngRoute.directive:ngView#usage_animations ngView}        | enter and leave                                    |
+ * | {@link module:ngRoute.directive:ngView#usage_animations ngView}        | enter and leave                                    |
  * | {@link module:ng.directive:ngInclude#usage_animations ngInclude}       | enter and leave                                    |
  * | {@link module:ng.directive:ngSwitch#usage_animations ngSwitch}         | enter and leave                                    |
  * | {@link module:ng.directive:ngIf#usage_animations ngIf}                 | enter and leave                                    |
@@ -243,9 +243,9 @@ angular.module('ngAnimate', ['ng'])
    * When an animation is triggered, the $animate service will query the $animate service to find any animations that match
    * the provided name value.
    *
-   * Requires the {@link ngAnimate `ngAnimate`} module to be installed.
+   * Requires the {@link module:ngAnimate `ngAnimate`} module to be installed.
    *
-   * Please visit the {@link ngAnimate `ngAnimate`} module overview page learn more about how to use animations in your application.
+   * Please visit the {@link module:ngAnimate `ngAnimate`} module overview page learn more about how to use animations in your application.
    *
    */
   .config(['$provide', '$animateProvider', function($provide, $animateProvider) {
@@ -336,9 +336,9 @@ angular.module('ngAnimate', ['ng'])
        * The `$animate` service is used behind the scenes with pre-existing directives and animation with these directives
        * will work out of the box without any extra configuration.
        *
-       * Requires the {@link ngAnimate `ngAnimate`} module to be installed.
+       * Requires the {@link module:ngAnimate} module to be installed.
        *
-       * Please visit the {@link ngAnimate `ngAnimate`} module overview page learn more about how to use animations in your application.
+       * Please visit the {@link module:ngAnimate} module overview page learn more about how to use animations in your application.
        *
        */
       return {

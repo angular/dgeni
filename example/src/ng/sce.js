@@ -774,7 +774,7 @@ function $SceProvider() {
      *
      * @description
      * Converts Angular {@link guide/expression expression} into a function.  This is like {@link
-     * ng.$parse $parse} and is identical when the expression is a literal constant.  Otherwise, it
+     * $parse} and is identical when the expression is a literal constant.  Otherwise, it
      * wraps the expression in a call to {@link $sce#methods_getTrusted $sce.getTrusted(*type*,
      * *result*)}
      *

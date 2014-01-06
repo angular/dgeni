@@ -10,7 +10,7 @@
      * The `$swipe` service is a service that abstracts the messier details of hold-and-drag swipe
      * behavior, to make implementing swipe-related directives more convenient.
      *
-     * Requires the {@link ngTouch `ngTouch`} module to be installed.
+     * Requires the {@link module:ngTouch `ngTouch`} module to be installed.
      *
      * `$swipe` is used by the `ngSwipeLeft` and `ngSwipeRight` directives in `ngTouch`, and by
      * `ngCarousel` in a separate component.

@@ -57,7 +57,7 @@ function shallowClearAndCopy(src, dst) {
  *
  * <div doc-module-components="ngResource"></div>
  *
- * See {@link ngResource.$resource `$resource`} for usage.
+ * See {@link $resource `$resource`} for usage.
  */
 
 /**
@@ -70,9 +70,9 @@ function shallowClearAndCopy(src, dst) {
  * [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) server-side data sources.
  *
  * The returned resource object has action methods which provide high-level behaviors without
- * the need to interact with the low level {@link ng.$http $http} service.
+ * the need to interact with the low level {@link module:ng.$http $http} service.
  *
- * Requires the {@link ngResource `ngResource`} module to be installed.
+ * Requires the {@link module:ngResource `ngResource`} module to be installed.
  *
  * @param {string} url A parametrized URL template with parameters prefixed by `:` as in
  *   `/user/:username`. If you are using a URL with a port number (e.g.
@@ -100,7 +100,7 @@ function shallowClearAndCopy(src, dst) {
  *
  * @param {Object.<Object>=} actions Hash with declaration of custom action that should extend the
  *   default set of resource actions. The declaration should be created in the format of {@link
- *   ng.$http#usage_parameters $http.config}:
+ *   module:ng.$http#usage_parameters $http.config}:
  *
  *       {action1: {method:?, params:?, isArray:?, headers:?, ...},
  *        action2: {method:?, params:?, isArray:?, headers:?, ...},
@@ -129,9 +129,9 @@ function shallowClearAndCopy(src, dst) {
  *     response body and headers and returns its transformed (typically deserialized) version.
  *   - **`cache`** – `{boolean|Cache}` – If true, a default $http cache will be used to cache the
  *     GET request, otherwise if a cache instance built with
- *     {@link ng.$cacheFactory $cacheFactory}, this cache will be used for
+ *     {@link module:ng.$cacheFactory $cacheFactory}, this cache will be used for
  *     caching.
- *   - **`timeout`** – `{number|Promise}` – timeout in milliseconds, or {@link ng.$q promise} that
+ *   - **`timeout`** – `{number|Promise}` – timeout in milliseconds, or {@link module:ng.$q promise} that
  *     should abort the request when resolved.
  *   - **`withCredentials`** - `{boolean}` - whether to set the `withCredentials` flag on the
  *     XHR object. See {@link https://developer.mozilla.org/en/http_access_control#section_5
@@ -140,7 +140,7 @@ function shallowClearAndCopy(src, dst) {
  *     https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest#responseType requestType}.
  *   - **`interceptor`** - `{Object=}` - The interceptor object has two optional methods -
  *     `response` and `responseError`. Both `response` and `responseError` interceptors get called
- *     with `http response` object. See {@link ng.$http $http interceptors}.
+ *     with `http response` object. See {@link module:ng.$http $http interceptors}.
  *
  * @returns {Object} A resource "class" object with methods for the default set of resource actions
  *   optionally extended with custom `actions`. The default set contains these actions:
@@ -151,7 +151,7 @@ function shallowClearAndCopy(src, dst) {
  *         'remove': {method:'DELETE'},
  *         'delete': {method:'DELETE'} };
  *
- *   Calling these methods invoke an {@link ng.$http} with the specified http method,
+ *   Calling these methods invoke an {@link module:ng.$http} with the specified http method,
  *   destination and parameters. When the data is returned from the server then the object is an
  *   instance of the resource class. The actions `save`, `remove` and `delete` are available on it
  *   as  methods with the `$` prefix. This allows you to easily perform CRUD operations (create,
@@ -187,15 +187,15 @@ function shallowClearAndCopy(src, dst) {
  *
  *   The Resource instances and collection have these additional properties:
  *
- *   - `$promise`: the {@link ng.$q promise} of the original server interaction that created this
+ *   - `$promise`: the {@link module:ng.$q promise} of the original server interaction that created this
  *     instance or collection.
  *
  *     On success, the promise is resolved with the same resource instance or collection object,
  *     updated with data from server. This makes it easy to use in
- *     {@link ngRoute.$routeProvider resolve section of $routeProvider.when()} to defer view
+ *     {@link module:ngRoute.$routeProvider resolve section of $routeProvider.when()} to defer view
  *     rendering until the resource(s) are loaded.
  *
- *     On failure, the promise is resolved with the {@link ng.$http http response} object, without
+ *     On failure, the promise is resolved with the {@link module:ng.$http http response} object, without
  *     the `resource` property.
  *
  *   - `$resolved`: `true` after first server interaction is completed (either with success or
