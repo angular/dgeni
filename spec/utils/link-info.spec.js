@@ -15,6 +15,12 @@ describe("getLinkInfo", function() {
       expect(getLinkInfo(someDoc, '../some/other/relative/url', 'some link')).toEqual({ doc: someDoc, url: "../some/other/relative/url", title: "some link", type: 'url', anchorElement : '<a href="../some/other/relative/url">some link</a>'});
       expect(getLinkInfo(someDoc, 'http://www.google.com', 'Google')).toEqual({ doc: someDoc, url: "http://www.google.com", title: "Google", type: 'url', anchorElement : '<a href="http://www.google.com">Google</a>'});
     });
+
+    it("should replace urls starting with a hash with HTML anchors to the same url", function() {
+      var someDoc = {};
+      expect(getLinkInfo(someDoc, '#some-local-anchor')).toEqual({ doc: someDoc, url: "#some-local-anchor", title: "some-local-anchor", type: 'url', anchorElement : '<a href="#some-local-anchor">some-local-anchor</a>'});
+      expect(getLinkInfo(someDoc, '#some-local-anchor', 'some title')).toEqual({ doc: someDoc, url: "#some-local-anchor", title: "some title", type: 'url', anchorElement : '<a href="#some-local-anchor">some title</a>'});
+    });
   });
 
   describe("for code references", function() {
