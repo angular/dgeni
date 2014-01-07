@@ -4,6 +4,7 @@ var vm = require('vm');
 var fs = require('fs');
 var _ = require('lodash');
 var log = require('winston');
+var rimraf = require('rimraf');
 log.cli();
 
 var myArgs = require('optimist')
@@ -59,10 +60,8 @@ var processDocs = docProcessorFactory(config.processing.plugins, config.processi
 var renderDocs = docRendererFactory(config.rendering.templatePath, config.rendering.outputPath, config.rendering.filters, config.rendering.tags);
 
 // Delete the previous output folder
-if ( fs.existsSync(config.rendering.outputPath) ) {
-  fs.rmdirSync(config.rendering.outputPath);
-  log.info('Removed previous output files from "' + config.rendering.outputPath + '"');
-}
+rimraf.sync(config.rendering.outputPath);
+log.info('Removed previous output files from "' + config.rendering.outputPath + '"');
 
 // Run the processing functions
 readFiles(config.source.files)
