@@ -69,16 +69,7 @@ readFiles(config.source.files)
   .then(function(docs) {
     log.info('Read', docs.length, 'docs');
     docs = processDocs(docs);
-    _.forEach(docs, function(doc) {
-      log.info('Processed doc', doc.id);
-    });
     return renderDocs(docs, config.rendering.extra);
-  })
-
-  .then(function(renderedFilePaths) {
-    _.forEach(renderedFilePaths, function(renderedFilePath) {
-      log.info('Rendered doc', renderedFilePath);
-    });
   })
 
   .done();
