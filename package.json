@@ -20,7 +20,8 @@
     "highlight.js": "~7.5.0",
     "winston": "~0.7.2",
     "graceful-fs": "~2.0.1",
-    "rimraf": "~2.2.5"
+    "rimraf": "~2.2.5",
+    "glob": "~3.2.7"
   },
   "devDependencies": {
     "jasmine-node": "~1.11.0",

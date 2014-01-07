@@ -2,8 +2,9 @@ var Q = require('q');
 var MockFS = require('q-io/fs-mock');
 var rewire = require('rewire');
 var fileReaderFactory = rewire('../../lib/doc-extractor');
+var _ = require('lodash');
 
-var fs = MockFS({
+var mockFiles = {
   "docs": {
     "a.js": "// Mock code file",
     "b.ngdoc": "mock documentation file"
@@ -12,8 +13,14 @@ var fs = MockFS({
     "a.js": "// Mock code file",
     "b.js": "// Other mock code file"
   }
+};
+
+fileReaderFactory.__set__('fs', MockFS(mockFiles));
+fileReaderFactory.__set__('glob.sync', function(pattern) {
+  // Strip off the "./" from the start of the pattern
+  pattern = pattern.replace(/^\.\//,'');
+  return _.keys(mockFiles[pattern]);
 });
-fileReaderFactory.__set__('fs', fs);
 
 var mockNgDocExtractor = {
   pattern: /\.ngdoc$/,
