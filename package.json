@@ -21,7 +21,8 @@
     "winston": "~0.7.2",
     "graceful-fs": "~2.0.1",
     "rimraf": "~2.2.5",
-    "glob": "~3.2.7"
+    "glob": "~3.2.7",
+    "doctrine": "~0.2.0"
   },
   "devDependencies": {
     "jasmine-node": "~1.11.0",
