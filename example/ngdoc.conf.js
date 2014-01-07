@@ -1,6 +1,5 @@
-source.files.push('src');
-source.files.push('content/error');
-source.files.push('content/api');
+source.files.push('src/**/*.js');
+source.files.push({ pattern: '**/*.ngdoc', basePath: 'content' });
 
 rendering.templatePath = 'templates';
 rendering.outputPath = 'build';
