@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc filter
- * @name  filter:filter
+ * @name filter
  * @function
  *
  * @description

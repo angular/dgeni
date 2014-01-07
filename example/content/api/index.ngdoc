@@ -20,7 +20,7 @@ Please do not use the `$` or `$$` prefix in your code.
 ## Angular Namespace
 
 
-## {@link ng ng (core module)}
+## {@link module:ng ng (core module)}
 This module is provided by default and contains the core components of AngularJS.
 
 <table class="definition-table spaced">
@@ -52,7 +52,7 @@ This module is provided by default and contains the core components of AngularJS
         Some examples include:
           {@link $compile $compile},
           {@link $http $http},
-          {@link ngRoute.$routeParams $routeParams},
+          {@link module:ngRoute.$routeParams $routeParams},
           {@link $location $location},
           etc…
       <p>
@@ -87,9 +87,9 @@ This module is provided by default and contains the core components of AngularJS
       </p>
       <p>
         Some examples include:
-        {@link angular.copy angular.copy()},
-        {@link angular.equals angular.equals()},
-        {@link angular.element angular.element()},
+        {@link global:angular.copy angular.copy()},
+        {@link global:angular.equals angular.equals()},
+        {@link global:angular.element angular.element()},
           etc...
       </p>
     </td>
@@ -97,7 +97,7 @@ This module is provided by default and contains the core components of AngularJS
 </table>
 
 
-## {@link ngRoute ngRoute}
+## {@link module:ngRoute ngRoute}
 
 Use ngRoute to enable URL routing to your application. The ngRoute module supports URL management via both hashbang and HTML5 pushState.
 
@@ -106,29 +106,29 @@ Use ngRoute to enable URL routing to your application. The ngRoute module suppor
 <table class="definition-table spaced">
   <tr>
     <td>
-      {@link ngRoute#service Services / Factories}
+      {@link module:ngRoute#service Services / Factories}
     </td>
     <td>
       The following services are used for route management:
       <ul>
-        <li>{@link ngRoute.$routeParams $routeParams} is used to access the querystring values present in the URL.</li>
-        <li>{@link ngRoute.$route $route} is used to access the details of the route that is currently being accessed.</li>
-        <li>{@link ngRoute.$routeProvider $routeProvider} is used to register routes for the application.</li>
+        <li>{@link module:ngRoute.$routeParams $routeParams} is used to access the querystring values present in the URL.</li>
+        <li>{@link module:ngRoute.$route $route} is used to access the details of the route that is currently being accessed.</li>
+        <li>{@link module:ngRoute.$routeProvider $routeProvider} is used to register routes for the application.</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>
-      {@link ngRoute#directive Directives}
+      {@link module:ngRoute#directive Directives}
     </td>
     <td>
-      The {@link ngRoute.directive:ngView ngView} directive will display the template of the current route within the page.
+      The {@link module:ngRoute.directive:ngView ngView} directive will display the template of the current route within the page.
     </td>
   </tr>
 </table>
 
 
-## {@link ngAnimate ngAnimate}
+## {@link module:ngAnimate ngAnimate}
 
 Use ngAnimate to enable animation features into your application. Various core ng directives will provide
 animation hooks into your application when ngAnimate is included. Animations are defined by using CSS transitions/animations
@@ -139,15 +139,15 @@ or JavaScript callbacks.
 <table class="definition-table spaced">
   <tr>
     <td>
-      {@link ngAnimate#service Services / Factories}
+      {@link module:ngAnimate#service Services / Factories}
     </td>
     <td>
-      Use {@link ngAnimate.$animate $animate} to trigger animation operations within your directive code.
+      Use {@link module:ngAnimate.$animate $animate} to trigger animation operations within your directive code.
     </td>
   </tr>
   <tr>
     <td>
-      {@link ngAnimate CSS-based animations}
+      {@link module:ngAnimate CSS-based animations}
     </td>
     <td>
       Follow ngAnimate’s CSS naming structure to reference CSS transitions / keyframe animations in AngularJS. Once defined the animation can be triggered by referencing the CSS class within the HTML template code.
@@ -155,16 +155,16 @@ or JavaScript callbacks.
   </tr>
   <tr>
     <td>
-      {@link ngAnimate JS-based animations}
+      {@link module:ngAnimate JS-based animations}
     </td>
     <td>
-      Use {@link angular.Module#methods_animation module.animation()} to register a JavaScript animation. Once registered the animation can be triggered by referencing the CSS class within the HTML template code.
+      Use {@link global:angular.Module#methods_animation module.animation()} to register a JavaScript animation. Once registered the animation can be triggered by referencing the CSS class within the HTML template code.
     </td>
   </tr>
 </table>
 
 
-## {@link ngResource ngResource}
+## {@link module:ngResource ngResource}
 
 Use the ngResource module when querying and posting data to a REST API.
 
@@ -173,15 +173,15 @@ Use the ngResource module when querying and posting data to a REST API.
 <table class="definition-table spaced">
   <tr>
     <td>
-      {@link ngResource#service Services / Factories}
+      {@link module:ngResource#service Services / Factories}
     </td>
     <td>
-      The {@link ngResource.$resource $resource} service is used to define RESTful objects which communicate with a REST API.
+      The {@link module:ngResource.$resource $resource} service is used to define RESTful objects which communicate with a REST API.
     </td>
   </tr>
 </table>
 
-## {@link ngCookies ngCookies}
+## {@link module:ngCookies ngCookies}
 
 Use the ngCookies module to handle cookie management within your application.
 
@@ -190,19 +190,19 @@ Use the ngCookies module to handle cookie management within your application.
 <table class="definition-table spaced">
   <tr>
     <td>
-      {@link ngCookies#service Services / Factories}
+      {@link module:ngCookies#service Services / Factories}
     </td>
     <td>
       The following services are used for cookie management:
       <ul>
-        <li>The {@link ngCookies.$cookies $cookie} service is a convenient wrapper to store simple data within browser cookies.</li>
-        <li>{@link ngCookies.$cookieStore $cookieStore} is used to store more complex data using serialization.</li>
+        <li>The {@link module:ngCookies.$cookies $cookie} service is a convenient wrapper to store simple data within browser cookies.</li>
+        <li>{@link module:ngCookies.$cookieStore $cookieStore} is used to store more complex data using serialization.</li>
       </ul>
     </td>
   </tr>
 </table>
 
-## {@link ngTouch ngTouch}
+## {@link module:ngTouch ngTouch}
 
 Use ngTouch when developing for mobile browsers/devices.
 
@@ -211,15 +211,15 @@ Use ngTouch when developing for mobile browsers/devices.
 <table class="definition-table spaced">
   <tr>
     <td>
-      {@link ngTouch#service Services / Factories}
+      {@link module:ngTouch#service Services / Factories}
     </td>
     <td>
-      The {@link ngTouch.$swipe $swipe} service is used to register and manage mobile DOM events. 
+      The {@link module:ngTouch.$swipe $swipe} service is used to register and manage mobile DOM events. 
     </td>
   </tr>
   <tr>
     <td>
-      {@link ngTouch#directive Directives}
+      {@link module:ngTouch#directive Directives}
     </td>
     <td>
       Various directives are available in ngTouch to emulate mobile DOM events.
@@ -227,7 +227,7 @@ Use ngTouch when developing for mobile browsers/devices.
   </tr>
 </table>
 
-## {@link ngSanitize ngSanitize}
+## {@link module:ngSanitize ngSanitize}
 
 Use ngSanitize to securely parse and manipulate HTML data in your application.
 
@@ -236,23 +236,23 @@ Use ngSanitize to securely parse and manipulate HTML data in your application.
 <table class="definition-table spaced">
   <tr>
     <td>
-      {@link ngSanitize#service Services / Factories}
+      {@link module:ngSanitize#service Services / Factories}
     </td>
     <td>
-      The {@link ngSanitize.$sanitize $sanitize} service is used to clean up dangerous HTML code in a quick and convenient way.
+      The {@link module:ngSanitize.$sanitize $sanitize} service is used to clean up dangerous HTML code in a quick and convenient way.
     </td>
   </tr>
   <tr>
     <td>
-      {@link ngTouch#filter Filters}
+      {@link module:ngTouch#filter Filters}
     </td>
     <td>
-      The {@link ngSanitize.filter:linky linky filter} is used to turn URLs into HTML links within the provided string.
+      The {@link module:ngSanitize.filter:linky linky filter} is used to turn URLs into HTML links within the provided string.
     </td>
   </tr>
 </table>
 
-## {@link ngMock ngMock}
+## {@link module:ngMock ngMock}
 
 Use ngMock to inject and mock modules, factories, services and providers within your unit tests 
 
@@ -261,7 +261,7 @@ Use ngMock to inject and mock modules, factories, services and providers within 
 <table class="definition-table spaced">
   <tr>
     <td>
-      {@link ngMock#service Services / Factories}
+      {@link module:ngMock#service Services / Factories}
     </td>
     <td>
       <p>
@@ -270,17 +270,17 @@ Use ngMock to inject and mock modules, factories, services and providers within 
 
       <p>
         Some examples include:
-          {@link ngMock.$timeout $timeout},
-          {@link ngMock.$interval $interval},
-          {@link ngMock.$log $log},
-          {@link ngMock.$httpBackend $httpBackend},
+          {@link module:ngMock.$timeout $timeout},
+          {@link module:ngMock.$interval $interval},
+          {@link module:ngMock.$log $log},
+          {@link module:ngMock.$httpBackend $httpBackend},
           etc...
       <p>
     </td>
   </tr>
   <tr>
     <td>
-      {@link ngMock#function Global APIs}
+      {@link module:ngMock#function Global APIs}
     </td>
     <td>
       <p>
@@ -289,9 +289,9 @@ Use ngMock to inject and mock modules, factories, services and providers within 
 
       <p>
         Some examples
-          {@link angular.mock.inject inject()},
-          {@link angular.mock.module module()},
-          {@link angular.mock.dump dump()},
+          {@link module:ngMock.global:angular.mock.inject inject()},
+          {@link module:ngMock.global:angular.mock.module module()},
+          {@link module:ngMock.global:angular.mock.dump dump()},
           etc...
       <p>
     </td>

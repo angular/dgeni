@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc filter
- * @name  filter:currency
+ * @name currency
  * @function
  *
  * @description
@@ -53,7 +53,7 @@ function currencyFilter($locale) {
 
 /**
  * @ngdoc filter
- * @name  filter:number
+ * @name number
  * @function
  *
  * @description
@@ -264,7 +264,7 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZE']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+
 
 /**
  * @ngdoc filter
- * @name  filter:date
+ * @name date
  * @function
  *
  * @description
@@ -421,7 +421,7 @@ function dateFilter($locale) {
 
 /**
  * @ngdoc filter
- * @name  filter:json
+ * @name json
  * @function
  *
  * @description
@@ -456,7 +456,7 @@ function jsonFilter() {
 
 /**
  * @ngdoc filter
- * @name  filter:lowercase
+ * @name lowercase
  * @function
  * @description
  * Converts string to lowercase.
@@ -467,7 +467,7 @@ var lowercaseFilter = valueFn(lowercase);
 
 /**
  * @ngdoc filter
- * @name  filter:uppercase
+ * @name uppercase
  * @function
  * @description
  * Converts string to uppercase.
