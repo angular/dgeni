@@ -54,7 +54,7 @@
 
 /**
  * @ngdoc module
- * @name AUTOx
+ * @name AUTO
  * @description
  *
  * Implicit module which gets automatically added to each {@link $injector $injector}.
