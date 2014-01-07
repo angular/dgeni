@@ -1,0 +1,6 @@
+{% import "lib/helpers.macro.html" as helpers -%}
+{$ helpers.viewSourceButton(doc, git) $}
+
+{$ helpers.improveDocButton(doc) $}
+
+{$ doc.description | marked $}
