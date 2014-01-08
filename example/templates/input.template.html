@@ -1,43 +1,15 @@
-{% import "lib/helpers.macro.html" as helpers %}
+{% import "lib/helpers.macro.html" as helpers -%}
+{% extends "api.template.html" %}
 
-{$ helpers.viewSourceButton(doc, git) $}
-{$ helpers.improveDocButton(doc) $}
+{% block additional %}
 
-<h1 ng:non-bindable>
-  {$ doc.name | code $}
-  <div><span class='hint'>directive in module {$ doc.module | code $}</span></div>
-</h1>
+  <h2>Usage</h2>
+  {% code %}
+  <input type="{$ doc.inputType $}"{% for param in doc.params %}
+         {$ helpers.renderElementParam(param) $}{% endfor %}>
+  {% endcode %}
 
-{$ notice('deprecated', 'Deprecated API', doc.deprecated) if doc.deprecated $}
-
-<div>
-  <h2 id="description">Description</h2>
-  <div class="description">
-    {$ doc.description | marked $}
-  </div>
-
-  {% if doc.requires %}
-  <h2 id="dependencies">Dependencies</h2>
-  <ul>
-    {% for require in doc.requires %}<li>{$ require | link(doc) $}</li>{% endfor %}
-  </ul>
-  {% endif %}
-  <h2 id="usage">Usage</h2>
-  <div class="usage">
-  {% if doc.usage %}
-    {$ doc.usage | marked $}
-  {% else %}
-    {% marked %}
-
-    {% if doc.restrict.element %}
-    <p>This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>.</p>
-    {% endif %}
-
-    {% if doc.restrict.element %}
-    * as element: `<{$ doc.name | dashCase $} {$ helpers.renderAttributes(doc.params)$} > ... </{$ doc.name | dashCase $}>`
-    {% endif %}
-
-    {% endmarked %}
-  {% endif %}
-  </div>
-</div>
+  {% include "lib/animations.template.html" %}
+  {% include "lib/params.template.html" %}
+  {% include "lib/events.template.html" %}
+{% endblock %}

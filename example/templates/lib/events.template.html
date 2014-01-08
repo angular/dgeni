@@ -4,7 +4,7 @@
   {%- for event in doc.events %}
   <li>
     <h3>{$ event.name $}</h3>
-    <div>{$ event.description $}</div>
+    <div>{$ event.description | marked $}</div>
     {%- if event.eventType == 'listen' %}
     <div class="inline">
       <h4>Listen on: {$ event.eventTarget $}</h4>
@@ -22,4 +22,4 @@
   </li>
   {% endfor -%}
 </ul>
-{%- endif -%}
+{% endif -%}

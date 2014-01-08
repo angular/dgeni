@@ -1,0 +1,34 @@
+{% block content %}
+
+{% block header %}
+<h1 ng:non-bindable>
+  {$ doc.name | code $}
+  <div><span class='hint'>{$ doc.docType $} in module {$ doc.module | code $}</span></div>
+</h1>
+{% endblock %}
+
+{% if doc.deprecated %}
+<fieldset class="deprecated">
+  <legend>Deprecated API</legend>
+  {$ doc.deprecated| marked $}
+</fieldset>
+{% endif %}
+
+<div>
+  {% block description %}
+  {% include "lib/description.template.html" %}
+  {% endblock %}
+
+  {% block dependencies %}
+  {% include "lib/dependencies.template.html" %}
+  {% endblock %}
+
+  {% block additional %}
+  {% endblock %}
+
+  {% block examples %}
+  {% include "lib/examples.template.html" %}
+  {% endblock %}
+</div>
+
+{% endblock %}

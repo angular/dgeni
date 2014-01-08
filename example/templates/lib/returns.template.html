@@ -1,0 +1,14 @@
+{% if doc.returns -%}
+<h2>Returns</h2>
+
+<table class="variables-matrix">
+  <tr>
+    <td>
+      {$ helpers.renderTypes(doc.returns.type) $}
+    </td>
+    <td>
+      {$ doc.description | marked $}
+    </td>
+  </tr>
+</table>
+{%- endif %}

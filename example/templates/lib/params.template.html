@@ -1,3 +1,4 @@
+{% import "lib/helpers.macro.html" as helpers -%}
 {%- if doc.params %}
 <h2>Parameters</h2>
 <table class="variables-matrix table table-bordered table-striped">
@@ -17,7 +18,7 @@
         {% if param.type.optional %}<div><em>(optional)</em></div>{% endif %}
       </td>
       <td>
-        {% for subType in param.type.typeList %}<a href="" class="{$ subType $}">{$ subType $}</a>{% endfor %}
+        {$ helpers.renderTypes(param.type) $}
       </td>
       <td>
         {$ param.description | marked $}

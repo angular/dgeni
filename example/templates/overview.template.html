@@ -1,6 +1,5 @@
-{% import "lib/helpers.macro.html" as helpers -%}
-{$ helpers.viewSourceButton(doc, git) $}
+{% extends "api.template.html" %}
 
-{$ helpers.improveDocButton(doc) $}
-
+{% block header %}
 {$ doc.description | marked $}
+{% endblock %}

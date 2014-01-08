@@ -1,20 +1,25 @@
-{% if doc.section == 'api' %}
-<a href='http://github.com/angular/angular.js/tree/{$ git.tag $}/{$ doc.file $}#L{$ doc.startingLine $}'
-   class='view-source btn btn-action'>
-  <i class="icon-zoom-in">&nbsp;</i>View Source
-</a>
-{% endif %}
-<a href='http://github.com/angular/angular.js/edit/master/{$ doc.file $}'
-   class='improve-docs btn btn-primary'>
-  <i class="icon-edit">&nbsp;</i>Improve this doc
-</a>
+{% extends "api.template.html" %}
 
-<h1>
-  <code>{$ doc.name $}</code>
-  <div><span class='hint'></span></div>
-</h1>
-  {% if doc.deprecated %}
-
+{% block additional %}
+  <h2>Usage</h2>
+  <h3>In HTML Template Binding</h3>
+  {% if doc.usage %}
+    {$ doc.usage | code $}
+  {% else %}
+    {% code -%}
+    {{ {$ doc.name $}_expression | {$ doc.name $}
+      {%- for param in doc.params %} : {$ param.name $}{% endfor -%}
+    }}
+    {%- endcode %}
   {% endif %}
-</h1>
-{$ doc.description $}
+
+  <h2>In JavaScript'</h2>
+  {% code -%}
+    {%- set sep = joiner(', ') -%}
+    $filter('{$ doc.name $}', {% for param in doc.params %}{$ sep() $}{$ param.name $}{% endfor -%})
+  {%- endcode %}
+
+  {% include "lib/params.template.html" %}
+  {% include "lib/this.template.html" %}
+  {% include "lib/returns.template.html" %}
+{% endblock %}
