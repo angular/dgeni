@@ -52,7 +52,7 @@ log.cli();
 log.remove(log.transports.Console);
 log.add(log.transports.Console, config.logging);
 log.info('Read config from "' + myArgs._[0] + '"');
-
+log.info('Logging set to "' + log.level + '"');
 
 // Create the processing functions from the factories and the configuration
 var readFiles = fileReaderFactory(config.source.extractors);
