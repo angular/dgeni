@@ -37,7 +37,7 @@
 /**
  * @ngdoc method
  * @name digestTtl
- * @methodOf $rootScopeProvider
+ * @memberof $rootScopeProvider
  * @description
  *
  * Sets the number of `$digest` iterations the scope should attempt to execute before giving up and
@@ -140,7 +140,7 @@ function $RootScopeProvider(){
     /**
      * @ngdoc property
      * @name $id
-     * @propertyOf global:$rootScope.Scope
+     * @memberof global:$rootScope.Scope
      * @returns {number} Unique scope ID (monotonically increasing alphanumeric sequence) useful for
      *   debugging.
      */
@@ -151,7 +151,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
        * @name $new
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -209,7 +209,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $watch
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -361,7 +361,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $watchCollection
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -501,7 +501,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $digest
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -657,7 +657,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc event
       * @name $destroy
-       * @eventOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @eventType broadcast on scope being destroyed
        *
        * @description
@@ -670,7 +670,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $destroy
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -715,7 +715,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $eval
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -748,7 +748,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $evalAsync
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -796,7 +796,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $apply
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -859,7 +859,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $on
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -909,7 +909,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $emit
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description
@@ -978,7 +978,7 @@ function $RootScopeProvider(){
       /**
        * @ngdoc method
       * @name $broadcast
-       * @methodOf global:$rootScope.Scope
+       * @memberof global:$rootScope.Scope
        * @function
        *
        * @description

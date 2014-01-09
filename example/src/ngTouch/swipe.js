@@ -42,7 +42,7 @@ ngTouch.factory('$swipe', [function() {
     /**
      * @ngdoc method
      * @name bind
-     * @methodOf $swipe
+     * @memberof $swipe
      *
      * @description
      * The main method of `$swipe`. It takes an element to be watched for swipe motions, and an

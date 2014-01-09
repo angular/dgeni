@@ -132,7 +132,7 @@
 /**
  * @ngdoc event
  * @name $includeContentRequested
- * @eventOf directive:ngInclude
+ * @memberof directive:ngInclude
  * @eventType emit on the scope ngInclude was declared in
  * @description
  * Emitted every time the ngInclude content is requested.
@@ -142,7 +142,7 @@
 /**
  * @ngdoc event
  * @name $includeContentLoaded
- * @eventOf directive:ngInclude
+ * @memberof directive:ngInclude
  * @eventType emit on the current ngInclude scope
  * @description
  * Emitted every time the ngInclude content is reloaded.

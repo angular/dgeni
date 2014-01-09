@@ -148,7 +148,7 @@ angular.module('ngCookies', ['ng']).
         /**
          * @ngdoc method
          * @name get
-         * @methodOf $cookieStore
+         * @memberof $cookieStore
          *
          * @description
          * Returns the value of given cookie key
@@ -164,7 +164,7 @@ angular.module('ngCookies', ['ng']).
         /**
          * @ngdoc method
          * @name put
-         * @methodOf $cookieStore
+         * @memberof $cookieStore
          *
          * @description
          * Sets a value for given cookie key
@@ -179,7 +179,7 @@ angular.module('ngCookies', ['ng']).
         /**
          * @ngdoc method
          * @name remove
-         * @methodOf $cookieStore
+         * @memberof $cookieStore
          *
          * @description
          * Remove given cookie

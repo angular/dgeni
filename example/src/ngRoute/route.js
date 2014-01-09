@@ -45,7 +45,7 @@ function $RouteProvider(){
   /**
    * @ngdoc method
    * @name when
-   * @methodOf $routeProvider
+   * @memberof $routeProvider
    *
    * @param {string} path Route path (matched against `$location.path`). If `$location.path`
    *    contains redundant trailing slash or is missing one, the route will still match and the
@@ -208,7 +208,7 @@ function $RouteProvider(){
   /**
    * @ngdoc method
    * @name otherwise
-   * @methodOf $routeProvider
+   * @memberof $routeProvider
    *
    * @description
    * Sets route definition that will be used on route change when no other route definition
@@ -366,7 +366,7 @@ function $RouteProvider(){
     /**
      * @ngdoc event
      * @name $routeChangeStart
-     * @eventOf $route
+     * @memberof $route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted before a route change. At this  point the route services starts
@@ -383,7 +383,7 @@ function $RouteProvider(){
     /**
      * @ngdoc event
      * @name $routeChangeSuccess
-     * @eventOf $route
+     * @memberof $route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted after a route dependencies are resolved.
@@ -399,7 +399,7 @@ function $RouteProvider(){
     /**
      * @ngdoc event
      * @name $routeChangeError
-     * @eventOf $route
+     * @memberof $route
      * @eventType broadcast on root scope
      * @description
      * Broadcasted if any of the resolve promises are rejected.
@@ -413,7 +413,7 @@ function $RouteProvider(){
     /**
      * @ngdoc event
      * @name $routeUpdate
-     * @eventOf $route
+     * @memberof $route
      * @eventType broadcast on root scope
      * @description
      *
@@ -428,7 +428,7 @@ function $RouteProvider(){
           /**
            * @ngdoc method
            * @name reload
-           * @methodOf $route
+           * @memberof $route
            *
            * @description
            * Causes `$route` service to reload the current route even if

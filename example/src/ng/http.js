@@ -808,7 +808,7 @@ function $HttpProvider() {
     /**
      * @ngdoc method
     * @name get
-     * @methodOf $http
+     * @memberof $http
      *
      * @description
      * Shortcut method to perform `GET` request.
@@ -821,7 +821,7 @@ function $HttpProvider() {
     /**
      * @ngdoc method
     * @name delete
-     * @methodOf $http
+     * @memberof $http
      *
      * @description
      * Shortcut method to perform `DELETE` request.
@@ -834,7 +834,7 @@ function $HttpProvider() {
     /**
      * @ngdoc method
     * @name head
-     * @methodOf $http
+     * @memberof $http
      *
      * @description
      * Shortcut method to perform `HEAD` request.
@@ -847,7 +847,7 @@ function $HttpProvider() {
     /**
      * @ngdoc method
     * @name jsonp
-     * @methodOf $http
+     * @memberof $http
      *
      * @description
      * Shortcut method to perform `JSONP` request.
@@ -862,7 +862,7 @@ function $HttpProvider() {
     /**
      * @ngdoc method
     * @name post
-     * @methodOf $http
+     * @memberof $http
      *
      * @description
      * Shortcut method to perform `POST` request.
@@ -876,7 +876,7 @@ function $HttpProvider() {
     /**
      * @ngdoc method
     * @name put
-     * @methodOf $http
+     * @memberof $http
      *
      * @description
      * Shortcut method to perform `PUT` request.
@@ -891,7 +891,7 @@ function $HttpProvider() {
         /**
          * @ngdoc property
          * @name defaults
-         * @propertyOf $http
+         * @memberof $http
          *
          * @description
          * Runtime equivalent of the `$httpProvider.defaults` property. Allows configuration of

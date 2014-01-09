@@ -88,7 +88,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
   * @name addPollFn
-   * @methodOf $browser
+   * @memberof $browser
    *
    * @param {function()} fn Poll function to add
    *
@@ -129,7 +129,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
   * @name url
-   * @methodOf $browser
+   * @memberof $browser
    *
    * @description
    * GETTER:
@@ -196,7 +196,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
   * @name onUrlChange
-   * @methodOf $browser
+   * @memberof $browser
    * @TODO(vojta): refactor to use node's syntax for events
    *
    * @description
@@ -243,7 +243,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
   * @name baseHref
-   * @methodOf $browser
+   * @memberof $browser
    *
    * @description
    * Returns current <base href>
@@ -265,7 +265,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
   * @name cookies
-   * @methodOf $browser
+   * @memberof $browser
    *
    * @param {string=} name Cookie name
    * @param {string=} value Cookie value
@@ -335,7 +335,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
   * @name defer
-   * @methodOf $browser
+   * @memberof $browser
    * @param {function()} fn A function, who's execution should be deferred.
    * @param {number=} [delay=0] of milliseconds to defer the function execution.
    * @returns {*} DeferId that can be used to cancel the task via `$browser.defer.cancel()`.
@@ -362,7 +362,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
   * @name defer.cancel
-   * @methodOf $browser.defer
+   * @memberof $browser.defer
    *
    * @description
    * Cancels a deferred task identified with `deferId`.

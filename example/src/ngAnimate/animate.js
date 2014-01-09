@@ -345,7 +345,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name enter
-         * @methodOf $animate
+         * @memberof $animate
          * @function
          *
          * @description
@@ -383,7 +383,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name leave
-         * @methodOf $animate
+         * @memberof $animate
          * @function
          *
          * @description
@@ -421,7 +421,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name move
-         * @methodOf $animate
+         * @memberof $animate
          * @function
          *
          * @description
@@ -461,7 +461,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name addClass
-         * @methodOf $animate
+         * @memberof $animate
          *
          * @description
          * Triggers a custom animation event based off the className variable and then attaches the className value to the element as a CSS class.
@@ -497,7 +497,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name removeClass
-         * @methodOf $animate
+         * @memberof $animate
          *
          * @description
          * Triggers a custom animation event based off the className variable and then removes the CSS class provided by the className value
@@ -533,7 +533,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name enabled
-         * @methodOf $animate
+         * @memberof $animate
          * @function
          *
          * @param {boolean=} value If provided then set the animation on or off.

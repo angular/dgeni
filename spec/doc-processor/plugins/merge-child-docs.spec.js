@@ -1,17 +1,17 @@
-var plugin = require('../../../lib/doc-processor/doc-processor-plugins/merge-child-docs');
+var plugin = require('../../../lib/doc-processor/plugins/merge-child-docs');
 
 describe('merge-child-docs', function() {
   var docs, mergedDocs;
   beforeEach(function() {
     docs = [
-      { ngdoc: 'service', id: 'x.y.z' },
-      { ngdoc: 'property', id: 'a.b.c#someProp' },
-      { ngdoc: 'service',  id: 'a.b.c' },
-      { ngdoc: 'event', id: 'a.b.c#someEvent' },
-      { ngdoc: 'service',  id: 'f.g.h' },
-      { ngdoc: 'method', id: 'a.b.c#someMethod' },
+      { docType: 'service', id: 'x.y.z' },
+      { docType: 'property', id: 'a.b.c#someProp', memberof: 'a.b.c' },
+      { docType: 'service',  id: 'a.b.c' },
+      { docType: 'event', id: 'a.b.c#someEvent', memberof: 'a.b.c' },
+      { docType: 'service',  id: 'f.g.h' },
+      { docType: 'method', id: 'a.b.c#someMethod', memberof: 'a.b.c' },
     ];
-    mergedDocs = mergeChildDocs(docs);
+    mergedDocs = plugin.after(docs);
   });
 
   it("should merge property docs into the parent doc", function() {

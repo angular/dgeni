@@ -1147,7 +1147,7 @@ function $ParseProvider() {
    *
    * @ngdoc method
    * @name unwrapPromises
-   * @methodOf $parseProvider
+   * @memberof $parseProvider
    * @description
    *
    * **This feature is deprecated, see deprecation notes below for more info**
@@ -1202,7 +1202,7 @@ function $ParseProvider() {
    *
    * @ngdoc method
   * @name logPromiseWarnings
-   * @methodOf $parseProvider
+   * @memberof $parseProvider
    * @description
    *
    * Controls whether Angular should log a warning on any encounter of a promise in an expression.

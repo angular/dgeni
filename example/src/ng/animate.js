@@ -24,7 +24,7 @@ var $AnimateProvider = ['$provide', function($provide) {
   /**
    * @ngdoc method
    * @name register
-   * @methodOf $animate
+   * @memberof $animate
    *
    * @description
    * Registers a new injectable animation factory function. The factory function produces the
@@ -64,7 +64,7 @@ var $AnimateProvider = ['$provide', function($provide) {
   /**
    * @ngdoc method
    * @name classNameFilter
-   * @methodOf $animate
+   * @memberof $animate
    *
    * @description
    * Sets and/or returns the CSS class regular expression that is checked when performing
@@ -108,7 +108,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *
        * @ngdoc method
        * @name enter
-       * @methodOf $animate
+       * @memberof $animate
        * 
        * @description Inserts the element into the DOM either after the `after` element or within
        *   the `parent` element. Once complete, the done() callback will be fired (if provided).
@@ -136,7 +136,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *
        * @ngdoc method
        * @name leave
-       * @methodOf $animate
+       * @memberof $animate
        * 
        * @description Removes the element from the DOM. Once complete, the done() callback will be
        *   fired (if provided).
@@ -153,7 +153,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *
        * @ngdoc method
        * @name move
-       * @methodOf $animate
+       * @memberof $animate
        * 
        * @description Moves the position of the provided element within the DOM to be placed
        * either after the `after` element or inside of the `parent` element. Once complete, the
@@ -178,7 +178,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *
        * @ngdoc method
        * @name addClass
-       * @methodOf $animate
+       * @memberof $animate
        * 
        * @description Adds the provided className CSS class value to the provided element. Once
        * complete, the done() callback will be fired (if provided).
@@ -202,7 +202,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *
        * @ngdoc method
        * @name removeClass
-       * @methodOf $animate
+       * @memberof $animate
        * 
        * @description Removes the provided className CSS class value from the provided element.
        * Once complete, the done() callback will be fired (if provided).

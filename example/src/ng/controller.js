@@ -18,7 +18,7 @@ function $ControllerProvider() {
   /**
    * @ngdoc method
    * @name register
-   * @methodOf $controllerProvider
+   * @memberof $controllerProvider
    * @param {string|Object} name Controller name, or an object map of controllers where the keys are
    *    the names and the values are the constructors.
    * @param {Function|Array} constructor Controller constructor fn (optionally decorated with DI

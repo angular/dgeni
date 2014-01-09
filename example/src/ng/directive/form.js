@@ -78,7 +78,7 @@ function FormController(element, attrs) {
   /**
    * @ngdoc method
    * @name $addControl
-   * @methodOf global:form.FormController
+   * @memberof global:form.FormController
    *
    * @description
    * Register a control with the form.
@@ -99,7 +99,7 @@ function FormController(element, attrs) {
   /**
    * @ngdoc method
    * @name $removeControl
-   * @methodOf global:form.FormController
+   * @memberof global:form.FormController
    *
    * @description
    * Deregister a control from the form.
@@ -120,7 +120,7 @@ function FormController(element, attrs) {
   /**
    * @ngdoc method
    * @name $setValidity
-   * @methodOf global:form.FormController
+   * @memberof global:form.FormController
    *
    * @description
    * Sets the validity of a form control.
@@ -168,7 +168,7 @@ function FormController(element, attrs) {
   /**
    * @ngdoc method
    * @name $setDirty
-   * @methodOf global:form.FormController
+   * @memberof global:form.FormController
    *
    * @description
    * Sets the form to a dirty state.
@@ -186,7 +186,7 @@ function FormController(element, attrs) {
   /**
    * @ngdoc method
    * @name $setPristine
-   * @methodOf global:form.FormController
+   * @memberof global:form.FormController
    *
    * @description
    * Sets the form to its pristine state.

@@ -977,7 +977,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc method
    * @name $render
-   * @methodOf global:ngModel.NgModelController
+   * @memberof global:ngModel.NgModelController
    *
    * @description
    * Called when the view needs to be updated. It is expected that the user of the ng-model
@@ -988,7 +988,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc method
    * @name $isEmpty
-   * @methodOf global:ngModel.NgModelController
+   * @memberof global:ngModel.NgModelController
    *
    * @description
    * This is called when we need to determine if the value of the input is empty.
@@ -1024,7 +1024,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc method
    * @name $setValidity
-   * @methodOf global:ngModel.NgModelController
+   * @memberof global:ngModel.NgModelController
    *
    * @description
    * Change the validity state, and notifies the form when the control changes validity. (i.e. it
@@ -1068,7 +1068,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc method
    * @name $setPristine
-   * @methodOf global:ngModel.NgModelController
+   * @memberof global:ngModel.NgModelController
    *
    * @description
    * Sets the control to its pristine state.
@@ -1085,7 +1085,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   /**
    * @ngdoc method
    * @name $setViewValue
-   * @methodOf global:ngModel.NgModelController
+   * @memberof global:ngModel.NgModelController
    *
    * @description
    * Update the view value.

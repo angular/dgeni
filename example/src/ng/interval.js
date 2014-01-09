@@ -164,7 +164,7 @@ function $IntervalProvider() {
      /**
       * @ngdoc method
       * @name cancel
-      * @methodOf $interval
+      * @memberof $interval
       *
       * @description
       * Cancels a task associated with the `promise`.

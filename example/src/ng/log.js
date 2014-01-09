@@ -49,7 +49,7 @@ function $LogProvider(){
   /**
    * @ngdoc method
    * @name debugEnabled
-   * @methodOf $logProvider
+   * @memberof $logProvider
    * @description
    * @param {string=} flag enable or disable debug level messages
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
@@ -68,7 +68,7 @@ function $LogProvider(){
       /**
        * @ngdoc method
        * @name log
-       * @methodOf $log
+       * @memberof $log
        *
        * @description
        * Write a log message
@@ -78,7 +78,7 @@ function $LogProvider(){
       /**
        * @ngdoc method
        * @name info
-       * @methodOf $log
+       * @memberof $log
        *
        * @description
        * Write an information message
@@ -88,7 +88,7 @@ function $LogProvider(){
       /**
        * @ngdoc method
        * @name warn
-       * @methodOf $log
+       * @memberof $log
        *
        * @description
        * Write a warning message
@@ -98,7 +98,7 @@ function $LogProvider(){
       /**
        * @ngdoc method
        * @name error
-       * @methodOf $log
+       * @memberof $log
        *
        * @description
        * Write an error message
@@ -108,7 +108,7 @@ function $LogProvider(){
       /**
        * @ngdoc method
        * @name debug
-       * @methodOf $log
+       * @memberof $log
        * 
        * @description
        * Write a debug message

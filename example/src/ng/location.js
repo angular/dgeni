@@ -290,7 +290,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name absUrl
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter only.
@@ -305,7 +305,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name url
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter / setter.
@@ -333,7 +333,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name protocol
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter only.
@@ -347,7 +347,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name host
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter only.
@@ -361,7 +361,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name port
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter only.
@@ -375,7 +375,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name path
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter / setter.
@@ -397,7 +397,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name search
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter / setter.
@@ -445,7 +445,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name hash
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * This method is getter / setter.
@@ -462,7 +462,7 @@ LocationHashbangInHtml5Url.prototype =
   /**
    * @ngdoc method
   * @name replace
-   * @methodOf $location
+   * @memberof $location
    *
    * @description
    * If called, all changes to $location during current `$digest` will be replacing current history
@@ -536,7 +536,7 @@ function $LocationProvider(){
   /**
    * @ngdoc method
   * @name hashPrefix
-   * @methodOf $locationProvider
+   * @memberof $locationProvider
    * @description
    * @param {string=} prefix Prefix for hash part (containing path and search)
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
@@ -553,7 +553,7 @@ function $LocationProvider(){
   /**
    * @ngdoc method
   * @name html5Mode
-   * @methodOf $locationProvider
+   * @memberof $locationProvider
    * @description
    * @param {boolean=} mode Use HTML5 strategy if available.
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
@@ -570,7 +570,7 @@ function $LocationProvider(){
   /**
    * @ngdoc event
   * @name $locationChangeStart
-   * @eventOf $location
+   * @memberof $location
    * @eventType broadcast on root scope
    * @description
    * Broadcasted before a URL will change. This change can be prevented by calling
@@ -586,7 +586,7 @@ function $LocationProvider(){
   /**
    * @ngdoc event
   * @name $locationChangeSuccess
-   * @eventOf $location
+   * @memberof $location
    * @eventType broadcast on root scope
    * @description
    * Broadcasted after a URL was changed.

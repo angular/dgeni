@@ -52,7 +52,7 @@
 /**
  * @ngdoc method
  * @name register
- * @methodOf $filterProvider
+ * @memberof $filterProvider
  * @description
  * Register filter factory function.
  *
@@ -82,7 +82,7 @@ function $FilterProvider($provide) {
   /**
    * @ngdoc method
    * @name register
-   * @methodOf $controllerProvider
+   * @memberof $controllerProvider
    * @param {string|Object} name Name of the filter function, or an object map of filters where
    *    the keys are the filter names and the values are the filter factories.
    * @returns {Object} Registered filter instance, or if a map of filters was provided then a map

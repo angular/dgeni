@@ -123,32 +123,32 @@ describe('extract-tags', function() {
   });
 
 
-  describe("parentId", function() {
-    it("should extract the parentId from eventOf if the doc is an event", function() {
+  describe("memberof", function() {
+    it("should extract the parent id from memberof if the doc is an event", function() {
       setTag('ngdoc', 'event');
       setTag('module', 'ng');
       setTag('name', '$includeContentRequested');
-      setTag('eventOf', 'module:ng.directive:ngInclude');
+      setTag('memberof', 'module:ng.directive:ngInclude');
       plugin(doc);
-      expect(doc.parentId).toEqual('module:ng.directive:ngInclude');
+      expect(doc.memberof).toEqual('module:ng.directive:ngInclude');
     });
 
-    it("should extract the parentId from methodOf if the doc is an method", function() {
+    it("should extract the parent id from memberof if the doc is an method", function() {
       setTag('ngdoc', 'method');
       setTag('module', 'ng');
       setTag('name', 'addControl');
-      setTag('methodOf', 'directive:form.FormController');
+      setTag('memberof', 'directive:form.FormController');
       plugin(doc);
-      expect(doc.parentId).toEqual('module:ng.directive:form.FormController');
+      expect(doc.memberof).toEqual('module:ng.directive:form.FormController');
     });
 
-    it("should extract the parentId from propertyOf if the doc is an property", function() {
+    it("should extract the parent id from memberof if the doc is an property", function() {
       setTag('ngdoc', 'property');
       setTag('module', 'ng');
       setTag('name', 'defaults');
-      setTag('propertyOf', '$http');
+      setTag('memberof', '$http');
       plugin(doc);
-      expect(doc.parentId).toEqual('module:ng.$http');
+      expect(doc.memberof).toEqual('module:ng.$http');
     });
   });
 
@@ -173,7 +173,7 @@ describe('extract-tags', function() {
       setTag('ngdoc', 'event');
       setTag('name', '$includeContentRequested');
       setTag('module', 'ng');
-      setTag('eventOf', 'directive:ngInclude');
+      setTag('memberof', 'directive:ngInclude');
       plugin(doc);
       expect(doc.id).toEqual('module:ng.directive:ngInclude#$includeContentRequested');
     });

@@ -153,7 +153,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name get
- * @methodOf $injector
+ * @memberof $injector
  *
  * @description
  * Return an instance of the service.
@@ -165,7 +165,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name invoke
- * @methodOf $injector
+ * @memberof $injector
  *
  * @description
  * Invoke the method and supply the method arguments from the `$injector`.
@@ -181,7 +181,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name has
- * @methodOf $injector
+ * @memberof $injector
  *
  * @description
  * Allows the user to query if the particular service exist.
@@ -193,7 +193,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name instantiate
- * @methodOf $injector
+ * @memberof $injector
  * @description
  * Create a new instance of JS type. The method takes a constructor function invokes the new
  * operator and supplies all of the arguments to the constructor function as specified by the
@@ -208,7 +208,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name annotate
- * @methodOf $injector
+ * @memberof $injector
  *
  * @description
  * Returns an array of service names which the function is requesting for injection. This API is
@@ -332,7 +332,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name #provider
- * @methodOf $provide
+ * @memberof $provide
  * @description
  *
  * Register a **provider function** with the {@link $injector $injector}. Provider functions
@@ -431,7 +431,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name factory
- * @methodOf $provide
+ * @memberof $provide
  * @description
  *
  * Register a **service factory**, which will be called to return the service instance.
@@ -466,7 +466,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name service
- * @methodOf $provide
+ * @memberof $provide
  * @description
  *
  * Register a **service constructor**, which will be invoked with `new` to create the service
@@ -504,7 +504,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name value
- * @methodOf $provide
+ * @memberof $provide
  * @description
  *
  * Register a **value service** with the {@link $injector $injector}, such as a string, a
@@ -538,7 +538,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name constant
- * @methodOf $provide
+ * @memberof $provide
  * @description
  *
  * Register a **constant service**, such as a string, a number, an array, an object or a function,
@@ -567,7 +567,7 @@ function annotate(fn) {
 /**
  * @ngdoc method
  * @name decorator
- * @methodOf $provide
+ * @memberof $provide
  * @description
  *
  * Register a **service decorator** with the {@link $injector $injector}. A service decorator
