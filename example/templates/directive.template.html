@@ -1,4 +1,4 @@
-{% import "lib/helpers.macro.html" as helpers -%}
+{% include "lib/macros.html" -%}
 {% extends "api.template.html" %}
 
 {% block additional %}
@@ -8,7 +8,7 @@
     <li>This directive executes at priority level {$ doc.priority $}.</li>
   </ul>
 
-
+  {% block usage %}
   <h2 id="usage">Usage</h2>
   <div class="usage">
   {% if doc.usage %}
@@ -23,7 +23,7 @@
       {% code %}
       <{$ doc.name | dashCase $}
         {%- for param in doc.params %}
-        {$ helpers.renderElementParam(param) $}
+        {$ forElementDirective(param) $}
         {%- endfor %}>
       ...
       </{$ doc.name | dashCase $}>
@@ -36,7 +36,7 @@
         {% code %}
         <{$ doc.element $}
           {%- for param in doc.params %}
-          {$ helpers.renderAttributeParam(param) $}
+          {$ forAttributeDirective(param) $}
           {%- endfor %}>
         ...
         </{$ doc.element $}>
@@ -48,15 +48,21 @@
       <li>as CSS class:
         {% code %}
         {% set sep = joiner(' ') %}
-        <{$ doc.element $} class="{% for param in doc.params %}{$ sep() $}{$ helpers.renderCssParam(param) $}{% endfor %}"> ... </{$ doc.element $}>
+        <{$ doc.element $} class="{% for param in doc.params %}{$ sep() $}{$ forCSSClassDirective(param) $}{% endfor %}"> ... </{$ doc.element $}>
         {% endcode %}
       </li>
     {% endif -%}
     
   {%- endif %}
   </div>
+  {% endblock -%}
 
-  {% include "lib/animations.template.html" %}
+  {%- if doc.animations %}
+  <h2>Animations</h2>
+  {$ doc.animations | marked $}
+  {$ 'module:ngAnimate.$animate' | link(doc, 'Click here') $} to learn more about the steps involved in the animation.
+  {%- endif -%}
+
   {% include "lib/params.template.html" %}
   {% include "lib/events.template.html" %}
 {% endblock %}

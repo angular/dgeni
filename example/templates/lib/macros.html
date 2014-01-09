@@ -1,0 +1,60 @@
+{% macro typeList(type) -%}
+{% if type and type.typeList -%}
+  {% for typeName in types %}<a href="" class="{$ typeName | typeClass $}">{$ typeName $}</a>{% endfor %}
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro paramTable(params) %}
+<table class="variables-matrix table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for param in params %}
+    <tr>
+      <td>
+        {$ param.name $}
+        {% if param.alias %}| {$ param.alias $}{% endif %}
+        {% if param.type.optional %}<div><em>(optional)</em></div>{% endif %}
+      </td>
+      <td>
+        {$ typeList(param.type) $}
+      </td>
+      <td>
+        {$ param.description | marked $}
+        {% if param.default %}<p><em>(default: {$ param.default $})</em></p>{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro -%}
+
+
+{%- macro inline(name, description, optional, join, sep) %}
+  {%- if optional %}[{% endif %}
+  {$ name | dashCase $}{$ join $}{$ description $}{$ sep $}
+  {%- if optional %}]{% endif %}
+{% endmacro -%}
+
+{%- macro forElementDirective(param) -%}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.alias or param.name | dashCase $}="{$ param.type.description $}"
+  {%- if param.type.optional %}]{% endif -%}
+{%- endmacro %}
+
+{%- macro forAttributeDirective(param) -%}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.name | dashCase $}="{$ param.type.description $}"
+  {%- if param.type.optional %}]{% endif -%}
+{%- endmacro %}
+
+{%- macro forCSSClassDirective(param) -%}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.name | dashCase $}: {$ param.type.description $};
+  {%- if param.type.optional %}]{% endif -%}
+{% endmacro %}

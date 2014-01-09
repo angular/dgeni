@@ -1,15 +1,10 @@
-{% import "lib/helpers.macro.html" as helpers -%}
-{% extends "api.template.html" %}
+{% include "lib/macros.html" -%}
+{% extends "directive.template.html" %}
 
-{% block additional %}
-
+{% block usage %}
   <h2>Usage</h2>
   {% code %}
   <input type="{$ doc.inputType $}"{% for param in doc.params %}
-         {$ helpers.renderElementParam(param) $}{% endfor %}>
+         {$ forElementDirective(param) $}{% endfor %}>
   {% endcode %}
-
-  {% include "lib/animations.template.html" %}
-  {% include "lib/params.template.html" %}
-  {% include "lib/events.template.html" %}
 {% endblock %}
