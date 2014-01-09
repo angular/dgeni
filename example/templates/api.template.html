@@ -1,5 +1,7 @@
 {% block content %}
 
+<a href='http://github.com/{$ git.owner $}/{$ git.repo $}/tree/{$ git.tag $}/{$ doc.file $}#L{$ doc.startingLine $}' class='view-source btn btn-action'><i class="icon-zoom-in">&nbsp;</i>View Source</a>
+
 {% block header %}
 <h1 ng:non-bindable>
   {$ doc.name | code $}

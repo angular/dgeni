@@ -1,8 +1,6 @@
-<a href='http://github.com/angular/angular.js/edit/master/{$ doc.file $}'
-   class='improve-docs btn btn-primary'>
-  <i class="icon-edit">&nbsp;</i>Improve this doc
-</a>
+{% extends "base.template.html" %}
 
+{% block content %}
 <h1>
   <code>{$ doc.fullName $}</code>
   <div><span class='hint'>error in code</span></div>
@@ -12,3 +10,5 @@
 <div class="description">
   {$ doc.description | marked $}
 </div>
+
+{% endblock %}
