@@ -23,7 +23,7 @@
       {% code %}
       <{$ doc.name | dashCase $}
         {%- for param in doc.params %}
-        {$ forElementDirective(param) $}
+        {$ directiveParam(param.alias or param.name, param.type, '="', '"') $}
         {%- endfor %}>
       ...
       </{$ doc.name | dashCase $}>
@@ -36,7 +36,7 @@
         {% code %}
         <{$ doc.element $}
           {%- for param in doc.params %}
-          {$ forAttributeDirective(param) $}
+          {$ directiveParam(param.name, param.type, '="', '"') $}
           {%- endfor %}>
         ...
         </{$ doc.element $}>
@@ -48,7 +48,10 @@
       <li>as CSS class:
         {% code %}
         {% set sep = joiner(' ') %}
-        <{$ doc.element $} class="{% for param in doc.params %}{$ sep() $}{$ forCSSClassDirective(param) $}{% endfor %}"> ... </{$ doc.element $}>
+        <{$ doc.element $} class="
+        {%- for param in doc.params -%}
+          {$ sep() $}{$ directiveParam(param.name, param.type, ': ', ';') $}
+        {%- endfor %}"> ... </{$ doc.element $}>
         {% endcode %}
       </li>
     {% endif -%}

@@ -1,14 +1,4 @@
 {% if doc.returns -%}
-<h2>Returns</h2>
-
-<table class="variables-matrix">
-  <tr>
-    <td>
-      {$ typeList(doc.returns.type) $}
-    </td>
-    <td>
-      {$ doc.description | marked $}
-    </td>
-  </tr>
-</table>
+<h3>Returns</h3>
+{$ returns(doc.returns) $}
 {%- endif %}

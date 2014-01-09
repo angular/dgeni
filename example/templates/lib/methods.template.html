@@ -3,14 +3,8 @@
 <ul class="methods">
   {%- for method in doc.methods %}
   <li>
-    <h3>{% set sep = joiner(', ') %}
-      {% code -%}
-      {$ method.name $}(
-        {%- for param in method.params %}{$ sep() $}{$ param.name $}{% endfor -%}
-      );
-      {%- endcode %}</h3>
-    <div>{$ method.description | marked $}</div>
-    
+    <h3>{$ functionSyntax(method) $}</h3>
+    <div>{$ method.description | marked $}</div>    
   </li>
   {% endfor -%}
 </ul>
