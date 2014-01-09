@@ -24,7 +24,7 @@ var $AnimateProvider = ['$provide', function($provide) {
   /**
    * @ngdoc method
    * @name register
-   * @memberof $animate
+   * @memberof $animateProvider
    *
    * @description
    * Registers a new injectable animation factory function. The factory function produces the
@@ -64,7 +64,7 @@ var $AnimateProvider = ['$provide', function($provide) {
   /**
    * @ngdoc method
    * @name classNameFilter
-   * @memberof $animate
+   * @memberof $animateProvider
    *
    * @description
    * Sets and/or returns the CSS class regular expression that is checked when performing
