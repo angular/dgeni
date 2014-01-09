@@ -66,10 +66,15 @@ describe('extract-tags', function() {
       plugin(doc);
       expect(doc.componentType).toEqual('global');
 
+      setTag('ngdoc', 'type');
+      plugin(doc);
+      expect(doc.componentType).toEqual('global');
+
       setTag('ngdoc', 'function');
       plugin(doc);
       expect(doc.componentType).toEqual('global');
     });
+
   });
 
   describe("module", function() {

@@ -829,7 +829,7 @@ var VALID_CLASS = 'ng-valid',
     DIRTY_CLASS = 'ng-dirty';
 
 /**
- * @ngdoc object
+ * @ngdoc type
  * @name ngModel.NgModelController
  *
  * @property {string} $viewValue Actual string value in the view.

@@ -84,7 +84,7 @@ function $RootScopeProvider(){
       function( $injector,   $exceptionHandler,   $parse,   $browser) {
 
     /**
-     * @ngdoc object
+     * @ngdoc type
      * @name $rootScope.Scope
      *
      * @description

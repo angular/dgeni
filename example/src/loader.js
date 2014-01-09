@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @ngdoc object
+ * @ngdoc type
  * @module ng
  * @name angular.Module
  * @description

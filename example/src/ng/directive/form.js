@@ -10,7 +10,7 @@ var nullFormCtrl = {
 };
 
 /**
- * @ngdoc object
+ * @ngdoc type
  * @name form.FormController
  *
  * @property {boolean} $pristine True if user has not interacted with the form yet.

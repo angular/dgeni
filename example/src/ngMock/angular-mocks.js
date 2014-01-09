@@ -633,7 +633,7 @@ function padNumber(num, digits, trim) {
 
 
 /**
- * @ngdoc object
+ * @ngdoc type
  * @name angular.mock.TzDate
  * @description
  *
