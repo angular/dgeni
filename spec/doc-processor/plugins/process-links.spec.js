@@ -36,8 +36,8 @@ describe("process-links doc-processor plugin", function() {
   });
 
   it("should convert code links to anchors with formatted code", function() {
-    expect(doc.example).toEqual('Some example with a code link: <a href="/src/ngOther/directive/ngDirective"><code class="prettyprint linenum"><span class="title">ngDirective</span></code></a>');
-    expect(doc.goodLink).toEqual('A link to reachable code: <a href="/src/ng/directive/ngInclude"><code class="prettyprint linenum"><span class="title">ngInclude</span></code></a>');
+    expect(doc.example).toEqual('Some example with a code link: <a href="src/ngOther/directive/ngDirective"><code class="prettyprint linenum"><span class="title">ngDirective</span></code></a>');
+    expect(doc.goodLink).toEqual('A link to reachable code: <a href="src/ng/directive/ngInclude"><code class="prettyprint linenum"><span class="title">ngInclude</span></code></a>');
   });
 
   it("should collect the link in the links array", function() {
@@ -49,19 +49,19 @@ describe("process-links doc-processor plugin", function() {
         type : 'url',
         anchorElement : '<a href="some/url">link</a>'
       },
-      '/src/ngOther/directive/ngDirective': {
+      'src/ngOther/directive/ngDirective': {
         doc: doc,
-        url: '/src/ngOther/directive/ngDirective',
+        url: 'src/ngOther/directive/ngDirective',
         title: '<code class="prettyprint linenum"><span class="title">ngDirective</span></code>',
         type: 'code',
-        anchorElement: '<a href="/src/ngOther/directive/ngDirective"><code class="prettyprint linenum"><span class="title">ngDirective</span></code></a>'
+        anchorElement: '<a href="src/ngOther/directive/ngDirective"><code class="prettyprint linenum"><span class="title">ngDirective</span></code></a>'
       },
-      '/src/ng/directive/ngInclude': {
+      'src/ng/directive/ngInclude': {
         doc: doc,
-        url: '/src/ng/directive/ngInclude',
+        url: 'src/ng/directive/ngInclude',
         title: '<code class="prettyprint linenum"><span class="title">ngInclude</span></code>',
         type: 'code',
-        anchorElement: '<a href="/src/ng/directive/ngInclude"><code class="prettyprint linenum"><span class="title">ngInclude</span></code></a>'
+        anchorElement: '<a href="src/ng/directive/ngInclude"><code class="prettyprint linenum"><span class="title">ngInclude</span></code></a>'
       }
     });
   });
@@ -69,10 +69,10 @@ describe("process-links doc-processor plugin", function() {
   it("should check that any links in the links property of a doc reference a valid doc", function() {
     expect(logger.warn).toHaveBeenCalled();
     expect(logger.warn.calls[0].args).toEqual([
-      'In doc "some/file.js" at line 200: Invalid link, "/src/ngOther/directive/ngDirective"'
+      'In doc "some/file.js" at line 200: Invalid link, "src/ngOther/directive/ngDirective"'
     ]);
     expect(logger.warn.calls[1].args).toEqual([
-      'In doc "some/file.js" at line 200: Invalid link, "/src/ng/directive/ngInclude"'
+      'In doc "some/file.js" at line 200: Invalid link, "src/ng/directive/ngInclude"'
     ]);
   });
 });

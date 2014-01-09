@@ -24,16 +24,16 @@ describe("link filter", function() {
 
   it("should return an HTML anchor for a code reference", function() {
     var doc = { componentType: 'directive', section: 'api', module: 'ng', docType: 'directive', name: 'ngShow'};
-    expect(filter.process('ngClass', doc)).toMatchCodeLink('/api/ng/directive/ngClass', 'ngClass');
-    expect(filter.process('module:ngRoute.$route', doc)).toMatchCodeLink("/api/ngRoute/$route","$route");
+    expect(filter.process('ngClass', doc)).toMatchCodeLink('api/ng/directive/ngClass', 'ngClass');
+    expect(filter.process('module:ngRoute.$route', doc)).toMatchCodeLink("api/ngRoute/$route","$route");
 
-    expect(filter.process('ngClass', doc, 'some title')).toEqual('<a href="/api/ng/directive/ngClass">some title</a>');
-    expect(filter.process('module:ngRoute.$route', doc, 'some title')).toEqual('<a href="/api/ngRoute/$route">some title</a>');
+    expect(filter.process('ngClass', doc, 'some title')).toEqual('<a href="api/ng/directive/ngClass">some title</a>');
+    expect(filter.process('module:ngRoute.$route', doc, 'some title')).toEqual('<a href="api/ngRoute/$route">some title</a>');
   });
 
   it("should return an HTML anchor for a url", function() {
     var doc = { section: 'api', module: 'ng', docType: 'directive', componentType: 'directive', name: 'ngShow'};
-    expect(filter.process('/guide/directives', doc)).toEqual('<a href="/guide/directives">directives</a>');
-    expect(filter.process('/tutorial/step-1', doc, 'Step 1')).toEqual('<a href="/tutorial/step-1">Step 1</a>');
+    expect(filter.process('guide/directives', doc)).toEqual('<a href="guide/directives">directives</a>');
+    expect(filter.process('tutorial/step-1', doc, 'Step 1')).toEqual('<a href="tutorial/step-1">Step 1</a>');
   });
 });
