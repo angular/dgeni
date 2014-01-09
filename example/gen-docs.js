@@ -69,6 +69,7 @@ readFiles(config.source.files)
   .then(function(docs) {
     log.info('Read', docs.length, 'docs');
     docs = processDocs(docs);
+    log.info('Rendering', docs.length, 'docs');
     return renderDocs(docs, config.rendering.extra);
   })
 
