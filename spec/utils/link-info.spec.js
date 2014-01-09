@@ -3,7 +3,7 @@ var getLinkInfo = require('../../lib/utils/link-info');
 describe("getLinkInfo", function() {
   describe('for real urls', function() {
     it("should replace urls containing slashes with HTML anchors to the same url", function() {
-      var someDoc = { };
+      var someDoc = { docType: 'overview', section: 'guide' };
 
       expect(getLinkInfo(someDoc, 'some/absolute/url')).toEqual({ doc: someDoc, url: "some/absolute/url", title: "url", type: 'url', anchorElement : '<a href="some/absolute/url">url</a>'});
       expect(getLinkInfo(someDoc, 'some/relative/url')).toEqual({ doc: someDoc, url: "some/relative/url", title: "url", type: 'url', anchorElement : '<a href="some/relative/url">url</a>'});
@@ -14,6 +14,8 @@ describe("getLinkInfo", function() {
       expect(getLinkInfo(someDoc, 'some/relative/url', 'some other link')).toEqual({ doc: someDoc, url: "some/relative/url", title: "some other link", type: 'url', anchorElement : '<a href="some/relative/url">some other link</a>'});
       expect(getLinkInfo(someDoc, '../some/other/relative/url', 'some link')).toEqual({ doc: someDoc, url: "../some/other/relative/url", title: "some link", type: 'url', anchorElement : '<a href="../some/other/relative/url">some link</a>'});
       expect(getLinkInfo(someDoc, 'http://www.google.com', 'Google')).toEqual({ doc: someDoc, url: "http://www.google.com", title: "Google", type: 'url', anchorElement : '<a href="http://www.google.com">Google</a>'});
+
+      expect(getLinkInfo(someDoc, 'expression', 'expressions')).toEqual({ doc: someDoc, url: "guide/expression", title: "expressions", type: 'url', anchorElement : '<a href="guide/expression">expressions</a>'});
     });
 
     it("should replace urls starting with a hash with HTML anchors to the same url", function() {

@@ -27,6 +27,11 @@ describe("code-name", function() {
       expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'filter', name: 'currency'}, 'module:ngRoute.$route'))
         .toEqual('module:ngRoute.$route');
     });
+
+    it("returns an absolute name given a non-code doc", function() {
+      expect(codeName.getAbsoluteCodeName({ docType: 'overview', name: 'Developer Guide: Scopes'}, 'module:ngRoute.directive:ngView'))
+        .toEqual('module:ngRoute.directive:ngView');
+    });
   });
 
   xdescribe("relativeName", function() {
