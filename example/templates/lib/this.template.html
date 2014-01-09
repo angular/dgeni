@@ -1,2 +1,4 @@
-
-<h3>this</h3>
+{% if doc.this %}
+<h3>Method's {% code %}this{% endcode %}</h3>
+{$ doc.this | marked $}
+{% endif %}
