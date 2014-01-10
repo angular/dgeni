@@ -1,19 +1,35 @@
-source.files.push({ pattern: 'example/src/**/*.js', basePath: 'example' });
-source.files.push({ pattern: 'example/content/**/*.ngdoc', basePath: 'example/content' });
-source.extractors = require('./extractors');
+var _ = require('lodash');
 
-processing.tagParser = require('../default/processors/doctrine-tag-parser');
-processing.plugins = require('./processors');
-processing.tagDefinitions = require('./tag-defs');
+module.exports = function(defaultConfig) {
+  var config = {
+    source: {
+      files: [
+        { pattern: '../../example/src/**/*.js', basePath: '../../example' },
+        { pattern: '../../example/content/**/*.ngdoc', basePath: '../../example/content' }
+      ],
+      extractors: require('./extractors')
+    },
 
-rendering.templatePath = 'templates';
-rendering.templateFinder = require('./rendering/template-finder')(rendering.templatePath, '.templates.html');
-rendering.filters = require('./rendering/filters');
-rendering.tags = require('./rendering/tags');
-rendering.outputPath = 'build';
+    processing: {
+      tagParser: require('../default/processors/doctrine-tag-parser'),
+      plugins: require('./processors'),
+      tagDefinitions: require('./tag-defs')
+    },
 
-rendering.extra.git = {
-  tag: "v1.2.6-build.1989+sha.b0474cb"
+    rendering: {
+      templatePath: 'rendering/templates',
+      templateExtension: 'templates.html',
+      templateFinderFactory: require('./rendering/template-finder'),
+      filters: require('./rendering/filters'),
+      tags: require('./rendering/tags'),
+      outputPath: 'build',
+      extra: {
+        git: {
+          tag: "v1.2.6-build.1989+sha.b0474cb"
+        }
+      }
+    }
+  };
+
+  return _.defaults(config, defaultConfig);
 };
-
-logging.level = 'info';

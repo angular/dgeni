@@ -14,6 +14,7 @@ describe("config utility", function() {
     mockConfigFile = function(config) {
       config.a = 'x';
       config.array[1] = 'y';
+      return config;
     };
     
     requireSpy = jasmine.createSpy('require').andReturn(mockConfigFile);
