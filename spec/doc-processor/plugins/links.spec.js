@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var logger = require('winston');
 var rewire = require('rewire');
-var plugin = rewire('../../../lib/doc-processor/plugins/process-links');
+var plugin = rewire('../../../lib/doc-processor/plugins/links');
 
 describe("process-links doc-processor plugin", function() {
   var doc, links, logLevel;
