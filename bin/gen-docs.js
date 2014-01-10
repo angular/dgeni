@@ -21,6 +21,7 @@ var defaultConfig = {
   },
 
   processing: {
+    tagParser: null,
     plugins: [],
     tagDefinitions: []
   },
