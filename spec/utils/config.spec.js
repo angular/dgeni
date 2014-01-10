@@ -1,21 +1,34 @@
 var rewire = require('rewire');
 var config = rewire('../../lib/utils/config');
 var log = require('winston');
+var path = require('canonical-path');
 
 describe("config utility", function() {
-  var defaultConfig, fs, logLevel;
+  var defaultConfig, oldRequire, requireSpy, logLevel;
 
   beforeEach(function() {
     logLevel = log.level;
     log.level = 'warn';
-    defaultConfig = { array: [ 'a', 'b' ] };
 
-    fs = config.__get__('fs');
-    spyOn(fs, 'readFileSync').andReturn('a = "x";\narray[1] = "y";');
+    defaultConfig = { array: [ 'a', 'b' ] };
+    mockConfigFile = function(config) {
+      config.a = 'x';
+      config.array[1] = 'y';
+    };
+    
+    requireSpy = jasmine.createSpy('require').andReturn(mockConfigFile);
+    oldRequire = config.__get__('require');
+    config.__set__('require', requireSpy);
   });
 
   afterEach(function() {
+    config.__set__('require', oldRequire);
     log.level = logLevel;
+  });
+
+  it("should call require to load the config", function() {
+    config('configFile.js', defaultConfig);
+    expect(requireSpy).toHaveBeenCalledWith('configFile.js');
   });
 
 
@@ -25,16 +38,12 @@ describe("config utility", function() {
   });
 
 
-  it("should call readFileSync", function() {
-    config('configFile.js', defaultConfig);
-    expect(fs.readFileSync).toHaveBeenCalledWith('configFile.js');
-  });
-
   it("should override the defaultConfig", function() {
     var newConfig = config('configFile.js', defaultConfig);
     expect(newConfig).toEqual({
       a: 'x',
-      array: [ 'a', 'y']
+      array: [ 'a', 'y'],
+      basePath : path.resolve('.')
     });
   });
 });
