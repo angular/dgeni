@@ -1,5 +1,5 @@
 var hljs = require('highlight.js');
-var trimIndentation = require('../../../lib/utils/trim-indentation');
+var trimIndentation = require('../../../../lib/utils/trim-indentation');
 
 module.exports = {
   tags: ['code'],
