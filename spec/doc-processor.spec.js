@@ -17,7 +17,7 @@ describe("doc-processor", function() {
       }
     };
 
-    var process = docProcessorFactory(config);
+    var process = docProcessorFactory(config.processing.plugins, config);
     var processedDocs = process(docs);
     expect(log).toEqual(['before', 'each:a', 'each:b', 'after']);
     expect(processedDocs).toEqual(docs);
