@@ -16,7 +16,7 @@ log.level = 'debug';
 // Default configuration
 var defaultConfig = {
   source: {
-    files: [],
+    files : [],
     extractors: []
   },
 
@@ -27,14 +27,16 @@ var defaultConfig = {
   },
 
   rendering: {
-    templateFinderFactory: function(templateFolder, ext) {
-      return function(doc) { return templateFolder + doc.docType + '.' + ext; };
+    templateFinder: function(config) {
+      return function findTemplate(doc) {
+        return config.rendering.templateFolder + doc.docType + '.' + config.rendering.templateExtension;
+      };
     },
-    templatePath: '',
+    templatePath: './templates',
     filters: [],
     tags: [],
     extra: {},
-    outputPath: ''
+    outputPath: './build'
   }
 };
 
