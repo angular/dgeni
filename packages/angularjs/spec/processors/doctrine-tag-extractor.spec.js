@@ -1,4 +1,5 @@
-var plugin = require('../../processors/doctrine-tag-extractor');
+var rewire = require('rewire');
+var plugin = rewire('../../processors/doctrine-tag-extractor');
 
 describe("doctrine-tag-extractor doc processor plugin", function() {
   it("should have name 'doctrine-tag-extractor", function() {
@@ -12,8 +13,9 @@ describe("doctrine-tag-extractor doc processor plugin", function() {
   it("should call extractTags on the document", function() {
     var doc = {};
     plugin.init({ processing: { tagDefinitions: [] } });
-    spyOn(plugin, 'extractTags');
+    var extractTagsSpy = jasmine.createSpy('extractTags');
+    plugin.__set__('extractTags', extractTagsSpy);
     plugin.each(doc);
-    expect(plugin.extractTags).toHaveBeenCalledWith(doc);
+    expect(extractTagsSpy).toHaveBeenCalledWith(doc);
   });
 });

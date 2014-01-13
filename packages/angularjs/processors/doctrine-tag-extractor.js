@@ -1,5 +1,7 @@
+var log = require('winston');
 var extractTagsFactory = require('../../../lib/utils/extract-tags');
 
+var extractTags;
 var plugin = module.exports = {
   name: 'doctrine-tag-extractor',
   description:
@@ -9,10 +11,11 @@ var plugin = module.exports = {
       throw new Error('Invalid config.\n'+
       'You must provide an array of tag definitions, at config.processing.tagDefinitions');
     }
-    plugin.extractTags = extractTagsFactory(config.processing.tagDefinitions);
+    extractTags = extractTagsFactory(config.processing.tagDefinitions);
   },
-  each: function extractTags(doc) {
-    plugin.extractTags(doc);
+  each: function(doc) {
+    log.debug('extracting tags from  ' + doc.file);
+    extractTags(doc);
   }
 };
 
