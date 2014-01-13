@@ -10,7 +10,14 @@ describe("doc-processor", function() {
     each = { each: function(doc) { log.push('each:' + doc.content); } };
     after = { after: function(docs) { log.push('after'); return docs; } };
 
-    var process = docProcessorFactory(tagParser, tagDefs, [before, each, after]);
+
+    var config = {
+      processing: {
+        plugins: [before, each, after]
+      }
+    };
+
+    var process = docProcessorFactory(config);
     var processedDocs = process(docs);
     expect(log).toEqual(['before', 'each:a', 'each:b', 'after']);
     expect(processedDocs).toEqual(docs);

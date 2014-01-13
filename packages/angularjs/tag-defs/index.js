@@ -3,10 +3,6 @@ var checkProperty = require('../../../lib/utils/check-property');
 var path = require('canonical-path');
 var _ = require('lodash');
 
-
-// TODO: Factor this out!!
-var tagParser = require('../../default/processors/doctrine-tag-parser');
-
 module.exports = [
   {
     name: 'ngdoc',
@@ -35,7 +31,8 @@ module.exports = [
     defaultFn: function(doc) {
       if ( doc.fileType === 'js' ) {
         checkProperty(doc, 'file');
-        doc.module = doc.file.split('/')[1];
+        checkProperty(doc, 'basePath');
+        return path.relative(doc.basePath, path.dirname(doc.file)).split('/')[1];
       }
     }
   },
@@ -46,7 +43,7 @@ module.exports = [
     defaultFn: function(doc) {
       // Code files are put in the api section
       // Other files compute their section from the first path segment
-      doc.section = (doc.fileType === 'js') ? 'api' : path.dirname(doc.file).split('/').shift();
+      return (doc.fileType === 'js') ? 'api' : path.dirname(doc.file).split('/').shift();
     }
   },
 
@@ -82,16 +79,16 @@ module.exports = [
         checkProperty(doc, 'name');
 
         if ( doc.memberof ) {
-          doc.id = doc.memberof + '#' + doc.name;
+          return doc.memberof + '#' + doc.name;
         } else if ( doc.docType === 'module' ) {
-          doc.id = 'module:' + doc.module;
+          return 'module:' + doc.module;
         } else {
           var type = doc.componentType ? (doc.componentType + ':') : '';
-          doc.id = 'module:' + doc.module + '.' + type + doc.name;
+          return 'module:' + doc.module + '.' + type + doc.name;
         }
       } else {
         // use the document name if provided or the filename, stripped of its extension
-        doc.id = doc.name || path.basename(doc.file, '.' + doc.fileType);
+        return doc.name || path.basename(doc.file, '.' + doc.fileType);
       }
     }
   },
@@ -108,7 +105,7 @@ module.exports = [
       var param = {
         name: tag.name,
         description: description,
-        type: tagParser.getType(tag),
+        type: doc.tags.getType(tag),
       };
       if (tag.default) {
         param.default = tag.default;
@@ -127,7 +124,7 @@ module.exports = [
     docProperty: 'properties',
     transformFn: function(doc, tag) {
       return {
-        type: tagParser.getType(tag),
+        type: doc.tags.getType(tag),
         name: tag.name,
         description: tag.description
       };
@@ -140,7 +137,7 @@ module.exports = [
     defaultFn: function(doc) {
       checkProperty(doc, 'componentType');
       if ( doc.componentType === 'directive') {
-        doc.restrict = { element: false, attribute: true, cssClass: false, comment: false };
+        return { element: false, attribute: true, cssClass: false, comment: false };
       }
     },
     transformFn: function(doc, tag) {
@@ -159,7 +156,7 @@ module.exports = [
     aliases: ['return'],
     transformFn: function(doc, tag) {
       return {
-        type: tagParser.getType(tag),
+        type: doc.tags.getType(tag),
         description: tag.description
       };
     }
@@ -190,7 +187,7 @@ module.exports = [
     name: 'element',
     defaultFn: function(doc) {
       if ( doc.componentType === 'directive' ) {
-        doc.element = 'ANY';
+        return'ANY';
       }
     }
   },
@@ -208,7 +205,7 @@ module.exports = [
 
   {
     name: 'priority',
-    defaultFn: function(doc) { doc.priority = 0; }
+    defaultFn: function(doc) { return 0; }
   },
 
   { name: 'description' },

@@ -1,21 +1,20 @@
 var plugin = require('../../processors/filter-ngdocs');
-
-var tagParser = require('../../../default/processors/doctrine-tag-parser');
+var MockTags = require('../MockTags');
 
 describe("filter-ngdocs doc-processor plugin", function() {
   it("should only return docs that have the ngdoc tag", function() {
     var docs = [
-      { tags: [{ title: 'ngdoc', description: 'a' }] },
-      { tags: [{ title: 'other', description: 'b' }] },
-      { tags: [{ title: 'ngdoc', description: 'c' }, { title: 'other', description: 'd' }] },
-      { tags: [] }
+      { tags: new MockTags({ ngdoc: 'a' }) },
+      { tags: new MockTags({ other: 'b' }) },
+      { tags: new MockTags({ ngdoc: 'c' , other: 'd' }) },
+      { tags: new MockTags([]) }
     ];
 
-    var filteredDocs = plugin.before(docs, tagParser);
+    var filteredDocs = plugin.before(docs);
 
     expect(filteredDocs).toEqual([
-      { tags: [{ title: 'ngdoc', description: 'a' }] },
-      { tags: [{ title: 'ngdoc', description: 'c' }, { title: 'other', description: 'd' }] }
+      { tags: new MockTags({ ngdoc: 'a' }) },
+      { tags: new MockTags({ ngdoc: 'c' , other: 'd' }) }
     ]);
   });
 });

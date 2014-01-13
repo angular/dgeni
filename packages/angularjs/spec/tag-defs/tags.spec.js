@@ -1,235 +1,232 @@
 var _ = require('lodash');
 var logger = require('winston');
 var tagDefs = require('../../tag-defs');
-var pluginFactory = require('../../../../lib/utils/extract-tags');
-var tagParser = require('../../../default/processors/doctrine-tag-parser');
-var doctrine = require('doctrine');
+var MockTags = require('../mockTags.js');
 
-describe('extract-tags', function() {
-  var plugin, doc;
+describe('tag definitions', function() {
+  var doc, tags, tagDef;
 
-  function setTag(name, description) {
-    var tag = _.find(doc.tags, { title: name });
-    if ( !tag ) {
-      tag = { title: name };
-      doc.tags.push(tag);
-    }
-    tag.description = description;
-  }
-
-  function removeTag(name) {
-    doc.tags = _.reject(doc.tags, { title: name });
-  }
-
+  var getTagDef = function(name) {
+    return _.find(tagDefs, { name: name });
+  };
 
   beforeEach(function() {
-    plugin = pluginFactory(tagParser, tagDefs);
+    tags = new MockTags({
+      ngdoc: { title: 'ngdoc', description: 'directive' },
+      name: { title: 'name', description: 'ngView' }
+    });
     doc = {
+      basePath: '.',
       file: 'src/ngRoute/directive/ngView.js',
       fileType: 'js',
-      tags: [
-        { title: 'ngdoc', description: 'directive' },
-        { title: 'name', description: 'ngView' }
-      ]
+      tags: tags
     };
   });
 
   describe("ngdoc", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('ngdoc');
+    });
+
     it("should extract the docType from the ngdoc tag", function() {
-      plugin(doc);
-      expect(doc.docType).toEqual('directive');
+      expect(tagDef.transformFn(doc, tags.getTag('ngdoc'))).toEqual('directive');
     });
 
     it("should set componentType to be an empty string if the docType is not one of the special types", function() {
-      setTag('ngdoc', 'otherType');
-      plugin(doc);
+      tags.getTag('ngdoc').description = 'otherType';
+      tagDef.transformFn(doc, tags.getTag('ngdoc'));
       expect(doc.componentType).toEqual('');
     });
 
     it("should set componentType to directive if the docType is a directive type", function() {
-      setTag('ngdoc', 'directive');
-      plugin(doc);
+      tagDef.transformFn(doc, tags.getTag('ngdoc'));
       expect(doc.componentType).toEqual('directive');
       
-      setTag('ngdoc', 'input');
-      plugin(doc);
+      tags.getTag('ngdoc').description = 'input';
+      tagDef.transformFn(doc, tags.getTag('ngdoc'));
       expect(doc.componentType).toEqual('directive');
     });
 
     it("should set componentType to filter if the docType is filter", function() {
-      setTag('ngdoc', 'filter');
-      plugin(doc);
+      tags.getTag('ngdoc').description = 'filter';
+      tagDef.transformFn(doc, tags.getTag('ngdoc'));
       expect(doc.componentType).toEqual('filter');
     });
 
     it("should set componentType to global if the docType isa global type", function() {
-      setTag('ngdoc', 'object');
-      plugin(doc);
+      tags.getTag('ngdoc').description = 'object';
+      tagDef.transformFn(doc, tags.getTag('ngdoc'));
       expect(doc.componentType).toEqual('global');
 
-      setTag('ngdoc', 'type');
-      plugin(doc);
+      tags.getTag('ngdoc').description = 'type';
+      tagDef.transformFn(doc, tags.getTag('ngdoc'));
       expect(doc.componentType).toEqual('global');
 
-      setTag('ngdoc', 'function');
-      plugin(doc);
+      tags.getTag('ngdoc').description = 'function';
+      tagDef.transformFn(doc, tags.getTag('ngdoc'));
       expect(doc.componentType).toEqual('global');
     });
 
   });
 
   describe("module", function() {
-    it("extracts the module from the module tag if it is there", function() {
-      setTag('module', 'ngRoute');
-      plugin(doc);
-      expect(doc.module).toEqual('ngRoute');
+    beforeEach(function() {
+      tagDef = getTagDef('module');
     });
+
     it("extracts the module from the file name if it is a js file", function() {
-      plugin(doc);
-      expect(doc.module).toEqual('ngRoute');
+      expect(tagDef.defaultFn(doc)).toEqual('ngRoute');
 
       doc.file = 'src/ng/compile.js';
-      plugin(doc);
-      expect(doc.module).toEqual('ng');
+      expect(tagDef.defaultFn(doc)).toEqual('ng');
     });
   });
 
   describe("section", function() {
-    it("should extract the section from the tag if it exists", function() {
-      setTag('section', 'xyz');
-      plugin(doc);
-      expect(doc.section).toEqual('xyz');
+    beforeEach(function() {
+      tagDef = getTagDef('section');
     });
+
     it("should be 'api' if the fileType is js", function() {
-      plugin(doc);
-      expect(doc.section).toEqual('api');
+      expect(tagDef.defaultFn(doc)).toEqual('api');
     });
+
     it("should compute the section from the file name", function() {
       doc.fileType = 'ngdoc';
       doc.file ='guide/scope/binding.ngdoc';
-      plugin(doc);
-      expect(doc.section).toEqual('guide');
+      expect(tagDef.defaultFn(doc)).toEqual('guide');
     });
   });
 
 
   describe("name", function() {
-    it("should extract the name tag into the doc.name property", function() {
-      setTag('name','someName');
-      plugin(doc);
-      expect(doc.name).toEqual('someName');
+    beforeEach(function() {
+      tagDef = getTagDef('name');
     });
 
     it("should throw an error if the tag is missing", function() {
-      removeTag('name');
       expect(function() {
-        plugin(doc);
+        tagDef.defaultFn(doc);
       }).toThrow();
     });
   });
 
 
   describe("memberof", function() {
-    it("should extract the parent id from memberof if the doc is an event", function() {
-      setTag('ngdoc', 'event');
-      setTag('module', 'ng');
-      setTag('name', '$includeContentRequested');
-      setTag('memberof', 'module:ng.directive:ngInclude');
-      plugin(doc);
-      expect(doc.memberof).toEqual('module:ng.directive:ngInclude');
+    beforeEach(function() {
+      tagDef = getTagDef('memberof');
     });
 
-    it("should extract the parent id from memberof if the doc is an method", function() {
-      setTag('ngdoc', 'method');
-      setTag('module', 'ng');
-      setTag('name', 'addControl');
-      setTag('memberof', 'directive:form.FormController');
-      plugin(doc);
-      expect(doc.memberof).toEqual('module:ng.directive:form.FormController');
+    it("should throw an exception if the tag exists and docType is not 'event', 'method' or 'property'", function() {
+      expect(function() {
+        tagDef.transformFn(doc, {});
+      }).toThrow();
     });
 
-    it("should extract the parent id from memberof if the doc is an property", function() {
-      setTag('ngdoc', 'property');
-      setTag('module', 'ng');
-      setTag('name', 'defaults');
-      setTag('memberof', '$http');
-      plugin(doc);
-      expect(doc.memberof).toEqual('module:ng.$http');
+    it("should throw an exception if the tag doesn't exist and docType is 'event', 'method' or 'property'", function() {
+      expect(function() {
+        doc.docType = 'event';
+        tagDef.defaultFn(doc, {});
+      }).toThrow();
+      expect(function() {
+        doc.docType = 'property';
+        tagDef.defaultFn(doc, {});
+      }).toThrow();
+      expect(function() {
+        doc.docType = 'method';
+        tagDef.defaultFn(doc, {});
+      }).toThrow();
+    });
+
+    it("should extract the parent id from memberof if the doc is an event, method or property", function() {
+      doc.docType = 'event';
+      expect(tagDef.transformFn(doc, { title: 'memberof', description: 'module:ng.directive:ngInclude' }))
+          .toEqual('module:ng.directive:ngInclude');
+
+      doc.docType = 'method';
+      doc.module = 'ng';
+      expect(tagDef.transformFn(doc, { title: 'memberof', description: 'directive:form.FormController' }))
+          .toEqual('module:ng.directive:form.FormController');
+
+      doc.docType = 'property';
+      doc.componentType = '';
+      expect(tagDef.transformFn(doc, { title: 'memberof', description: '$http' })).toEqual('module:ng.$http');
     });
   });
 
   describe("id", function() {
-    it("should take the tag from the doc if it's there", function() {
-      setTag('ngdoc', 'directive');
-      setTag('name', 'ngView');
-      setTag('module', 'ngRoute');
-      setTag('id', 'abc.xyz');
-      plugin(doc);
-      expect(doc.id).toEqual('abc.xyz');
+    beforeEach(function() {
+      tagDef = getTagDef('id');
     });
-    
 
     it("should compute the id from the doc's meta data if it's a js file", function() {
-      setTag('ngdoc', 'directive');
-      setTag('name', 'ngView');
-      setTag('module', 'ngRoute');
-      plugin(doc);
-      expect(doc.id).toEqual('module:ngRoute.directive:ngView');
+      doc.docType = 'directive';
+      doc.componentType = 'directive';
+      doc.name = 'ngView';
+      doc.module = 'ngRoute';
+      expect(tagDef.defaultFn(doc)).toEqual('module:ngRoute.directive:ngView');
 
-      setTag('ngdoc', 'event');
-      setTag('name', '$includeContentRequested');
-      setTag('module', 'ng');
-      setTag('memberof', 'directive:ngInclude');
-      plugin(doc);
-      expect(doc.id).toEqual('module:ng.directive:ngInclude#$includeContentRequested');
+      doc.docType = 'event';
+      doc.componentType = '';
+      doc.name = '$includeContentRequested';
+      doc.module = 'ng';
+      doc.memberof = 'module:ng.directive:ngInclude';
+      expect(tagDef.defaultFn(doc)).toEqual('module:ng.directive:ngInclude#$includeContentRequested');
     });
 
 
     it("should compute the id from the name if it's not a js file", function() {
       doc.fileType = 'ngdoc';
       doc.file = 'foobar.ngdoc';
-      setTag('ngdoc', 'guide');
-      setTag('name', 'abc.xyz');
-      plugin(doc);
-      expect(doc.id).toEqual('abc.xyz');
+      doc.docType = 'guide';
+      doc.name = 'abc.xyz';
+      expect(tagDef.defaultFn(doc)).toEqual('abc.xyz');
     });
   });
 
 
   describe("param", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('param');
+    });
+
     it("should add param tags to a params array on the doc", function() {
-      var tags = doctrine.parse(
-        '@param {string} paramName description of param\n' +
-        '@param {string=} optionalParam description of optional param\n' +
-        '@param {string} [paramWithDefault=xyz] description of param with default\n' +
-        '@param {string} paramName|alias description of param with alias',
-        { sloppy: true } // to allow square brackets in param name
-      ).tags;
+      var param;
 
-      doc.tags = doc.tags.concat(tags);
+      doc.tags = new MockTags([
+        { title: 'param', name: 'paramName', description: 'description of param', type: { description: 'string', optional: false, typeList: ['string'] } },
+        { title: 'param', name: 'optionalParam', description: 'description of optional param', type: { description: 'string', optional: true, typeList: ['string']  } },
+        { title: 'param', name: 'paramWithDefault', description: 'description of param with default', default: 'xyz', type: { description: 'string', optional: true, typeList: ['string']  } },
+        { title: 'param', name: 'paramName', description: '|alias description of param with alias', type: { description: 'string', optional: false, typeList: ['string']  } }
+      ]);
 
-      plugin(doc);
-
-      expect(doc.params[0]).toEqual(
+      param = tagDef.transformFn(doc, doc.tags.tags[0]);
+      expect(param).toEqual(
       {
         name: 'paramName',
         description: 'description of param',
         type: { description: 'string', optional: false, typeList: ['string'] }
       });
-      expect(doc.params[1]).toEqual(
+
+      param = tagDef.transformFn(doc, doc.tags.tags[1]);
+      expect(param).toEqual(
       {
         name: 'optionalParam',
         description: 'description of optional param',
         type: { description: 'string', optional: true, typeList: ['string']  }
       });
-      expect(doc.params[2]).toEqual(
+
+      param = tagDef.transformFn(doc, doc.tags.tags[2]);
+      expect(param).toEqual(
       {
         name: 'paramWithDefault',
         description: 'description of param with default',
         type: { description: 'string', optional: true, typeList: ['string']  },
         default: 'xyz'
       });
-      expect(doc.params[3]).toEqual(
+
+      param = tagDef.transformFn(doc, doc.tags.tags[3]);
+      expect(param).toEqual(
       {
         name: 'paramName',
         description: 'description of param with alias',
@@ -241,99 +238,77 @@ describe('extract-tags', function() {
 
 
   describe("property", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('property');
+    });
 
-    it("should add a property object to the properties property on the doc", function() {
-      doc.tags.push({
+    it("should transform into a property object", function() {
+      var tag = {
         title: 'property',
         name: 'propertyName',
         description: 'description of property',
-        type: { type: 'NameExpression', name: 'string', typeList: ['string']  }
-      });
+        type: { description: 'string', optional: false, typeList: ['string']  }
+      };
 
-      plugin(doc);
-      expect(doc.properties).toEqual([{
+      expect(tagDef.transformFn(doc, tag)).toEqual({
         type: { description: 'string', optional: false, typeList: ['string']  },
         name: 'propertyName',
         description: 'description of property'
-      }]);
+      });
     });
 
   });
 
 
   describe("restrict", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('restrict');
+    });
+
 
     it("should convert a restrict tag text to an object", function() {
 
-      setTag('restrict', 'A');
-      plugin(doc);
-      expect(doc.restrict).toEqual({ element: false, attribute: true, cssClass: false, comment: false });
+      expect(tagDef.transformFn(doc, { title: 'restrict', description: 'A' }))
+        .toEqual({ element: false, attribute: true, cssClass: false, comment: false });
 
-      setTag('restrict', 'C');
-      plugin(doc);
-      expect(doc.restrict).toEqual({ element: false, attribute: false, cssClass: true, comment: false });
+      expect(tagDef.transformFn(doc, { title: 'restrict', description: 'C' }))
+        .toEqual({ element: false, attribute: false, cssClass: true, comment: false });
 
-      setTag('restrict', 'E');
-      plugin(doc);
-      expect(doc.restrict).toEqual({ element: true, attribute: false, cssClass: false, comment: false });
+      expect(tagDef.transformFn(doc, { title: 'restrict', description: 'E' }))
+        .toEqual({ element: true, attribute: false, cssClass: false, comment: false });
 
-      setTag('restrict', 'M');
-      plugin(doc);
-      expect(doc.restrict).toEqual({ element: false, attribute: false, cssClass: false, comment: true });
+      expect(tagDef.transformFn(doc, { title: 'restrict', description: 'M' }))
+        .toEqual({ element: false, attribute: false, cssClass: false, comment: true });
 
-      setTag('restrict', 'ACEM');
-      plugin(doc);
-      expect(doc.restrict).toEqual({ element: true, attribute: true, cssClass: true, comment: true });
+      expect(tagDef.transformFn(doc, { title: 'restrict', description: 'ACEM' }))
+        .toEqual({ element: true, attribute: true, cssClass: true, comment: true });
     });
 
     it("should default to restricting to an attribute if no tag is found and the doc is for a directive", function() {
-
-      plugin(doc);
-      expect(doc.restrict).toEqual({ element: false, attribute: true, cssClass: false, comment: false });
+      doc.componentType = 'directive';
+      expect(tagDef.defaultFn(doc)).toEqual({ element: false, attribute: true, cssClass: false, comment: false });
     });
 
     it("should not add a restrict property if the doc is not a directive", function() {
-
-      setTag('ngdoc', 'filter');
-      plugin(doc);
+      doc.componentType = '';
       expect(doc.restrict).toBeUndefined();
     });
   });
 
 
-  describe("returns", function() {
+  describe("returns/return", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('returns');
+    });
 
-    it("should add a returns property to the doc", function() {
-      doc.tags.push({
+
+    it("should transform into a returns object", function() {
+      expect(tagDef.transformFn(doc, {
         title: 'returns',
-        type: { name: 'string', type: 'NameExpression' },
-        description: 'description of returns'
-      });
-      plugin(doc);
-      expect(doc.returns).toEqual({
         type: { description: 'string', optional: false, typeList: ['string']  },
         description: 'description of returns'
-      });
-    });
-
-    it("should throw an exception if both return and returns tags are specified", function() {
-      doc.tags.push({ title: 'returns' });
-      doc.tags.push({ title: 'return' });
-      expect(function() { plugin(doc); }).toThrow();
-    });
-
-  });
-
-  describe("return", function() {
-
-    it("should add a returns property to the doc", function() {
-      doc.tags.push({
-        title: 'return',
-        type: { name: 'string', type: 'NameExpression' },
-        description: 'description of returns'
-      });
-      plugin(doc);
-      expect(doc.returns).toEqual({
+      }))
+      .toEqual({
         type: { description: 'string', optional: false, typeList: ['string']  },
         description: 'description of returns'
       });
@@ -343,45 +318,51 @@ describe('extract-tags', function() {
 
 
   describe("eventType", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('eventType');
+    });
 
-    it("should add an eventType and eventTarget property to the doc", function() {
-      setTag('eventType', 'broadcast on module:ng.directive:ngInclude');
-      plugin(doc);
-      expect(doc.eventType).toEqual('broadcast');
+
+    it("should add an eventTarget property to the doc and return the event type", function() {
+      var tag = { title: 'eventType', description: 'broadcast on module:ng.directive:ngInclude' };
+      expect(tagDef.transformFn(doc, tag)).toEqual('broadcast');
       expect(doc.eventTarget).toEqual('module:ng.directive:ngInclude');
     });
   });
 
 
   describe("element", function() {
-    it("should apply the tag to the doc.element property", function() {
-      setTag('element', 'input');
-      plugin(doc);
-      expect(doc.element).toEqual('input');
+    beforeEach(function() {
+      tagDef = getTagDef('element');
     });
+
     it("should default to ANY if the document is a directive", function() {
-      plugin(doc);
-      expect(doc.element).toEqual('ANY');
+      doc.componentType = 'directive';
+      expect(tagDef.defaultFn(doc)).toEqual('ANY');
+
+      doc.componentType = 'filter';
+      expect(tagDef.defaultFn(doc)).toBeUndefined();
     });
   });
 
 
   describe("requires", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('requires');
+    });
 
-    it("should extract an array of requires information from the tags", function() {
-      setTag('module', 'ng');
-      setTag('ngdoc', '$http');
-      doc.tags = doc.tags.concat([
-        { title: 'requires', description: '$compile' },
-        { title: 'requires', description: 'directive:ngClick' },
-        { title: 'requires', description: 'module:ngRoute.directive:ngView' }
-      ]);
-      plugin(doc);
-      expect(doc.requires).toEqual([
-        'module:ng.$compile',
-        'module:ng.directive:ngClick',
-        'module:ngRoute.directive:ngView'
-      ]);
+
+    it("should transform the code name to an absolute form", function() {
+      doc.module = 'ng';
+      doc.name = '$http';
+      doc.docType = 'service';
+      doc.componentType = '';
+      expect(tagDef.transformFn(doc, { title: 'requires', description: '$compile' }))
+        .toEqual('module:ng.$compile');
+      expect(tagDef.transformFn(doc, { title: 'requires', description: 'directive:ngClick' }))
+        .toEqual('module:ng.directive:ngClick');
+      expect(tagDef.transformFn(doc, { title: 'requires', description: 'module:ngRoute.directive:ngView' }))
+        .toEqual('module:ngRoute.directive:ngView');
     });
   });
 
