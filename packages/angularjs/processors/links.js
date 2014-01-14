@@ -27,18 +27,18 @@ module.exports = {
   },
 
   after: function checkLinks(docs) {
-    log.debug('=== links ===');
+    log.silly('=== links ===');
     _.forEach(_.map(links, 'url'), function(url) {
-      log.debug(url);
+      log.silly(url);
     });
 
     var docMap = {};
     _.forEach(docs, function(doc) {
       docMap[doc.path] = doc;
     });
-    log.debug('=== docs ===');
+    log.silly('=== docs ===');
     _.forEach(docMap, function(doc, path) {
-      log.debug(path);
+      log.silly(path);
     });
 
     var errCount = 0;
