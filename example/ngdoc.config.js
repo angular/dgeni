@@ -9,7 +9,7 @@ module.exports = function(config) {
     { pattern: '**/*.ngdoc', basePath: 'content' }
   ];
 
-  config.processing.dumpToFile = 'docs.txt';
+  //config.processing.dumpToFile = 'docs.txt';
 
   config.rendering.outputPath = 'build';
   config.rendering.extra = {
@@ -17,6 +17,8 @@ module.exports = function(config) {
       tag: "v1.2.6-build.1989+sha.b0474cb"
     }
   };
+
+  config.logging.level = 'info';
 
   return config;
 };

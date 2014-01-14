@@ -11,7 +11,6 @@ var loadConfig = require('../lib/utils/config');
 var docGenerator = require('../lib/index');
 
 log.cli();
-log.level = 'debug';
 
 // Default configuration
 var defaultConfig = {
@@ -37,6 +36,10 @@ var defaultConfig = {
     tags: [],
     extra: {},
     outputPath: './build'
+  },
+
+  logging: {
+    level: 'info'
   }
 };
 
@@ -44,6 +47,7 @@ var defaultConfig = {
 // Load in the config file and run it over the top of the default config
 var config = loadConfig(path.resolve(myArgs._[0]), defaultConfig);
 
+log.level = config.logging.level;
 log.info('Read config from "' + myArgs._[0] + '"');
 log.info('Logging set to "' + log.level + '"');
 
