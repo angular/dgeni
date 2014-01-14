@@ -24,7 +24,7 @@ HTML files.  It has a command line program called `gen-docs.js` and a configurat
 
 ```
 cd example
-node gen-docs.js ngdoc.conf.js
+../bin/gen-docs.js ngdoc.conf.js
 ```
 
 The configuration file defines where to find the source files containing the ngdocs and also where
@@ -50,20 +50,14 @@ from the following file types:
 * JavaScript - Strip ngdocs out of comments in JavaScript files. Can produce more than one doc per
   file
 
-### ngdoc Parsing
-
-Once we have a document read in from a file we parse it (using doctrine) to extract the ngdoc tags.
-The doctrine library creates an object structure for each tag that is found. It does not parse
-inline tags. We then extract what meta-data about the document we want from these tags using a set
-of declarative tag definitions.
-
 ### Doc Processing
 
-We need to do more work with this to get the full meta data required for rendering. This is done
-by the doc-processor plugins.
+Once we have read in all the documents we process them. This is done by the doc-processor plugins.
 
 Each plugin can provide the following functions:
 
+* init: this function is called with the current configuration to allow the plugin to initialize
+itself before any processing starts.
 * before: this function is executed at the start of processing.  It is passed the entire collection
 of documents and it should return the processed document collection.
 * each: this function is executed for each document in the collection.  It is passed the document
@@ -72,11 +66,30 @@ that is being processed.
 called.  It is passed the entire collection of documents and it should return the processed document
 collection.
 
+#### Tag Parsing
+
+We parse the tags in a document using doctrine) to extract an object containing the bare tags.
+The doctrine library creates an object structure for each tag that is found. It does not parse
+inline tags.
+
+#### Document Filtering
+For AngularJS we are only interested in documents that contain the @ngdoc tag.
+
+#### Extacting Tag Information
+
+We extract what meta-data about the document we want from these tags using a set of declarative tag
+definitions.
+
+#### Processing Links
+
+
+#### Processing Examples
+
 
 ### HTML Rendering
 
-We render each of these documents as an HTML page. We use the nunjucks JavaScript template
-tool-kit to generate HTML based on the data in each document. We create a filter that can render
-text as markdown and will highlight code.
+We render each of these documents as an HTML page. We use the "nunjucks" JavaScript template
+tool-kit to generate HTML based on the data in each document. We have nunjucks tags and filters that
+can render links and text as markdown and will highlight code.
 
-
+The templates used to render the doc is based upon the docunent's id and docType.
