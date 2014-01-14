@@ -43,7 +43,7 @@ module.exports = [
     defaultFn: function(doc) {
       // Code files are put in the api section
       // Other files compute their section from the first path segment
-      return (doc.fileType === 'js') ? 'api' : path.dirname(doc.file).split('/').shift();
+      return (doc.fileType === 'js') ? 'api' : path.relative(doc.basePath, doc.file).split('/').shift();
     }
   },
 
@@ -99,7 +99,7 @@ module.exports = [
     docProperty: 'params',
     transformFn: function(doc, tag) {
       // doctrine doesn't support param name aliases
-      var match = /^(?:\|(\S+)\s)?(.*)/.exec(tag.description);
+      var match = /^(?:\|(\S+)\s)?([\s\S]*)/.exec(tag.description);
       var alias = match[1];
       var description = match[2];
       var param = {
