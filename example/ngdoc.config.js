@@ -6,7 +6,7 @@ module.exports = function(config) {
   
   config.source.files = [
     'src/**/*.js',
-    { pattern: 'content/**/*.ngdoc', basePath: 'content' }
+    { pattern: '**/*.ngdoc', basePath: 'content' }
   ];
 
   config.processing.dumpToFile = 'docs.txt';
