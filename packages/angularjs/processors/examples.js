@@ -17,16 +17,16 @@ module.exports = {
   each: function(doc) {
 
     function extractAttributes(attributeText) {
-      var matches = attributeText.match(ATTRIBUTE_REGEX);
       var attributes = {};
-      _.forEach(matches, function(match) {
-        attributes[match[1]] = match[2];
+      attributeText.replace(ATTRIBUTE_REGEX, function(match, prop, val1, val2){
+        log.info(match, prop, val1, val2);
+        attributes[prop] = val1 || val2;
       });
       return attributes;
     }
 
     function extractFiles(exampleText) {
-      var matches = content.match(FILE_REGEX);
+      var matches = exampleText.match(FILE_REGEX);
       var files = {};
       _.forEach(matches, function(match) {
         
@@ -41,6 +41,7 @@ module.exports = {
         // Store this file information
         files[attributes.name] = attributes;
       });
+      return files;
     }
 
     function processExample(match, attributeText, exampleText) {
@@ -67,5 +68,6 @@ module.exports = {
 
   after: function(docs) {
     // Create new documents (which will be rendered as javascript) for each of the examples
+    log.info(examples);
   }
 };

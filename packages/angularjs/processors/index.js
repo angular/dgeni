@@ -6,5 +6,6 @@ module.exports = [
   require('./input-type'),
   require('./merge-child-docs'),
   require('./links'),
-  require('./module')
+  require('./module'),
+  require('./examples')
 ];
