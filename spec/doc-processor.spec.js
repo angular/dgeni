@@ -4,6 +4,12 @@ var tagDefs = [];
 
 describe("doc-processor", function() {
 
+  it("should throw error if the config is invalid", function() {
+    expect(function() {
+      docProcessorFactory([], {});
+    }).toThrow('Invalid config - you must provide a config object with a "processing" property');
+  });
+
   it("should call each of the plugins in turn, passing the docs object to each", function() {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];
     before = { before: function(docs) { log.push('before'); return docs; } };
@@ -21,6 +27,20 @@ describe("doc-processor", function() {
     var processedDocs = process(docs);
     expect(log).toEqual(['before', 'each:a', 'each:b', 'after']);
     expect(processedDocs).toEqual(docs);
+  });
+
+  it("should wrap and rethrow exceptions thrown by plugins", function() {
+    var badProcessor = {
+      name: 'bad-processor',
+      each: function() { throw new Error('processor failed'); }
+    };
+    var process = docProcessorFactory([badProcessor], { processing: {} });
+    var doc = {};
+    expect(function() { process([doc]); }).toThrow('Error processing document "unknown" with processor "bad-processor": Error: processor failed');
+    doc.name = 'doc-name';
+    expect(function() { process([doc]); }).toThrow('Error processing document "doc-name" with processor "bad-processor": Error: processor failed');
+    doc.name = 'doc-id';
+    expect(function() { process([doc]); }).toThrow('Error processing document "doc-id" with processor "bad-processor": Error: processor failed');
   });
 
 });
