@@ -25,7 +25,7 @@
     "doctrine": "~0.2.0"
   },
   "devDependencies": {
-    "jasmine-node": "~1.11.0",
+    "jasmine-node": "~1.12.0",
     "rewire": "~2.0.0"
   }
 }
