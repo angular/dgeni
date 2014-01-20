@@ -9,13 +9,14 @@ module.exports = function(defaultConfig) {
     },
 
     processing: {
-      plugins: require('./processors'),
-      tagDefinitions: require('./tag-defs')
+      tagDefinitions: require('./tag-defs'),
+      processors: require('./processors')
     },
 
     rendering: {
       templatePath: path.resolve(packagePath, 'rendering/templates'),
       templatePatterns: [
+        '${ doc.template }',
         '${ doc.id }.${ doc.docType }.template.html',
         '${ doc.id }.template.html',
         '${ doc.docType }.template.html'
