@@ -12,9 +12,9 @@ describe("doc-processor", function() {
 
   it("should call each of the processors in turn, passing the docs object to each", function() {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];
-    before = { before: function(docs) { log.push('before'); return docs; } };
-    each = { each: function(doc) { log.push('each:' + doc.content); } };
-    after = { after: function(docs) { log.push('after'); return docs; } };
+    before = { name: 'before', before: function(docs) { log.push('before'); return docs; } };
+    each = { name:'each', each: function(doc) { log.push('each:' + doc.content); } };
+    after = { name: 'after', after: function(docs) { log.push('after'); return docs; } };
 
 
     var config = {
@@ -41,6 +41,22 @@ describe("doc-processor", function() {
     expect(function() { process([doc]); }).toThrow('Error processing document "doc-name" with processor "bad-processor": Error: processor failed');
     doc.name = 'doc-id';
     expect(function() { process([doc]); }).toThrow('Error processing document "doc-id" with processor "bad-processor": Error: processor failed');
+  });
+
+  it("should order the processors by dependency", function() {
+    var log = [], docs = { content: 'x' };
+    var config = { processing: {
+      processors: [
+        { name: 'a', requires: ['c'], each: function(doc) { log.push('a'); } },
+        { name: 'b', requires: ['c','e','a'], each: function(doc) { log.push('b'); } },
+        { name: 'c', requires: ['e'], each: function(doc) { log.push('c'); } },
+        { name: 'd', requires: ['a'], each: function(doc) { log.push('d'); } },
+        { name: 'e', requires: [], each: function(doc) { log.push('e'); } }
+      ]
+    } };
+    var process = docProcessorFactory(config);
+    process(docs);
+    expect(log).toEqual(['e', 'c', 'a', 'b', 'd']);
   });
 
 });
