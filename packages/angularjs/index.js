@@ -15,8 +15,11 @@ module.exports = function(defaultConfig) {
 
     rendering: {
       templatePath: path.resolve(packagePath, 'rendering/templates'),
-      templateExtension: 'template.html',
-      templateFinder: require('./rendering/template-finder'),
+      templatePatterns: [
+        '${ doc.id }.${ doc.docType }.template.html',
+        '${ doc.id }.template.html',
+        '${ doc.docType }.template.html'
+      ],
       filters: require('./rendering/filters'),
       tags: require('./rendering/tags')
     }
