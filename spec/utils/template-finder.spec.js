@@ -1,18 +1,23 @@
 var rewire = require('rewire');
-var finderFactory = rewire('../../rendering/template-finder');
+var finderFactory = rewire('../../lib/utils/template-finder');
 
 describe("angular template-finder", function() {
-  var fs, finder;
+  var fs, finder, patterns;
   beforeEach(function() {
-    fs = finderFactory.__get__('fs');
-    spyOn(fs, 'readdirSync').andReturn([
+    glob = finderFactory.__get__('glob');
+    spyOn(glob, 'sync').andReturn([
       'a.x',
       'b.x',
       'c.x',
       'c.a.x',
       'f.other'
     ]);
-    finder = finderFactory({ rendering: { templatePath: 'abc', templateExtension: 'x' } });
+    patterns = [
+      '${ doc.id }.${ doc.docType }.x',
+      '${ doc.id }.x',
+      '${ doc.docType }.x'
+    ];
+    finder = finderFactory({ rendering: { templateFolder: 'abc', templatePatterns: patterns } });
   });
 
   it("should match id followed by doctype if both are provided and the file exists", function() {
@@ -29,6 +34,12 @@ describe("angular template-finder", function() {
 
   it("should match docType if id is undefined", function() {
     expect(finder({ docType: 'a' })).toEqual('a.x');
+  });
+
+  it("should throw an error if no template was found", function() {
+    expect(function() {
+      finder({docType:'missing'});
+    }).toThrow();
   });
 
 });
