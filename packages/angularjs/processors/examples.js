@@ -47,6 +47,46 @@ function uniqueName(name) {
   return name;
 }
 
+function outputPath(example, fileName) {
+  return path.join('examples', example.id, fileName);
+}
+
+function createExampleDoc(example) {
+  var exampleDoc = {
+    docType: 'example',
+    template: path.join(templateFolder, 'index.template.html'),
+    file: example.doc.file,
+    startingLine: example.doc.startingLine,
+    example: example,
+    path: example.id,
+    outputPath: outputPath(example, 'index.html'),
+    scripts: [],
+    styles: []
+  };
+
+  // If there is an index.html file specified then use it contents for this doc
+  // and remove it from the files property
+  if ( example.files['index.html'] ) {
+    exampleDoc.fileContents = example.files['index.html'].fileContents;
+    delete example.files['index.html'];
+  }
+  return exampleDoc;
+}
+
+function createFileDoc(example, file) {
+  var fileDoc = {
+    docType: 'example-' + file.type,
+    template: path.join(templateFolder, 'template.' + file.type),
+    file: example.doc.file,
+    startingLine: example.doc.startingLine,
+    example: example,
+    path: file.name,
+    outputPath: outputPath(example, file.name),
+    fileContents: file.fileContents
+  };
+  return fileDoc;
+}
+
 module.exports = {
   name: 'examples',
   description: 'Search the documentation for examples that need to be extracted',
@@ -58,20 +98,18 @@ module.exports = {
   },
   each: function(doc) {
 
-    function processExample(match, attributeText, exampleText) {
-      var example = extractAttributes(attributeText);
-      example.files = extractFiles(exampleText);
-      example.id = uniqueName(example.name || 'example');
-      example.doc = doc;
-      
-      // store the example information for later
-      examples.push(example);
-    }
-
     // Walk the properties of the document and parse the examples
     walk(doc, function(property, key) {
       if ( _.isString(property) ) {
-        property.replace(EXAMPLE_REGEX, processExample);
+        property.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
+          var example = extractAttributes(attributeText);
+          example.files = extractFiles(exampleText);
+          example.id = uniqueName(example.name || 'example');
+          example.doc = doc;
+          
+          // store the example information for later
+          examples.push(example);
+        });
       }
       return property;
     });
@@ -82,36 +120,20 @@ module.exports = {
       var outputFolder = path.join('examples', example.id);
       
       // Create a new document for the example
-      var exampleDoc = {
-        docType: 'example',
-        template: path.join(templateFolder, 'index.template.html'),
-        file: example.doc.file,
-        startingLine: example.doc.startingLine,
-        example: example,
-        path: outputFolder,
-        outputPath: path.join(outputFolder, 'index.html')
-      };
-      // If there is an index.html file specified then use it contents for this doc
-      // and remove it from the files property
-      if ( example.files['index.html'] ) {
-        exampleDoc.fileContents = example.files['index.html'].fileContents;
-        delete example.files['index.html'];
-      }
+      var exampleDoc = createExampleDoc(example);
       docs.push(exampleDoc);
 
       // Create a new document for each file of the example
       _.forEach(example.files, function(file) {
-        var fileDoc = {
-          docType: 'example-' + file.type,
-          template: path.join(templateFolder, 'template.' + file.type),
-          file: example.doc.file,
-          startingLine: example.doc.startingLine,
-          example: example,
-          path: path.join(outputFolder, file.name),
-          outputPath: path.join(outputFolder, file.name),
-          fileContents: file.fileContents
-        };
+        var fileDoc = createFileDoc(example, file);
         docs.push(fileDoc);
+
+        // Store a reference to the fileDoc in the relevant property on the exampleDoc
+        if ( file.type == 'css' ) {
+          exampleDoc.styles.push(fileDoc);
+        } else if ( file.type == 'js' ) {
+          exampleDoc.scripts.push(fileDoc);
+        }
       });
     });
   }
