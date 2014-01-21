@@ -8,7 +8,7 @@ describe("paths doc processor plugin", function() {
   });
 
   it("should compute the path from the section file name and file type", function() {
-    var doc = { fileType: 'ngdoc', file: 'guide/directives.ngdoc'};
+    var doc = { fileType: 'ngdoc', file: 'content/guide/directives.ngdoc', basePath: 'content' };
     plugin.each(doc);
     expect(doc.path).toEqual('guide/directives');
     expect(doc.outputPath).toEqual('guide/directives.html');
