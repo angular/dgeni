@@ -21,7 +21,7 @@ function extractFiles(exampleText) {
   exampleText.replace(FILE_REGEX, function(match, attributesText, contents) {
     var attributes = extractAttributes(attributesText);
     if ( !attributes.name ) {
-      throw new Error('Missing name attribute in example');
+      throw new Error('Missing name attribute in file: ' + match);
     }
 
     // Extract the contents of the file
@@ -36,7 +36,7 @@ function extractFiles(exampleText) {
 function processExample(match, attributeText, exampleText) {
   var example = extractAttributes(attributeText);
   example.files = extractFiles(exampleText);
-  example.id = examples.length;
+  example.id = (example.name || 'example') + '-' + examples.length;
   
   // store the example information for later
   examples.push(example);
