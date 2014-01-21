@@ -3,6 +3,7 @@ var checkProperty = require('../../../lib/utils/check-property');
 
 module.exports = {
   name: 'input-type',
+  requires: ['doctrine-tag-extractor'],
   each: function(doc) {
     if ( doc.docType === 'input' ) {
 

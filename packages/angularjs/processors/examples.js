@@ -45,6 +45,7 @@ function processExample(match, attributeText, exampleText) {
 module.exports = {
   name: 'examples',
   description: 'Search the documentation for examples that need to be extracted',
+  requires: ['doctrine-tag-extractor'],
   init: function(config) {
     examples = [];
   },
@@ -61,6 +62,6 @@ module.exports = {
 
   after: function(docs) {
     // Create new documents (which will be rendered as javascript) for each of the examples
-    log.info(require('util').inspect(examples, { depth: 4 }));
+    //log.info(require('util').inspect(examples, { depth: 4 }));
   }
 };

@@ -7,6 +7,7 @@ var links;
 
 module.exports = {
   name: 'links',
+  requires: ['doctrine-tag-extractor'],
 
   before: function setup(docs) {
     links = {};
