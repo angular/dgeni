@@ -7,7 +7,7 @@ var ATTRIBUTE_REGEX = /\s*([^=]+)\s*=\s*(?:(?:"([^"]+)")|(?:'([^']+)'))/g;
 var FILE_REGEX = /<file([^>]*)>([\S\s]+?)<\/file>/g;
 
 // A holder for all the examples that have been found in the document
-var examples, exampleNames;
+var examples, exampleNames, templateFolder;
 
 function extractAttributes(attributeText) {
   var attributes = {};
@@ -53,6 +53,7 @@ module.exports = {
   init: function(config) {
     examples = [];
     exampleNames = {};
+    templateFolder = 'examples';
   },
   each: function(doc) {
 
@@ -79,26 +80,35 @@ module.exports = {
     _.forEach(examples, function(example) {
       var outputFolder = path.join('examples', example.id);
       
+      // Create a new document for the example
       var exampleDoc = {
         docType: 'example',
-        template: 'example/index.template.html',
+        template: path.join(templateFolder, 'index.template.html'),
         file: example.doc.file,
         startingLine: example.doc.startingLine,
         example: example,
         path: outputFolder,
         outputPath: path.join(outputFolder, 'index.html')
       };
+      // If there is an index.html file specified then use it contents for this doc
+      // and remove it from the files property
+      if ( example.files['index.html'] ) {
+        exampleDoc.fileContents = example.files['index.html'].fileContents;
+        delete example.files['index.html'];
+      }
       docs.push(exampleDoc);
 
+      // Create a new document for each file of the example
       _.forEach(example.files, function(file) {
         var fileDoc = {
           docType: 'example-' + (file.type || 'file'),
-          template: 'example/' + (file.type || 'file') + '.template.txt',
+          template: path.join(templateFolder, (file.type || 'file') + '.template.txt'),
           file: example.doc.file,
           startingLine: example.doc.startingLine,
           example: example,
           path: path.join(outputFolder, file.name),
-          outputPath: path.join(outputFolder, file.name)
+          outputPath: path.join(outputFolder, file.name),
+          fileContents: file.fileContents
         };
         docs.push(fileDoc);
       });

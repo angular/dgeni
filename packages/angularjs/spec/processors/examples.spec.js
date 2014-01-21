@@ -65,7 +65,7 @@ describe("examples doc processor", function() {
       jasmine.objectContaining({ docType: 'directive' })
     );
     expect(docs[1]).toEqual(
-      jasmine.objectContaining({ docType: 'example' })
+      jasmine.objectContaining({ docType: 'example', template: 'examples/index.template.html' })
     );
     expect(docs[2]).toEqual(
       jasmine.objectContaining({ docType: 'example-file' })
