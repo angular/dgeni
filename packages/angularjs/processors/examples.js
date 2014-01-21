@@ -20,16 +20,17 @@ function extractAttributes(attributeText) {
 function extractFiles(exampleText) {
   var files = {};
   exampleText.replace(FILE_REGEX, function(match, attributesText, contents) {
-    var attributes = extractAttributes(attributesText);
-    if ( !attributes.name ) {
+    var file = extractAttributes(attributesText);
+    if ( !file.name ) {
       throw new Error('Missing name attribute in file: ' + match);
     }
 
     // Extract the contents of the file
-    attributes.fileContents = contents;
+    file.fileContents = contents;
+    file.type = file.type || path.extname(file.name).substr(1) || 'file';
 
     // Store this file information
-    files[attributes.name] = attributes;
+    files[file.name] = file;
   });
   return files;
 }
@@ -101,8 +102,8 @@ module.exports = {
       // Create a new document for each file of the example
       _.forEach(example.files, function(file) {
         var fileDoc = {
-          docType: 'example-' + (file.type || 'file'),
-          template: path.join(templateFolder, (file.type || 'file') + '.template.txt'),
+          docType: 'example-' + file.type,
+          template: path.join(templateFolder, 'template.' + file.type),
           file: example.doc.file,
           startingLine: example.doc.startingLine,
           example: example,
