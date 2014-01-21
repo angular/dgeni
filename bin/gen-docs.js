@@ -21,17 +21,12 @@ var defaultConfig = {
 
   processing: {
     tagParser: null,
-    plugins: [],
+    processors: [],
     tagDefinitions: []
   },
 
   rendering: {
-    templateFinder: function(config) {
-      return function findTemplate(doc) {
-        return config.rendering.templateFolder + doc.docType + '.' + config.rendering.templateExtension;
-      };
-    },
-    templatePath: './templates',
+    templateFolder: './templates',
     filters: [],
     tags: [],
     extra: {},
@@ -51,25 +46,30 @@ log.level = config.logging.level;
 log.info('Read config from "' + myArgs._[0] + '"');
 log.info('Logging set to "' + log.level + '"');
 
-log.info('basePath: ', config.basePath);
-// Normalize the paths in the config file
-var normalizePath = function(filePath) {
-  var normalisedPath = path.resolve(config.basePath, filePath);
-  log.debug('normalizing: ', filePath, normalisedPath);
-  return normalisedPath;
-};
+if ( !config.basePath ) {
+  // If the config does not have a base path then set it to the same folder as the config file
+  config.basePath = path.resolve(path.dirname(myArgs._[0]));
+}
+
+log.debug('basePath: ', config.basePath);
+
 config.source.files = _.map(config.source.files, function(file) {
-  if ( _.isString(file) ) { return normalizePath(file); }
-  if ( _.isObject(file) ) {
+  if ( _.isString(file) ) {
     return {
-      pattern: normalizePath(file.pattern),
-      basePath: normalizePath(file.basePath)
+      pattern: path.resolve(config.basePath, file),
+      basePath: config.basePath
+    };
+  } else if ( _.isObject(file) ) {
+    return {
+      pattern: path.resolve(config.basePath, file.basePath, file.pattern),
+      basePath: path.resolve(config.basePath, file.basePath)
     };
   }
   return file;
 });
-config.rendering.templatePath = normalizePath(config.rendering.templatePath);
-config.rendering.outputPath = normalizePath(config.rendering.outputPath);
+
+config.rendering.templateFolder = path.resolve(config.basePath, config.rendering.templateFolder);
+config.rendering.outputPath = path.resolve(config.basePath, config.rendering.outputPath);
 
 
 // Delete the previous output folder
