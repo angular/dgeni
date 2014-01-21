@@ -40,7 +40,7 @@ describe('doc-extractor', function() {
 
   it('should traverse the specified folder tree, reading each matching file', function() {
 
-    var readFiles = fileReaderFactory([mockNgDocExtractor, mockJsExtractor]);
+    var readFiles = fileReaderFactory({ source: { extractors: [mockNgDocExtractor, mockJsExtractor] }});
     readFiles(['./docs', './src']).then(function(docs) {
       expect(docs.length).toEqual(4);
       expect(docs[0]).toEqual({
