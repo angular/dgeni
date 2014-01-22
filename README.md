@@ -20,11 +20,11 @@ npm install
 
 There is an example with templates and source code from which you can generate a bunch of partial
 HTML files.  It has a command line program called `gen-docs.js` and a configuration file called
-`ngdoc.conf.js`:
+`ngdoc.config.js`:
 
 ```
 cd example
-../bin/gen-docs.js ngdoc.conf.js
+../bin/gen-docs.js ngdoc.config.js
 ```
 
 The configuration file defines where to find the source files containing the ngdocs and also where
