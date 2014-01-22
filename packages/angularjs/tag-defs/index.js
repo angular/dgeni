@@ -32,7 +32,7 @@ module.exports = [
       if ( doc.fileType === 'js' ) {
         checkProperty(doc, 'file');
         checkProperty(doc, 'basePath');
-        return path.relative(doc.basePath, path.dirname(doc.file)).split('/')[1];
+        return path.dirname(doc.file).split('/')[1];
       }
     }
   },
@@ -43,7 +43,7 @@ module.exports = [
     defaultFn: function(doc) {
       // Code files are put in the api section
       // Other files compute their section from the first path segment
-      return (doc.fileType === 'js') ? 'api' : path.relative(doc.basePath, doc.file).split('/').shift();
+      return (doc.fileType === 'js') ? 'api' : doc.file.split('/')[0];
     }
   },
 
