@@ -16,7 +16,7 @@ http://nodejs.org/.  Then, in the root folder of the project run:
 npm install
 ```
 
-### Run the Example
+### Run the Example (via CLI tool)
 
 There is an example with templates and source code from which you can generate a bunch of partial
 HTML files.  It has a command line program called `gen-docs.js` and a configuration file called
@@ -31,6 +31,23 @@ The configuration file defines where to find the source files containing the ngd
 to write the rendered HTML files.
 
 You should find that a folder called `build` has been created containing rendered files.
+
+### Run the example (with Gulp!)
+
+Even more cool, there is now a gulpfile for the example that basically does the same as the above
+but in a more comprehensive manner, such as the ability to copy over assets to the build more
+easily.
+
+You'll need to have GulpJS installed
+
+```
+sudo install -g gulp
+```
+
+```
+cd example
+gulp
+```
 
 
 ## Architecture
@@ -66,24 +83,27 @@ that is being processed.
 called.  It is passed the entire collection of documents and it should return the processed document
 collection.
 
-#### Tag Parsing
+#### AngularJS Processors
 
+Here is some information about some of the processors that com
+
+* **Doctrine Tag Parser** - 
 We parse the tags in a document using doctrine) to extract an object containing the bare tags.
 The doctrine library creates an object structure for each tag that is found. It does not parse
 inline tags.
 
-#### Document Filtering
+* **Document Filtering** -
 For AngularJS we are only interested in documents that contain the @ngdoc tag.
 
-#### Extacting Tag Information
-
+* **Doctrine Tag Extractor** -
 We extract what meta-data about the document we want from these tags using a set of declarative tag
 definitions.
 
-#### Processing Links
+* **Merge Child Docs**
 
+* **Links**
 
-#### Processing Examples
+* **Examples**
 
 
 ### HTML Rendering
