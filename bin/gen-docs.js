@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-var path = require('canonical-path');
 var log = require('winston');
 var rimraf = require('rimraf');
 var myArgs = require('optimist')
@@ -12,7 +11,7 @@ var docGenerator = require('../lib/index');
 log.cli();
 
 // Load in the config file and run it over the top of the default config
-var config = loadConfig(path.resolve(myArgs._[0]));
+var config = loadConfig(myArgs._[0]);
 
 log.level = config.logging.level;
 log.info('Read config from "' + myArgs._[0] + '"');

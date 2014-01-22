@@ -29,7 +29,7 @@ describe("config utility", function() {
 
   it("should call require to load the config", function() {
     config('configFile.js', defaultConfig);
-    expect(requireSpy).toHaveBeenCalledWith('configFile.js');
+    expect(requireSpy).toHaveBeenCalledWith(path.resolve('configFile.js'));
   });
 
 
