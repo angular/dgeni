@@ -11,16 +11,14 @@ gulp.task('clean', function() {
   .pipe(rimraf());
 });
 
-gulp.task('assets', function() {
-  gulp.src(['assets/**/*'])
+gulp.task('assets', ['clean'], function() {
+  return gulp.src(['assets/**/*'])
   .pipe(gulp.dest('build'));
 });
 
-gulp.task('doc-gen', function() {
+gulp.task('doc-gen', ['clean'], function() {
   var config = loadConfig('ngdoc.config.js');
   return docGenerator(config).generateDocs();
 });
 
-gulp.task('default', ['clean'], function() {
-  return gulp.run('assets', 'doc-gen');
-});
+gulp.task('default', ['assets', 'doc-gen']);
