@@ -11,7 +11,8 @@ module.exports = function(config) {
 
   //config.processing.dumpToFile = 'docs.txt';
 
-  config.rendering.outputPath = 'build';
+  config.rendering.outputFolder = 'build';
+  config.rendering.cleanOutputFolder = true;
   config.rendering.extra = {
     git: {
       tag: "v1.2.6-build.1989+sha.b0474cb"

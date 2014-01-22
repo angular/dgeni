@@ -30,7 +30,7 @@ var defaultConfig = {
     filters: [],
     tags: [],
     extra: {},
-    outputPath: './build'
+    outputFolder: './build'
   },
 
   logging: {
@@ -45,12 +45,6 @@ var config = loadConfig(path.resolve(myArgs._[0]), defaultConfig);
 log.level = config.logging.level;
 log.info('Read config from "' + myArgs._[0] + '"');
 log.info('Logging set to "' + log.level + '"');
-
-if ( !config.basePath ) {
-  // If the config does not have a base path then set it to the same folder as the config file
-  config.basePath = path.resolve(path.dirname(myArgs._[0]));
-}
-
 log.debug('basePath: ', config.basePath);
 
 config.source.files = _.map(config.source.files, function(file) {
@@ -68,13 +62,12 @@ config.source.files = _.map(config.source.files, function(file) {
   return file;
 });
 
-config.rendering.templateFolder = path.resolve(config.basePath, config.rendering.templateFolder);
-config.rendering.outputPath = path.resolve(config.basePath, config.rendering.outputPath);
-
 
 // Delete the previous output folder
-rimraf.sync(config.rendering.outputPath);
-log.info('Removed previous output files from "' + config.rendering.outputPath + '"');
+if ( config.rendering.cleanOutputFolder ) {
+  rimraf.sync(config.rendering.outputFolder);
+  log.info('Removed previous output files from "' + config.rendering.outputFolder + '"');
+}
 
 docGenerator(config).generateDocs().then(function() {
   log.info('Finished generating docs');
