@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Example - {$ doc.id $}</title>
   
-  {% for style in doc.styles %}<link href="{$ style.path $}" rel="stylesheet" type="text/css">
+  {% for styleheet in doc.stylesheets %}<link href="{$ stylesheet.path $}" rel="stylesheet" type="text/css">
   {% endfor %}
 
   {% for script in doc.scripts %}<script src="{$ script.path $}"></script>

@@ -61,7 +61,7 @@ function createExampleDoc(example) {
     path: example.id,
     outputPath: outputPath(example, 'index.html'),
     scripts: [],
-    styles: []
+    stylesheets: []
   };
 
   // If there is an index.html file specified then use it contents for this doc
@@ -130,7 +130,7 @@ module.exports = {
 
         // Store a reference to the fileDoc in the relevant property on the exampleDoc
         if ( file.type == 'css' ) {
-          exampleDoc.styles.push(fileDoc);
+          exampleDoc.stylesheets.push(fileDoc);
         } else if ( file.type == 'js' ) {
           exampleDoc.scripts.push(fileDoc);
         }
