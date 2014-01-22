@@ -7,5 +7,6 @@ module.exports = [
   require('./merge-child-docs'),
   require('./links'),
   require('./module'),
-  require('./examples')
+  require('./examples'),
+  require('./index-page')
 ];
