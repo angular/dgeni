@@ -23,9 +23,7 @@ module.exports = {
       doc.outputPath = doc.path.split('#').shift() + (parts.name ? '.html' : '/index.html');
 
     } else {
-      var relativeFilePath = path.relative(doc.basePath, doc.file);
-      // Replace the original extension with .html
-      doc.path = path.dirname(relativeFilePath) + '/' + path.basename(relativeFilePath, '.' + doc.fileType);
+      doc.path = path.dirname(doc.file) + '/' + path.basename(doc.file, '.' + doc.fileType);
       doc.outputPath = doc.path + '.html';
     }
   }
