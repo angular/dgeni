@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var rimraf = require('gulp-rimraf');
-var loadConfig = require('../lib/utils/config');
+var bower = require('bower');
 var docGenerator = require('../lib/index');
 
 gulp.task('clean', function() {
@@ -17,8 +17,7 @@ gulp.task('assets', ['clean'], function() {
 });
 
 gulp.task('doc-gen', ['clean'], function() {
-  var config = loadConfig('ngdoc.config.js');
-  return docGenerator(config).generateDocs();
+  return docGenerator('ngdoc.config.js').generateDocs();
 });
 
 gulp.task('default', ['assets', 'doc-gen']);
