@@ -7,5 +7,6 @@ module.exports = [
   require('./links'),
   require('./module'),
   require('./examples'),
-  require('./index-page')
+  require('./index-page'),
+  require('./docs-data')
 ];
