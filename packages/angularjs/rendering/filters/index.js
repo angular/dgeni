@@ -4,5 +4,6 @@ module.exports = [
   require('./marked'),
   require('./dash-case'),
   require('./type-class'),
-  require('./first-line')
+  require('./first-line'),
+  require('./json')
 ];
