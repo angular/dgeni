@@ -33,11 +33,12 @@ module.exports = function(config) {
         'angular-sanitize.js',
         'angular-touch.js',
         'angular-animate.js',
+        'components/marked/lib/marked.js',
         'js/angular-bootstrap/bootstrap.js',
         'js/angular-bootstrap/bootstrap-prettify.js',
         //'js/google-code-prettify.js',
         'components/lunr.js/lunr.js',
-        'docs-data.js',
+        'js/docs-data.js',
         'js/docs.js'
       ],
       stylesheets: [

@@ -22,7 +22,8 @@ gulp.task('assets', ['bower', 'clean'], function() {
     gulp.src('bower_components/components-font-awesome/**').pipe(gulp.dest('build/components/font-awesome')),
     gulp.src('bower_components/bootstrap/dist/**').pipe(gulp.dest('build/components/bootstrap')),
     gulp.src('bower_components/lunr.js/*.js').pipe(gulp.dest('build/components/lunr.js')),
-    gulp.src('bower_components/jquery/*.js').pipe(gulp.dest('build/components/jquery'))
+    gulp.src('bower_components/jquery/*.js').pipe(gulp.dest('build/components/jquery')),
+    gulp.src('node_modules/marked/**/*.js').pipe(gulp.dest('build/components/marked'))
   );
 });
 
