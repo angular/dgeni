@@ -109,6 +109,25 @@ describe('tag definitions', function() {
         tagDef.defaultFn(doc);
       }).toThrow();
     });
+
+    it("should throw error if the docType is 'input' and the name is not a valid format", function() {
+      var doc = { docType: 'input' };
+      var tag = { title: 'name', description: 'input[checkbox]' };
+      expect(tagDef.transformFn(doc, tag)).toEqual('input[checkbox]');
+      expect(doc.inputType).toEqual('checkbox');
+
+      doc = { docType: 'directive' };
+      tagDef.transformFn(doc, tag);
+      expect(doc.inputType).toBeUndefined();
+
+      doc = { docType: 'input'};
+      tag = { title: 'name', description: 'invalidInputName' };
+      expect(function() {
+        tagDef.transformFn(doc, tag);
+      }).toThrow();
+      
+    });
+
   });
 
 

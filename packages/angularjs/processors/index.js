@@ -3,7 +3,6 @@ module.exports = [
   require('./doctrine-tag-extractor'),
   require('./filter-ngdocs'),
   require('./paths'),
-  require('./input-type'),
   require('./merge-child-docs'),
   require('./links'),
   require('./module'),

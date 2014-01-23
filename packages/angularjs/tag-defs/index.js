@@ -50,7 +50,19 @@ module.exports = [
 
   {
     name: 'name',
-    required: true
+    required: true,
+    transformFn: function(doc, tag) {
+      var INPUT_TYPE = /input\[(.+)\]/;
+      var name = tag['description'];
+      if ( doc.docType === 'input' ) {
+        var match = INPUT_TYPE.exec(name);
+        if ( !match ) {
+          throw new Error('Invalid input directive name.  It should be of the form: "input[inputType]" but was "' + doc.name + '"');
+        }
+        doc.inputType = match[1];
+      }
+      return name;
+    }
   },
   
 
