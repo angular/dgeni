@@ -8,7 +8,10 @@
   },
   "repository": "",
   "author": "Pete Bacon Darwin",
-  "license": "MIT",
+  "licenses": [{
+    "type": "Apache",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  }],
   "dependencies": {
     "q": "~0.9.7",
     "q-io": "~1.10.6",
@@ -29,6 +32,7 @@
     "jasmine-node": "~1.12.0",
     "rewire": "~2.0.0",
     "gulp": "~3.4.0",
-    "gulp-rimraf": "0.0.8"
+    "gulp-rimraf": "0.0.8",
+    "bower": "~1.2.8"
   }
 }
