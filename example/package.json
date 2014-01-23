@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "version": "0.0.0",
+  "description": "An set of source code for trying out the documentation generation",
+  "author": "Pete Bacon Darwin",
+  "licenses": [{
+    "type": "Apache",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  }],
+  "devDependencies": {
+    "gulp": "~3.4.0",
+    "gulp-rimraf": "0.0.8",
+    "bower": "~1.2.8"
+  }
+}
