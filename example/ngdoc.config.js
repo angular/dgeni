@@ -5,7 +5,7 @@ var packagePath = __dirname;
 var angularjsPackage = require('../packages/angularjs');
 
 module.exports = function(config) {
-  
+
   config = angularjsPackage(config);
   
   config.set('source.files', [
@@ -24,7 +24,7 @@ module.exports = function(config) {
     }
   });
 
-  config.set('logging.level', 'debug');
+  config.set('logging.level', 'info');
 
   config.merge('deployment', {
     environments: [{
