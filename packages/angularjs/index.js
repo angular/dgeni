@@ -17,8 +17,7 @@ module.exports = function(config) {
     require('./processors/links'),
     require('./processors/module'),
     require('./processors/examples'),
-    require('./processors/index-page'),
-    require('./processors/docs-data')
+    require('./processors/index-page')
   ]);
 
   config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));
