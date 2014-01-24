@@ -20,11 +20,11 @@ module.exports = {
 
       // Strip off any hash fragment...
       // If the parts don't contain a "name" then it is a module, in which case use index.html
-      doc.outputPath = doc.path.split('#').shift() + (parts.name ? '.html' : '/index.html');
+      doc.outputPath = 'partials/' + doc.path.split('#').shift() + (parts.name ? '.html' : '/index.html');
 
     } else {
       doc.path = path.dirname(doc.file) + '/' + path.basename(doc.file, '.' + doc.fileType);
-      doc.outputPath = doc.path + '.html';
+      doc.outputPath = 'partials/' + doc.path + '.html';
     }
   }
 };
