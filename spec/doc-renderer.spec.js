@@ -2,12 +2,16 @@ var rewire = require('rewire');
 var docRendererFactory = rewire('../lib/doc-renderer');
 
 describe("doc-renderer", function() {
-  var nunjucks, nunjucksEnvMock;
+  var nunjucks, addFilterSpy, addExtensionSpy;
 
   beforeEach(function() {
     nunjucks = docRendererFactory.__get__('nunjucks');
-    nunjucksEnvMock = jasmine.createSpyObj('nunjucksEnv', ['addFilter', 'addExtension']);
-    spyOn(nunjucks, 'configure').andReturn( nunjucksEnvMock );
+    addFilterSpy = jasmine.createSpy('addFilter');
+    addExtensionSpy = jasmine.createSpy('addExtension');
+
+    nunjucks.Environment = jasmine.createSpy('Environment');
+    nunjucks.Environment.prototype.addFilter = addFilterSpy;
+    nunjucks.Environment.prototype.addExtension = addExtensionSpy;
   });
 
   it("should configure nunjucks", function() {
@@ -15,7 +19,7 @@ describe("doc-renderer", function() {
 
     docRendererFactory({ basePath: '/', rendering: { templateFolders: ['templates'], templatePatterns: [], outputFolder: 'output' }});
 
-    expect(nunjucks.configure).toHaveBeenCalledWith(['/templates'], {
+    expect(nunjucks.Environment).toHaveBeenCalledWith(jasmine.any(nunjucks.FileSystemLoader), {
       tags: {
         variableStart: '{$',
         variableEnd: '$}'
@@ -29,7 +33,7 @@ describe("doc-renderer", function() {
 
     docRendererFactory({ basePath: '/', rendering: { templateFolders: ['templates'], templatePatterns: [], outputFolder: 'output', filters: [dummyFilter],  tags: [dummyExtension] } });
 
-    expect(nunjucksEnvMock.addFilter).toHaveBeenCalledWith(dummyFilter.name, dummyFilter.process);
-    expect(nunjucksEnvMock.addExtension).toHaveBeenCalledWith('dummy', dummyExtension);
+    expect(addFilterSpy).toHaveBeenCalledWith(dummyFilter.name, dummyFilter.process);
+    expect(addExtensionSpy).toHaveBeenCalledWith('dummy', dummyExtension);
   });
 });
