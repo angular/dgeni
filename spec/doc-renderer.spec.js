@@ -13,9 +13,9 @@ describe("doc-renderer", function() {
   it("should configure nunjucks", function() {
 
 
-    docRendererFactory({ basePath: '/', rendering: { templateFolder: 'templates', templatePatterns: [], outputFolder: 'output' }});
+    docRendererFactory({ basePath: '/', rendering: { templateFolders: ['templates'], templatePatterns: [], outputFolder: 'output' }});
 
-    expect(nunjucks.configure).toHaveBeenCalledWith('/templates', {
+    expect(nunjucks.configure).toHaveBeenCalledWith(['/templates'], {
       tags: {
         variableStart: '{$',
         variableEnd: '$}'
@@ -27,7 +27,7 @@ describe("doc-renderer", function() {
 
     var dummyFilter = { name: 'test', process: function() {} }, dummyExtension = { tags: ['dummy']};
 
-    docRendererFactory({ basePath: '/', rendering: { templateFolder: 'templates', templatePatterns: [], outputFolder: 'output', filters: [dummyFilter],  tags: [dummyExtension] } });
+    docRendererFactory({ basePath: '/', rendering: { templateFolders: ['templates'], templatePatterns: [], outputFolder: 'output', filters: [dummyFilter],  tags: [dummyExtension] } });
 
     expect(nunjucksEnvMock.addFilter).toHaveBeenCalledWith(dummyFilter.name, dummyFilter.process);
     expect(nunjucksEnvMock.addExtension).toHaveBeenCalledWith('dummy', dummyExtension);
