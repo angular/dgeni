@@ -1,32 +1,44 @@
-var _ = require('lodash');
 var path = require('canonical-path');
 var packagePath = __dirname;
+var basePackage = require('../base');
 
-module.exports = function(defaultConfig) {
-  var config = {
-    source: {
-      extractors: require('./extractors')
-    },
+module.exports = function(config) {
 
-    processing: {
-      tagDefinitions: require('./tag-defs'),
-      processors: require('./processors')
-    },
+  config = basePackage(config);
 
-    rendering: {
-      templateFolders: [
-        path.resolve(packagePath, 'rendering/templates')
-      ],
-      templatePatterns: [
-        '${ doc.template }',
-        '${ doc.id }.${ doc.docType }.template.html',
-        '${ doc.id }.template.html',
-        '${ doc.docType }.template.html'
-      ],
-      filters: require('./rendering/filters'),
-      tags: require('./rendering/tags')
-    }
-  };
+  config.append('source.extractors', require('./extractors/ngdoc'));
+  
+  config.set('processing.tagDefinitions', require('./tag-defs'));
 
-  return _.defaults(config, defaultConfig);
+  config.append('processing.processors', [
+    require('./processors/filter-ngdocs'),
+    require('./processors/paths'),
+    require('./processors/merge-child-docs'),
+    require('./processors/links'),
+    require('./processors/module'),
+    require('./processors/examples'),
+    require('./processors/index-page'),
+    require('./processors/docs-data')
+  ]);
+
+  config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));
+
+  config.prepend('rendering.templatePatterns', [
+    '${ doc.template }',
+    '${ doc.id }.${ doc.docType }.template.html',
+    '${ doc.id }.template.html',
+    '${ doc.docType }.template.html'
+  ]);
+
+  config.append('rendering.filters', [
+    require('./rendering/filters/code'),
+    require('./rendering/filters/link'),
+    require('./rendering/filters/type-class')
+  ]);
+
+  config.append('rendering.tags', [
+    require('./rendering/tags/code')
+  ]);
+
+  return config;
 };

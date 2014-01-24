@@ -7,7 +7,7 @@ var BLANK_LINE = /^\s*\n\r?/;
 
 /**
  * @description
- * This extractor will pull all ngdoc docs out from comments in the JS code
+ * This extractor will pull all docs out from comments in the JS code
  * Each doc will initially have the form:
  * {
  *   fileType: 'js',

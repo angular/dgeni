@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - {$ doc.id $}</title>
+  
+  {% for styleheet in doc.stylesheets %}<link href="{$ stylesheet.path $}" rel="stylesheet" type="text/css">
+  {% endfor %}
+
+  <script src="../../angular.js"></script>
+  {% for script in doc.scripts %}<script src="{$ script.path $}"></script>
+  {% endfor %}
+</head>
+<body ng-app="{$ doc.example.module $}">
+  {$ doc.fileContents $}
+</body>
+</html>

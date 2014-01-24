@@ -8,26 +8,25 @@ module.exports = function(config) {
   
   config = angularjsPackage(config);
   
-  config.source.files = [
+  config.set('source.files', [
     'src/**/*.js',
     { pattern: '**/*.ngdoc', basePath: 'content' }
-  ];
+  ]);
 
   //config.processing.dumpToFile = 'docs.txt';
 
-  config.rendering.templateFolders.unshift(path.resolve(packagePath, 'templates'));
+  config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));
   config.rendering.outputFolder = 'build';
   config.rendering.cleanOutputFolder = true;
-  config.rendering.extra = {
+  config.merge('rendering.extra', {
     git: {
       tag: "v1.2.6-build.1989+sha.b0474cb"
     }
-  };
+  });
 
-  config.logging.level = 'info';
-  
+  config.set('logging.level', 'info');
 
-  config.deployment = {
+  config.merge('deployment', {
     environments: [{
       name: 'debug',
       scripts: [
@@ -54,7 +53,7 @@ module.exports = function(config) {
         'css/animations.css'
       ]
     }]
-  };
+  });
 
   return config;
 };
