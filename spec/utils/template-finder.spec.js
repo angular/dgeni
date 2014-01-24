@@ -1,6 +1,5 @@
 var rewire = require('rewire');
 var finderFactory = rewire('../../lib/utils/template-finder');
-var path = require('canonical-path');
 
 describe("angular template-finder", function() {
   var fs, finder, patterns, templateFolders;
@@ -24,19 +23,19 @@ describe("angular template-finder", function() {
   });
 
   it("should match id followed by doctype if both are provided and the file exists", function() {
-    expect(finder({ docType: 'a', id: 'c'})).toEqual(path.resolve(templateFolders[0], 'c.a.x'));
+    expect(finder({ docType: 'a', id: 'c'})).toEqual('c.a.x');
   });
 
   it("should match id before docType", function() {
-    expect(finder({ docType: 'a', id: 'b' })).toEqual(path.resolve(templateFolders[0], 'b.x'));
+    expect(finder({ docType: 'a', id: 'b' })).toEqual('b.x');
   });
 
   it("should match docType if id doesn't match", function() {
-    expect(finder({ docType: 'a', id: 'missing' })).toEqual(path.resolve(templateFolders[0], 'a.x'));
+    expect(finder({ docType: 'a', id: 'missing' })).toEqual('a.x');
   });
 
   it("should match docType if id is undefined", function() {
-    expect(finder({ docType: 'a' })).toEqual(path.resolve(templateFolders[0], 'a.x'));
+    expect(finder({ docType: 'a' })).toEqual('a.x');
   });
 
   it("should throw an error if no template was found", function() {
