@@ -24,7 +24,7 @@ module.exports = function(config) {
     }
   });
 
-  config.set('logging.level', 'info');
+  config.set('logging.level', 'debug');
 
   config.merge('deployment', {
     environments: [{
