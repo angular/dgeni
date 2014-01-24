@@ -14,7 +14,9 @@ module.exports = function(defaultConfig) {
     },
 
     rendering: {
-      templateFolder: path.resolve(packagePath, 'rendering/templates'),
+      templateFolders: [
+        path.resolve(packagePath, 'rendering/templates')
+      ],
       templatePatterns: [
         '${ doc.template }',
         '${ doc.id }.${ doc.docType }.template.html',

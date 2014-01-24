@@ -1,3 +1,7 @@
+var _ = require('lodash');
+var path = require('canonical-path');
+var packagePath = __dirname;
+
 var angularjsPackage = require('../packages/angularjs');
 
 module.exports = function(config) {
@@ -11,6 +15,7 @@ module.exports = function(config) {
 
   //config.processing.dumpToFile = 'docs.txt';
 
+  config.rendering.templateFolders.unshift(path.resolve(packagePath, 'templates'));
   config.rendering.outputFolder = 'build';
   config.rendering.cleanOutputFolder = true;
   config.rendering.extra = {
