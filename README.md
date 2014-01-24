@@ -3,11 +3,11 @@ angular-doc-gen
 
 The documentation generation utility for angular.js
 
-### Getting started
+## Getting started
 
 To get started, install the dependencies and then try out the example.
 
-### Install Depencencies
+## Install Dependencies
 
 You'll need node.js and a bunch of npm modules installed to run this tool.  Get node.js from here:
 http://nodejs.org/.  Then, in the root folder of the project run:
@@ -16,33 +16,46 @@ http://nodejs.org/.  Then, in the root folder of the project run:
 npm install
 ```
 
-### Run the Example (via CLI tool)
+### Run the example
 
 There is an example with templates and source code from which you can generate a bunch of partial
-HTML files.  It has a command line program called `gen-docs.js` and a configuration file called
-`ngdoc.config.js`:
+HTML files.
+
+First, you'll need to install some local dependencies to be able to run the example:
+
+```
+cd example
+npm install 
+```
+
+There is a configuration file called `ngdoc.config.js` that defines how the documents
+should be generated. The configuration file defines where to find the source files containing the
+ngdocs and also where to write the rendered HTML files.
+
+Once you have run generated the example documentation, you should find that a folder called `build`
+has been created containing rendered files.
+
+### using CLI tool
+
+There is  a command line program in the main tool called `bin/gen-docs.js`.
 
 ```
 cd example
 ../bin/gen-docs.js ngdoc.config.js
 ```
 
-The configuration file defines where to find the source files containing the ngdocs and also where
-to write the rendered HTML files.
+### using Gulp (preferred method)
 
-You should find that a folder called `build` has been created containing rendered files.
-
-### Run the example (with Gulp!)
-
-Even more cool, there is now a gulpfile for the example that basically does the same as the above
-but in a more comprehensive manner, such as the ability to copy over assets to the build more
-easily.
+Even more cool, there is now a gulpfile for the example that basically does the same (and more) as
+the CLI tool above.  It also provides the ability to copy over assets to the build folder and so on.
 
 You'll need to have GulpJS installed
 
 ```
 sudo install -g gulp
 ```
+
+Then just run gulp
 
 ```
 cd example
