@@ -16,50 +16,88 @@ http://nodejs.org/.  Then, in the root folder of the project run:
 npm install
 ```
 
+This will install the npm modules needed for documentation generation.  If you want to run the
+example you'll need to install more dependencies - see below.
+
+
 ### Run the example
 
-There is an example with templates and source code from which you can generate a bunch of partial
-HTML files.
+The best way to see how to setup and use this tool is to follow an example.  There is a fully
+featured example with templates and source code from which you can generate a version of the
+angularjs docs in the `/example` folder.
+
+```
+cd example
+```
 
 First, you'll need to install some local dependencies to be able to run the example:
 
 ```
-cd example
 npm install 
 ```
 
-There is a configuration file called `ngdoc.config.js` that defines how the documents
-should be generated. The configuration file defines where to find the source files containing the
-ngdocs and also where to write the rendered HTML files.
+(Note that you have to run this from the `example` folder as it has its own npm dependencies,
+separate from the main doc gen tool.)
 
-Once you have run generated the example documentation, you should find that a folder called `build`
-has been created containing rendered files.
-
-### using CLI tool
-
-There is  a command line program in the main tool called `bin/gen-docs.js`.
+The initial folder structure for the example looks like this:
 
 ```
-cd example
-../bin/gen-docs.js ngdoc.config.js
+- example
+  - ngdoc.config.js  - the doc gen configuration 
+  - src              - JavaScript source files that contain ngdocs in code comments 
+  - content          - ngdoc files containing content for the docs
+  - assets           - static assets that will be used by the web app
+  - templates        - templates for the doc generator, specific to this example
+  - processors       - plugins for the doc generator, specific to this example
 ```
 
-### using Gulp (preferred method)
+The documentation generation is controlled via the configuration file `ngdoc.config.js`.  This
+defines where the source files are, how they should be processed, what files should be generated
+and where to put the generated files.
 
-Even more cool, there is now a gulpfile for the example that basically does the same (and more) as
-the CLI tool above.  It also provides the ability to copy over assets to the build folder and so on.
+Once you have run the tool you will have a new folder called `build` containing rendered doc web
+application.
 
-You'll need to have GulpJS installed
+### Using Gulp (preferred method)
+
+There is a `gulpfile.js' for the example that has tasks to run the documentation generation, but
+will also install bower dependencies, copy over the static assets to the build folder and and also
+can start a web server to host the web app.
+
+You'll need to have GulpJS installed:
 
 ```
 sudo install -g gulp
 ```
 
-Then just run gulp
+Then just run the default Gulp task:
 
 ```
 cd example
 gulp
+```
+
+The complete list of Gulp tasks available are:
+
+* default - runs the assets and doc-gen tasks
+* clean - removes the build folder
+* bower - installs bower dependencies
+* assets - copies over the static assets to the build folder (depends on the bower and clean tasks)
+* doc-gen - generates the docs into the build folder (depends on the clean task)
+* watch - watches the files in the project and runs the default task when any change
+* server - starts a web server at http://localhost:8000 for testing the web app
+
+
+### using CLI tool
+
+The documentation generation tool contains a command line (CLI) program called `gen-docs.js`. It is 
+located in the `bin` folder of the repos.  This can also be used to generate the files for the
+doc web app, but it will not copy static files into the build folder that are needed to actually
+run the web app successfully.
+
+```
+cd example
+../bin/gen-docs.js ngdoc.config.js
 ```
 
 
