@@ -22,7 +22,7 @@ gulp.task('bower', function() {
 
 gulp.task('assets', ['bower', 'clean'], function() {
   return merge(
-    gulp.src(['assets/**/*']).pipe(gulp.dest('build')),
+    gulp.src(['config/assets/**/*']).pipe(gulp.dest('build')),
     gulp.src('bower_components/components-font-awesome/**').pipe(gulp.dest('build/components/font-awesome')),
     gulp.src('bower_components/bootstrap/dist/**').pipe(gulp.dest('build/components/bootstrap')),
     gulp.src('bower_components/lunr.js/*.js').pipe(gulp.dest('build/components/lunr.js')),
@@ -33,7 +33,7 @@ gulp.task('assets', ['bower', 'clean'], function() {
 
 
 gulp.task('doc-gen', ['clean'], function() {
-  return docGenerator('ngdoc.config.js').generateDocs();
+  return docGenerator('config/ngdoc.config.js').generateDocs();
 });
 
 
@@ -44,10 +44,9 @@ gulp.task('default', ['assets', 'doc-gen']);
 // Watch the files and run the default task when something changes
 gulp.task('watch', function() {
   return gulp.watch([
-    'assets/**/*',
     'content/**/*',
     'src/**/*',
-    'ngdoc.config.js',
+    'config/**/*',
     '../lib/**/*',
     '../packages/**/*'
   ], function() {

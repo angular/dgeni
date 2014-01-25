@@ -43,12 +43,13 @@ The initial folder structure for the example looks like this:
 
 ```
 - example
-  - ngdoc.config.js  - the doc gen configuration 
-  - src              - JavaScript source files that contain ngdocs in code comments 
-  - content          - ngdoc files containing content for the docs
-  - assets           - static assets that will be used by the web app
-  - templates        - templates for the doc generator, specific to this example
-  - processors       - plugins for the doc generator, specific to this example
+  - config             - contains the stuff that controls the doc generation
+    - ngdoc.config.js  - the doc gen configuration 
+    - assets           - static assets that will be used by the web app
+    - processors       - plugins for the doc generator, specific to this example
+    - templates        - templates for the doc generator, specific to this example
+  - content            - ngdoc files containing content for the docs
+  - src                - JavaScript source files that contain ngdocs in code comments 
 ```
 
 The documentation generation is controlled via the configuration file `ngdoc.config.js`.  This

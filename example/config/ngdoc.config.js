@@ -2,15 +2,15 @@ var _ = require('lodash');
 var path = require('canonical-path');
 var packagePath = __dirname;
 
-var angularjsPackage = require('../packages/angularjs');
+var angularjsPackage = require('../../packages/angularjs');
 
 module.exports = function(config) {
 
   config = angularjsPackage(config);
   
   config.set('source.files', [
-    'src/**/*.js',
-    { pattern: '**/*.ngdoc', basePath: 'content' }
+    { pattern: 'src/**/*.js', basePath: path.resolve(packagePath, '..') },
+    { pattern: '**/*.ngdoc', basePath: path.resolve(packagePath, '../content') }
   ]);
 
   config.append('processing.processors', [
@@ -18,8 +18,11 @@ module.exports = function(config) {
     require('./processors/index-page')
   ]);
 
-  config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));
-  config.set('rendering.outputFolder', 'build');
+  config.prepend('rendering.templateFolders', [
+    path.resolve(packagePath, 'templates')
+  ]);
+
+  config.set('rendering.outputFolder', '../build');
   config.set('rendering.cleanOutputFolder', true);
   config.merge('rendering.extra', {
     git: {
