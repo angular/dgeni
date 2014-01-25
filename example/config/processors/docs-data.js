@@ -12,7 +12,8 @@ module.exports = {
       template: 'docs-data.template.js',
       outputPath: 'js/docs-data.js',
       versions: [],
-      currentVersion: ''
+      currentVersion: '',
+      pages: _.filter(docs, function(doc) { return doc.section; })
     };
     docs.push(docData);
   }

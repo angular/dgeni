@@ -95,7 +95,7 @@ docsApp.serviceFactory.docsSearch = ['$rootScope','lunrSearch', 'NG_PAGES',
   });
 
   angular.forEach(NG_PAGES, function(page, i) {
-    var title = page.shortName;
+    var title = page.name;
     if(title.charAt(0) == 'n' && title.charAt(1) == 'g') {
       title = title + ' ' + title.charAt(2).toLowerCase() + title.substr(3);
     }
