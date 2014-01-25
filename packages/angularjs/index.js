@@ -16,8 +16,7 @@ module.exports = function(config) {
     require('./processors/merge-child-docs'),
     require('./processors/links'),
     require('./processors/module'),
-    require('./processors/examples'),
-    require('./processors/index-page')
+    require('./processors/examples')
   ]);
 
   config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));

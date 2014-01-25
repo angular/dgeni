@@ -13,10 +13,21 @@ module.exports = {
     }
   },
   after: function(docs) {
+
+    // Collect up all the sections in the docs
+    var sections = {};
+    _.forEach(docs, function(doc) {
+      if ( doc.section ) {
+        sections[doc.section] = doc.section;
+      }
+    });
+    sections = _.keys(sections);
+
     _.forEach(deployment.environments, function(environment) {
 
       var indexDoc = _.defaults({
         docType: 'index',
+        sections: sections
       }, environment);
 
       indexDoc.id = 'index' + (environment.name === 'default' ? '' : '-' + environment.name);

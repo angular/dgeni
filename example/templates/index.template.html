@@ -17,8 +17,17 @@
   <title ng-bind-template="AngularJS: {{partialTitle}}">AngularJS</title>
 
   <script type="text/javascript">
+    var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1],
+        rUrl = /(#!\/{% for section in doc.sections %}|{$ section $}{% endfor %}|index[^\.]*\.html).*$/,
+        baseUrl = location.href.replace(rUrl, indexFile),
+        headEl = document.getElementsByTagName('head')[0];
+
+    var baseTag = document.createElement('base');
+    baseTag.setAttribute('href', baseUrl);
+    headEl.appendChild(baseTag);
 
   </script>
+
   {% for stylesheet in doc.stylesheets %}<link href="{$ stylesheet $}" rel="stylesheet" type="text/css">
   {% endfor %}
 

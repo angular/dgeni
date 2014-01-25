@@ -13,7 +13,10 @@ module.exports = function(config) {
     { pattern: '**/*.ngdoc', basePath: 'content' }
   ]);
 
-  config.append('processing.processors', require('./processors/docs-data'));
+  config.append('processing.processors', [
+    require('./processors/docs-data'),
+    require('./processors/index-page')
+  ]);
 
   config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));
   config.set('rendering.outputFolder', 'build');
