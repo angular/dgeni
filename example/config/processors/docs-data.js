@@ -148,7 +148,12 @@ module.exports = {
         _.filter(docs, function(doc) { return doc.section; }),
         function(doc) {
           return {
-            id: doc.id, name: doc.name, description: doc.description
+            id: doc.id,
+            name: doc.name,
+            description: doc.description,
+            section: doc.section,
+            module: doc.module,
+            keywords: doc.keywords
           };
         }
       )
