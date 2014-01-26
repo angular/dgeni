@@ -14,9 +14,12 @@ module.exports = function(config) {
   ]);
 
   config.append('processing.processors', [
+    require('./processors/keywords'),
     require('./processors/docs-data'),
     require('./processors/index-page')
   ]);
+
+  config.set('processing.search.ignoreWordsFile', 'ignore.words');
 
   config.prepend('rendering.templateFolders', [
     path.resolve(packagePath, 'templates')
