@@ -95,6 +95,7 @@ docsApp.serviceFactory.docsSearch = ['$rootScope','lunrSearch', 'NG_PAGES',
   });
 
   angular.forEach(NG_PAGES, function(page, i) {
+    if ( !page.section ) return;
     var title = page.name;
     if(title.charAt(0) == 'n' && title.charAt(1) == 'g') {
       title = title + ' ' + title.charAt(2).toLowerCase() + title.substr(3);
@@ -622,7 +623,6 @@ docsApp.serviceFactory.sections = ['NG_PAGES', function sections(NG_PAGES) {
     api: [],
     tutorial: [],
     misc: [],
-    cookbook: [],
     error: [],
     getPage: function(sectionId, partialId) {
       var pages = sections[sectionId];
@@ -639,6 +639,8 @@ docsApp.serviceFactory.sections = ['NG_PAGES', function sections(NG_PAGES) {
   };
 
   angular.forEach(NG_PAGES, function(page) {
+    if ( !page.section ) return;
+
     page.url = page.section + '/' +  page.id;
     if (page.id == 'angular.Module') {
       page.partialUrl = 'partials/api/angular.IModule.html';
