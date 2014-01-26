@@ -106,7 +106,7 @@
             <div ng-repeat="(key, value) in results" class="search-group" ng-class="colClassName">
               <h4>{{ key }}</h4>
               <div ng-repeat="item in value" class="search-result">
-                <a ng-click="hideResults()" href="{{ item.url }}">{{ item.shortName }}</a>
+                <a ng-click="hideResults()" href="{{ item.url }}">{{ item.name }}</a>
               </div>
             </div>
             <a href="" ng-click="hideResults()" class="search-close">
@@ -164,7 +164,7 @@
           <div class="side-navigation">
             <ul class="nav nav-list" ng-hide="page">
               <li ng-repeat="page in pages track by page.url" ng-class="navClass(page)" class="api-list-item">
-                <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+                <a href="{{page.url}}" tabindex="2">{{page.name}}</a>
               </li>
             </ul>
 
@@ -174,7 +174,7 @@
               </li>
 
               <li ng-repeat="page in namespace.errors track by page.url" ng-class="navClass(page)" class="api-list-item">
-                <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+                <a href="{{page.url}}" tabindex="2">{{page.name}}</a>
               </li>
             </ul>
 
@@ -188,14 +188,14 @@
                 <a href="{{URL.directive}}" class="guide">directive</a>
               </li>
               <li ng-repeat="page in module.directives track by page.url" ng-class="navClass(page)" class="api-list-item">
-                <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+                <a href="{{page.url}}" tabindex="2">{{page.name}}</a>
               </li>
 
               <li class="nav-header section" ng-show="module.filters">
                 <a href="{{URL.filter}}" class="guide">filter</a>
               </li>
               <li ng-repeat="page in module.filters track by page.url" ng-class="navClass(page)" class="api-list-item">
-                <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+                <a href="{{page.url}}" tabindex="2">{{page.name}}</a>
               </li>
 
               <li class="nav-header section" ng-show="module.services">
@@ -210,7 +210,7 @@
                 <a href="{{URL.type}}" class="guide">Types</a>
               </li>
               <li ng-repeat="page in module.types track by page.url" ng-class="navClass(page)" class="api-list-item">
-                <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+                <a href="{{page.url}}" tabindex="2">{{page.name}}</a>
               </li>
 
               <li class="nav-header section" ng-show="module.globals">
