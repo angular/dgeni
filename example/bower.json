@@ -9,7 +9,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.0.3",
+    "bootstrap": "https://raw.github.com/twbs/bootstrap/v2.0.2/docs/assets/bootstrap.zip",
     "jquery": "~2.0.3",
     "lunr.js": "~0.4.3",
     "components-font-awesome": "~4.0.3"
