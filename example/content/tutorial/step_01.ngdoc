@@ -1,5 +1,6 @@
-@ngdoc overview
+@ngdoc tutorial
 @name 1 - Static Template
+@step 1
 @description
 
 <ul doc-tutorial-nav="1"></ul>
