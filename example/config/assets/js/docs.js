@@ -638,7 +638,7 @@ docsApp.serviceFactory.sections = ['NG_PAGES', function sections(NG_PAGES) {
     if (page.id == 'angular.Module') {
       page.partialUrl = 'partials/api/angular.IModule.html';
     } else {
-      page.partialUrl = 'partials/' + page.url + '.html';
+      page.partialUrl = page.outputPath;
     }
 
     sections[page.section].push(page);
@@ -912,7 +912,7 @@ docsApp.controller.DocsController = function($scope, $rootScope, $location, $win
 };
 
 
-angular.module('docsApp', ['ngResource', 'ngRoute', 'ngCookies', 'ngSanitize', 'ngAnimate', 'bootstrap', 'bootstrapPrettify', 'docsData']).
+angular.module('docsApp', ['ngResource', 'ngRoute', 'ngCookies', 'ngSanitize', 'ngAnimate', 'bootstrap', 'bootstrapPrettify', 'versionsData', 'pagesData']).
   config(function($locationProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
   }).

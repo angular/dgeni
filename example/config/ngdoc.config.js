@@ -15,7 +15,8 @@ module.exports = function(config) {
 
   config.append('processing.processors', [
     require('./processors/keywords'),
-    require('./processors/docs-data'),
+    require('./processors/versions-data'),
+    require('./processors/pages-data'),
     require('./processors/index-page')
   ]);
 
@@ -51,7 +52,8 @@ module.exports = function(config) {
         'js/angular-bootstrap/bootstrap-prettify.js',
         //'js/google-code-prettify.js',
         'components/lunr.js/lunr.js',
-        'js/docs-data.js',
+        'js/versions-data.js',
+        'js/pages-data.js',
         'js/docs.js'
       ],
       stylesheets: [

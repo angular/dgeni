@@ -104,88 +104,19 @@ function ngVersions() {
 }
 
 module.exports = {
-  name: 'docs-data',
+  name: 'versions-data',
   description: 'This plugin will create a new doc that will be rendered as an angularjs module ' +
-               'which will contain meta information about the paths and versions of angular',
-  requires: ['paths'],
+               'which will contain meta information about the versions of angular',
+  requires: [],
   after: function(docs) {
 
-    // Group and sort the given pages by docType
-    function pagesByType(pages) {
-      
-      return _(pages)
-        .groupBy('docType')
-        .map(function(pages, typeName) {
-          return {
-            typeName: typeName,
-            pages: _.sortBy(_.pluck(pages, 'id'))
-          };
-        })
-        .sortBy('typeName')
-        .value();
-    }
-
-
-    // We are only interested in docs that are in a section
-    var pages = _(docs)
-      .filter('section')
-      .map(function(doc) {
-        return _.pick(doc, [
-          'docType',
-          'inputType',
-          'id',
-          'name',
-          'section',
-          'module',
-          'outputPath',
-          'path',
-          'searchTerms'
-        ]);
-      })
-      .value();
-
-    // Generate an object collection of pages that is grouped by section
-    var sections = _(pages)
-      .groupBy('section')
-      .map(function(pages, sectionName) {
-
-        if ( sectionName === 'api' ) {
-          // The section is api so we return a collection of pages grouped by module -> type
-          return {
-            sectionName: sectionName,
-            modules: _(pages)
-              .groupBy('module')
-              .map(function(pages, moduleName) {
-                return {
-                  moduleName: moduleName,
-                  types: pagesByType(pages)
-                };
-              })
-              .sortBy('moduleName')
-              .value()
-          };
-        } else {
-          // The section is not api so we just return a colection of pages grouped by type
-          return {
-            sectionName: sectionName,
-            pages: _.sortBy(_.pluck(pages, 'id'))
-          };
-        }
-      })
-
-      .sortBy('sectionName')
-      .value();
-
-    var docData = {
-      docType: 'docs-data',
-      id: 'docs-data',
-      template: 'docs-data.template.js',
-      outputPath: 'js/docs-data.js',
+    docs.push({
+      docType: 'versions-data',
+      id: 'versions-data',
+      template: 'versions-data.template.js',
+      outputPath: 'js/versions-data.js',
       versions: ngVersions(),
-      currentVersion: ngCurrentVersion(),
-      sections: sections,
-      pages: _.indexBy(pages, 'id')
-    };
-    docs.push(docData);
+      currentVersion: ngCurrentVersion()
+    });
   }
 };
