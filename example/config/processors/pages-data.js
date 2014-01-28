@@ -45,7 +45,7 @@ var sectionNavigationMapping = {
     return items;
   },
   tutorial: function(pages, sectionName) {
-    var items = _.sortBy(_.map(pages, function(page) {
+    var navItems = _.sortBy(_.map(pages, function(page) {
       // Get the tutorial step number from the name
       var match = /^\s*(\d+)/.exec(page.name);
       return {
@@ -55,7 +55,11 @@ var sectionNavigationMapping = {
         type: 'tutorial'
       };
     }), 'step');
-    return items;
+
+    return [{
+      name: sectionName,
+      navItems: navItems
+    }];
   },
   error: function(pages, sectionName) {
     var items;
@@ -64,7 +68,7 @@ var sectionNavigationMapping = {
     return items;
   },
   pages: function(pages, sectionName) {
-    var items = _.sortBy(_.map(pages, function(page) {
+    var navItems = _.sortBy(_.map(pages, function(page) {
       return {
         name: page.name,
         href: page.path,
@@ -72,7 +76,10 @@ var sectionNavigationMapping = {
       };
     }), 'name');
 
-    return items;
+    return [{
+      name: sectionName,
+      navItems: navItems
+    }];
   }
 };
 
@@ -95,7 +102,7 @@ module.exports = {
         sections[sectionName] = {
           id: sectionName,
           name: SECTION_NAMES[sectionName],
-          pages: mapper(pages, sectionName)
+          navGroups: mapper(pages, sectionName)
         };
       });
 

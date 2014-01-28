@@ -165,11 +165,16 @@
           <div class="side-navigation">
 
             <ul class="nav nav-list">
-              <li ng-repeat="item in currentSection.pages track by item.href" ng-class="navClass(item)">
-                <a ng-if="item.extra.href" ng-class="navClass(item.extra)" href="{{item.extra.href}}">
-                  {{item.extra.text}}<i ng-if="item.extra.icon" class="icon-{{item.extra.icon}}"></i>
-                </a>
-                <a tabindex="2" ng-class="linkClass(item)" href="{{item.href}}">{{item.name}}</a>
+              <li ng-repeat="navGroup in currentSection.navGroups track by navGroup.name">
+                <ul>
+                  <li ng-repeat="navItem in navGroup.navItems track by navItem.href" ng-class="navClass(navItem)">
+                    <a ng-if="navItem.extra.href" ng-class="navClass(navItem.extra)" href="{{navItem.extra.href}}">
+                      {{navItem.extra.text}}<i ng-if="navItem.extra.icon" class="icon-{{navItem.extra.icon}}"></i>
+                    </a>
+                    <a tabindex="2" ng-class="linkClass(navItem)" href="{{navItem.href}}">{{navItem.name}}</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
 
           </div>
@@ -187,7 +192,7 @@
 
         <div id="loading" ng-show="loading">Loading...</div>
 
-        <div ng-hide="loading" ng-include src="currentPage.partialUrl" onload="afterPartialLoaded()" autoscroll class="content slide-reveal"></div>
+        <div ng-hide="loading" ng-include src="currentPage.outputPath" onload="afterPartialLoaded()" autoscroll class="content slide-reveal"></div>
 
       </div>
     </div>
