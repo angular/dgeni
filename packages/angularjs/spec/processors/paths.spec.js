@@ -1,5 +1,8 @@
 var plugin = require('../../processors/paths');
 describe("paths doc processor plugin", function() {
+  beforeEach(function() {
+    plugin.init();
+  });
   it("should compute the path from the document section and id if it is a js file", function() {
     var doc = { basePath: 'src', fileType: 'js', section: 'api', id: 'module:ng.directive:input[checkbox]#someMethod'};
     plugin.each(doc);
