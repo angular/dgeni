@@ -14,7 +14,7 @@
                  Declarative templates with data-binding, MVC, dependency injection and great
                  testability story all implemented with pure client-side JavaScript!">
   <meta name="fragment" content="!">
-  <title ng-bind-template="AngularJS: {{partialTitle}}">AngularJS</title>
+  <title ng-bind-template="AngularJS: {{ currentSection.name }}: {{ currentPage.name || 'Error: Page not found'}}">AngularJS</title>
 
   <script type="text/javascript">
     var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1],
@@ -165,11 +165,11 @@
           <div class="side-navigation">
 
             <ul class="nav nav-list">
-              <li ng-repeat="item in navigation track by item.href" ng-class="navClass(item)">
-                <a ng-if="item.extra" ng-class="navClass(item.extra)" href="{{item.extra.href}}">
-                  {{item.extra}}<i ng-if="item.extra.icon" class="icon-{{item.extra.icon}}"></i>
+              <li ng-repeat="item in currentSection.pages track by item.href" ng-class="navClass(item)">
+                <a ng-if="item.extra.href" ng-class="navClass(item.extra)" href="{{item.extra.href}}">
+                  {{item.extra.text}}<i ng-if="item.extra.icon" class="icon-{{item.extra.icon}}"></i>
                 </a>
-                <a tabindex="2" ng-class="linkClass(item)" href="{{item.href}}">{{item.text}}</a>
+                <a tabindex="2" ng-class="linkClass(item)" href="{{item.href}}">{{item.name}}</a>
             </ul>
 
           </div>
