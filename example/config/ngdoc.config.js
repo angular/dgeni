@@ -20,6 +20,8 @@ module.exports = function(config) {
     require('./processors/index-page')
   ]);
 
+  config.processing.tagDefinitions.push(require('./tag-defs/tutorial-step'));
+
   config.set('processing.search.ignoreWordsFile', 'ignore.words');
 
   config.prepend('rendering.templateFolders', [
