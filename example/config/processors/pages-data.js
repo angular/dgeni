@@ -48,10 +48,9 @@ var sectionNavigationMapping = {
     var items = _.sortBy(_.map(pages, function(page) {
       // Get the tutorial step number from the name
       var match = /^\s*(\d+)/.exec(page.name);
-      var step = match && match[1] && parseInt(match[1], 10);
       return {
         name: page.name,
-        step: step,
+        step: page.step,
         href: page.path,
         type: 'tutorial'
       };
