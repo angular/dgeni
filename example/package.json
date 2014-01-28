@@ -1,6 +1,6 @@
 {
   "name": "example",
-  "version": "1.2.10",
+  "version": "1.2.10-snapshot",
   "description": "An set of source code for trying out the documentation generation",
   "author": "Pete Bacon Darwin",
   "licenses": [

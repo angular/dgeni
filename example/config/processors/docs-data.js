@@ -2,102 +2,104 @@ var _ = require('lodash');
 var shell = require('shelljs');
 var fs = require('fs');
 
-function sortVersionsNaturally(versions) {
-  var pad = function(num) { return ('0000'+num).slice(-4); };
-  var VERSION_REGEX = /(\d+)\.(\d+)\.(\d+)(?:-?rc\.?(\d+))?/;
+// Matches versions from 1.0 onwards
+// Group 1: Major Version Number
+// Group 2: Minor Version Number
+// Group 3: Patch Version Number
+// Group 4: Release Candidate Number (optional)
+// Group 5: Snapshot Identifier
+var VERSION_REGEX = /([1-9]\d*)\.(\d+)\.(\d+)(?:-?rc\.?(\d+)|-(snapshot))?/;
 
-  return _.sortBy(versions, function(version) {
-    var matches = VERSION_REGEX.exec(version);
-    // We pad out the version numbers with 0s so they sort nicely
-    // Non-Release Candidates get 0999 for the last section to make them appear
-    // earlier than release candidates
-    var versionPadded = pad(matches[1]) + pad(matches[2]) + pad(matches[3]) + pad(matches[4] || 999);
-    return versionPadded;
-  });
+// The version is stable if its 2nd number is even and doesn't contain "rc"
+var UNSTABLE_REGEX = /\d+\.\d*[13579]\.\d+|rc/;
+
+// Versions before 1.0.2 had a different docs folder name
+var OLDDOCSFOLDER_REGEX = /1.0.[01]([^\d]|$)/;
+
+function pad(num) {
+  return ('0000'+num).slice(-4);
 }
 
 
-function expandVersions(versions, latestVersion) {
-  // The version is stable if its 2nd number is even and doesn't contain "rc"
-  var UNSTABLE_REGEX = /\d+\.\d*[13579]\.\d+|rc/;
-
-  //copy the array to avoid changing the versions param data the latest version is not on the
-  //git tags list, but docs.angularjs.org will always point to master as of 1.2
-  versions = versions.concat([latestVersion]);
-
-  return _.map(versions, function(version) {
-    var isMaster = version === latestVersion;
-    var isStable = !UNSTABLE_REGEX.test(version);
-    var title = 'AngularJS - v' + version;
-    var docsPath = version < 'v1.0.2' ? 'docs-' + version : 'docs';
-    var url = isMaster ?
-      'http://docs.angularjs.org' :
-      'http://code.angularjs.org/' + version + '/' + docsPath;
-    return {
-      version: version,
-      stable: isStable,
-      group: isStable ? 'Stable' : 'Unstable',
-      title: title,
-      url: url
-    };
-  }).reverse();
+function getSnapshotSuffix() {
+  var jenkinsBuild = process.env.BUILD_NUMBER || 'local';
+  var hash = shell.exec('git rev-parse --short HEAD', {silent: true}).output.replace('\n', '');
+  return 'build.'+jenkinsBuild+'+sha.'+hash;
 }
 
-var version;
+
 function ngCurrentVersion() {
-  if (version) return version;
-
   var package = JSON.parse(fs.readFileSync('package.json', 'UTF-8'));
-  var match = package.version.match(/^([^\-]*)(?:\-(.+))?$/);
-  var semver = match[1].split('.');
-
-  var fullVersion = match[1];
-
-  if (match[2]) {
-    fullVersion += '-';
-    fullVersion += (match[2] == 'snapshot') ? getSnapshotSuffix() : match[2];
-  }
-
-  version = {
-    full: fullVersion,
-    major: semver[0],
-    minor: semver[1],
-    dot: semver[2].replace(/rc\d+/, ''),
-    codename: package.codename,
-    cdn: package.cdnVersion
-  };
-
+  var match = VERSION_REGEX.exec(package.version);
+  var version = match[1] + '.' + match[2] + '.' + match[3] +
+                  (match[4] ? '-rc.' + match[4] : '') +
+                  (match[5] ? '-' + getSnapshotSuffix() : '');
   return version;
-
-  function getSnapshotSuffix() {
-    var jenkinsBuild = process.env.BUILD_NUMBER || 'local';
-    var hash = shell.exec('git rev-parse --short HEAD', {silent: true}).output.replace('\n', '');
-    return 'build.'+jenkinsBuild+'+sha.'+hash;
-  }
 }
 
 function ngVersions() {
-  var regex = /^v([1-9]\d*(?:\.\d+\S+)+)$/; //only fetch >= 1.0.0 versions
+  var latestVersion = ngCurrentVersion();
   var versions = shell.exec('git tag', {silent: true}).output.split(/\s*\n\s*/);
 
+  //// TODO - remove this mock list of versions
   versions = [
     'g3-v1.0.0-rc2', 'g3-v1.0.0rc1', 'v0.10.0', 'v0.10.1', 'v0.10.2', 'v0.10.3', 'v0.10.4', 'v0.10.5', 'v0.10.6', 'v0.9.0', 'v0.9.1', 'v0.9.10',
     'v0.9.11', 'v0.9.12', 'v0.9.13', 'v0.9.14', 'v0.9.15', 'v0.9.16', 'v0.9.17', 'v0.9.18', 'v0.9.19', 'v0.9.2', 'v0.9.3',
     'v0.9.4', 'v0.9.5', 'v0.9.6', 'v0.9.7', 'v0.9.9', 'v1.0.0', 'v1.0.0rc1', 'v1.0.0rc10', 'v1.0.0rc11', 'v1.0.0rc12', 'v1.0.0rc2', 'v1.0.0rc3', 'v1.0.0rc4', 'v1.0.0rc5',
     'v1.0.0rc6', 'v1.0.0rc7', 'v1.0.0rc8', 'v1.0.0rc9', 'v1.0.1', 'v1.0.2', 'v1.0.3', 'v1.0.4', 'v1.0.5', 'v1.0.6', 'v1.0.7', 'v1.0.8',
-    'v1.1.0', 'v1.1.1', 'v1.1.2', 'v1.1.3', 'v1.1.4', 'v1.1.5', 'v1.2.0', 'v1.2.0-rc.2', 'v1.2.0-rc.3', 'v1.2.0rc1', 'v1.2.1', 'v1.2.10',
+    'v1.1.0', 'v1.1.1', 'v1.1.2', 'v1.1.3', 'v1.1.4', 'v1.1.5', 'v1.2.0', 'v1.2.0-rc.2', 'v1.2.0-rc.3', 'v1.2.0rc1', 'v1.2.1',
     'v1.2.2', 'v1.2.3', 'v1.2.4', 'v1.2.5', 'v1.2.6', 'v1.2.7', 'v1.2.8', 'v1.2.9'
   ];
+  //// ODOT
 
-  versions = _.filter(_.map(versions, function(version) {
-    var matches = regex.exec(version);
-    if(matches && matches.length > 0) {
-      return matches[1];
-    }
-  }));
+  versions = _(versions)
+    .filter(function(version) { return version.indexOf('v1') === 0; })
 
-  //match the future version of AngularJS that is set in the package.json file
-  return expandVersions(sortVersionsNaturally(versions), ngCurrentVersion().full);
+    .map(function(version) {
+      return version.substr(1);
+    })
+
+    .sortBy(function(version) {
+      var matches = VERSION_REGEX.exec(version);
+      // We pad out the version numbers with 0s so they sort nicely
+      // - Non-Release Candidates get 0999 for their release candidate section to make them appear earlier
+      // - Snapshots get 9 added to the front to move them to the top of the list
+      var versionPadded = (matches[5] ? '9' : '0') + pad(matches[1]) + pad(matches[2]) + pad(matches[3]) + pad(matches[4] || 999);
+      return versionPadded;
+    })
+
+    .tap(function(versions) {
+      versions.push(latestVersion);
+    })
+
+    .map(function(version) {
+      var isMaster = version === latestVersion;
+      var isStable = !UNSTABLE_REGEX.test(version);
+      var title = 'AngularJS - v' + version;
+      var docsFolder = 'docs';
+      var docsUrl = 'http://docs.angularjs.org';
+      
+      if ( OLDDOCSFOLDER_REGEX.exec(version) ) {
+        docsFolder += '-' + version;
+      }
+
+      if (!isMaster) {
+        docsUrl = 'http://code.angularjs.org/' + version + '/' + docsFolder;
+      }
+
+      return {
+        version: version,
+        stable: isStable,
+        master: isMaster,
+        group: isStable ? 'Stable' : 'Unstable',
+        title: title,
+        url: docsUrl
+      };
+    })
+    .value()
+    .reverse();
+
+    return versions;
 
 }
 
