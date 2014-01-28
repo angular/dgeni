@@ -30,11 +30,6 @@ module.exports = function(config) {
 
   config.set('rendering.outputFolder', '../build');
   config.set('rendering.cleanOutputFolder', true);
-  config.merge('rendering.extra', {
-    git: {
-      tag: "v1.2.6-build.1989+sha.b0474cb"
-    }
-  });
 
   config.set('logging.level', 'info');
 
