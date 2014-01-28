@@ -11,38 +11,40 @@ var SECTION_NAMES = {
 
 // Group and sort the given pages by docType
 function pagesByType(pages) {
-  
-  return _(pages)
+  var navItems = [];
+   _(pages)
     .groupBy('docType')
-    .map(function(pages, typeName) {
-      return {
-        typeName: typeName,
-        pages: _.sortBy(_.pluck(pages, 'path'))
-      };
-    })
-    .sortBy('typeName')
-    .value();
+    .forEach(function(pages, typeName) {
+      
+      navItems.push({
+        name: typeName,
+        type: 'section',
+        href: '...'
+      });
+      
+      _.forEach(pages, function(page) {
+        navItems.push({
+          name: page.name,
+          href: page.path
+        });
+      });
+    });
+  return navItems;
 }
 
 var sectionNavigationMapping = {
   api: function(pages, sectionName) {
-    var items;
-
-          // return {
-          //   sectionName: sectionName,
-          //   modules: _(pages)
-          //     .groupBy('module')
-          //     .map(function(pages, moduleName) {
-          //       return {
-          //         moduleName: moduleName,
-          //         types: pagesByType(pages)
-          //       };
-          //     })
-          //     .sortBy('moduleName')
-          //     .value()
-          // };
-
-    return items;
+    var navGroups = _(pages)
+      .groupBy('module')
+      .map(function(pages, moduleName) {
+        return {
+          name: moduleName,
+          navItems: pagesByType(pages)
+        };
+      })
+      .sortBy('name')
+      .value();
+    return navGroups;
   },
   tutorial: function(pages, sectionName) {
     var navItems = _.sortBy(_.map(pages, function(page) {

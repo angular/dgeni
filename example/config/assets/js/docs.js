@@ -638,11 +638,11 @@ docsApp.controller.DocsController = function($scope, $rootScope, $location, $win
     };
   };
 
-  $scope.afterPartialLoaded = function() {
-    var currentPageId = $location.path();
-    $scope.partialTitle = $scope.currentPage.shortName;
-    $window._gaq.push(['_trackPageview', currentPageId]);
-  };
+  // $scope.afterPartialLoaded = function() {
+  //   var currentPageId = $location.path();
+  //   $scope.partialTitle = $scope.currentPage.shortName;
+  //   $window._gaq.push(['_trackPageview', currentPageId]);
+  // };
 
   /** stores a cookie that is used by apache to decide which manifest ot send */
   $scope.enableOffline = function() {
