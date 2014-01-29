@@ -53,6 +53,7 @@ function outputPath(example, fileName) {
 
 function createExampleDoc(example) {
   var exampleDoc = {
+    id: example.id,
     docType: 'example',
     template: path.join(templateFolder, 'index.template.html'),
     file: example.doc.file,
@@ -76,6 +77,7 @@ function createExampleDoc(example) {
 function createFileDoc(example, file) {
   var fileDoc = {
     docType: 'example-' + file.type,
+    id: example.id + '/' + file.name,
     template: path.join(templateFolder, 'template.' + file.type),
     file: example.doc.file,
     startingLine: example.doc.startingLine,
@@ -90,7 +92,7 @@ function createFileDoc(example, file) {
 module.exports = {
   name: 'examples',
   description: 'Search the documentation for examples that need to be extracted',
-  runAfter: ['doctrine-tag-extractor'],
+  runBefore: ['doctrine-tag-parser'],
   init: function(config) {
     examples = [];
     exampleNames = {};
@@ -99,19 +101,14 @@ module.exports = {
   each: function(doc) {
 
     // Walk the properties of the document and parse the examples
-    walk(doc, function(property, key) {
-      if ( _.isString(property) ) {
-        property.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
-          var example = extractAttributes(attributeText);
-          example.files = extractFiles(exampleText);
-          example.id = uniqueName(example.name || 'example');
-          example.doc = doc;
-          
-          // store the example information for later
-          examples.push(example);
-        });
-      }
-      return property;
+    doc.content.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
+      var example = extractAttributes(attributeText);
+      example.files = extractFiles(exampleText);
+      example.id = uniqueName(example.name || 'example');
+      example.doc = doc;
+      
+      // store the example information for later
+      examples.push(example);
     });
   },
 
