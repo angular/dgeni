@@ -17,6 +17,7 @@
     "marked": "~0.3.0",
     "express": "~3.4.8",
     "gulp-util": "~2.2.12",
-    "shelljs": "~0.2.6"
+    "shelljs": "~0.2.6",
+    "gulp-concat": "~2.1.7"
   }
 }

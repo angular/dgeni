@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var rimraf = require('gulp-rimraf');
+var concat = require('gulp-concat');
 var bower = require('bower');
 var docGenerator = require('../lib/index');
 var merge = require('event-stream').merge;
@@ -18,6 +19,12 @@ gulp.task('clean', function() {
 
 gulp.task('bower', function() {
   return bower.commands.install();
+});
+
+gulp.task('build-app', ['clean'], function() {
+  gulp.src('config/app/**/*.js')
+    .pipe(concat('docs.js'))
+    .pipe(gulp.dest('build/js/'));
 });
 
 gulp.task('assets', ['bower', 'clean'], function() {
@@ -38,7 +45,7 @@ gulp.task('doc-gen', ['clean'], function() {
 
 
 // The default task that will be run if no task is supplied
-gulp.task('default', ['assets', 'doc-gen']);
+gulp.task('default', ['assets', 'doc-gen', 'build-app']);
 
 
 // Watch the files and run the default task when something changes
