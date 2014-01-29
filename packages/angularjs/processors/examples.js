@@ -101,7 +101,7 @@ module.exports = {
   each: function(doc) {
 
     // Walk the properties of the document and parse the examples
-    doc.content.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
+    doc.content = doc.content.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
       var example = extractAttributes(attributeText);
       example.files = extractFiles(exampleText);
       example.id = uniqueName(example.name || 'example');
@@ -109,6 +109,8 @@ module.exports = {
       
       // store the example information for later
       examples.push(example);
+
+      return match.replace('<example ', '<example id="' + example.id + '" ');
     });
   },
 

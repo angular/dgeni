@@ -3,6 +3,9 @@ var plugin = rewire('../../processors/examples');
 
 describe("examples doc processor", function() {
 
+  beforeEach(function() {
+    plugin.init();
+  });
 
   it("should be called examples", function() {
     expect(plugin.name).toEqual('examples');
@@ -10,7 +13,6 @@ describe("examples doc processor", function() {
 
 
   it("should initialize an examples collection", function() {
-    plugin.init();
     expect(plugin.__get__('examples')).toEqual(jasmine.any(Array));
   });
 
@@ -49,6 +51,19 @@ describe("examples doc processor", function() {
     var examples = plugin.__get__('examples');
     expect(examples[0].id).toEqual('bar');
     expect(examples[1].id).toEqual('bar1');
+  });
+
+  it("should inject the computed example id into the original markup to be used by the template", function() {
+    doc = {
+      content: '<example name="bar">some example content 1</example>\n' +
+                    '<example name="bar">some example content 2</example>'
+    };
+
+    plugin.each(doc);
+
+    expect(doc.content).toEqual('<example id="bar" name="bar">some example content 1</example>\n' +
+                    '<example id="bar1" name="bar">some example content 2</example>');
+
   });
 
 
