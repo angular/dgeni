@@ -9,40 +9,51 @@ var SECTION_NAMES = {
 };
 
 
-// Group and sort the given pages by docType
-function pagesByType(pages) {
-  var navItems = [];
-   _(pages)
-    .groupBy('docType')
-    .forEach(function(pages, typeName) {
-      
-      navItems.push({
-        name: typeName,
-        type: 'section',
-        href: '...'
-      });
-      
-      _.forEach(pages, function(page) {
-        navItems.push({
-          name: page.name,
-          href: page.path
-        });
-      });
-    });
-  return navItems;
-}
-
 var sectionNavigationMapping = {
   api: function(pages, sectionName) {
     var navGroups = _(pages)
       .groupBy('module')
       .map(function(pages, moduleName) {
+        
+        var navItems = [];
+        var modulePage;
+
+        _(pages)
+
+          .groupBy('docType')
+
+          .tap(function(docTypes) {
+            // Extract the module page from the collection
+            modulePage = docTypes.module[0];
+            delete docTypes.module;
+          })
+
+          .forEach(function(pages, typeName) {
+
+            // Push a navItem for this section
+            navItems.push({
+              name: typeName,
+              type: 'section',
+              href: modulePage.path + "#" + typeName
+            });
+            
+            // Push the rest of the pages for this section
+            _.forEach(pages, function(page) {
+
+              navItems.push({
+                name: page.name,
+                href: page.path,
+                type: page.docType
+              });
+
+            });
+          });
         return {
           name: moduleName,
-          navItems: pagesByType(pages)
+          href: modulePage.path,
+          navItems: navItems
         };
       })
-      .sortBy('name')
       .value();
     return navGroups;
   },
