@@ -90,7 +90,7 @@ function createFileDoc(example, file) {
 module.exports = {
   name: 'examples',
   description: 'Search the documentation for examples that need to be extracted',
-  requires: ['doctrine-tag-extractor'],
+  runAfter: ['doctrine-tag-extractor'],
   init: function(config) {
     examples = [];
     exampleNames = {};

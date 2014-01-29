@@ -12,7 +12,7 @@ var KEYWORD_REGEX = /^((ng:|[\$_a-z])[\w\-_]+)/;
 
 module.exports = {
   name: 'keywords',
-  requires: ['examples', 'links'],
+  runAfter: ['examples', 'links'],
   description: 'This processor extracts all the keywords from the document',
   init: function(config) {
 

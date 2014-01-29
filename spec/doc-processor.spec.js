@@ -47,16 +47,16 @@ describe("doc-processor", function() {
     var log = [], docs = { content: 'x' };
     var config = { processing: {
       processors: [
-        { name: 'a', requires: ['c'], each: function(doc) { log.push('a'); } },
-        { name: 'b', requires: ['c','e','a'], each: function(doc) { log.push('b'); } },
-        { name: 'c', requires: ['e'], each: function(doc) { log.push('c'); } },
-        { name: 'd', requires: ['a'], each: function(doc) { log.push('d'); } },
-        { name: 'e', requires: [], each: function(doc) { log.push('e'); } }
+        { name: 'a', runAfter: ['c'], each: function(doc) { log.push('a'); } },
+        { name: 'b', runAfter: ['c','e','a'], each: function(doc) { log.push('b'); } },
+        { name: 'c', runBefore: ['e'], each: function(doc) { log.push('c'); } },
+        { name: 'd', runAfter: ['a'], each: function(doc) { log.push('d'); } },
+        { name: 'e', runAfter: [], each: function(doc) { log.push('e'); } }
       ]
     } };
     var process = docProcessorFactory(config);
     process(docs);
-    expect(log).toEqual(['e', 'c', 'a', 'b', 'd']);
+    expect(log).toEqual(['c', 'e', 'a', 'b', 'd']);
   });
 
 });

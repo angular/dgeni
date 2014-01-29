@@ -100,7 +100,7 @@ module.exports = {
   name: 'pages-data',
   description: 'This plugin will create a new doc that will be rendered as an angularjs module ' +
                'which will contain meta information about the pages and navigation',
-  requires: ['paths'],
+  runAfter: ['paths'],
   after: function(docs) {
 
     // We are only interested in docs that are in a section

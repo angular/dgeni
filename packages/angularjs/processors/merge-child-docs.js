@@ -15,7 +15,7 @@ var mergeableTypes = {
  */
 module.exports = {
   name: 'merge-child-docs',
-  requires: ['doctrine-tag-extractor'],
+  runAfter: ['doctrine-tag-extractor'],
 
   description: 'Move child docs (e.g. events, methods or properties) into the parent doc',
 
