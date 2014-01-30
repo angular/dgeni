@@ -68,6 +68,13 @@ describe("default-config", function() {
     });
 
   });
+
+  it("should have a function for getting a value", function() {
+    config.set('logging.level', 'debug');
+    expect(config.get('logging.level', 'other')).toEqual('debug');
+    expect(config.get('logging.missing', 'other')).toEqual('other');
+    expect(config.get('completely.random.missing.property', 'missingVal')).toEqual('missingVal');
+  });
 });
 
 describe("config utility", function() {
