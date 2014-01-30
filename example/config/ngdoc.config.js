@@ -1,10 +1,14 @@
 var _ = require('lodash');
 var path = require('canonical-path');
+var fs = require('fs');
+var gitInfo = require('../../lib/utils/git-info');
 var packagePath = __dirname;
 
 var angularjsPackage = require('../../packages/angularjs');
 
 module.exports = function(config) {
+
+  var nodePackage = JSON.parse(fs.readFileSync('package.json', 'UTF-8'));
 
   config = angularjsPackage(config);
   
@@ -12,6 +16,8 @@ module.exports = function(config) {
     { pattern: 'src/**/*.js', basePath: path.resolve(packagePath, '..') },
     { pattern: '**/*.ngdoc', basePath: path.resolve(packagePath, '../content') }
   ]);
+
+  config.set('source.nodePackage', nodePackage);
 
   config.append('processing.processors', [
     require('./processors/keywords'),
@@ -30,6 +36,10 @@ module.exports = function(config) {
 
   config.set('rendering.outputFolder', '../build');
   config.set('rendering.cleanOutputFolder', true);
+  config.set('rendering.extra', {
+    git: gitInfo.getGitInfo(nodePackage.repository.url),
+    version: gitInfo.getCurrentVersion(nodePackage)
+  });
 
   config.set('logging.level', 'info');
 

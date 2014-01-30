@@ -1,6 +1,5 @@
 {
   "name": "example",
-  "version": "1.2.10-snapshot",
   "description": "An set of source code for trying out the documentation generation",
   "author": "Pete Bacon Darwin",
   "licenses": [
@@ -9,6 +8,13 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
+  "version": "1.2.11-snapshot",
+  "cdnVersion": "1.2.10",
+  "codename": "cryptocurrency-hyperdeflation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angular/angular.js.git"
+  },
   "devDependencies": {
     "gulp": "~3.4.0",
     "gulp-rimraf": "0.0.8",
@@ -17,7 +23,6 @@
     "marked": "~0.3.0",
     "express": "~3.4.8",
     "gulp-util": "~2.2.12",
-    "shelljs": "~0.2.6",
     "gulp-concat": "~2.1.7"
   }
 }

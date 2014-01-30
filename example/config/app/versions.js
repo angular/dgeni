@@ -1,17 +1,15 @@
 angular.module('versions', [])
 
-.controller('DocsVersionsCtrl', ['$scope', '$rootScope', '$window', 'NG_VERSIONS', 'NG_VERSION', function($scope, $rootScope, $window, NG_VERSIONS, NG_VERSION) {
+.controller('DocsVersionsCtrl', ['$scope', '$location', '$window', 'NG_VERSIONS', function($scope, $location, $window, NG_VERSIONS) {
   $scope.docs_versions = NG_VERSIONS;
   $scope.docs_version  = NG_VERSIONS[0];
 
   $scope.jumpToDocsVersion = function(version) {
-    var currentPagePath = '';
+    var currentPagePath = $location.path();
 
-    // preserve URL path when switching between doc versions
-    if (angular.isObject($rootScope.currentPage) && $rootScope.currentPage.section && $rootScope.currentPage.id) {
-      currentPagePath = '/' + $rootScope.currentPage.section + '/' + $rootScope.currentPage.id;
-    }
+    // TODO: We need to do some munging of the path for different versions of the API...
+    
 
-    $window.location = version.url + currentPagePath;
+    $window.location = version.docsUrl + currentPagePath;
   };
 }]);
