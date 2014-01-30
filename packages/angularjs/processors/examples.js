@@ -89,6 +89,15 @@ function createFileDoc(example, file) {
   return fileDoc;
 }
 
+function generateExampleDirective(example) {
+  var html = '\n<div runnable-example\n';
+  _.forEach(_.omit(example, ['files', 'doc']), function(value, key) {
+    html += key + '="' + value + '"\n';
+  });
+  html += '></div>\n<iframe class="example" src="' + example.outputPath + '" name="' + example.id + '"></iframe>';
+  return html;
+}
+
 module.exports = {
   name: 'examples',
   description: 'Search the documentation for examples that need to be extracted',
@@ -105,14 +114,14 @@ module.exports = {
       doc.content = doc.content.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
         var example = extractAttributes(attributeText);
         example.files = extractFiles(exampleText);
-        example.id = uniqueName(example.name || 'example');
+        example.id = 'example-' + uniqueName(example.name || 'example');
         example.doc = doc;
         example.outputPath = outputPath(example, 'index.html');
         
         // store the example information for later
         examples.push(example);
 
-        return match.replace('<example ', '<example path="' + example.outputPath + '" ');
+        return generateExampleDirective(example);
       });
     });
   },

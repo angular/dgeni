@@ -240,3 +240,8 @@ code.highlighted {
   border-right: 6px solid transparent;
   border-left: 6px solid transparent;
 }
+
+iframe.example {
+  width: 100%;
+  border: 1px solid black;
+}

@@ -46,7 +46,7 @@
   {%- if doc.examples %}
   <h2 id="example">Example</h2>
   {%- for example in doc.examples -%}
-    {$ example | marked $}
+    {$ example $}
   {%- endfor -%}
   {% endif -%}  
   {% endblock %}
