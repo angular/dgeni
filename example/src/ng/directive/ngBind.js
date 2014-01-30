@@ -26,26 +26,26 @@
  *
  * @example
  * Enter a name in the Live Preview text box; the greeting below the text box changes instantly.
-   <doc:example>
-     <doc:source>
-       <script>
-         function Ctrl($scope) {
-           $scope.name = 'Whirled';
-         }
-       </script>
-       <div ng-controller="Ctrl">
-         Enter name: <input type="text" ng-model="name"><br>
-         Hello <span ng-bind="name"></span>!
-       </div>
-     </doc:source>
-     <doc:scenario>
+  <example name="ngBind">
+    <file name='app.js'>
+       function Ctrl($scope) {
+         $scope.name = 'Whirled';
+       }
+    </file>
+    <file name="index.html">
+      <div ng-controller="Ctrl">
+        Enter name: <input type="text" ng-model="name"><br>
+        Hello <span ng-bind="name"></span>!
+      </div>
+    </file>
+    <file name="scenario.js" type='scenario'>
        it('should check ng-bind', function() {
          expect(using('.doc-example-live').binding('name')).toBe('Whirled');
          using('.doc-example-live').input('name').enter('world');
          expect(using('.doc-example-live').binding('name')).toBe('world');
        });
-     </doc:scenario>
-   </doc:example>
+    </file>
+    </example>
  */
 var ngBindDirective = ngDirective(function(scope, element, attr) {
   element.addClass('ng-binding').data('$binding', attr.ngBind);
