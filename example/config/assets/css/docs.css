@@ -1,3 +1,8 @@
+body {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(120px%,rgba(0,0,0,0)), color-stop(96%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 120px,rgba(0,0,0,0) 96%); /* Chrome10+,Safari5.1+ */
+}
+
 /* Logo */
 .dropdown-menu {
   display:none;
@@ -75,6 +80,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .nav-index-group > .nav-index-listing:first-child a {
   font-weight:bold;
+  font-family: "Open Sans";
   color:black;
 }
 
@@ -84,22 +90,23 @@ h1,h2,h3,h4,h5,h6 {
 
 .nav-breadcrumb {
   padding:0;
-  margin:0 0 20px;
+  margin:4px 0 20px;
 }
 
 .nav-breadcrumb-entry {
   font-family: "Open Sans";
-  font-size:20px;
+  font-size:24px;
   display:inline-block;
 }
 
 .nav-breadcrumb-entry > .divider {
-  padding-left:3px;
+  display:inline-block;
+  padding-left:8px;
 }
 
 .nav-breadcrumb-entry > span,
 .nav-breadcrumb-entry > a {
-  color:#aaa;
+  color:#6F0101;
 }
 
 .step-list > li:nth-child(1) {
@@ -153,7 +160,8 @@ pre {
   font-size:20px;
 }
 
-p > code {
+p > code,
+code.highlighted {
   background:#f4f4f4;
   border-radius:5px;
   padding:2px 5px;
@@ -210,11 +218,11 @@ p > code {
   right: 8%;
   top: 50%;
   z-index: 0;
-  color: #555555;
+  color: #999;
   width: 0;
   margin-top:-2px;
   height: 0;
-  border-top: 7px solid;
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
+  border-top: 6px solid;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
 }

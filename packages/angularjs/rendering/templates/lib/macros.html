@@ -3,33 +3,20 @@
 {%- endmacro -%}
 
 {%- macro paramTable(params) %}
-<table class="variables-matrix table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Param</th>
-      <th>Type</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for param in params %}
-    <tr>
-      <td>
-        {$ param.name $}
-        {% if param.alias %}| {$ param.alias $}{% endif %}
-        {% if param.type.optional %}<div><em>(optional)</em></div>{% endif %}
-      </td>
-      <td>
-        {$ typeList(param.type.typeList) $}
-      </td>
-      <td>
-        {$ param.description | marked $}
-        {% if param.default %}<p><em>(default: {$ param.default $})</em></p>{% endif %}
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<ol class="params-table">
+  {% for param in params %}
+  <li>
+    <h5 class="pull-left">
+      {$ param.name $}
+      {% if param.alias %}| {$ param.alias $}{% endif %}
+      {% if param.type.optional %}<div><em>(optional)</em></div>{% endif %}
+    </h5>
+    {$ typeList(param.type.typeList) $}
+    {% if param.default %}<p><em>(default: {$ param.default $})</em></p>{% endif %}
+    <p>{$ param.description | marked $}</p>
+  </li>
+  {% endfor %}
+</ol>
 {% endmacro -%}
 
 
