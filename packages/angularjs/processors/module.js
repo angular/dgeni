@@ -12,7 +12,7 @@ module.exports = {
       modules[doc.id] = doc;
 
       // Initialize the list of components
-      doc.components = [];
+      doc.components = {};
 
       // Compute the package name and file name for the module
       var match = /^ng(.*)/.exec(doc.name);
@@ -30,7 +30,9 @@ module.exports = {
       if ( doc.module && doc.docType !== 'module') {
         var module = modules['module:' + doc.module];
         if ( module ) {
-          module.components.push(doc);
+          var componentGroup = module.components[doc.docType] || [];
+          componentGroup.push(doc);
+          module.components[doc.docType] = componentGroup;
         }
         doc.moduleDoc = module;
       }
@@ -38,7 +40,15 @@ module.exports = {
 
     // Sort the components by name
     _.forEach(modules, function(module) {
-      module.components = _.sortBy(module.components, 'name');
+      module.components = _(module.components)
+        .map(function(pages, docType) {
+          return {
+            type: docType,
+            pages: _.sortBy(pages, 'path')
+          };
+        })
+        .sortBy('type')
+        .value();
     });
   }
 };

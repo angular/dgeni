@@ -43,15 +43,15 @@
 
 <div class="component-breakdown">
   <h2>Module Components</h2>
-  {% for section, components in doc.components | groupby('docType') %}
+  {% for components in doc.components %}
   <div>
-    <h3 class="component-heading" id="{$ section | dashCase $}">{$ section | title $}</h3>
+    <h3 class="component-heading" id="{$ components.type | dashCase $}">{$ components.type | title $}</h3>
     <table class="definition-table">
       <tr>
         <th>Name</th>
         <th>Description</th>
       </tr>
-      {% for component in components %}
+      {% for component in components.pages %}
       <tr>
         <td>{$ component.id | link(doc, component.name) $}</td>
         <td>{$ component.description | firstLine | marked $}</td>
