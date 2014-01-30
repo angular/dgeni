@@ -219,6 +219,8 @@ module.exports = [
     name: 'priority',
     defaultFn: function(doc) { return 0; }
   },
+  
+  { name: 'title' },
 
   { name: 'description' },
   { name: 'usage' },
