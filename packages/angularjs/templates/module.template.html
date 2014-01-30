@@ -1,7 +1,9 @@
 {% extends "base.template.html" %}
 
 {% block content %}
-<h1>{$ doc.name | code $}</h1>
+<h1>
+  {% if doc.title %}{$ doc.title | marked $}{% else %}{$ doc.name | code $}{% endif %}
+</h1>
 
 {$ doc.description | marked $}
 
@@ -52,7 +54,7 @@
       {% for component in components %}
       <tr>
         <td>{$ component.id | link(doc, component.name) $}</td>
-        <td>{$ component.description | firstLine $}</td>
+        <td>{$ component.description | firstLine | marked $}</td>
       </tr>
       {% endfor %}
     </table>
