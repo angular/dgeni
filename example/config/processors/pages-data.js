@@ -12,6 +12,7 @@ var SECTION_NAMES = {
 var sectionNavigationMapping = {
   api: function(pages, sectionName) {
     var navGroups = _(pages)
+      .filter('module') // We are not interested in docs that are not in a module
       .groupBy('module')
       .map(function(pages, moduleName) {
         
