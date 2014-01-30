@@ -12,7 +12,7 @@
 
  * @param {Array.<string|Function>} modules A list of module functions or their aliases. See
  *        {@link module:ng.global:angular.module}. The `ng` module must be explicitly added.
- * @returns {function()} Injector function. See {@link module:AUTO.$injector $injector}.
+ * @returns {function()} Injector function. See {@link module:auto.$injector $injector}.
  *
  * @example
  * Typical usage
@@ -54,7 +54,7 @@
 
 /**
  * @ngdoc module
- * @name AUTO
+ * @name auto
  * @description
  *
  * Implicit module which gets automatically added to each {@link $injector $injector}.

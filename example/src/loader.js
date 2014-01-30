@@ -45,7 +45,7 @@ function setupModuleLoader(window) {
      * # Module
      *
      * A module is a collection of services, directives, filters, and configuration information.
-     * `angular.module` is used to configure the {@link module:AUTO.$injector $injector}.
+     * `angular.module` is used to configure the {@link module:auto.$injector $injector}.
      *
      * <pre>
      * // Create a new module
@@ -142,7 +142,7 @@ function setupModuleLoader(window) {
            * @param {Function} providerType Construction function for creating new instance of the
            *                                service.
            * @description
-           * See {@link module:AUTO.$provide#provider $provide.provider()}.
+           * See {@link module:auto.$provide#provider $provide.provider()}.
            */
           provider: invokeLater('$provide', 'provider'),
 
@@ -154,7 +154,7 @@ function setupModuleLoader(window) {
            * @param {string} name service name
            * @param {Function} providerFunction Function for creating new instance of the service.
            * @description
-           * See {@link module:AUTO.$provide#factory $provide.factory()}.
+           * See {@link module:auto.$provide#factory $provide.factory()}.
            */
           factory: invokeLater('$provide', 'factory'),
 
@@ -166,7 +166,7 @@ function setupModuleLoader(window) {
            * @param {string} name service name
            * @param {Function} constructor A constructor function that will be instantiated.
            * @description
-           * See {@link module:AUTO.$provide#service $provide.service()}.
+           * See {@link module:auto.$provide#service $provide.service()}.
            */
           service: invokeLater('$provide', 'service'),
 
@@ -178,7 +178,7 @@ function setupModuleLoader(window) {
            * @param {string} name service name
            * @param {*} object Service instance object.
            * @description
-           * See {@link module:AUTO.$provide#value $provide.value()}.
+           * See {@link module:auto.$provide#value $provide.value()}.
            */
           value: invokeLater('$provide', 'value'),
 
@@ -191,7 +191,7 @@ function setupModuleLoader(window) {
            * @param {*} object Constant value.
            * @description
            * Because the constant are fixed, they get applied before other provide methods.
-           * See {@link module:AUTO.$provide#constant $provide.constant()}.
+           * See {@link module:auto.$provide#constant $provide.constant()}.
            */
           constant: invokeLater('$provide', 'constant', 'unshift'),
 

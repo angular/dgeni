@@ -2053,7 +2053,7 @@ if(window.jasmine || window.mocha) {
    * *NOTE*: This function is also published on window for easy access.<br>
    *
    * The inject function wraps a function into an injectable function. The inject() creates new
-   * instance of {@link module:AUTO.$injector $injector} per test, which is then used for
+   * instance of {@link module:auto.$injector $injector} per test, which is then used for
    * resolving references.
    *
    *

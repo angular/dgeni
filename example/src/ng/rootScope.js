@@ -89,7 +89,7 @@ function $RootScopeProvider(){
      *
      * @description
      * A root scope can be retrieved using the {@link module:ng.$rootScope} key from the
-     * {@link module:AUTO.$injector}. Child scopes are created using the
+     * {@link module:auto.$injector}. Child scopes are created using the
      * {@link global:$rootScope.Scope#methods_$new $new()} method. (Most scopes are created automatically when
      * compiled HTML template is executed.)
      *
