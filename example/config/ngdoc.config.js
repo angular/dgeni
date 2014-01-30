@@ -57,8 +57,9 @@ module.exports = function(config) {
         'components/marked/lib/marked.js',
         'js/angular-bootstrap/bootstrap.js',
         'js/angular-bootstrap/bootstrap-prettify.js',
-        //'js/google-code-prettify.js',
         'components/lunr.js/lunr.js',
+        'components/google-code-prettify/src/prettify.js',
+        'components/google-code-prettify/src/lang-css.js',
         'js/versions-data.js',
         'js/pages-data.js',
         'js/docs.js'
@@ -66,7 +67,7 @@ module.exports = function(config) {
       stylesheets: [
         'css/bootstrap/css/bootstrap.css',
         'components/open-sans-fontface/open-sans.css',
-        'css/prettify.css',
+        'css/prettify-theme.css',
         'css/docs.css',
         'css/animations.css'
       ]

@@ -32,6 +32,7 @@ gulp.task('assets', ['bower', 'clean'], function() {
     gulp.src(['config/assets/**/*']).pipe(gulp.dest('build')),
     gulp.src('bower_components/open-sans-fontface/**/*').pipe(gulp.dest('build/components/open-sans-fontface')),
     gulp.src('bower_components/lunr.js/*.js').pipe(gulp.dest('build/components/lunr.js')),
+    gulp.src('bower_components/google-code-prettify/**/*').pipe(gulp.dest('build/components/google-code-prettify/')),
     gulp.src('bower_components/jquery/*.js').pipe(gulp.dest('build/components/jquery')),
     gulp.src('node_modules/marked/**/*.js').pipe(gulp.dest('build/components/marked'))
   );

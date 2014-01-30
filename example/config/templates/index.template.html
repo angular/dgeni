@@ -123,20 +123,20 @@
       <div class="row">
         <div class="col-md-9">
           <ul class="nav-breadcrumb">
+            <li ng-controller="DocsVersionsCtrl" class="picker nav-breadcrumb-entry naked-list">
+              <select ng-options="v as ('AngularJS ' + v.full) group by (v.isStable?'Stable':'Unstable') for v in docs_versions"
+                      ng-model="docs_version"
+                      ng-change="jumpToDocsVersion(docs_version)"
+                      class="docs-version-jump">
+              </select>
+            </li>
             <li ng-repeat="crumb in breadcrumb" class="nav-breadcrumb-entry naked-list">
-              <span ng-if="$index > 0" class="divider"> /</span>
+              <span class="divider"> /</span>
               <a ng-href="{{crumb.url}}">{{crumb.name}}</a>
             </li>
           </ul>
         </div>
         <div class="col-md-3 pull-right">
-          <div ng-controller="DocsVersionsCtrl" class="picker">
-            <select ng-options="v as ('v'+v.full) group by (v.isStable?'Stable':'Unstable') for v in docs_versions"
-                    ng-model="docs_version"
-                    ng-change="jumpToDocsVersion(docs_version)"
-                    class="docs-version-jump">
-            </select>
-          </div>
         </div>
       </div>
     </div>
@@ -144,16 +144,12 @@
 
   <section role="main" class="container main-body">
     <div class="row">
-      <div class="col-md-9">
-        <div id="loading" ng-show="loading">Loading...</div>
-        <div ng-hide="loading" ng-include="currentPage.outputPath" autoscroll></div>
-      </div>
-      <div class="col-md-2 pull-right">
+      <div class="col-md-3">
         <div class="side-navigation">
-          <ul class="nav nav-list naked-list aside-nav">
+          <ul class="nav-list naked-list">
             <li ng-repeat="navGroup in currentSection.navGroups track by navGroup.name" class="nav-index-group">
-              <a href="{{ navGroup.href }}" ng-class="navClass(navGroup)" class="">{{ navGroup.name }}</a>
-              <ul>
+              <a href="{{ navGroup.href }}" ng-class="navClass(navGroup)" class="nav-index-group-heading">{{ navGroup.name }}</a>
+              <ul class="aside-nav">
                 <li ng-repeat="navItem in navGroup.navItems" ng-class="navClass(navItem)" class="nav-index-listing">
                   <a ng-if="navItem.extra.href" ng-class="navClass(navItem.extra)" href="{{navItem.extra.href}}">
                     {{navItem.extra.text}}<i ng-if="navItem.extra.icon" class="icon-{{navItem.extra.icon}}"></i>
@@ -164,6 +160,10 @@
             </li>
           </ul>
         </div>
+      </div>
+      <div class="col-md-9">
+        <div id="loading" ng-show="loading">Loading...</div>
+        <div ng-hide="loading" ng-include="currentPage.outputPath" autoscroll></div>
       </div>
     </div>
   </section>

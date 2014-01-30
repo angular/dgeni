@@ -81,8 +81,6 @@ angular.module('docsApp', [
     }
     var currentPage = $scope.currentPage = NG_PAGES[path];
 
-    console.log(path, currentPage);
-
     if ( currentPage ) {
       $scope.currentSection = currentPage && NG_SECTIONS[currentPage.section];
       var pathParts = currentPage.path.split('/');

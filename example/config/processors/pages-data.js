@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 var SECTION_NAMES = {
-  api: 'API Reference',
+  api: 'API',
   guide: 'Developer Guide',
   misc: 'Miscellaneous',
   tutorial: 'Tutorial',

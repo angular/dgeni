@@ -81,11 +81,23 @@ h1,h2,h3,h4,h5,h6 {
 .nav-index-section a {
   font-weight:bold;
   font-family: "Open Sans";
-  color:black;
+  color:black!important;
+  margin-top:10px;
+  display:block;
 }
 
 .nav-index-group {
   margin-bottom:20px!important;
+}
+
+.nav-index-group-heading {
+  color:#6F0101;
+  font-weight:bold;
+  font-size:1.2em;
+  padding:0;
+  margin:0;
+  border-bottom:1px soild #aaa;
+  margin-bottom:5px;
 }
 
 .nav-breadcrumb {
@@ -95,11 +107,13 @@ h1,h2,h3,h4,h5,h6 {
 
 .nav-breadcrumb-entry {
   font-family: "Open Sans";
-  font-size:24px;
+  font-size:18px;
   display:inline-block;
+  vertical-align:middle;
 }
 
 .nav-breadcrumb-entry > .divider {
+  color:#555;
   display:inline-block;
   padding-left:8px;
 }
@@ -122,8 +136,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .api-profile-header-heading {
-  margin-bottom:0;
-  padding-bottom:0;
+  margin:0;
+  padding:0;
 }
 
 .api-profile-header-structure,
@@ -199,9 +213,9 @@ code.highlighted {
   position: relative;
   display: block;
   min-width: 100%;
-  width: 135%;
+  width: 120%;
   height: 34px;
-  padding: 6px 45px 6px 15px;
+  padding: 6px 30px 6px 15px;
   color: #555555;
   border: none;
   background: transparent;
