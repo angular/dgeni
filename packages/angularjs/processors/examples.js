@@ -99,19 +99,20 @@ module.exports = {
     templateFolder = config.get('processing.examples.templateFolder', 'examples');
     outputFolder = config.get('processing.examples.templateFolder', 'examples');
   },
-  each: function(doc) {
+  before: function(docs) {
 
-    // Walk the properties of the document and parse the examples
-    doc.content = doc.content.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
-      var example = extractAttributes(attributeText);
-      example.files = extractFiles(exampleText);
-      example.id = uniqueName(example.name || 'example');
-      example.doc = doc;
-      
-      // store the example information for later
-      examples.push(example);
+    _.forEach(docs, function(doc) {
+      doc.content = doc.content.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
+        var example = extractAttributes(attributeText);
+        example.files = extractFiles(exampleText);
+        example.id = uniqueName(example.name || 'example');
+        example.doc = doc;
+        
+        // store the example information for later
+        examples.push(example);
 
-      return match.replace('<example ', '<example id="' + example.id + '" ');
+        return match.replace('<example ', '<example id="' + example.id + '" ');
+      });
     });
   },
 
