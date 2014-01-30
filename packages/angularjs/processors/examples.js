@@ -7,7 +7,7 @@ var ATTRIBUTE_REGEX = /\s*([^=]+)\s*=\s*(?:(?:"([^"]+)")|(?:'([^']+)'))/g;
 var FILE_REGEX = /<file([^>]*)>([\S\s]+?)<\/file>/g;
 
 // A holder for all the examples that have been found in the document
-var examples, exampleNames, templateFolder;
+var examples, exampleNames, templateFolder, outputFolder;
 
 function extractAttributes(attributeText) {
   var attributes = {};
@@ -48,7 +48,7 @@ function uniqueName(name) {
 }
 
 function outputPath(example, fileName) {
-  return path.join('examples', example.id, fileName);
+  return path.join(outputFolder, example.id, fileName);
 }
 
 function createExampleDoc(example) {
@@ -96,7 +96,8 @@ module.exports = {
   init: function(config) {
     examples = [];
     exampleNames = {};
-    templateFolder = 'examples';
+    templateFolder = config.get('processing.examples.templateFolder', 'examples');
+    outputFolder = config.get('processing.examples.templateFolder', 'examples');
   },
   each: function(doc) {
 

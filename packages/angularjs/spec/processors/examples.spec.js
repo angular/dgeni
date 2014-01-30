@@ -1,10 +1,13 @@
 var rewire = require('rewire');
 var plugin = rewire('../../processors/examples');
+var configurer = require('../../../../lib/utils/config');
+var log = require('winston');
 
 describe("examples doc processor", function() {
 
   beforeEach(function() {
-    plugin.init();
+    log.level = 'error';
+    plugin.init(configurer.load());
   });
 
   it("should be called examples", function() {
@@ -77,7 +80,6 @@ describe("examples doc processor", function() {
           '<file type="spec" name="appSpec.js">describe("some thing", function() { ... });</file>\n' +
         '</example>'
     }];
-    plugin.init();
     plugin.each(docs[0]);
     docs = plugin.after(docs) || docs;
     expect(docs[0]).toEqual(
