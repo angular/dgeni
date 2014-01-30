@@ -32,6 +32,7 @@ module.exports = {
         if ( module ) {
           module.components.push(doc);
         }
+        doc.moduleDoc = module;
       }
     });
 
