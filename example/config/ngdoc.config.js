@@ -54,9 +54,9 @@ module.exports = function(config) {
         'js/docs.js'
       ],
       stylesheets: [
-        'components/bootstrap/css/bootstrap.css',
-        'components/font-awesome/css/font-awesome.css',
-        //'css/prettify.css',
+        'css/bootstrap/css/bootstrap.css',
+        'components/open-sans-fontface/open-sans.css',
+        'css/prettify.css',
         'css/docs.css',
         'css/animations.css'
       ]

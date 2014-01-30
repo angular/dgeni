@@ -1,12 +1,6 @@
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js ng-app: docsApp;" lang="en" ng-controller="DocsController"> <!--<![endif]-->
+<html lang="en" ng-app="docsApp" ng-controller="DocsController">
 <head>
-  <style>
-    .ng-hide { display:none!important; }
-  </style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="Description"
@@ -35,14 +29,16 @@
   {% endfor %}
 </head>
 <body>
-  <header class="header" ng-controller="DocsSearchCtrl">
+  <header class="header">
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="http://angularjs.org">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="brand navbar-brand" href="http://angularjs.org">
             <img class="logo" src="img/angularjs-for-header-only.svg">
           </a>
-          <ul class="nav">
+        </div>
+        <div class="row">
+          <ul class="nav navbar-nav col-md-7">
             <li class="divider-vertical"></li>
             <li><a href="http://angularjs.org"><i class="icon-home icon-white"></i> Home</a></li>
             <li class="divider-vertical"></li>
@@ -92,11 +88,14 @@
             </li>
             <li class="divider-vertical"></li>
           </ul>
-          <form class="navbar-search pull-right" ng-submit="submit()">
+          <form ng-class="{focus:focus}" class="navbar-search col-md-3 docs-search" ng-submit="submit()">
+            <span class="glyphicon glyphicon-search search-icon"></span>
             <input type="text"
                    name="as_q"
                    class="search-query"
-                   placeholder="Click to focus or press '/' to search"
+                   placeholder="Click or press / to search"
+                   ng-focus="focus=true"
+                   ng-blur="focus=false"
                    ng-change="search(q)"
                    ng-model="q"
                    docs-search-input
@@ -118,86 +117,55 @@
     </div>
   </header>
 
- <div class="ng-hide" id="docs-fold-overlay" ng-show="docs_fold" ng-click="fold(null)"></div>
- <div class="foldout ng-hide" id="docs-fold" ng-show="docs_fold">
-   <div id="docs-fold-close" ng-click="fold(null)">
-     <span class="icon-remove-sign"></span>
-   </div>
-   <div ng-include="docs_fold"></div>
- </div>
-
-<div ng-class="{fixed_body:docs_fold}">
-  <div role="main" class="container">
-    <div class="row clear-navbar"></div>
-
-    <div class="row">
-      <div class="span12">
-        <!--[if lt IE 7]>
-        <p class="alert alert-error">Your browser is <em>ancient!</em>
-          <a href="http://browsehappy.com/">Upgrade to a different browser</a> or
-          <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to
-          experience this site.
-        </p>
-        <![endif]-->
-
-        <!--[if lt IE 9]>
-        <div class="alert">
-          You are using an old version of Internet Explorer.
-          For better and safer browsing experience please <a href="http://www.microsoft.com/IE9">upgrade IE</a>
-          or install <a href="http://google.com/chrome">Google Chrome browser</a>.
+<div>
+  <section class="subnav-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <ul class="nav-breadcrumb">
+            <li ng-repeat="crumb in breadcrumb" class="nav-breadcrumb-entry naked-list">
+              <span ng-if="$index > 0" class="divider"> /</span>
+              <a ng-href="{{crumb.url}}">{{crumb.name}}</a>
+            </li>
+          </ul>
         </div>
-        <![endif]-->
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="span3">
-        <div class="well">
-          
-          <div ng-controller="DocsVersionsCtrl">
+        <div class="col-md-3 pull-right">
+          <div ng-controller="DocsVersionsCtrl" class="picker">
             <select ng-options="v as v.title group by v.group for v in docs_versions"
                     ng-model="docs_version"
                     ng-change="jumpToDocsVersion(docs_version)"
                     class="docs-version-jump">
             </select>
           </div>
-
-          <div class="side-navigation">
-
-            <ul class="nav nav-list">
-              <li ng-repeat="navGroup in currentSection.navGroups track by navGroup.name">
-                <a ng-class="navClass(navGroup)" href="{{navGroup.href}}">{{navGroup.name}}</a>
-                <ul>
-                  <li ng-repeat="navItem in navGroup.navItems" ng-class="navClass(navItem)">
-                    <a ng-if="navItem.extra.href" ng-class="navClass(navItem.extra)" href="{{navItem.extra.href}}">
-                      {{navItem.extra.text}}<i ng-if="navItem.extra.icon" class="icon-{{navItem.extra.icon}}"></i>
-                    </a>
-                    <a tabindex="2" ng-class="linkClass(navItem)" href="{{navItem.href}}">{{navItem.name}}</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-
-          </div>
         </div>
       </div>
-      <div class="span9">
+    </div>
+  </section>
 
-        <ul class="breadcrumb">
-          <li ng-repeat="crumb in breadcrumb">
-            <span ng-hide="crumb.url">{{crumb.name}}</span>
-            <a ng-show="crumb.url" href="{{crumb.url}}">{{crumb.name}}</a>
-            <span ng-show="crumb.url" class="divider">/</span>
-          </li>
-        </ul>
-
+  <section role="main" class="container main-body">
+    <div class="row">
+      <div class="col-md-9">
         <div id="loading" ng-show="loading">Loading...</div>
-
-        <div ng-hide="loading" ng-include src="currentPage.outputPath" autoscroll class="content slide-reveal"></div>
-
+        <div ng-hide="loading" ng-include="currentPage.outputPath" autoscroll></div>
+      </div>
+      <div class="col-md-2 pull-right">
+        <div class="side-navigation">
+          <ul class="nav nav-list naked-list aside-nav">
+            <li ng-repeat="navGroup in currentSection.navGroups track by navGroup.name">
+              <ul class="nav-index-group">
+                <li ng-repeat="navItem in navGroup.navItems" ng-class="navClass(navItem)" class="nav-index-listing">
+                  <a ng-if="navItem.extra.href" ng-class="navClass(navItem.extra)" href="{{navItem.extra.href}}">
+                    {{navItem.extra.text}}<i ng-if="navItem.extra.icon" class="icon-{{navItem.extra.icon}}"></i>
+                  </a>
+                  <a tabindex="2" ng-class="linkClass(navItem)" href="{{navItem.href}}">{{navItem.name}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <footer class="footer">
     <div class="container">
