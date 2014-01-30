@@ -60,7 +60,7 @@ function createExampleDoc(example) {
     startingLine: example.doc.startingLine,
     example: example,
     path: example.id,
-    outputPath: outputPath(example, 'index.html'),
+    outputPath: example.outputPath,
     scripts: [],
     stylesheets: []
   };
@@ -107,11 +107,12 @@ module.exports = {
         example.files = extractFiles(exampleText);
         example.id = uniqueName(example.name || 'example');
         example.doc = doc;
+        example.outputPath = outputPath(example, 'index.html');
         
         // store the example information for later
         examples.push(example);
 
-        return match.replace('<example ', '<example id="' + example.id + '" ');
+        return match.replace('<example ', '<example path="' + example.outputPath + '" ');
       });
     });
   },
