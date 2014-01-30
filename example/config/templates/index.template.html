@@ -152,6 +152,7 @@
         <div class="side-navigation">
           <ul class="nav nav-list naked-list aside-nav">
             <li ng-repeat="navGroup in currentSection.navGroups track by navGroup.name">
+              <a href="{{ navGroup.href }}" ng-class="navClass(navGroup)" class="">{{ navGroup.name }}</a>
               <ul class="nav-index-group">
                 <li ng-repeat="navItem in navGroup.navItems" ng-class="navClass(navItem)" class="nav-index-listing">
                   <a ng-if="navItem.extra.href" ng-class="navClass(navItem.extra)" href="{{navItem.extra.href}}">
