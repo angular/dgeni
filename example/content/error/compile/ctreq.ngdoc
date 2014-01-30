@@ -24,13 +24,13 @@ myApp.directive('myDirective', function() {
 ```
 
 This directive can then be used as:
-```html
+```
 <input ng-model="some.path" my-directive>
 ```
 
 
 Example of a directive that optionally requires a {@link api/ng.directive:form form} controller from an ancestor:
-```js
+```
 myApp.directive('myDirective', function() {
   return {
     require: '^?form',
@@ -40,7 +40,7 @@ myApp.directive('myDirective', function() {
 ```
 
 This directive can then be used as:
-```html
+```
 <form name="myForm">
   <div>
     <span my-directive></span>
