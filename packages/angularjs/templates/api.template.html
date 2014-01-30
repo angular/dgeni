@@ -8,8 +8,9 @@
 <header class="api-profile-header">
   <h1 class="api-profile-header-heading">{$ doc.name $}</h1>
   <ol class="api-profile-header-structure naked-list step-list">
+    {% block related_components %}{% endblock %}
     <li>
-      <a href="#">- {$ doc.docType $} in module <code class="highlighted">{$ doc.module $}</code></a>
+      - {$ doc.docType $} in module {$ doc.moduleDoc.id | link(doc) $}
     </li>
   </ol>
 </header>

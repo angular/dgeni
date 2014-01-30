@@ -1,17 +1,9 @@
 {% extends "object.template.html" %}
 
-{% block header %}
-<header class="api-profile-header">
-  <h1 class="api-profile-header-heading">{$ doc.name $}</h1>
-  <ol class="api-profile-header-structure naked-list step-list">
-    {% if doc.providerDoc -%}
-    <li>
-      <a href="{$ doc.providerDoc.path $}">- {$ doc.providerDoc.name $}</a>
-    </li>
-    {%- endif %}
-    <li>
-      <a href="#">- {$ doc.docType $} in module <code class="highlighted">{$ doc.module $}</code></a>
-    </li>
-  </ol>
-</header>
+{% block related_components %}
+  {% if doc.providerDoc -%}
+  <li>
+    <a href="{$ doc.providerDoc.path $}">- {$ doc.providerDoc.name $}</a>
+  </li>
+  {%- endif %}
 {% endblock %}
