@@ -42,10 +42,10 @@ angular.module('docsApp', [
    Publish methods
    ***********************************/
 
-  $scope.navClass = function(page1, page2) {
+  $scope.navClass = function(navItem) {
     return {
-      last: this.$last,
-      active: page1 && this.currentPage == page1 || page2 && this.currentPage == page2
+      active: navItem.href && this.currentPage.path,
+      'nav-index-section': navItem.type === 'section'
     };
   };
 

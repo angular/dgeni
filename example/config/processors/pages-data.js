@@ -51,6 +51,7 @@ var sectionNavigationMapping = {
         return {
           name: moduleName,
           href: modulePage.path,
+          type: 'group',
           navItems: navItems
         };
       })

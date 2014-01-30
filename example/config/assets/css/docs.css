@@ -78,7 +78,7 @@ h1,h2,h3,h4,h5,h6 {
   padding:0;
 }
 
-.nav-index-group > .nav-index-listing:first-child a {
+.nav-index-section a {
   font-weight:bold;
   font-family: "Open Sans";
   color:black;
