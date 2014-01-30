@@ -21,7 +21,8 @@ angular.module('docsApp', [
 })
 
 
-.controller('DocsController', function($scope, $rootScope, $location, $window, $cookies, NG_PAGES, NG_SECTIONS) {
+.controller('DocsController', function($scope, $rootScope, $location, $window, $cookies, NG_PAGES, NG_SECTIONS, NG_VERSION) {
+
   $scope.fold = function(url) {
     if(url) {
       $scope.docs_fold = '/notes/' + url;
