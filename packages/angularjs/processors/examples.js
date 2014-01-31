@@ -1,7 +1,9 @@
 var _ = require('lodash');
 var log = require('winston');
 var path = require('canonical-path');
-var walk = require('../../../lib/utils/walk');
+var trimIndentation = require('../../../lib/utils/trim-indentation');
+var code = require('../../../lib/utils/code');
+
 var EXAMPLE_REGEX = /<example([^>]*)>([\S\s]+?)<\/example>/g;
 var ATTRIBUTE_REGEX = /\s*([^=]+)\s*=\s*(?:(?:"([^"]+)")|(?:'([^']+)'))/g;
 var FILE_REGEX = /<file([^>]*)>([\S\s]+?)<\/file>/g;
@@ -26,8 +28,9 @@ function extractFiles(exampleText) {
     }
 
     // Extract the contents of the file
-    file.fileContents = contents;
-    file.type = file.type || path.extname(file.name).substr(1) || 'file';
+    file.fileContents = trimIndentation(contents);
+    file.language = path.extname(file.name).substr(1);
+    file.type = file.type || file.language || 'file';
 
     // Store this file information
     files[file.name] = file;
@@ -103,7 +106,7 @@ function generateExampleDirective(example) {
       html += '\n      ' + key + '="' + value + '"';
     });
     html += '>\n';
-    html += file.fileContents + '\n';
+    html += code(file.fileContents) + '\n';
     html += '  </div>\n';
   });
   html += '</div>\n<iframe class="example" src="' + example.outputPath + '" name="' + example.id + '"></iframe>';
