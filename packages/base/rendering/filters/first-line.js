@@ -4,10 +4,7 @@ module.exports = {
     if (!str) return str;
     
     str = str
-      .split("\n")[0]
-      .replace(/<.+?\/?>/g, '')
-      .replace(/{/g,'&#123;')
-      .replace(/}/g,'&#125;');
+      .split("\n")[0];
     return str;
   }
 };
