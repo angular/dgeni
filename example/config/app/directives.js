@@ -16,5 +16,18 @@ angular.module('directives', [])
       scope.$apply($anchorScroll);
     });
   };
-}]);
+}])
+
+
+.directive('code', function() {
+  return {
+    restrict: 'E',
+    terminal: true,
+    compile: function(element) {
+      var linenums = element.hasClass('linenum') || element.parent()[0].nodeName === 'PRE';
+      var html = element.html();
+      element.html(window.prettyPrintOne(html, undefined, linenums));
+    }
+  };
+});
 

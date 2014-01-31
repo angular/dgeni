@@ -89,29 +89,6 @@ directive.jsFiddle = function(getEmbeddedTemplate, escape, script) {
 };
 
 
-directive.code = function() {
-  return {restrict: 'E', terminal: true};
-};
-
-
-directive.prettyprint = ['reindentCode', function(reindentCode) {
-  return {
-    restrict: 'C',
-    compile: function(element) {
-      var html = element.html();
-      //ensure that angular won't compile {{ curly }} values
-      html = html.replace(/\{\{/g, '<span>{{</span>')
-                 .replace(/\}\}/g, '<span>}}</span>');
-      if (window.RUNNING_IN_NG_TEST_RUNNER) {
-        element.html(html);
-      }
-      else {
-        element.html(window.prettyPrintOne(reindentCode(html), undefined, true));
-      }
-    }
-  };
-}];
-
 
 directive.ngSetText = ['getEmbeddedTemplate', function(getEmbeddedTemplate) {
   return {
