@@ -7,14 +7,12 @@ describe("code custom filter", function() {
   it("should have the name 'code'", function() {
     expect(filter.name).toEqual('code');
   });
-  it("should transform the content using the provided marked function into highlighted code", function() {
-    expect(filter.process('function foo() { }')).toEqual(
-      '<code class="prettyprint linenum">'+
-        '<span class="function">' +
-          '<span class="keyword">function</span> '+
-          '<span class="title">foo</span>' +
-          '<span class="params">()</span> {' +
-        '</span> }' +
-      '</code>');
+  it("should call the code utility", function() {
+    var codeSpy = jasmine.createSpy('code');
+    filter.__set__('code', codeSpy);
+
+    filter.process('function foo() { }');
+
+    expect(codeSpy).toHaveBeenCalledWith('function foo() { }', true);
   });
 });
