@@ -3,7 +3,7 @@ var logger = require('winston');
 var rewire = require('rewire');
 var plugin = rewire('../../processors/links');
 
-describe("process-links doc-processor plugin", function() {
+describe("links doc-processor plugin", function() {
   var doc, links, logLevel;
 
   beforeEach(function() {
@@ -36,8 +36,8 @@ describe("process-links doc-processor plugin", function() {
   });
 
   it("should convert code links to anchors with formatted code", function() {
-    expect(doc.example).toEqual('Some example with a code link: <a href="src/ngOther/directive/ngDirective"><code class="prettyprint linenum"><span class="title">ngDirective</span></code></a>');
-    expect(doc.goodLink).toEqual('A link to reachable code: <a href="src/ng/directive/ngInclude"><code class="prettyprint linenum"><span class="title">ngInclude</span></code></a>');
+    expect(doc.example).toEqual('Some example with a code link: <a href="src/ngOther/directive/ngDirective"><code>ngDirective</code></a>');
+    expect(doc.goodLink).toEqual('A link to reachable code: <a href="src/ng/directive/ngInclude"><code>ngInclude</code></a>');
   });
 
   it("should collect the link in the links array", function() {
@@ -52,16 +52,16 @@ describe("process-links doc-processor plugin", function() {
       'src/ngOther/directive/ngDirective': {
         doc: doc,
         url: 'src/ngOther/directive/ngDirective',
-        title: '<code class="prettyprint linenum"><span class="title">ngDirective</span></code>',
+        title: '<code>ngDirective</code>',
         type: 'code',
-        anchorElement: '<a href="src/ngOther/directive/ngDirective"><code class="prettyprint linenum"><span class="title">ngDirective</span></code></a>'
+        anchorElement: '<a href="src/ngOther/directive/ngDirective"><code>ngDirective</code></a>'
       },
       'src/ng/directive/ngInclude': {
         doc: doc,
         url: 'src/ng/directive/ngInclude',
-        title: '<code class="prettyprint linenum"><span class="title">ngInclude</span></code>',
+        title: '<code>ngInclude</code>',
         type: 'code',
-        anchorElement: '<a href="src/ng/directive/ngInclude"><code class="prettyprint linenum"><span class="title">ngInclude</span></code></a>'
+        anchorElement: '<a href="src/ng/directive/ngInclude"><code>ngInclude</code></a>'
       }
     });
   });

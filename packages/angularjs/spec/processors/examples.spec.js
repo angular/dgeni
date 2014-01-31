@@ -21,25 +21,26 @@ describe("examples doc processor", function() {
 
 
   it("should extract example tags from the doc content", function() {
-    plugin.each({
+    plugin.before([
+    {
       content: 'a b c <example name="bar" moo1="nar1">some example content 1</example> x y z\n' +
                 'a b c <example name="bar" moo2="nar2">some example content 2</example> x y z'
-    });
-    plugin.each({
+    },
+    {
       content: 'j k l \n<example name="value">some content \n with newlines</example> j k l'
-    });
-    plugin.each({
-      content: '<example name="example-with-files"><file name="app.js">aaa</file><file name="app.spec.js" type="spec">bbb</file></example>'
-    });
+    },
+    {
+      content: '<example name="with-files"><file name="app.js">aaa</file><file name="app.spec.js" type="spec">bbb</file></example>'
+    }]);
     var examples = plugin.__get__('examples');
-    expect(examples[0]).toEqual(jasmine.objectContaining({ name:'bar', moo1:'nar1', files: {} , id: 'bar'}));
-    expect(examples[1]).toEqual(jasmine.objectContaining({ name:'bar', moo2:'nar2', files: {} , id: 'bar1'}));
-    expect(examples[2]).toEqual(jasmine.objectContaining({ name:'value', files: {}, id: 'value'}));
+    expect(examples[0]).toEqual(jasmine.objectContaining({ name:'bar', moo1:'nar1', files: {} , id: 'example-bar'}));
+    expect(examples[1]).toEqual(jasmine.objectContaining({ name:'bar', moo2:'nar2', files: {} , id: 'example-bar1'}));
+    expect(examples[2]).toEqual(jasmine.objectContaining({ name:'value', files: {}, id: 'example-value'}));
     expect(examples[3]).toEqual(jasmine.objectContaining({
-      name: 'example-with-files',
+      name: 'with-files',
       files: {
-        'app.js': { name: 'app.js', fileContents: 'aaa', type: 'js' },
-        'app.spec.js': { name: 'app.spec.js', fileContents: 'bbb', type: 'spec' },
+        'app.js': { name: 'app.js', fileContents: 'aaa', language: 'js', type: 'js' },
+        'app.spec.js': { name: 'app.spec.js', fileContents: 'bbb', language: 'js', type: 'spec' },
       },
       id: 'example-with-files'
     }));
@@ -47,25 +48,24 @@ describe("examples doc processor", function() {
 
 
   it("should compute unique ids for each example", function() {
-    plugin.each({
+    plugin.before([{
       content: '<example name="bar">some example content 1</example>\n' +
                     '<example name="bar">some example content 2</example>'
-    });
+    }]);
     var examples = plugin.__get__('examples');
-    expect(examples[0].id).toEqual('bar');
-    expect(examples[1].id).toEqual('bar1');
+    expect(examples[0].id).toEqual('example-bar');
+    expect(examples[1].id).toEqual('example-bar1');
   });
 
-  it("should inject the computed example id into the original markup to be used by the template", function() {
+  it("should inject a new set of elements in place of the example into the original markup to be used by the template", function() {
     doc = {
-      content: '<example name="bar">some example content 1</example>\n' +
-                    '<example name="bar">some example content 2</example>'
+      content: '<example name="bar">some example content 1</example>'
     };
 
-    plugin.each(doc);
+    plugin.before([doc]);
 
-    expect(doc.content).toEqual('<example id="bar" name="bar">some example content 1</example>\n' +
-                    '<example id="bar1" name="bar">some example content 2</example>');
+    expect(doc.content).toMatch('<div class="runnable-example" name="bar" id="example-bar" outputPath="examples/example-bar/index.html">');
+    expect(doc.content).toMatch('<iframe class="runnable-example-frame" src="examples/example-bar/index.html" name="example-bar"></iframe>');
 
   });
 
@@ -80,7 +80,7 @@ describe("examples doc processor", function() {
           '<file type="spec" name="appSpec.js">describe("some thing", function() { ... });</file>\n' +
         '</example>'
     }];
-    plugin.each(docs[0]);
+    plugin.before(docs);
     docs = plugin.after(docs) || docs;
     expect(docs[0]).toEqual(
       jasmine.objectContaining({ docType: 'directive' })

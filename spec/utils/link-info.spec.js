@@ -34,30 +34,30 @@ describe("getLinkInfo", function() {
 
 
     it("should replace relative references to code in the current module with HTML anchors to the correct url", function() {
-      expect(getLinkInfo(someDoc, 'ngShow').anchorElement).toEqual('<a href="api/ng/directive/ngShow"><code class="prettyprint linenum"><span class="title">ngShow</span></code></a>');
-      expect(getLinkInfo(someDoc, 'directive:ngShow').anchorElement).toEqual('<a href="api/ng/directive/ngShow"><code class="prettyprint linenum"><span class="title">ngShow</span></code></a>');
+      expect(getLinkInfo(someDoc, 'ngShow').anchorElement).toEqual('<a href="api/ng/directive/ngShow"><code>ngShow</code></a>');
+      expect(getLinkInfo(someDoc, 'directive:ngShow').anchorElement).toEqual('<a href="api/ng/directive/ngShow"><code>ngShow</code></a>');
 
-      expect(getLinkInfo(someDoc, 'input[checkbox]').anchorElement).toEqual('<a href="api/ng/directive/input[checkbox]"><code class="prettyprint linenum"><span class="tag">input</span><span class="attr_selector">[checkbox]</span></code></a>');
-      expect(getLinkInfo(someDoc, 'filter:currency').anchorElement).toEqual('<a href="api/ng/filter/currency"><code class="prettyprint linenum"><span class="title">currency</span></code></a>');
-      expect(getLinkInfo(someDoc, 'module:ng.$compile').anchorElement).toEqual('<a href="api/ng/$compile"><code class="prettyprint linenum"><span class="variable">$compile</span></code></a>');
+      expect(getLinkInfo(someDoc, 'input[checkbox]').anchorElement).toEqual('<a href="api/ng/directive/input[checkbox]"><code>input[checkbox]</code></a>');
+      expect(getLinkInfo(someDoc, 'filter:currency').anchorElement).toEqual('<a href="api/ng/filter/currency"><code>currency</code></a>');
+      expect(getLinkInfo(someDoc, 'module:ng.$compile').anchorElement).toEqual('<a href="api/ng/$compile"><code>$compile</code></a>');
     });
     
 
     it("should replace references to modules with HTML anchors to the correct url", function() {
-      expect(getLinkInfo(someDoc, 'module:ng').anchorElement).toEqual('<a href="api/ng"><code class="prettyprint linenum"><span class="title">ng</span></code></a>');
-      expect(getLinkInfo(someDoc, 'module:ngRoute').anchorElement).toEqual('<a href="api/ngRoute"><code class="prettyprint linenum"><span class="title">ngRoute</span></code></a>');
-      expect(getLinkInfo(someDoc, 'module:ngSanitize').anchorElement).toEqual('<a href="api/ngSanitize"><code class="prettyprint linenum"><span class="title">ngSanitize</span></code></a>');
+      expect(getLinkInfo(someDoc, 'module:ng').anchorElement).toEqual('<a href="api/ng"><code>ng</code></a>');
+      expect(getLinkInfo(someDoc, 'module:ngRoute').anchorElement).toEqual('<a href="api/ngRoute"><code>ngRoute</code></a>');
+      expect(getLinkInfo(someDoc, 'module:ngSanitize').anchorElement).toEqual('<a href="api/ngSanitize"><code>ngSanitize</code></a>');
     });
     
 
     it("should replace references to code in other modules with HTML anchors to the correct url", function() {
-      expect(getLinkInfo(someDoc, 'module:ngRoute.directive:ngView').anchorElement).toEqual('<a href="api/ngRoute/directive/ngView"><code class="prettyprint linenum"><span class="title">ngView</span></code></a>');
+      expect(getLinkInfo(someDoc, 'module:ngRoute.directive:ngView').anchorElement).toEqual('<a href="api/ngRoute/directive/ngView"><code>ngView</code></a>');
     });
     
 
     it("should replace references to code in the global namespace with HTML anchors to the correct url", function() {
-      expect(getLinkInfo(someDoc, 'global:angular.element').anchorElement).toEqual('<a href="api/ng/global/angular.element"><code class="prettyprint linenum"><span class="title">angular</span>.element</code></a>');
-      expect(getLinkInfo(someDoc, 'module:ngMock.global:angular.mock.dump').anchorElement).toEqual('<a href="api/ngMock/global/angular.mock.dump"><code class="prettyprint linenum">angular<span class="preprocessor">.mock</span><span class="preprocessor">.dump</span></code></a>');
+      expect(getLinkInfo(someDoc, 'global:angular.element').anchorElement).toEqual('<a href="api/ng/global/angular.element"><code>angular.element</code></a>');
+      expect(getLinkInfo(someDoc, 'module:ngMock.global:angular.mock.dump').anchorElement).toEqual('<a href="api/ngMock/global/angular.mock.dump"><code>angular.mock.dump</code></a>');
     });
 
 
