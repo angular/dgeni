@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Example - {$ doc.id $}</title>
-  
-  {% for styleheet in doc.stylesheets %}<link href="{$ stylesheet.path $}" rel="stylesheet" type="text/css">
+  {% for stylesheet in doc.stylesheets %}<link href="{$ stylesheet.path $}" rel="stylesheet" type="text/css">
   {% endfor %}
 
   <script src="../../angular.js"></script>
