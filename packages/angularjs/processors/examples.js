@@ -138,7 +138,7 @@ module.exports = {
     examples = [];
     exampleNames = {};
     templateFolder = config.get('processing.examples.templateFolder', 'examples');
-    outputFolder = config.get('processing.examples.templateFolder', 'examples');
+    outputFolder = config.get('processing.examples.outputFolder', 'examples');
   },
   before: function(docs) {
 
