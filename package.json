@@ -8,10 +8,12 @@
   },
   "repository": "",
   "author": "Pete Bacon Darwin",
-  "licenses": [{
-    "type": "Apache",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-  }],
+  "licenses": [
+    {
+      "type": "Apache",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ],
   "dependencies": {
     "q": "~0.9.7",
     "q-io": "~1.10.6",
@@ -20,7 +22,6 @@
     "marked": "~0.2.10",
     "optimist": "~0.6.0",
     "nunjucks": "~1.0.0",
-    "highlight.js": "~7.5.0",
     "winston": "~0.7.2",
     "graceful-fs": "~2.0.1",
     "rimraf": "~2.2.5",

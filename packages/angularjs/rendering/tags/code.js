@@ -1,5 +1,5 @@
-var hljs = require('highlight.js');
 var trimIndentation = require('../../../../lib/utils/trim-indentation');
+var code = require('../../../../lib/utils/code');
 
 module.exports = {
   tags: ['code'],
@@ -16,7 +16,7 @@ module.exports = {
 
   process: function(context, content) {
     var trimmedString = trimIndentation(content());
-    var codeString = '<pre><code class="prettyprint linenum">'+hljs.highlightAuto(trimmedString).value+'</code></pre>';
+    var codeString = code(trimmedString);
     return codeString;
   }
 };
