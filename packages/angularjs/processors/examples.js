@@ -90,11 +90,23 @@ function createFileDoc(example, file) {
 }
 
 function generateExampleDirective(example) {
-  var html = '\n<div runnable-example\n';
+
+  var html = '\n<div runnable-example';
   _.forEach(_.omit(example, ['files', 'doc']), function(value, key) {
-    html += key + '="' + value + '"\n';
+    html += '\n    ' + key + '="' + value + '"';
   });
-  html += '></div>\n<iframe class="example" src="' + example.outputPath + '" name="' + example.id + '"></iframe>';
+  html += '>\n';
+
+  _.forEach(example.files, function(file) {
+    html += '  <div runnable-example-file';
+    _.forEach(_.omit(file, ['fileContents']), function(value, key) {
+      html += '\n      ' + key + '="' + value + '"';
+    });
+    html += '>\n';
+    html += file.fileContents + '\n';
+    html += '  </div>\n';
+  });
+  html += '</div>\n<iframe class="example" src="' + example.outputPath + '" name="' + example.id + '"></iframe>';
   return html;
 }
 
@@ -128,8 +140,7 @@ module.exports = {
 
   after: function(docs) {
     _.forEach(examples, function(example) {
-      var outputFolder = path.join('examples', example.id);
-      
+
       // Create a new document for the example
       var exampleDoc = createExampleDoc(example);
       docs.push(exampleDoc);
