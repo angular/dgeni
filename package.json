@@ -28,7 +28,8 @@
     "glob": "~3.2.7",
     "doctrine": "~0.2.0",
     "shelljs": "~0.2.6",
-    "dependency-graph": "~0.1.0"
+    "dependency-graph": "~0.1.0",
+    "node-html-encoder": "0.0.2"
   },
   "devDependencies": {
     "jasmine-node": "~1.12.0",
