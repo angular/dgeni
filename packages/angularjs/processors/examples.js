@@ -94,22 +94,39 @@ function createFileDoc(example, file) {
 
 function generateExampleDirective(example) {
 
-  var html = '\n<div runnable-example';
+  var html = ''
+
+    // Be aware that we need these extra new lines here or marked will not realise that the <div>
+  // above is HTML and wrap each line in a <p> - thus breaking the HTML
+  html += '\n\n';
+  
+  // Write out the runnable-example directive
+  html += '<div class="runnable-example"';
   _.forEach(_.omit(example, ['files', 'doc']), function(value, key) {
-    html += '\n    ' + key + '="' + value + '"';
+    html += ' ' + key + '="' + value + '"';
   });
   html += '>\n';
 
+  // Write each of the files as a runnable-example-file directive
   _.forEach(example.files, function(file) {
-    html += '  <div runnable-example-file';
+    html += '  <div class="runnable-example-file"';
     _.forEach(_.omit(file, ['fileContents']), function(value, key) {
-      html += '\n      ' + key + '="' + value + '"';
+      html += ' ' + key + '="' + value + '"';
     });
     html += '>\n';
-    html += code(file.fileContents) + '\n';
+    html += code(file.fileContents, false, file.language) + '\n';
     html += '  </div>\n';
   });
-  html += '</div>\n<iframe class="example" src="' + example.outputPath + '" name="' + example.id + '"></iframe>';
+
+  // Write out the iframe that will host the runnable example
+  html += '<iframe class="runnable-example-frame" src="' + example.outputPath + '" name="' + example.id + '"></iframe>\n';
+
+  html += '</div>';
+
+  // Be aware that we need these extra new lines here or marked will not realise that the <div>
+  // above is HTML and wrap each line in a <p> - thus breaking the HTML
+  html += '\n\n';
+  
   return html;
 }
 
