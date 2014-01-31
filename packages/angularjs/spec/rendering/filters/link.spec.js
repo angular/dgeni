@@ -23,7 +23,7 @@ describe("link filter", function() {
   });
 
   it("should return an HTML anchor for a code reference", function() {
-    var doc = { componentType: 'directive', section: 'api', module: 'ng', docType: 'directive', name: 'ngShow'};
+    var doc = { componentType: 'directive', area: 'api', module: 'ng', docType: 'directive', name: 'ngShow'};
     expect(filter.process('ngClass', doc)).toMatchCodeLink('api/ng/directive/ngClass', 'ngClass');
     expect(filter.process('module:ngRoute.$route', doc)).toMatchCodeLink("api/ngRoute/$route","$route");
 
@@ -32,7 +32,7 @@ describe("link filter", function() {
   });
 
   it("should return an HTML anchor for a url", function() {
-    var doc = { section: 'api', module: 'ng', docType: 'directive', componentType: 'directive', name: 'ngShow'};
+    var doc = { area: 'api', module: 'ng', docType: 'directive', componentType: 'directive', name: 'ngShow'};
     expect(filter.process('guide/directives', doc)).toEqual('<a href="guide/directives">directives</a>');
     expect(filter.process('tutorial/step-1', doc, 'Step 1')).toEqual('<a href="tutorial/step-1">Step 1</a>');
   });

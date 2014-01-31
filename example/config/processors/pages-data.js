@@ -1,6 +1,7 @@
 var _ = require('lodash');
+var path = require('canonical-path');
 
-var SECTION_NAMES = {
+var AREA_NAMES = {
   api: 'API',
   guide: 'Developer Guide',
   misc: 'Miscellaneous',
@@ -8,18 +9,34 @@ var SECTION_NAMES = {
   error: 'Error Reference'
 };
 
+function getNavGroup(navGroupPages, groupName, pageSorter, pageMapper) {
+  
+  var navItems = _(navGroupPages)
+    .sortBy(pageSorter)
+    .map(pageMapper)
+    .value();
 
-var sectionNavigationMapping = {
-  api: function(pages, sectionName) {
-    var navGroups = _(pages)
+  return {
+    name: groupName,
+    type: 'group',
+    navItems: navItems
+  };
+}
+
+
+var navGroupMappers = {
+  api: function(areaPages, areaName) {
+    var navGroups = _(areaPages)
       .filter('module') // We are not interested in docs that are not in a module
+
       .groupBy('module')
-      .map(function(pages, moduleName) {
+
+      .map(function(modulePages, moduleName) {
         
         var navItems = [];
         var modulePage;
 
-        _(pages)
+        _(modulePages)
 
           .groupBy('docType')
 
@@ -29,25 +46,27 @@ var sectionNavigationMapping = {
             delete docTypes.module;
           })
 
-          .forEach(function(pages, typeName) {
+          .forEach(function(sectionPages, sectionName) {
 
-            // Push a navItem for this section
-            navItems.push({
-              name: typeName,
-              type: 'section',
-              href: modulePage.path + "#" + typeName
-            });
-            
-            // Push the rest of the pages for this section
-            _.forEach(pages, function(page) {
-
+            if ( sectionPages.length > 0 ) {
+              // Push a navItem for this section
               navItems.push({
-                name: page.name,
-                href: page.path,
-                type: page.docType
+                name: sectionName,
+                type: 'section',
+                href: path.dirname(sectionPages[0].path)
               });
 
-            });
+              // Push the rest of the sectionPages for this section
+              _.forEach(sectionPages, function(sectionPage) {
+
+                navItems.push({
+                  name: sectionPage.name,
+                  href: sectionPage.path,
+                  type: sectionPage.docType
+                });
+
+              });
+            }
           });
         return {
           name: moduleName,
@@ -59,42 +78,33 @@ var sectionNavigationMapping = {
       .value();
     return navGroups;
   },
-  tutorial: function(pages, sectionName) {
-    var navItems = _.sortBy(_.map(pages, function(page) {
-      // Get the tutorial step number from the name
-      var match = /^\s*(\d+)/.exec(page.name);
+  tutorial: function(pages, areaName) {
+    return [getNavGroup(pages, areaName, 'step', function(page) {
       return {
         name: page.name,
         step: page.step,
         href: page.path,
         type: 'tutorial'
       };
-    }), 'step');
-
-    return [{
-      name: sectionName,
-      navItems: navItems
-    }];
+    })];
   },
-  error: function(pages, sectionName) {
-    var items;
-
-
-    return items;
+  error: function(pages, areaName) {
+    return [getNavGroup(pages, areaName, 'path', function(page) {
+      return {
+        name: page.name,
+        href: page.path,
+        type: 'error'
+      };
+    })];
   },
-  pages: function(pages, sectionName) {
-    var navItems = _.sortBy(_.map(pages, function(page) {
+  pages: function(pages, areaName) {
+    return [getNavGroup(pages, areaName, 'path', function(page) {
       return {
         name: page.name,
         href: page.path,
         type: 'page'
       };
-    }), 'name');
-
-    return [{
-      name: sectionName,
-      navItems: navItems
-    }];
+    })];
   }
 };
 
@@ -102,29 +112,50 @@ module.exports = {
   name: 'pages-data',
   description: 'This plugin will create a new doc that will be rendered as an angularjs module ' +
                'which will contain meta information about the pages and navigation',
-  runAfter: ['paths'],
+  runAfter: ['landing-pages'],
   after: function(docs) {
 
-    // We are only interested in docs that are in a section
-    var pages = _.filter(docs, 'section');
+    // We are only interested in docs that are in a area and not landing pages
+    var navPages = _.filter(docs, function(page) {
+      return page.area && page.docType != 'landingPage';
+    });
 
-    // Generate an object collection of pages that is grouped by section
-    var sections = {};
-    _(pages)
-      .groupBy('section')
-      .forEach(function(pages, sectionName) {
-        var mapper = sectionNavigationMapping[sectionName] || sectionNavigationMapping['pages'];
-        sections[sectionName] = {
-          id: sectionName,
-          name: SECTION_NAMES[sectionName],
-          navGroups: mapper(pages, sectionName)
+    // Generate an object collection of pages that is grouped by area e.g.
+    // - area "api"
+    //  - group "ng"
+    //    - section "directive"
+    //    - ngApp
+    //    - ngBind
+    //    - section "global"
+    //    - angular.element
+    //    - angular.bootstrap
+    //    - section "service"
+    //    - $compile
+    //  - group "ngRoute"
+    //    - section "directive"
+    //    - ngView
+    //    - section "service"
+    //    - $route
+    //    
+    var areas = {};
+    _(navPages)
+      .groupBy('area')
+      .forEach(function(pages, areaName) {
+        var navGroupMapper = navGroupMappers[areaName] || navGroupMappers['pages'];
+
+        areas[areaName] = {
+          id: areaName,
+          name: AREA_NAMES[areaName],
+          navGroups: navGroupMapper(pages, areaName)
         };
       });
 
-    pages = _(pages)
+
+    // Extract a list of basic page information for mapping paths to paritals and for client side searching
+    var pages = _(docs)
       .map(function(doc) {
         return _.pick(doc, [
-          'docType', 'id', 'name', 'section', 'outputPath', 'path', 'searchTerms'
+          'docType', 'id', 'name', 'area', 'outputPath', 'path', 'searchTerms'
         ]);
       })
       .indexBy('path')
@@ -137,7 +168,7 @@ module.exports = {
       template: 'pages-data.template.js',
       outputPath: 'js/pages-data.js',
 
-      sections: sections,
+      areas: areas,
       pages: pages
     };
     docs.push(docData);

@@ -3,7 +3,7 @@ var getLinkInfo = require('../../lib/utils/link-info');
 describe("getLinkInfo", function() {
   describe('for real urls', function() {
     it("should replace urls containing slashes with HTML anchors to the same url", function() {
-      var someDoc = { docType: 'overview', section: 'guide' };
+      var someDoc = { docType: 'overview', area: 'guide' };
 
       expect(getLinkInfo(someDoc, 'some/absolute/url')).toEqual({ doc: someDoc, url: "some/absolute/url", title: "url", type: 'url', anchorElement : '<a href="some/absolute/url">url</a>'});
       expect(getLinkInfo(someDoc, 'some/relative/url')).toEqual({ doc: someDoc, url: "some/relative/url", title: "url", type: 'url', anchorElement : '<a href="some/relative/url">url</a>'});
@@ -29,7 +29,7 @@ describe("getLinkInfo", function() {
     var someDoc;
 
     beforeEach(function() {
-      someDoc = { module: 'ng', name:'ngClass', componentType:'directive', section: 'api' };
+      someDoc = { module: 'ng', name:'ngClass', componentType:'directive', area: 'api' };
     });
 
 

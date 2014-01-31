@@ -82,16 +82,16 @@ describe('tag definitions', function() {
     });
   });
 
-  describe("section", function() {
+  describe("area", function() {
     beforeEach(function() {
-      tagDef = getTagDef('section');
+      tagDef = getTagDef('area');
     });
 
     it("should be 'api' if the fileType is js", function() {
       expect(tagDef.defaultFn(doc)).toEqual('api');
     });
 
-    it("should compute the section from the file name", function() {
+    it("should compute the area from the file name", function() {
       doc.fileType = 'ngdoc';
       doc.file ='guide/scope/binding.ngdoc';
       expect(tagDef.defaultFn(doc)).toEqual('guide');

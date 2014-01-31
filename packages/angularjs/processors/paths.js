@@ -14,7 +14,7 @@ module.exports = {
   each: function(doc) {
     if ( doc.fileType === 'js' ) {
 
-      checkProperty(doc, 'section');
+      checkProperty(doc, 'area');
       checkProperty(doc, 'id');
 
       var parts = codeName.getAbsCodeNameParts(doc, doc.id);

@@ -39,10 +39,10 @@ module.exports = [
 
 
   {
-    name: 'section',
+    name: 'area',
     defaultFn: function(doc) {
-      // Code files are put in the api section
-      // Other files compute their section from the first path segment
+      // Code files are put in the api area
+      // Other files compute their area from the first path segment
       return (doc.fileType === 'js') ? 'api' : doc.file.split('/')[0];
     }
   },

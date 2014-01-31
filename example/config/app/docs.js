@@ -21,7 +21,7 @@ angular.module('docsApp', [
 })
 
 
-.controller('DocsController', function($scope, $rootScope, $location, $window, $cookies, NG_PAGES, NG_SECTIONS, NG_VERSION) {
+.controller('DocsController', function($scope, $rootScope, $location, $window, $cookies, NG_PAGES, NG_NAVIGATION, NG_VERSION) {
 
   $scope.fold = function(url) {
     if(url) {
@@ -82,7 +82,7 @@ angular.module('docsApp', [
     var currentPage = $scope.currentPage = NG_PAGES[path];
 
     if ( currentPage ) {
-      $scope.currentSection = currentPage && NG_SECTIONS[currentPage.section];
+      $scope.currentArea = currentPage && NG_NAVIGATION[currentPage.area];
       var pathParts = currentPage.path.split('/');
       var breadcrumb = $scope.breadcrumb = [];
       var breadcrumbPath = '';
@@ -92,7 +92,7 @@ angular.module('docsApp', [
         breadcrumbPath += '/';
       });
     } else {
-      $scope.currentSection = null;
+      $scope.currentArea = null;
       $scope.breadcrumb = [];
     }
   });

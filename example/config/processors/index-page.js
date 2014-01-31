@@ -14,20 +14,20 @@ module.exports = {
   },
   after: function(docs) {
 
-    // Collect up all the sections in the docs
-    var sections = {};
+    // Collect up all the areas in the docs
+    var areas = {};
     _.forEach(docs, function(doc) {
-      if ( doc.section ) {
-        sections[doc.section] = doc.section;
+      if ( doc.area ) {
+        areas[doc.area] = doc.area;
       }
     });
-    sections = _.keys(sections);
+    areas = _.keys(areas);
 
     _.forEach(deployment.environments, function(environment) {
 
       var indexDoc = _.defaults({
         docType: 'index',
-        sections: sections
+        areas: areas
       }, environment);
 
       indexDoc.id = 'index' + (environment.name === 'default' ? '' : '-' + environment.name);

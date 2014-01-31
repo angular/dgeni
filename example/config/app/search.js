@@ -11,14 +11,14 @@ angular.module('search', [])
     var MIN_SEARCH_LENGTH = 3;
     if(q.length >= MIN_SEARCH_LENGTH) {
       var results = docsSearch(q);
-      var totalSections = 0;
+      var totalAreas = 0;
       for(var i in results) {
-        ++totalSections;
+        ++totalAreas;
       }
-      if(totalSections > 0) {
-        $scope.colClassName = 'cols-' + totalSections;
+      if(totalAreas > 0) {
+        $scope.colClassName = 'cols-' + totalAreas;
       }
-      $scope.hasResults = totalSections > 0;
+      $scope.hasResults = totalAreas > 0;
       $scope.results = results;
     }
     else {
@@ -85,11 +85,11 @@ angular.module('search', [])
     var results = {};
     angular.forEach(index.search(q), function(result) {
       var item = NG_PAGES[result.ref];
-      var section = item.section;
+      var area = item.area;
 
-      results[section] = results[section] || [];
-      if(results[section].length < 15) {
-        results[section].push(item);
+      results[area] = results[area] || [];
+      if(results[area].length < 15) {
+        results[area].push(item);
       }
     });
     return results;
