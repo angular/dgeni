@@ -25,8 +25,10 @@ angular.module('directives', [])
     terminal: true,
     compile: function(element) {
       var linenums = element.hasClass('linenum') || element.parent()[0].nodeName === 'PRE';
+      var match = /lang-(\S)+/.exec(element.className);
+      var lang = match && match[1];
       var html = element.html();
-      element.html(window.prettyPrintOne(html, undefined, linenums));
+      element.html(window.prettyPrintOne(html, lang, linenums));
     }
   };
 });
