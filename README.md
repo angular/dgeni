@@ -20,7 +20,7 @@ This will install the npm modules needed for documentation generation.  If you w
 example you'll need to install more dependencies - see below.
 
 
-### Run the example
+## Run the example
 
 The best way to see how to setup and use this tool is to follow an example.  There is a fully
 featured example with templates and source code from which you can generate a version of the
@@ -159,36 +159,30 @@ Extract meta-data from the tags into properties on the doc using a set of declar
 definitions.
 
 * **Merge Child Docs**
-
 All docs that have a `@memberof` tag are attached to their parent document and removed from the top
 level list of docs.
 
 * **Links**
-
 Parse all `{@link ... }` inline tags in the docs and replace with real anchors.  This processor is
 able to compute URLs for code references.
 
 * **Examples**
-
 Parse the `<example>` tags from the content, generating new docs that will be converted to extra
 files that can be loaded by the application and used, for example, in live in-place demos of the
 examples and e2e testing.
 
 * **Index Pages**
-
 Create new docs that will correspond to index pages based on the deployment information in the 
 configuration.  In the angularjs project there are a number of configurations, including "debug",
 "jquery", "no-cache" and "production".  Each configuration loads up different dependencies, such as
 "angular.js" or "angular.min.js".
 
 * **Module**
-
 Some docs that represent a module.  The processor will compute the package name for the module (e.g.
 angular or angular-sanitize).  It also collects up all documents that belong to the module and
 attaches them to the module doc in the `components` property.
 
 * **Paths**
-
 This processor computes the URL to the document and the path to the final output file for the
 document.
 
@@ -198,8 +192,8 @@ We render each of these documents as an HTML page. We use the "nunjucks" JavaScr
 tool-kit to generate HTML based on the data in each document. We have nunjucks tags and filters that
 can render links and text as markdown and will highlight code.
 
-The template used to render the doc is computed by a `templateFinder`, which uses the first matche
-from a set of patterns provided in the configuration. This allows a lot of control to provide
+The template used to render the doc is computed by a `templateFinder`, which uses the first match
+from a set of patterns in a set of folders, provided in the configuration. This allows a lot of control to provide
 generic templates for most situations and specific templates for exceptional cases.
 
 Here is an example of the angularjs patterns:
@@ -217,6 +211,10 @@ rendering: {
       ],
 
       ...
+
+      templateFolders: [
+        'templates'
+      ]
 
     },
 ```
