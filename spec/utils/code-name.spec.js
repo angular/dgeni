@@ -1,6 +1,29 @@
 var codeName = require('../../lib/utils/code-name');
 
 describe("code-name", function() {
+
+  describe("getPartialNames", function() {
+    it("should return an array of partial names for a full code name", function() {
+      expect(codeName.getPartialNames('module:ng.service:$http')).toEqual([
+        '$http',
+        'service:$http',
+        'ng.$http',
+        'module:ng.$http',
+        'ng.service:$http',
+        'module:ng.service:$http'
+      ]);
+      expect(codeName.getPartialNames('module:ng.service:$http#get')).toEqual([
+        '$http#get',
+        'service:$http#get',
+        'ng.$http#get',
+        'module:ng.$http#get',
+        'ng.service:$http#get',
+        'module:ng.service:$http#get',
+        'get'
+      ]);
+    });
+  });
+
   describe("getAbsoluteCodeName", function() {
     it("returns an absolute name given a doc and name in the same module and componentType", function() {
       expect(codeName.getAbsoluteCodeName({ module: 'ng', componentType: 'directive', name: 'ngShow'}, 'ngClass'))
