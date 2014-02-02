@@ -1,7 +1,7 @@
 var _ = require('lodash');
-var plugin = require('../../processors/merge-child-docs');
+var plugin = require('../../processors/memberof');
 
-describe('merge-child-docs', function() {
+describe('memberof', function() {
   var docs, mergedDocs;
   beforeEach(function() {
     docs = [

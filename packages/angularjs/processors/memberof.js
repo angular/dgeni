@@ -14,7 +14,7 @@ var mergeableTypes = {
  * @return {array}      The collection of merged docs
  */
 module.exports = {
-  name: 'merge-child-docs',
+  name: 'memberof',
   runAfter: ['tags-extracted'],
 
   description: 'Move child docs (e.g. events, methods or properties) into the parent doc',
