@@ -2,10 +2,10 @@ var _ = require('lodash');
 var log = require('winston');
 
 module.exports = {
-  name: 'providers',
+  name: 'service-provider-mapping',
   runAfter: ['tags-extracted'],
 
-  description: 'Relate service and their providers',
+  description: 'Relate services to their providers',
 
   after: function relateServicesToProviders(docs) {
     var docMap = _.indexBy(docs, 'id');

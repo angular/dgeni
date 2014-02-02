@@ -17,7 +17,7 @@ module.exports = function(config) {
     require('./processors/links'),
     require('./processors/module'),
     require('./processors/examples'),
-    require('./processors/providers'),
+    require('./processors/service-provider-mapping'),
     require('./processors/landing-pages')
   ]);
 
