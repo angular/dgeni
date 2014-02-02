@@ -4,7 +4,7 @@ var modules = {};
 module.exports = {
   name: 'module',
   description: 'Compute module related properties',
-  runAfter: ['tags-extracted'],
+  runAfter: ['memberof'],
   each: function(doc) {
     if ( doc.docType === 'module' ) {
       
@@ -38,13 +38,13 @@ module.exports = {
       }
     });
 
-    // Sort the components by name
+    // Sort the components by id
     _.forEach(modules, function(module) {
       module.components = _(module.components)
         .map(function(pages, docType) {
           return {
             type: docType,
-            pages: _.sortBy(pages, 'path')
+            pages: _.sortBy(pages, 'id')
           };
         })
         .sortBy('type')
