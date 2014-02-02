@@ -8,7 +8,7 @@ var links;
 module.exports = {
   name: 'links',
   description: 'parse inline {@link} tags and check that they are not broken',
-  runAfter: ['doctrine-tag-extractor'],
+  runAfter: ['tags-extracted'],
 
   before: function setup(docs) {
     links = {};

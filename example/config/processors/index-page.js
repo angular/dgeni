@@ -4,7 +4,8 @@ var deployment;
 
 module.exports = {
   name: 'index-page',
-  runAfter: ['examples', 'links'],
+  runAfter: ['adding-extra-docs'],
+  runBefore: ['extra-docs-added'],
   description: 'This processor creates docs that will be rendered as the index page for the app',
   init: function(config) {
     deployment = config.deployment;

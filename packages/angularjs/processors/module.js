@@ -4,7 +4,7 @@ var modules = {};
 module.exports = {
   name: 'module',
   description: 'Compute module related properties',
-  runAfter: ['doctrine-tag-extractor'],
+  runAfter: ['tags-extracted'],
   each: function(doc) {
     if ( doc.docType === 'module' ) {
       

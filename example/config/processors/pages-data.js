@@ -112,7 +112,8 @@ module.exports = {
   name: 'pages-data',
   description: 'This plugin will create a new doc that will be rendered as an angularjs module ' +
                'which will contain meta information about the pages and navigation',
-  runAfter: ['landing-pages'],
+  runAfter: ['adding-extra-docs'],
+  runBefore: ['extra-docs-added'],
   after: function(docs) {
 
     // We are only interested in docs that are in a area and not landing pages

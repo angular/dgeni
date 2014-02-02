@@ -56,8 +56,9 @@ Tags.prototype = {
 
 var plugin = module.exports = {
   name: 'doctrine-tag-parser',
-  description:
-    'Parse the doc for tags using doctrine.',
+  description: 'Parse the doc for tags using doctrine.',
+  runAfter: ['parsing-tags'],
+  runBefore: ['tags-parsed'],
   before: function parseDocsWithDoctrine(docs) {
     _.forEach(docs, function(doc) {
       doc.tags = new Tags(doc.content);

@@ -9,7 +9,7 @@ var env, helpers;
 
 var plugin = module.exports = {
   name: 'nunjucks-renderer',
-  runAfter: ['docs-processed'],
+  runAfter: ['rendering-docs'],
   runBefore: ['docs-rendered'],
   init: function initialize(config, injectables) {
 

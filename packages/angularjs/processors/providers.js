@@ -3,7 +3,7 @@ var log = require('winston');
 
 module.exports = {
   name: 'providers',
-  runAfter: ['doctrine-tag-extractor'],
+  runAfter: ['tags-extracted'],
 
   description: 'Relate service and their providers',
 

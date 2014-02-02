@@ -133,7 +133,8 @@ function generateExampleDirective(example) {
 module.exports = {
   name: 'examples',
   description: 'Search the documentation for examples that need to be extracted',
-  runBefore: ['doctrine-tag-parser'],
+  runAfter: ['files-loaded'],
+  runBefore: ['parsing-tags'],
   init: function(config) {
     examples = [];
     exampleNames = {};

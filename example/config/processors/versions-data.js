@@ -7,6 +7,8 @@ module.exports = {
   name: 'versions-data',
   description: 'This plugin will create a new doc that will be rendered as an angularjs module ' +
                'which will contain meta information about the versions of angular',
+  runAfter: ['adding-extra-docs'],
+  runBefore: ['extra-docs-added'],
   init: function(config) {
     package = config.source.nodePackage;
   },

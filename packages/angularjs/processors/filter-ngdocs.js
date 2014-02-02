@@ -3,7 +3,7 @@ var log = require('winston');
 
 module.exports = {
   name: 'filter-ngdocs',
-  runAfter: ['doctrine-tag-parser'],
+  runAfter: ['tags-parsed'],
   before: function(docs) {
     var docCount = docs.length;
     docs = _.filter(docs, function(doc) {

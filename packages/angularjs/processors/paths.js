@@ -7,7 +7,7 @@ module.exports = {
   name: 'paths',
   description: 'This plugin will compute the path to the route and the output file for the partial' +
                'that will be generated from the code name or original file path of the doc.',
-  runAfter: ['doctrine-tag-extractor'],
+  runAfter: ['tags-extracted'],
   init: function(config) {
     partialFolder = (config && config.rendering && config.rendering.partialFolder) || 'partials';
   },

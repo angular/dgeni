@@ -4,7 +4,8 @@ var extractTagsFactory = require('../../../lib/utils/extract-tags');
 var extractTags;
 var plugin = module.exports = {
   name: 'doctrine-tag-extractor',
-  runAfter: ['doctrine-tag-parser'],
+  runAfter: ['extracting-tags'],
+  runBefore: ['tags-extracted'],
   description:
     'Extract the information from the tags that were parsed',
   init: function initialize(config) {
