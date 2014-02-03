@@ -10,6 +10,21 @@ module.exports = function(config) {
   ]);
   config.append('processing.tagDefinitions', require('./tag-defs'));
 
+  config.append('processing.docTypes.code', [
+    'constant',
+    'class',
+    'constant',
+    'event',
+    'external',
+    'file',
+    'function',
+    'member',
+    'mixin',
+    'module',
+    'namespace',
+    'typedef'
+  ]);
+
   config.append('rendering.filters', [
     require('./rendering/filters/dash-case'),
     require('./rendering/filters/first-line'),

@@ -17,10 +17,22 @@ module.exports = function(config) {
     require('./processors/id'),
     require('./processors/links'),
     require('./processors/module'),
-    require('./processors/parse-examples'),
-    require('./processors/examples-docs'),
+    require('./processors/examples-parse'),
+    require('./processors/examples-generate'),
     require('./processors/service-provider-mapping'),
     require('./processors/landing-pages')
+  ]);
+
+  config.append('processing.docTypes.code', [
+    'directive',
+    'input',
+    'service',
+    'provider',
+    'object',
+    'type',
+    'method',
+    'property',
+    'interface'
   ]);
 
   config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));
