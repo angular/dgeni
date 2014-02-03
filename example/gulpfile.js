@@ -66,8 +66,8 @@ gulp.task('watch', function() {
 // A simple server that can cope with HTML5 deep links
 gulp.task('server', function() {
   var port = 8000;
-  var build = gulp.env.type || '';
-  var indexPage = ['index',build].join('-') + '.html';
+  var build = gulp.env.type || 'default';
+  var indexPage = 'index' + (build === 'default' ? '' : '-' + build) + '.html';
   var app = express();
   // Log requests to the console
   app.use(express.logger());
