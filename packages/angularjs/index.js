@@ -13,7 +13,7 @@ module.exports = function(config) {
   config.append('processing.processors', [
     require('./processors/filter-ngdocs'),
     require('./processors/paths'),
-    require('./processors/memberof'),
+    require('./processors/merge-member-docs'),
     require('./processors/id'),
     require('./processors/links'),
     require('./processors/module'),
