@@ -264,12 +264,12 @@ function $HttpProvider() {
      *
      * Complete list of shortcut methods:
      *
-     * - {@link $http#methods_get $http.get}
-     * - {@link $http#methods_head $http.head}
-     * - {@link $http#methods_post $http.post}
-     * - {@link $http#methods_put $http.put}
-     * - {@link $http#methods_delete $http.delete}
-     * - {@link $http#methods_jsonp $http.jsonp}
+     * - {@link $http#get $http.get}
+     * - {@link $http#head $http.head}
+     * - {@link $http#post $http.post}
+     * - {@link $http#put $http.put}
+     * - {@link $http#delete $http.delete}
+     * - {@link $http#jsonp $http.jsonp}
      *
      *
      * # Setting HTTP Headers

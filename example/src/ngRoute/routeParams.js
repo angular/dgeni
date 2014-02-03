@@ -14,7 +14,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * Requires the {@link module:ngRoute `ngRoute`} module to be installed.
  *
  * The route parameters are a combination of {@link module:ng.$location}'s
- * {@link module:ng.$location#methods_search `search()`} and {@link module:ng.$location#methods_path `path()`}.
+ * {@link module:ng.$location#search `search()`} and {@link module:ng.$location#path `path()`}.
  * The `path` parameters are extracted when the {@link $route} path is matched.
  *
  * In case of parameter name collision, `path` params take precedence over `search` params.

@@ -90,7 +90,7 @@ function $RootScopeProvider(){
      * @description
      * A root scope can be retrieved using the {@link module:ng.$rootScope} key from the
      * {@link module:auto.$injector}. Child scopes are created using the
-     * {@link function:$rootScope.Scope#methods_$new $new()} method. (Most scopes are created automatically when
+     * {@link function:$rootScope.Scope#$new $new()} method. (Most scopes are created automatically when
      * compiled HTML template is executed.)
      *
      * Here is a simple scope snippet to show how you can interact with the scope.
@@ -157,11 +157,11 @@ function $RootScopeProvider(){
        * @description
        * Creates a new child {@link function:$rootScope.Scope scope}.
        *
-       * The parent scope will propagate the {@link function:$rootScope.Scope#methods_$digest $digest()} and
-       * {@link function:$rootScope.Scope#methods_$digest $digest()} events. The scope can be removed from the
-       * scope hierarchy using {@link function:$rootScope.Scope#methods_$destroy $destroy()}.
+       * The parent scope will propagate the {@link function:$rootScope.Scope#$digest $digest()} and
+       * {@link function:$rootScope.Scope#$digest $digest()} events. The scope can be removed from the
+       * scope hierarchy using {@link function:$rootScope.Scope#$destroy $destroy()}.
        *
-       * {@link function:$rootScope.Scope#methods_$destroy $destroy()} must be called on a scope when it is
+       * {@link function:$rootScope.Scope#$destroy $destroy()} must be called on a scope when it is
        * desired for the scope and its child scopes to be permanently detached from the parent and
        * thus stop participating in model change detection and listener notification by invoking.
        *
@@ -215,11 +215,11 @@ function $RootScopeProvider(){
        * @description
        * Registers a `listener` callback to be executed whenever the `watchExpression` changes.
        *
-       * - The `watchExpression` is called on every call to {@link function:$rootScope.Scope#methods_$digest
+       * - The `watchExpression` is called on every call to {@link function:$rootScope.Scope#$digest
        *   $digest()} and should return the value that will be watched. (Since
-       *   {@link function:$rootScope.Scope#methods_$digest $digest()} reruns when it detects changes the
+       *   {@link function:$rootScope.Scope#$digest $digest()} reruns when it detects changes the
        *   `watchExpression` can execute multiple times per
-       *   {@link function:$rootScope.Scope#methods_$digest $digest()} and should be idempotent.)
+       *   {@link function:$rootScope.Scope#$digest $digest()} and should be idempotent.)
        * - The `listener` is called only when the value from the current `watchExpression` and the
        *   previous call to `watchExpression` are not equal (with the exception of the initial run,
        *   see below). The inequality is determined according to
@@ -231,13 +231,13 @@ function $RootScopeProvider(){
        *   iteration limit is 10 to prevent an infinite loop deadlock.
        *
        *
-       * If you want to be notified whenever {@link function:$rootScope.Scope#methods_$digest $digest} is called,
+       * If you want to be notified whenever {@link function:$rootScope.Scope#$digest $digest} is called,
        * you can register a `watchExpression` function with no `listener`. (Since `watchExpression`
-       * can execute multiple times per {@link function:$rootScope.Scope#methods_$digest $digest} cycle when a
+       * can execute multiple times per {@link function:$rootScope.Scope#$digest $digest} cycle when a
        * change is detected, be prepared for multiple calls to your listener.)
        *
        * After a watcher is registered with the scope, the `listener` fn is called asynchronously
-       * (via {@link function:$rootScope.Scope#methods_$evalAsync $evalAsync}) to initialize the
+       * (via {@link function:$rootScope.Scope#$evalAsync $evalAsync}) to initialize the
        * watcher. In rare cases, this is undesirable because the listener is called when the result
        * of `watchExpression` didn't change. To detect this scenario within the `listener` fn, you
        * can compare the `newVal` and `oldVal`. If these two values are identical (`===`) then the
@@ -301,7 +301,7 @@ function $RootScopeProvider(){
        *
        *
        * @param {(function()|string)} watchExpression Expression that is evaluated on each
-       *    {@link function:$rootScope.Scope#methods_$digest $digest} cycle. A change in the return value triggers
+       *    {@link function:$rootScope.Scope#$digest $digest} cycle. A change in the return value triggers
        *    a call to the `listener`.
        *
        *    - `string`: Evaluated as {@link guide/expression expression}
@@ -400,7 +400,7 @@ function $RootScopeProvider(){
        *
        * @param {string|Function(scope)} obj Evaluated as {@link guide/expression expression}. The
        *    expression value should evaluate to an object or an array which is observed on each
-       *    {@link function:$rootScope.Scope#methods_$digest $digest} cycle. Any shallow change within the
+       *    {@link function:$rootScope.Scope#$digest $digest} cycle. Any shallow change within the
        *    collection will trigger a call to the `listener`.
        *
        * @param {function(newCollection, oldCollection, scope)} listener a callback function that is
@@ -505,22 +505,22 @@ function $RootScopeProvider(){
        * @function
        *
        * @description
-       * Processes all of the {@link function:$rootScope.Scope#methods_$watch watchers} of the current scope and
-       * its children. Because a {@link function:$rootScope.Scope#methods_$watch watcher}'s listener can change
-       * the model, the `$digest()` keeps calling the {@link function:$rootScope.Scope#methods_$watch watchers}
+       * Processes all of the {@link function:$rootScope.Scope#$watch watchers} of the current scope and
+       * its children. Because a {@link function:$rootScope.Scope#$watch watcher}'s listener can change
+       * the model, the `$digest()` keeps calling the {@link function:$rootScope.Scope#$watch watchers}
        * until no more listeners are firing. This means that it is possible to get into an infinite
        * loop. This function will throw `'Maximum iteration limit exceeded.'` if the number of
        * iterations exceeds 10.
        *
        * Usually, you don't call `$digest()` directly in
        * {@link directive:ngController controllers} or in
-       * {@link $compileProvider#methods_directive directives}.
-       * Instead, you should call {@link function:$rootScope.Scope#methods_$apply $apply()} (typically from within
-       * a {@link $compileProvider#methods_directive directives}), which will force a `$digest()`.
+       * {@link $compileProvider#directive directives}.
+       * Instead, you should call {@link function:$rootScope.Scope#$apply $apply()} (typically from within
+       * a {@link $compileProvider#directive directives}), which will force a `$digest()`.
        *
        * If you want to be notified whenever `$digest()` is called,
        * you can register a `watchExpression` function with
-       * {@link function:$rootScope.Scope#methods_$watch $watch()} with no `listener`.
+       * {@link function:$rootScope.Scope#$watch $watch()} with no `listener`.
        *
        * In unit tests, you may need to call `$digest()` to simulate the scope life cycle.
        *
@@ -675,7 +675,7 @@ function $RootScopeProvider(){
        *
        * @description
        * Removes the current scope (and all of its children) from the parent scope. Removal implies
-       * that calls to {@link function:$rootScope.Scope#methods_$digest $digest()} will no longer
+       * that calls to {@link function:$rootScope.Scope#$digest $digest()} will no longer
        * propagate to the current scope and its children. Removal also implies that the current
        * scope is eligible for garbage collection.
        *
@@ -759,7 +759,7 @@ function $RootScopeProvider(){
        *
        *   - it will execute after the function that scheduled the evaluation (preferably before DOM
        *     rendering).
-       *   - at least one {@link function:$rootScope.Scope#methods_$digest $digest cycle} will be performed after
+       *   - at least one {@link function:$rootScope.Scope#$digest $digest cycle} will be performed after
        *     `expression` execution.
        *
        * Any exceptions from the execution of the expression are forwarded to the
@@ -804,7 +804,7 @@ function $RootScopeProvider(){
        * framework. (For example from browser DOM events, setTimeout, XHR or third party libraries).
        * Because we are calling into the angular framework we need to perform proper scope life
        * cycle of {@link $exceptionHandler exception handling},
-       * {@link function:$rootScope.Scope#methods_$digest executing watches}.
+       * {@link function:$rootScope.Scope#$digest executing watches}.
        *
        * ## Life cycle
        *
@@ -825,11 +825,11 @@ function $RootScopeProvider(){
        * Scope's `$apply()` method transitions through the following stages:
        *
        * 1. The {@link guide/expression expression} is executed using the
-       *    {@link function:$rootScope.Scope#methods_$eval $eval()} method.
+       *    {@link function:$rootScope.Scope#$eval $eval()} method.
        * 2. Any exceptions from the execution of the expression are forwarded to the
        *    {@link $exceptionHandler $exceptionHandler} service.
-       * 3. The {@link function:$rootScope.Scope#methods_$watch watch} listeners are fired immediately after the
-       *    expression was executed using the {@link function:$rootScope.Scope#methods_$digest $digest()} method.
+       * 3. The {@link function:$rootScope.Scope#$watch watch} listeners are fired immediately after the
+       *    expression was executed using the {@link function:$rootScope.Scope#$digest $digest()} method.
        *
        *
        * @param {(string|function())=} exp An angular expression to be executed.
@@ -863,7 +863,7 @@ function $RootScopeProvider(){
        * @function
        *
        * @description
-       * Listens on events of a given type. See {@link function:$rootScope.Scope#methods_$emit $emit} for
+       * Listens on events of a given type. See {@link function:$rootScope.Scope#$emit $emit} for
        * discussion of event life cycle.
        *
        * The event listener function format is: `function(event, args...)`. The `event` object
@@ -914,20 +914,20 @@ function $RootScopeProvider(){
        *
        * @description
        * Dispatches an event `name` upwards through the scope hierarchy notifying the
-       * registered {@link function:$rootScope.Scope#methods_$on} listeners.
+       * registered {@link function:$rootScope.Scope#$on} listeners.
        *
        * The event life cycle starts at the scope on which `$emit` was called. All
-       * {@link function:$rootScope.Scope#methods_$on listeners} listening for `name` event on this scope get
+       * {@link function:$rootScope.Scope#$on listeners} listening for `name` event on this scope get
        * notified. Afterwards, the event traverses upwards toward the root scope and calls all
        * registered listeners along the way. The event will stop propagating if one of the listeners
        * cancels it.
        *
-       * Any exception emitted from the {@link function:$rootScope.Scope#methods_$on listeners} will be passed
+       * Any exception emitted from the {@link function:$rootScope.Scope#$on listeners} will be passed
        * onto the {@link $exceptionHandler $exceptionHandler} service.
        *
        * @param {string} name Event name to emit.
        * @param {...*} args Optional set of arguments which will be passed onto the event listeners.
-       * @return {Object} Event object (see {@link function:$rootScope.Scope#methods_$on}).
+       * @return {Object} Event object (see {@link function:$rootScope.Scope#$on}).
        */
       $emit: function(name, args) {
         var empty = [],
@@ -983,19 +983,19 @@ function $RootScopeProvider(){
        *
        * @description
        * Dispatches an event `name` downwards to all child scopes (and their children) notifying the
-       * registered {@link function:$rootScope.Scope#methods_$on} listeners.
+       * registered {@link function:$rootScope.Scope#$on} listeners.
        *
        * The event life cycle starts at the scope on which `$broadcast` was called. All
-       * {@link function:$rootScope.Scope#methods_$on listeners} listening for `name` event on this scope get
+       * {@link function:$rootScope.Scope#$on listeners} listening for `name` event on this scope get
        * notified. Afterwards, the event propagates to all direct and indirect scopes of the current
        * scope and calls all registered listeners along the way. The event cannot be canceled.
        *
-       * Any exception emitted from the {@link function:$rootScope.Scope#methods_$on listeners} will be passed
+       * Any exception emitted from the {@link function:$rootScope.Scope#$on listeners} will be passed
        * onto the {@link $exceptionHandler $exceptionHandler} service.
        *
        * @param {string} name Event name to broadcast.
        * @param {...*} args Optional set of arguments which will be passed onto the event listeners.
-       * @return {Object} Event object, see {@link function:$rootScope.Scope#methods_$on}
+       * @return {Object} Event object, see {@link function:$rootScope.Scope#$on}
        */
       $broadcast: function(name, args) {
         var target = this,

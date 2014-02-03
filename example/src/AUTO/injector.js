@@ -313,16 +313,16 @@ function annotate(fn) {
  * these cases the {@link $provide $provide} service has additional helper methods to register
  * services without specifying a provider.
  *
- * * {@link $provide#methods_provider provider(provider)} - registers a **service provider** with the
+ * * {@link $provide#provider provider(provider)} - registers a **service provider** with the
  *     {@link $injector $injector}
- * * {@link $provide#methods_constant constant(obj)} - registers a value/object that can be accessed by
+ * * {@link $provide#constant constant(obj)} - registers a value/object that can be accessed by
  *     providers and services.
- * * {@link $provide#methods_value value(obj)} - registers a value/object that can only be accessed by
+ * * {@link $provide#value value(obj)} - registers a value/object that can only be accessed by
  *     services, not providers.
- * * {@link $provide#methods_factory factory(fn)} - registers a service **factory function**, `fn`,
+ * * {@link $provide#factory factory(fn)} - registers a service **factory function**, `fn`,
  *     that will be wrapped in a **service provider** object, whose `$get` property will contain the
  *     given factory function.
- * * {@link $provide#methods_service service(class)} - registers a **constructor function**, `class` that
+ * * {@link $provide#service service(class)} - registers a **constructor function**, `class` that
  *     that will be wrapped in a **service provider** object, whose `$get` property will instantiate
  *      a new object using the given constructor function.
  *
@@ -366,7 +366,7 @@ function annotate(fn) {
  * @example
  *
  * The following example shows how to create a simple event tracking service and register it using
- * {@link $provide#methods_provider $provide.provider()}.
+ * {@link $provide#provider $provide.provider()}.
  *
  * <pre>
  *  // Define the eventTracker provider
@@ -474,7 +474,7 @@ function annotate(fn) {
  * This is short for registering a service where its provider's `$get` property is the service
  * constructor function that will be used to instantiate the service instance.
  *
- * You should use {@link $provide#methods_service $provide.service(class)} if you define your service
+ * You should use {@link $provide#service $provide.service(class)} if you define your service
  * as a type/class. This is common when using {@link http://coffeescript.org CoffeeScript}.
  *
  * @param {string} name The name of the instance.
@@ -483,7 +483,7 @@ function annotate(fn) {
  *
  * @example
  * Here is an example of registering a service using
- * {@link $provide#methods_service $provide.service(class)} that is defined as a CoffeeScript class.
+ * {@link $provide#service $provide.service(class)} that is defined as a CoffeeScript class.
  * <pre>
  *   class Ping
  *     constructor: (@$http) ->
