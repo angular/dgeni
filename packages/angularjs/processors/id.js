@@ -43,8 +43,9 @@ module.exports = {
         doc.id = path.basename(doc.file, '.' + doc.fileType);
       }
 
-      log.info('Document id: ', doc.id);
+      log.debug('Identified document: ', doc.id);
 
+      // Store this doc in the partial names store for looking up by partial names later
       partialNames.addDoc(doc);
     });
   }
