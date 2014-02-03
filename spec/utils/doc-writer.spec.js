@@ -126,7 +126,7 @@ describe("doc-writer", function() {
         var replacements = {'angular': 'ng', 'jQuery': 'jqlite','notHere': 'here'};
         expect(replaceContent(content, replacements)).toBe('ng super jqlite manifest');
       });
-    });    
+    });
   });
 
 });
