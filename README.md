@@ -172,6 +172,9 @@ This package does not provide any templates.
 
 ### `angularjs` Package
 
+There is one new document extractor in this package, `ngdoc`, which can pull a single document from
+an ngdoc content file.
+
 On top of the processors provided by the `jsdoc` package, this packages adds the following processors:
 
 * `filter-ngdocs` -
@@ -203,7 +206,9 @@ document.
 * `service-provider-mapping` - relates documents about angular services to their corresponding
 angular service provider document.
 
-This package also provides a set of templates for generating an HTML file for each docment.
+This package also provides a set of templates for generating an HTML file for each document: api,
+directive, error, filter function, input, module, object, overview, provider, service, type and a
+number to support rendering of the runnable examples.
 
 ### doc.angularjs.org Package
 
@@ -223,6 +228,11 @@ about all the pages in the web app, used for setting up the navigation.
 * `version-data` - creates a new document, which will be rendered as a JS file, containing information
 about the versions of angular, used for the version-changer drop-down in the web app.
 
+The package contains an extra tag definition that extracts the step number from tutorial documents,
+which enable more control over sorting of those pages.
+
+The package adds a number of extra templates, primarily to support the extra processors: index,
+pages-data, versions-data and tutorial.
 
 ## HTML Rendering
 
