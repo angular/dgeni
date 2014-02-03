@@ -29,7 +29,7 @@ describe("doc-processor", function() {
     expect(function() {
       docProcessorFactory({
         processing: {
-          processors: [{ name: 'bad-runBefore-processor', runBefore: 'tags-processed' }]
+          processors: [{ name: 'bad-runBefore-processor', runAfter: 'tags-processed' }]
         }
       });
     }).toThrow();
@@ -38,20 +38,20 @@ describe("doc-processor", function() {
 
   it("should call each of the processors in turn, passing the docs object to each", function() {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];
-    before = { name: 'before', before: function(docs) { log.push('before'); return docs; } };
-    each = { name:'each', each: function(doc) { log.push('each:' + doc.content); } };
-    after = { name: 'after', after: function(docs) { log.push('after'); return docs; } };
+    before = { name: 'before', process: function(docs) { log.push('before'); } };
+    middle = { name:'middle', process: function(docs) { log.push('middle'); } };
+    after = { name: 'after', process: function(docs) { log.push('after'); } };
 
 
     var config = {
       processing: {
-        processors: [before, each, after]
+        processors: [before, middle, after]
       }
     };
 
     var process = docProcessorFactory(config);
     return process(docs).then(function(docs) {
-      expect(log).toEqual(['before', 'each:a', 'each:b', 'after']);
+      expect(log).toEqual(['before', 'middle', 'after']);
       expect(docs).toEqual(docs);
     }).done();
   });
@@ -63,7 +63,7 @@ describe("doc-processor", function() {
     beforeEach(function() {
       var badProcessor = {
         name: 'bad-processor',
-        each: function() { throw new Error('processor failed'); }
+        process: function() { throw new Error('processor failed'); }
       };
       process = docProcessorFactory({ processing: { processors: [badProcessor]} });
       doc = {};
@@ -84,11 +84,11 @@ describe("doc-processor", function() {
     var log = [], docs = { content: 'x' };
     var config = { processing: {
       processors: [
-        { name: 'a', runAfter: ['c'], each: function(doc) { log.push('a'); } },
-        { name: 'b', runAfter: ['c','e','a'], each: function(doc) { log.push('b'); } },
-        { name: 'c', runBefore: ['e'], each: function(doc) { log.push('c'); } },
-        { name: 'd', runAfter: ['a'], each: function(doc) { log.push('d'); } },
-        { name: 'e', runAfter: [], each: function(doc) { log.push('e'); } }
+        { name: 'a', runAfter: ['c'], process: function(docs) { log.push('a'); } },
+        { name: 'b', runAfter: ['c','e','a'], process: function(docs) { log.push('b'); } },
+        { name: 'c', runBefore: ['e'], process: function(docs) { log.push('c'); } },
+        { name: 'd', runAfter: ['a'], process: function(docs) { log.push('d'); } },
+        { name: 'e', runAfter: [], process: function(docs) { log.push('e'); } }
       ]
     } };
     var process = docProcessorFactory(config);

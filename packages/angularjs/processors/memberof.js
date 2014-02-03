@@ -15,34 +15,34 @@ var mergeableTypes = {
  */
 module.exports = {
   name: 'memberof',
-  runAfter: ['tags-extracted'],
+  runAfter: ['id'],
 
   description: 'Move child docs (e.g. events, methods or properties) into the parent doc',
 
-  after: function mergeChildDocs(docs) {
+  process: function mergeChildDocs(docs, partialNames) {
 
-    var parentDoc;
     var mergedDocs = [];
-    var docMap = {};
 
     _.forEach(docs, function(doc) {
-      docMap[doc.id] = doc;
-    });
 
-    _.forEach(docs, function(doc) {
+      var isChild = false;
 
       checkProperty(doc, 'id');
 
-      var isChild = false;
       _.forEach(mergeableTypes, function(collectionProp, referenceType) {
+        var parentDoc;
 
         if ( doc.docType === referenceType ) {
           log.debug('child doc found', doc.id);
           isChild = true;
 
-          parentDoc = docMap[doc.memberof];
+          parentDoc = partialNames.getLink(doc.memberof);
           if ( !parentDoc ) {
             log.warn('Missing parent document "'+ doc.memberof + '" referenced by "'+ doc.id + '" in file "' + doc.file + '" at line ' + doc.startingLine);
+            return;
+          }
+          if ( _.isArray(parentDoc) ) {
+            log.warn('Ambiguous parent document reference "'+ doc.memberof + '" referenced by "'+ doc.id + '" in file "' + doc.file + '" at line ' + doc.startingLine);
             return;
           }
           parentDoc[collectionProp] = parentDoc[collectionProp] || [];

@@ -173,37 +173,6 @@ describe('tag definitions', function() {
     });
   });
 
-  describe("id", function() {
-    beforeEach(function() {
-      tagDef = getTagDef('id');
-    });
-
-    it("should compute the id from the doc's meta data if it's a js file", function() {
-      doc.docType = 'directive';
-      doc.componentType = 'directive';
-      doc.name = 'ngView';
-      doc.module = 'ngRoute';
-      expect(tagDef.defaultFn(doc)).toEqual('module:ngRoute.directive:ngView');
-
-      doc.docType = 'event';
-      doc.componentType = '';
-      doc.name = '$includeContentRequested';
-      doc.module = 'ng';
-      doc.memberof = 'module:ng.directive:ngInclude';
-      expect(tagDef.defaultFn(doc)).toEqual('module:ng.directive:ngInclude#$includeContentRequested');
-    });
-
-
-    it("should compute the id from the name if it's not a js file", function() {
-      doc.fileType = 'ngdoc';
-      doc.file = 'foobar.ngdoc';
-      doc.docType = 'guide';
-      doc.name = 'abc.xyz';
-      expect(tagDef.defaultFn(doc)).toEqual('abc.xyz');
-    });
-  });
-
-
   describe("param", function() {
     beforeEach(function() {
       tagDef = getTagDef('param');

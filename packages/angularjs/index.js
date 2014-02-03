@@ -14,9 +14,11 @@ module.exports = function(config) {
     require('./processors/filter-ngdocs'),
     require('./processors/paths'),
     require('./processors/memberof'),
+    require('./processors/id'),
     require('./processors/links'),
     require('./processors/module'),
-    require('./processors/examples'),
+    require('./processors/parse-examples'),
+    require('./processors/examples-docs'),
     require('./processors/service-provider-mapping'),
     require('./processors/landing-pages')
   ]);

@@ -23,7 +23,7 @@
       </tr>
       {% for page in doc.pages %}
       <tr>
-        <td>{$ page.id | link(doc, page.name) $}</td>
+        <td>{$ page.id | link(partialNames, page.name) $}</td>
         <td>{$ page.description | firstLine | marked $}</td>
       </tr>
       {% endfor %}

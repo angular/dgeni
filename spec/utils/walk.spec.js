@@ -46,4 +46,12 @@ describe("walk", function() {
   it("should apply the function to properties that are objects", function() {
     expect(walk({ a: ['a'], 'bad': { x: 'xxx'} }, deleteBad)).toEqual({ a: ['a']});
   });
+
+  it("should cope with circular references", function() {
+
+    var obj = { a: 1, b: 2, c: {} };
+    obj.c.circular = obj;
+    
+    expect(function() { walk(obj, function(x) { return x; }); }).not.toThrow();
+  });
 });

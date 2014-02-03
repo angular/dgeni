@@ -574,7 +574,7 @@ function $LocationProvider(){
    * @eventType broadcast on root scope
    * @description
    * Broadcasted before a URL will change. This change can be prevented by calling
-   * `preventDefault` method of the event. See {@link global:$rootScope.Scope#$on} for more
+   * `preventDefault` method of the event. See {@link function:$rootScope.Scope#$on} for more
    * details about event object. Upon successful change
    * {@link $location#$locationChangeSuccess $locationChangeSuccess} is fired.
    *

@@ -11,7 +11,7 @@ describe("doctrine-tag-parser doc processor plugin", function() {
     var doc = {
       content: 'some content\n@ngdoc directive\n@description Some description info\n'
     };
-    plugin.before([doc]);
+    plugin.process([doc]);
     expect(doc.tags).toBeDefined();
     expect(doc.tags.getTag('ngdoc')).toEqual({ title: 'ngdoc', description: 'directive' });
     expect(doc.tags.getTag('description')).toEqual({ title: 'description', description: 'some content\nSome description info' });

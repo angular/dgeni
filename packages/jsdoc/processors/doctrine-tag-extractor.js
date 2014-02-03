@@ -1,4 +1,5 @@
 var log = require('winston');
+var _ = require('lodash');
 var extractTagsFactory = require('../../../lib/utils/extract-tags');
 
 var extractTags;
@@ -15,9 +16,11 @@ var plugin = module.exports = {
     }
     extractTags = extractTagsFactory(config.processing.tagDefinitions);
   },
-  each: function(doc) {
-    log.debug('extracting tags from  ' + doc.file);
-    extractTags(doc);
+  process: function(docs) {
+    _.forEach(docs, function(doc) {
+      log.debug('extracting tags from  ' + doc.file);
+      extractTags(doc);
+    });
   }
 };
 

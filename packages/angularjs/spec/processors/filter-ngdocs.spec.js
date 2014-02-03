@@ -10,7 +10,7 @@ describe("filter-ngdocs doc-processor plugin", function() {
       { tags: new MockTags([]) }
     ];
 
-    var filteredDocs = plugin.before(docs);
+    var filteredDocs = plugin.process(docs);
 
     expect(filteredDocs).toEqual([
       { tags: new MockTags({ ngdoc: 'a' }) },

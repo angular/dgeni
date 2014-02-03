@@ -82,28 +82,7 @@ module.exports = [
   },
 
 
-  {
-    name: 'id',
-    defaultFn: function(doc) {
-      if ( doc.fileType === 'js' ) {
-        checkProperty(doc, 'componentType');
-        checkProperty(doc, 'module');
-        checkProperty(doc, 'name');
-
-        if ( doc.memberof ) {
-          return doc.memberof + '#' + doc.name;
-        } else if ( doc.docType === 'module' ) {
-          return 'module:' + doc.module;
-        } else {
-          var type = doc.componentType ? (doc.componentType + ':') : '';
-          return 'module:' + doc.module + '.' + type + doc.name;
-        }
-      } else {
-        // use the document name if provided or the filename, stripped of its extension
-        return doc.name || path.basename(doc.file, '.' + doc.fileType);
-      }
-    }
-  },
+  { name: 'id' },
 
   {
     name: 'param',

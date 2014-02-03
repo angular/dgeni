@@ -7,12 +7,12 @@ module.exports = {
 
   description: 'Relate services to their providers',
 
-  after: function relateServicesToProviders(docs) {
+  process: function relateServicesToProviders(docs) {
     var docMap = _.indexBy(docs, 'id');
 
     _.forEach(docs, function(doc) {
       if ( doc.docType === 'provider' ) {
-        var serviceId = doc.id.replace(/Provider$/, '');
+        var serviceId = doc.id.replace(/provider:/, 'service:').replace(/Provider$/, '');
         var serviceDoc = docMap[serviceId];
 
         if ( serviceDoc ) {

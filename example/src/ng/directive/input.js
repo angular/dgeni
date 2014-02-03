@@ -838,7 +838,7 @@ var VALID_CLASS = 'ng-valid',
        the control reads value from the DOM.  Each function is called, in turn, passing the value
        through to the next. Used to sanitize / convert the value as well as validation.
        For validation, the parsers should update the validity state using
-       {@link global:ngModel.NgModelController#methods_$setValidity $setValidity()},
+       {@link function:ngModel.NgModelController#methods_$setValidity $setValidity()},
        and return `undefined` for invalid values.
 
  *
@@ -1169,7 +1169,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  *
  * @description
  * The `ngModel` directive binds an `input`,`select`, `textarea` (or custom form control) to a
- * property on the scope using {@link global:ngModel.NgModelController NgModelController},
+ * property on the scope using {@link function:ngModel.NgModelController NgModelController},
  * which is created and exposed by this directive.
  *
  * `ngModel` is responsible for:

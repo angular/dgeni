@@ -642,7 +642,7 @@ function map(obj, iterator, context) {
  * the length of a string.
  *
  * Note: This function is used to augment the Object type in Angular expressions. See
- * {@link global:angular.Object} for more information about Angular arrays.
+ * {@link function:angular.Object} for more information about Angular arrays.
  *
  * @param {Object|Array|string} obj Object, array, or string to inspect.
  * @param {boolean} [ownPropsOnly=false] Count only "own" properties in an object
@@ -1138,7 +1138,7 @@ function encodeUriQuery(val, pctEncodeSpaces) {
  *
  * @element ANY
  * @param {angular.Module} ngApp an optional application
- *   {@link global:angular.module module} name to load.
+ *   {@link function:angular.module module} name to load.
  *
  * @description
  *
@@ -1149,12 +1149,12 @@ function encodeUriQuery(val, pctEncodeSpaces) {
  * Only one AngularJS application can be auto-bootstrapped per HTML document. The first `ngApp`
  * found in the document will be used to define the root element to auto-bootstrap as an
  * application. To run multiple applications in an HTML document you must manually bootstrap them using
- * {@link global:angular.bootstrap} instead. AngularJS applications cannot be nested within each other.
+ * {@link function:angular.bootstrap} instead. AngularJS applications cannot be nested within each other.
  *
  * You can specify an **AngularJS module** to be used as the root module for the application.  This
  * module will be loaded into the {@link module:auto.$injector} when the application is bootstrapped and
  * should contain the application code needed or have dependencies on other modules that will
- * contain the code. See {@link global:angular.module} for more information.
+ * contain the code. See {@link function:angular.module} for more information.
  *
  * In the example below if the `ngApp` directive were not placed on the `html` element then the
  * document would not be compiled, the `AppController` would not be instantiated and the `{{ a+b }}`
@@ -1237,7 +1237,7 @@ function angularInit(element, bootstrap) {
  * @param {Array<String|Function|Array>=} modules an array of modules to load into the application.
  *     Each item in the array should be the name of a predefined module or a (DI annotated)
  *     function that will be invoked by the injector as a run block.
- *     See: {@link global:angular.module modules}
+ *     See: {@link function:angular.module modules}
  * @returns {auto.$injector} Returns the newly created injector for this app.
  */
 function bootstrap(element, modules) {

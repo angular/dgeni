@@ -12,7 +12,7 @@ module.exports = {
   init: function(config) {
     package = config.source.nodePackage;
   },
-  after: function(docs) {
+  process: function(docs) {
 
     var versionDoc = {
       docType: 'versions-data',

@@ -15,7 +15,7 @@ describe("service-provider-mapping doc processor", function() {
       compileProviderDoc
     ];
 
-    processor.after(docs);
+    processor.process(docs);
 
     expect(compileDoc.providerDoc).toBe(compileProviderDoc);
     expect(compileProviderDoc.serviceDoc).toBe(compileDoc);

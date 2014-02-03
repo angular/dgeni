@@ -15,7 +15,7 @@ describe("doctrine-tag-extractor doc processor plugin", function() {
     plugin.init({ processing: { tagDefinitions: [] } });
     var extractTagsSpy = jasmine.createSpy('extractTags');
     plugin.__set__('extractTags', extractTagsSpy);
-    plugin.each(doc);
+    plugin.process([doc]);
     expect(extractTagsSpy).toHaveBeenCalledWith(doc);
   });
 });

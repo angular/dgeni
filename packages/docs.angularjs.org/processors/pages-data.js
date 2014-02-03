@@ -114,7 +114,7 @@ module.exports = {
                'which will contain meta information about the pages and navigation',
   runAfter: ['adding-extra-docs'],
   runBefore: ['extra-docs-added'],
-  after: function(docs) {
+  process: function(docs) {
 
     // We are only interested in docs that are in a area and not landing pages
     var navPages = _.filter(docs, function(page) {

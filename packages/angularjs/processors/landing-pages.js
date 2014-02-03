@@ -9,7 +9,7 @@ module.exports = {
   init: function(config) {
     partialFolder = (config && config.rendering && config.rendering.partialFolder) || 'partials';
   },
-  after: function(docs) {
+  process: function(docs) {
     var paths = _.indexBy(docs, 'path');
     var landingPages = {};
 

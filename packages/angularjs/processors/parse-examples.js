@@ -9,7 +9,7 @@ var ATTRIBUTE_REGEX = /\s*([^=]+)\s*=\s*(?:(?:"([^"]+)")|(?:'([^']+)'))/g;
 var FILE_REGEX = /<file([^>]*)>([\S\s]+?)<\/file>/g;
 
 // A holder for all the examples that have been found in the document
-var examples, exampleNames, templateFolder, outputFolder;
+var outputFolder;
 
 function extractAttributes(attributeText) {
   var attributes = {};
@@ -38,6 +38,7 @@ function extractFiles(exampleText) {
   return files;
 }
 
+var exampleNames;
 function uniqueName(name) {
   if ( exampleNames[name] ) {
     var index = 1;
@@ -54,47 +55,9 @@ function outputPath(example, fileName) {
   return path.join(outputFolder, example.id, fileName);
 }
 
-function createExampleDoc(example) {
-  var exampleDoc = {
-    id: example.id,
-    docType: 'example',
-    template: path.join(templateFolder, 'index.template.html'),
-    file: example.doc.file,
-    startingLine: example.doc.startingLine,
-    example: example,
-    path: example.id,
-    outputPath: example.outputPath,
-    scripts: [],
-    stylesheets: []
-  };
-
-  // If there is an index.html file specified then use it contents for this doc
-  // and remove it from the files property
-  if ( example.files['index.html'] ) {
-    exampleDoc.fileContents = example.files['index.html'].fileContents;
-    delete example.files['index.html'];
-  }
-  return exampleDoc;
-}
-
-function createFileDoc(example, file) {
-  var fileDoc = {
-    docType: 'example-' + file.type,
-    id: example.id + '/' + file.name,
-    template: path.join(templateFolder, 'template.' + file.type),
-    file: example.doc.file,
-    startingLine: example.doc.startingLine,
-    example: example,
-    path: file.name,
-    outputPath: outputPath(example, file.name),
-    fileContents: file.fileContents
-  };
-  return fileDoc;
-}
-
 function generateExampleDirective(example) {
 
-  var html = ''
+  var html = '';
 
     // Be aware that we need these extra new lines here or marked will not realise that the <div>
   // above is HTML and wrap each line in a <p> - thus breaking the HTML
@@ -131,17 +94,19 @@ function generateExampleDirective(example) {
 }
 
 module.exports = {
-  name: 'examples',
+  name: 'parse-examples',
   description: 'Search the documentation for examples that need to be extracted',
   runAfter: ['files-loaded'],
-  runBefore: ['parsing-tags'],
-  init: function(config) {
-    examples = [];
+  // runBefore: ['parsing-tags'],
+  init: function(config, injectables) {
+    // Reset the unique name map
     exampleNames = {};
-    templateFolder = config.get('processing.examples.templateFolder', 'examples');
+
+    injectables.value('examples', []);
+
     outputFolder = config.get('processing.examples.outputFolder', 'examples');
   },
-  before: function(docs) {
+  process: function(docs, examples) {
 
     _.forEach(docs, function(doc) {
       doc.content = doc.content.replace(EXAMPLE_REGEX, function processExample(match, attributeText, exampleText) {
@@ -157,27 +122,6 @@ module.exports = {
         return generateExampleDirective(example);
       });
     });
-  },
 
-  after: function(docs) {
-    _.forEach(examples, function(example) {
-
-      // Create a new document for the example
-      var exampleDoc = createExampleDoc(example);
-      docs.push(exampleDoc);
-
-      // Create a new document for each file of the example
-      _.forEach(example.files, function(file) {
-        var fileDoc = createFileDoc(example, file);
-        docs.push(fileDoc);
-
-        // Store a reference to the fileDoc in the relevant property on the exampleDoc
-        if ( file.type == 'css' ) {
-          exampleDoc.stylesheets.push(fileDoc);
-        } else if ( file.type == 'js' ) {
-          exampleDoc.scripts.push(fileDoc);
-        }
-      });
-    });
   }
 };

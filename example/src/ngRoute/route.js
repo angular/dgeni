@@ -73,7 +73,7 @@ function $RouteProvider(){
    *    Object properties:
    *
    *    - `controller` – `{(string|function()=}` – Controller fn that should be associated with
-   *      newly created scope or the name of a {@link module:ng.global:angular.Module#controller
+   *      newly created scope or the name of a {@link module:ng.function:angular.Module#controller
    *      registered controller} if passed as a string.
    *    - `controllerAs` – `{string=}` – A controller alias name. If present the controller will be
    *      published to scope under the `controllerAs` name.

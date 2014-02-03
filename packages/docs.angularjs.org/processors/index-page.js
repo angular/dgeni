@@ -13,7 +13,7 @@ module.exports = {
       throw new Errro('No deployment environments found in the config.');
     }
   },
-  after: function(docs) {
+  process: function(docs) {
 
     // Collect up all the areas in the docs
     var areas = {};

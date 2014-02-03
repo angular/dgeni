@@ -11,7 +11,7 @@
  *
 
  * @param {Array.<string|Function>} modules A list of module functions or their aliases. See
- *        {@link module:ng.global:angular.module}. The `ng` module must be explicitly added.
+ *        {@link module:ng.function:angular.module}. The `ng` module must be explicitly added.
  * @returns {function()} Injector function. See {@link module:auto.$injector $injector}.
  *
  * @example
@@ -31,7 +31,7 @@
  * Sometimes you want to get access to the injector of a currently running Angular app
  * from outside Angular. Perhaps, you want to inject and compile some markup after the
  * application has been bootstrapped. You can do this using extra `injector()` added
- * to JQuery/jqLite elements. See {@link module:ng.global:angular.element}.
+ * to JQuery/jqLite elements. See {@link module:ng.function:angular.element}.
  *
  * *This is fairly rare but could be the case if a third party library is injecting the
  * markup.*
@@ -297,7 +297,7 @@ function annotate(fn) {
  *
  * The {@link $provide $provide} service has a number of methods for registering components
  * with the {@link $injector $injector}. Many of these functions are also exposed on
- * {@link module:ng.global:angular.Module}.
+ * {@link module:ng.function:angular.Module}.
  *
  * An Angular **service** is a singleton object created by a **service factory**.  These **service
  * factories** are functions which, in turn, are created by a **service provider**.
@@ -513,7 +513,7 @@ function annotate(fn) {
  * service**.
  *
  * Value services are similar to constant services, except that they cannot be injected into a
- * module configuration function (see {@link module:ng.global:angular.Module#config}) but they can be overridden by
+ * module configuration function (see {@link module:ng.function:angular.Module#config}) but they can be overridden by
  * an Angular
  * {@link $provide#decorator decorator}.
  *
@@ -543,7 +543,7 @@ function annotate(fn) {
  *
  * Register a **constant service**, such as a string, a number, an array, an object or a function,
  * with the {@link $injector $injector}. Unlike {@link $provide#value value} it can be
- * injected into a module configuration function (see {@link module:ng.global:angular.Module#config}) and it cannot
+ * injected into a module configuration function (see {@link module:ng.function:angular.Module#config}) and it cannot
  * be overridden by an Angular {@link $provide#decorator decorator}.
  *
  * @param {string} name The name of the constant.

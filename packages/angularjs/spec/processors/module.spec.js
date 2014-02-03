@@ -3,6 +3,7 @@ var processor = require('../../processors/module');
 
 describe("module doc processor", function() {
 
+  var modules;
   var moduleDoc1, moduleDoc2;
   var componentDoc1, componentDoc2, componentDoc3;
   var docs;
@@ -22,8 +23,9 @@ describe("module doc processor", function() {
       moduleDoc2
     ];
 
-    _.forEach(docs, processor.each);
-    processor.after(docs);
+    modules = {};
+
+    processor.process(docs, modules);
 
   });
 

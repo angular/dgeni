@@ -21,7 +21,7 @@
     "canonical-path": "~0.0.2",
     "marked": "~0.2.10",
     "optimist": "~0.6.0",
-    "nunjucks": "~1.0.0",
+    "nunjucks": "~1.0.1",
     "winston": "~0.7.2",
     "graceful-fs": "~2.0.1",
     "rimraf": "~2.2.5",

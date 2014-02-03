@@ -21,7 +21,7 @@ module.exports = {
     sourceFiles = config.source.files;
   },
 
-  before: function(docs) {
+  process: function(docs) {
 
     return Q.all(_.map(sourceFiles, function(fileInfo) {
       var pattern, files;

@@ -25,7 +25,7 @@ module.exports = {
 
     }
   },
-  each: function(doc) {
+  process: function(docs) {
 
     // keywordMap holds a map of words that have been found already
     var keywordMap = _.indexBy(wordsToIgnore);
@@ -58,11 +58,14 @@ module.exports = {
       return text;
     }
 
-    walk(doc, extractWords);
+    _.forEach(docs, function(doc) {
 
-    doc.searchTerms = {
-      titleWords: extractTitleWords(doc.name),
-      keywords: _.sortBy(words).join(' ')
-    };
+      walk(doc, extractWords);
+
+      doc.searchTerms = {
+        titleWords: extractTitleWords(doc.name),
+        keywords: _.sortBy(words).join(' ')
+      };
+    });
   }
 };

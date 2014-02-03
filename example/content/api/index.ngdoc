@@ -86,9 +86,9 @@ This module is provided by default and contains the core components of AngularJS
       </p>
       <p>
         Some examples include:
-        {@link global:angular.copy angular.copy()},
-        {@link global:angular.equals angular.equals()},
-        {@link global:angular.element angular.element()},
+        {@link function:angular.copy angular.copy()},
+        {@link function:angular.equals angular.equals()},
+        {@link function:angular.element angular.element()},
           etc...
       </p>
     </td>
@@ -157,7 +157,7 @@ or JavaScript callbacks.
       {@link module:ngAnimate JS-based animations}
     </td>
     <td>
-      Use {@link global:angular.Module#methods_animation module.animation()} to register a JavaScript animation. Once registered the animation can be triggered by referencing the CSS class within the HTML template code.
+      Use {@link angular.Module#methods_animation module.animation()} to register a JavaScript animation. Once registered the animation can be triggered by referencing the CSS class within the HTML template code.
     </td>
   </tr>
 </table>
@@ -288,9 +288,9 @@ Use ngMock to inject and mock modules, factories, services and providers within 
 
       <p>
         Some examples
-          {@link module:ngMock.global:angular.mock.inject inject()},
-          {@link module:ngMock.global:angular.mock.module module()},
-          {@link module:ngMock.global:angular.mock.dump dump()},
+          {@link module:ngMock.angular.mock.inject inject()},
+          {@link module:ngMock.angular.mock.module module()},
+          {@link module:ngMock.angular.mock.dump dump()},
           etc...
       <p>
     </td>

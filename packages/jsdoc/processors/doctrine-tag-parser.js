@@ -59,7 +59,7 @@ var plugin = module.exports = {
   description: 'Parse the doc for tags using doctrine.',
   runAfter: ['parsing-tags'],
   runBefore: ['tags-parsed'],
-  before: function parseDocsWithDoctrine(docs) {
+  process: function parseDocsWithDoctrine(docs) {
     _.forEach(docs, function(doc) {
       doc.tags = new Tags(doc.content);
     });

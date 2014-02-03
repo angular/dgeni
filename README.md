@@ -125,18 +125,12 @@ more of the following handlers:
 
 * `init(config, injectables) { ... }` - gives the processor and opportunity to initialize itself
 based on the configuration object and also add items to the dependency injection container.
-* `before(docs, ...) { ... }` - invoked by the dependency injector, this handler is called before
-the main document processing.  It is often used for loading up documents from files and filtering.
-* `each(doc, docs ...) { ... }` - invoked by the dependency injector, this handler is called for 
-each document in turn. This is where much of the main document processing will happen, such as
-parsing and extracting jsdoc/ngdoc tags.
-* `after(docs, ...) { ... }` - invoked by the dependency injector, this handler is called before
-the main document processing.
+* `process(docs, ...) { ... }` - invoked by the dependency injector.  Each processor's process
+handler is called an order that fits with the declared `runBefore` and `runAfter` dependencies.
 
-While the `init` and `each` handlers must be synchronous, the `before` and `after` handlers can be
-also be asynchronous.  If they are synchronous then they should return undefined or a new array of
-documents. If they are asynchronous then they must return a promise, which will resolve to undefined
-or a new collection of documents.
+The `before` and `after` handlers can be synchronous or asynchronous.  If they are synchronous then
+they should return undefined or a new array of documents. If they are asynchronous then they must
+return a promise, which will resolve to undefined or a new collection of documents.
 
 ## Packages
 

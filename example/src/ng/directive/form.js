@@ -231,7 +231,7 @@ function FormController(element, attrs) {
  *
  * @description
  * Directive that instantiates
- * {@link global:form.FormController FormController}.
+ * {@link function:form.FormController FormController}.
  *
  * If the `name` attribute is specified, the form controller is published onto the current scope under
  * this name.

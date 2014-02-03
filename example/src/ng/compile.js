@@ -25,7 +25,7 @@
  *
  * @description
  * Compiles an HTML string or DOM into a template and produces a template function, which
- * can then be used to link {@link global:$rootScope.Scope `scope`} and the template together.
+ * can then be used to link {@link function:$rootScope.Scope `scope`} and the template together.
  *
  * The compilation is a process of walking the DOM tree and matching DOM elements to
  * {@link $compileProvider#methods_directive directives}.
@@ -309,8 +309,8 @@
  * executed after the template has been cloned. This is where most of the directive logic will be
  * put.
  *
- *   * `scope` - {@link global:$rootScope.Scope Scope} - The scope to be used by the
- *     directive for registering {@link global:$rootScope.Scope#methods_$watch watches}.
+ *   * `scope` - {@link function:$rootScope.Scope Scope} - The scope to be used by the
+ *     directive for registering {@link function:$rootScope.Scope#methods_$watch watches}.
  *
  *   * `iElement` - instance element - The element where the directive is to be used. It is safe to
  *     manipulate the children of the element only in `postLink` function since the children have
@@ -341,7 +341,7 @@
  * <a name="Attributes"></a>
  * ### Attributes
  *
- * The {@link global:$compile.directive.Attributes Attributes} object - passed as a parameter in the
+ * The {@link function:$compile.directive.Attributes Attributes} object - passed as a parameter in the
  * `link()` or `compile()` functions. It has a variety of uses.
  *
  * accessing *Normalized attribute names:*
@@ -442,7 +442,7 @@
  * @returns {function(scope[, cloneAttachFn])} a link function which is used to bind template
  * (a DOM element/tree) to a scope. Where:
  *
- *  * `scope` - A {@link global:$rootScope.Scope Scope} to bind to.
+ *  * `scope` - A {@link function:$rootScope.Scope Scope} to bind to.
  *  * `cloneAttachFn` - If `cloneAttachFn` is provided, then the link function will clone the
  *  `template` and call the `cloneAttachFn` function allowing the caller to attach the
  *  cloned elements to the DOM document at the appropriate place. The `cloneAttachFn` is
@@ -1957,7 +1957,7 @@ function directiveNormalize(name) {
  *
  *
  * @param {string} name Normalized element attribute name of the property to modify. The name is
- *          revers translated using the {@link global:$compile.directive.Attributes#$attr $attr}
+ *          revers translated using the {@link function:$compile.directive.Attributes#$attr $attr}
  *          property to the original name.
  * @param {string} value Value to set the attribute to. The value can be an interpolated string.
  */

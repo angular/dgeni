@@ -490,7 +490,7 @@ angular.mock.$LogProvider = function() {
  * @param {number=} [count=0] Number of times to repeat. If not set, or 0, will repeat
  *   indefinitely.
  * @param {boolean=} [invokeApply=true] If set to `false` skips model dirty checking, otherwise
- *   will invoke `fn` within the {@link module:ng.global:$rootScope.Scope#methods_$apply $apply} block.
+ *   will invoke `fn` within the {@link module:ng.function:$rootScope.Scope#methods_$apply $apply} block.
  * @returns {promise} A promise which will be notified on each iteration.
  */
 angular.mock.$IntervalProvider = function() {
@@ -2087,7 +2087,7 @@ if(window.jasmine || window.mocha) {
    *
    * ```
    *
-   * See also {@link module:ngMock.global:angular.mock.module angular.mock.module}
+   * See also {@link module:ngMock.function:angular.mock.module angular.mock.module}
    *
    * ## Example
    * Example of what a typical jasmine tests looks like with the inject method.

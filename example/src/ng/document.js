@@ -6,7 +6,7 @@
  * @requires $window
  *
  * @description
- * A {@link global:angular.element jQuery (lite)}-wrapped reference to the browser's `window.document`
+ * A {@link function:angular.element jQuery (lite)}-wrapped reference to the browser's `window.document`
  * element.
  */
 function $DocumentProvider(){

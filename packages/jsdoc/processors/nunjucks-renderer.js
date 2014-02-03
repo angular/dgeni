@@ -58,9 +58,9 @@ var plugin = module.exports = {
    * @returns {promise}            A promise to each of the output paths, resolved when all the docs have
    *                               been rendered and output
    */
-  after: function render(docs, extraData, config, templateFinder) {
+  process: function render(docs, extraData, config, templateFinder) {
     var fileWritePromises = [];
-    
+
     _.forEach(docs, function(doc) {
       var data, res, outputFile, err;
       if ( !doc.outputPath ) {

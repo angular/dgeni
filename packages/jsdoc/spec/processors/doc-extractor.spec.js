@@ -41,7 +41,7 @@ describe('doc-extractor', function() {
   it('should traverse the specified folder tree, reading each matching file', function() {
 
     plugin.init({ source: { extractors: [mockNgDocExtractor, mockJsExtractor], files: ['./docs', './src'] }});
-    plugin.before().then(function(docs) {
+    plugin.process().then(function(docs) {
       expect(docs.length).toEqual(4);
       expect(docs[0]).toEqual({
         file: "docs/a.js",
