@@ -1,24 +1,36 @@
 var plugin = require('../../processors/paths');
-xdescribe("paths doc processor plugin", function() {
+describe("paths doc processor plugin", function() {
   var outputFolder = 'partials';
 
-  beforeEach(function() {
-    plugin.init({}, { value: function() { }});
+  it("should compute the path from the document's parents'", function() {
+    var apiDoc = {
+      docType: 'overview',
+      id: 'api',
+      pathSegment: 'api'
+    };
+    var ngDoc = {
+      docType: 'module',
+      id: 'module:ng',
+      pathSegment: 'ng',
+      parentDoc: apiDoc
+    };
+    var directiveDoc = {
+      docType: 'componentGroup',
+      id: 'module:ng.directive',
+      pathSegment: 'directive',
+      parentDoc: ngDoc
+    };
+    var ngClassDoc = {
+      docType: 'directive',
+      id: 'module:ng.directive:ngClass',
+      pathSegment: 'ngClass',
+      parentDoc: directiveDoc
+    };
+    var docs = [ngDoc, directiveDoc, ngClassDoc];
+    plugin.process(docs, outputFolder);
+
+    expect(ngClassDoc.path).toEqual('api/ng/directive/ngClass');
+    expect(ngClassDoc.outputPath).toEqual('partials/api/ng/directive/ngClass.html');
   });
 
-
-  it("should compute the path from the document area and id if it is a js file", function() {
-    var doc = { basePath: 'src', fileType: 'js', area: 'api', id: 'module:ng.directive:input[checkbox]#someMethod'};
-    plugin.process([doc], outputFolder);
-    expect(doc.path).toEqual('api/ng/directive/input[checkbox]#someMethod');
-    expect(doc.outputPath).toEqual('partials/api/ng/directive/input[checkbox].html');
-  });
-
-
-  it("should compute the path from the area, file name and file type", function() {
-    var doc = { fileType: 'ngdoc', file: 'guide/directives.ngdoc', basePath: 'content' };
-    plugin.process([doc], outputFolder);
-    expect(doc.path).toEqual('guide/directives');
-    expect(doc.outputPath).toEqual('partials/guide/directives.html');
-  });
 });

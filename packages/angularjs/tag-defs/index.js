@@ -193,6 +193,7 @@ module.exports = [
   },
   
   { name: 'title' },
+  { name: 'parent' },
 
   { name: 'description' },
   { name: 'usage' },

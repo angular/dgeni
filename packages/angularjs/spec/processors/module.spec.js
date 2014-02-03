@@ -43,13 +43,10 @@ describe("module doc processor", function() {
 
   it("should add a list of components to module docs", function() {
     expect(moduleDoc1.components).toEqual([
-      { type: 'directive', pages: [componentDoc1] },
-      { type: 'function', pages: [componentDoc3] }
+      componentDoc1, componentDoc3
     ]);
 
-    expect(moduleDoc2.components).toEqual([
-      { type: 'service', pages: [componentDoc2] }
-    ]);
+    expect(moduleDoc2.components).toEqual([componentDoc2]);
   });
 
   it("should add a moduleDoc property to each component", function() {

@@ -20,7 +20,8 @@ module.exports = function(config) {
     require('./processors/examples-parse'),
     require('./processors/examples-generate'),
     require('./processors/service-provider-mapping'),
-    require('./processors/landing-pages')
+    require('./processors/component-groups'),
+    require ('./processors/parent')
   ]);
 
   config.append('processing.docTypes.code', [
