@@ -22,14 +22,14 @@ gulp.task('bower', function() {
 });
 
 gulp.task('build-app', ['clean'], function() {
-  gulp.src('config/app/**/*.js')
+  gulp.src('app/src/**/*.js')
     .pipe(concat('docs.js'))
     .pipe(gulp.dest('build/js/'));
 });
 
 gulp.task('assets', ['bower', 'clean'], function() {
   return merge(
-    gulp.src(['config/assets/**/*']).pipe(gulp.dest('build')),
+    gulp.src(['app/assets/**/*']).pipe(gulp.dest('build')),
     gulp.src('bower_components/open-sans-fontface/**/*').pipe(gulp.dest('build/components/open-sans-fontface')),
     gulp.src('bower_components/lunr.js/*.js').pipe(gulp.dest('build/components/lunr.js')),
     gulp.src('bower_components/google-code-prettify/**/*').pipe(gulp.dest('build/components/google-code-prettify/')),
@@ -40,7 +40,7 @@ gulp.task('assets', ['bower', 'clean'], function() {
 
 
 gulp.task('doc-gen', ['clean'], function() {
-  return docGenerator('config/ngdoc.config.js').generateDocs();
+  return docGenerator('bikeshed.config.js').generateDocs();
 });
 
 
@@ -53,7 +53,7 @@ gulp.task('watch', function() {
   return gulp.watch([
     'content/**/*',
     'src/**/*',
-    'config/**/*',
+    'app/**/*',
     '../lib/**/*',
     '../packages/**/*'
   ], function() {

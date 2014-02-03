@@ -1,45 +1,20 @@
 var _ = require('lodash');
 var path = require('canonical-path');
-var fs = require('fs');
-var gitInfo = require('../../lib/utils/git-info');
 var packagePath = __dirname;
 
-var angularjsPackage = require('../../packages/angularjs');
+var basePackage = require('../packages/docs.angularjs.org');
 
 module.exports = function(config) {
 
-  var nodePackage = JSON.parse(fs.readFileSync('package.json', 'UTF-8'));
+  config = basePackage(config);
 
-  config = angularjsPackage(config);
-  
   config.set('source.files', [
-    { pattern: 'src/**/*.js', basePath: path.resolve(packagePath, '..') },
-    { pattern: '**/*.ngdoc', basePath: path.resolve(packagePath, '../content') }
+    { pattern: 'src/**/*.js', basePath: path.resolve(packagePath) },
+    { pattern: '**/*.ngdoc', basePath: path.resolve(packagePath, 'content') }
   ]);
 
-  config.set('source.nodePackage', nodePackage);
-
-  config.append('processing.processors', [
-    require('./processors/keywords'),
-    require('./processors/versions-data'),
-    require('./processors/pages-data'),
-    require('./processors/index-page')
-  ]);
-
-  config.processing.tagDefinitions.push(require('./tag-defs/tutorial-step'));
-
-  config.set('processing.search.ignoreWordsFile', 'ignore.words');
-
-  config.prepend('rendering.templateFolders', [
-    path.resolve(packagePath, 'templates')
-  ]);
-
-  config.set('rendering.outputFolder', '../build');
+  config.set('rendering.outputFolder', 'build');
   config.set('rendering.cleanOutputFolder', true);
-  config.set('rendering.extra', {
-    git: gitInfo.getGitInfo(nodePackage.repository.url),
-    version: gitInfo.getCurrentVersion(nodePackage)
-  });
 
   config.set('logging.level', 'info');
 
