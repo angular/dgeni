@@ -9,7 +9,32 @@ describe("doc-processor", function() {
     expect(function() {
       docProcessorFactory({});
     }).toThrow('Invalid config - you must provide a config object with a "processing" property');
+
+    expect(function() {
+      docProcessorFactory({
+        processing: {
+          processors: [{ }]
+        }
+      });
+    }).toThrow();
+
+    expect(function() {
+      docProcessorFactory({
+        processing: {
+          processors: [{ name: 'bad-runAfter-processor', runAfter: 'tags-processed' }]
+        }
+      });
+    }).toThrow();
+
+    expect(function() {
+      docProcessorFactory({
+        processing: {
+          processors: [{ name: 'bad-runBefore-processor', runBefore: 'tags-processed' }]
+        }
+      });
+    }).toThrow();
   });
+
 
   it("should call each of the processors in turn, passing the docs object to each", function() {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];
