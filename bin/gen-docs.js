@@ -5,13 +5,13 @@ var myArgs = require('optimist')
   .usage('Usage: $0 path/to/config')
   .demand(1)
   .argv;
-var loadConfig = require('../lib/utils/config');
+var configurer = require('../lib/utils/config');
 var docGenerator = require('../lib/index');
 
 log.cli();
 
 // Load in the config file and run it over the top of the default config
-var config = loadConfig(myArgs._[0]);
+var config = configurer.load(myArgs._[0]);
 
 log.level = config.logging.level;
 log.info('Read config from "' + myArgs._[0] + '"');
