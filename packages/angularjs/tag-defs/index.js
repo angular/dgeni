@@ -1,4 +1,3 @@
-var codeName = require('../../../lib/utils/code-name');
 var checkProperty = require('../../../lib/utils/check-property');
 var path = require('canonical-path');
 var _ = require('lodash');
@@ -10,40 +9,18 @@ module.exports = [
     docProperty: 'docType',
     transformFn: function(doc, tag) {
 
-      // compute componentType
-      var componentTypeMap = {
-        directive: 'directive',
-        input: 'directive',
-        filter: 'filter',
-        object: 'global',
-        type: 'global',
-        function: 'global'
-      };
-      doc.componentType = componentTypeMap[tag.description] || '';
+      // // compute componentType
+      // var componentTypeMap = {
+      //   directive: 'directive',
+      //   input: 'directive',
+      //   filter: 'filter',
+      //   object: 'global',
+      //   type: 'global',
+      //   function: 'global'
+      // };
+      // doc.componentType = componentTypeMap[tag.description] || '';
 
       return tag.description;
-    }
-  },
-
-
-  {
-    name: 'module',
-    defaultFn: function(doc) {
-      if ( doc.fileType === 'js' ) {
-        checkProperty(doc, 'file');
-        checkProperty(doc, 'basePath');
-        return path.dirname(doc.file).split('/')[1];
-      }
-    }
-  },
-
-
-  {
-    name: 'area',
-    defaultFn: function(doc) {
-      // Code files are put in the api area
-      // Other files compute their area from the first path segment
-      return (doc.fileType === 'js') ? 'api' : doc.file.split('/')[0];
     }
   },
 
@@ -66,23 +43,41 @@ module.exports = [
   },
   
 
+  { name: 'id' },
+
   {
-    name: 'memberof',
+    name: 'module',
     defaultFn: function(doc) {
-      if ( doc.docType === 'event' || doc.docType === 'property' || doc.docType === 'method' ) {
-        throw new Error('Missing tag "@memberof" for doc of type "'+ doc.docType + '" in file "' + doc.file + '" at line ' + doc.startingLine);
+      if ( doc.fileType === 'js' ) {
+        checkProperty(doc, 'file');
+        // Calculate the module from the second segment of the file path
+        // (the first being the area)
+        return path.dirname(doc.file).split('/')[1];
       }
-    },
-    transformFn: function(doc, tag) {
-      if ( !(doc.docType === 'event' || doc.docType === 'property' || doc.docType === 'method') ) {
-        throw new Error('"@'+ tag.name +'" tag found on non-'+ doc.docTyep +' document in file "' + doc.file + '" at line ' + doc.startingLine);
-      }
-      return codeName.getAbsoluteCodeName(doc, tag.description);
     }
   },
 
 
-  { name: 'id' },
+  {
+    name: 'area',
+    defaultFn: function(doc) {
+      // Code files are put in the 'api' area
+      // Other files compute their area from the first path segment
+      return (doc.fileType === 'js') ? 'api' : doc.file.split('/')[0];
+    }
+  },
+
+
+  {
+    name: 'memberof',
+    transformFn: function(doc, tag) {
+      if ( !(doc.docType === 'event' || doc.docType === 'property' || doc.docType === 'method') ) {
+        throw new Error('"@'+ tag.name +'" tag found on non-'+ doc.docTyep +' document in file "' + doc.file + '" at line ' + doc.startingLine);
+      }
+      return tag.description;
+    }
+  },
+
 
   {
     name: 'param',
@@ -126,8 +121,7 @@ module.exports = [
   {
     name: 'restrict',
     defaultFn: function(doc) {
-      checkProperty(doc, 'componentType');
-      if ( doc.componentType === 'directive') {
+      if ( doc.docType === 'directive' || doc.docType === 'input' ) {
         return { element: false, attribute: true, cssClass: false, comment: false };
       }
     },
@@ -160,7 +154,7 @@ module.exports = [
       var EVENTTYPE_REGEX = /^([^\s]*)\s+on\s+([\S\s]*)/;
       var match = EVENTTYPE_REGEX.exec(tag.description);
       // Attach the target to the doc
-      doc.eventTarget = codeName.getAbsoluteCodeName(doc, match[2]);
+      doc.eventTarget = match[2];
       // And return the type
       return match[1];
     }
@@ -177,7 +171,7 @@ module.exports = [
   {
     name: 'element',
     defaultFn: function(doc) {
-      if ( doc.componentType === 'directive' ) {
+      if ( doc.docType === 'directive' || doc.docType === 'input') {
         return'ANY';
       }
     }
@@ -185,8 +179,7 @@ module.exports = [
   
   {
     name: 'requires',
-    multi: true,
-    transformFn: function(doc, tag) { return codeName.getAbsoluteCodeName(doc, tag.description); }
+    multi: true
   },
 
   {

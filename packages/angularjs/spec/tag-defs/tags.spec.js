@@ -32,41 +32,6 @@ describe('tag definitions', function() {
       expect(tagDef.transformFn(doc, tags.getTag('ngdoc'))).toEqual('directive');
     });
 
-    it("should set componentType to be an empty string if the docType is not one of the special types", function() {
-      tags.getTag('ngdoc').description = 'otherType';
-      tagDef.transformFn(doc, tags.getTag('ngdoc'));
-      expect(doc.componentType).toEqual('');
-    });
-
-    it("should set componentType to directive if the docType is a directive type", function() {
-      tagDef.transformFn(doc, tags.getTag('ngdoc'));
-      expect(doc.componentType).toEqual('directive');
-      
-      tags.getTag('ngdoc').description = 'input';
-      tagDef.transformFn(doc, tags.getTag('ngdoc'));
-      expect(doc.componentType).toEqual('directive');
-    });
-
-    it("should set componentType to filter if the docType is filter", function() {
-      tags.getTag('ngdoc').description = 'filter';
-      tagDef.transformFn(doc, tags.getTag('ngdoc'));
-      expect(doc.componentType).toEqual('filter');
-    });
-
-    it("should set componentType to global if the docType isa global type", function() {
-      tags.getTag('ngdoc').description = 'object';
-      tagDef.transformFn(doc, tags.getTag('ngdoc'));
-      expect(doc.componentType).toEqual('global');
-
-      tags.getTag('ngdoc').description = 'type';
-      tagDef.transformFn(doc, tags.getTag('ngdoc'));
-      expect(doc.componentType).toEqual('global');
-
-      tags.getTag('ngdoc').description = 'function';
-      tagDef.transformFn(doc, tags.getTag('ngdoc'));
-      expect(doc.componentType).toEqual('global');
-    });
-
   });
 
   describe("module", function() {
@@ -142,35 +107,6 @@ describe('tag definitions', function() {
       }).toThrow();
     });
 
-    it("should throw an exception if the tag doesn't exist and docType is 'event', 'method' or 'property'", function() {
-      expect(function() {
-        doc.docType = 'event';
-        tagDef.defaultFn(doc, {});
-      }).toThrow();
-      expect(function() {
-        doc.docType = 'property';
-        tagDef.defaultFn(doc, {});
-      }).toThrow();
-      expect(function() {
-        doc.docType = 'method';
-        tagDef.defaultFn(doc, {});
-      }).toThrow();
-    });
-
-    it("should extract the parent id from memberof if the doc is an event, method or property", function() {
-      doc.docType = 'event';
-      expect(tagDef.transformFn(doc, { title: 'memberof', description: 'module:ng.directive:ngInclude' }))
-          .toEqual('module:ng.directive:ngInclude');
-
-      doc.docType = 'method';
-      doc.module = 'ng';
-      expect(tagDef.transformFn(doc, { title: 'memberof', description: 'directive:form.FormController' }))
-          .toEqual('module:ng.directive:form.FormController');
-
-      doc.docType = 'property';
-      doc.componentType = '';
-      expect(tagDef.transformFn(doc, { title: 'memberof', description: '$http' })).toEqual('module:ng.$http');
-    });
   });
 
   describe("param", function() {
@@ -273,12 +209,12 @@ describe('tag definitions', function() {
     });
 
     it("should default to restricting to an attribute if no tag is found and the doc is for a directive", function() {
-      doc.componentType = 'directive';
+      doc.docType = 'directive';
       expect(tagDef.defaultFn(doc)).toEqual({ element: false, attribute: true, cssClass: false, comment: false });
     });
 
     it("should not add a restrict property if the doc is not a directive", function() {
-      doc.componentType = '';
+      doc.docType = '';
       expect(doc.restrict).toBeUndefined();
     });
   });
@@ -325,10 +261,10 @@ describe('tag definitions', function() {
     });
 
     it("should default to ANY if the document is a directive", function() {
-      doc.componentType = 'directive';
+      doc.docType = 'directive';
       expect(tagDef.defaultFn(doc)).toEqual('ANY');
 
-      doc.componentType = 'filter';
+      doc.docType = 'filter';
       expect(tagDef.defaultFn(doc)).toBeUndefined();
     });
   });
@@ -337,20 +273,6 @@ describe('tag definitions', function() {
   describe("requires", function() {
     beforeEach(function() {
       tagDef = getTagDef('requires');
-    });
-
-
-    it("should transform the code name to an absolute form", function() {
-      doc.module = 'ng';
-      doc.name = '$http';
-      doc.docType = 'service';
-      doc.componentType = '';
-      expect(tagDef.transformFn(doc, { title: 'requires', description: '$compile' }))
-        .toEqual('module:ng.$compile');
-      expect(tagDef.transformFn(doc, { title: 'requires', description: 'directive:ngClick' }))
-        .toEqual('module:ng.directive:ngClick');
-      expect(tagDef.transformFn(doc, { title: 'requires', description: 'module:ngRoute.directive:ngView' }))
-        .toEqual('module:ngRoute.directive:ngView');
     });
   });
 
