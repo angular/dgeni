@@ -40,7 +40,7 @@ gulp.task('assets', ['bower', 'clean'], function() {
 
 
 gulp.task('doc-gen', ['clean'], function() {
-  return docGenerator('bikeshed.config.js').generateDocs();
+  return docGenerator('example.config.js').generateDocs();
 });
 
 
