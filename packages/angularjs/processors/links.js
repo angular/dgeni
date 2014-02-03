@@ -7,7 +7,7 @@ module.exports = {
   name: 'links',
   description: 'parse inline {@link} tags and check that they are not broken',
   runAfter: ['id'],
-  runBefore: ['docs-processed'],
+  runBefore: ['processing-docs'],
   process: function parseLinks(docs, partialNames) {
     _.forEach(docs, function(doc) {
 

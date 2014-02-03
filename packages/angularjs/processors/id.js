@@ -1,7 +1,8 @@
 var _ = require('lodash');
 var path = require('canonical-path');
 var checkProperty = require('../../../lib/utils/check-property');
-var codeName = require('../../../lib/utils/code-name');
+var PartialNames = require('../../../lib/utils/partial-name-map').PartialNames;
+var log = require('winston');
 
 module.exports = {
   name: 'id',
@@ -9,7 +10,7 @@ module.exports = {
   runAfter: ['tags-extracted'],
   runBefore: ['processing-docs'],
   init: function(config, injectables) {
-    injectables.value('partialNames', new codeName.PartialNames());
+    injectables.value('partialNames', new PartialNames());
   },
   process: function(docs, partialNames) {
     _.forEach(docs, function(doc) {
@@ -19,22 +20,30 @@ module.exports = {
 
         // The document was extracted from a js file so it is going to be code related
         // compute the id from the other properties
-        checkProperty(doc, 'name');
 
-        if ( doc.memberof ) {
-          doc.id = doc.memberof + '#' + doc.name;
-        } else if ( doc.docType === 'module' ) {
+        if ( doc.docType === 'module' ) {
+
           checkProperty(doc, 'module');
           doc.id = 'module:' + doc.module;
+
         } else {
+
+          checkProperty(doc, 'name');
           checkProperty(doc, 'docType');
           checkProperty(doc, 'module');
           doc.id = 'module:' + doc.module + '.' + doc.docType + ':' + doc.name;
         }
+
       } else {
-        // use the document name if provided or the filename, stripped of its extension
-        doc.id = doc.name || path.basename(doc.file, '.' + doc.fileType);
+
+        // use the filename, stripped of its extension
+        checkProperty(doc, 'file');
+        checkProperty(doc, 'fileType');
+
+        doc.id = path.basename(doc.file, '.' + doc.fileType);
       }
+
+      log.info('Document id: ', doc.id);
 
       partialNames.addDoc(doc);
     });

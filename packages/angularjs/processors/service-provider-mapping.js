@@ -3,8 +3,8 @@ var log = require('winston');
 
 module.exports = {
   name: 'service-provider-mapping',
-  runAfter: ['tags-extracted'],
-
+  runAfter: ['docs-processed'],
+  runBefore: ['rendering-docs'],
   description: 'Relate services to their providers',
 
   process: function relateServicesToProviders(docs) {

@@ -1,5 +1,5 @@
 var plugin = require('../../processors/paths');
-describe("paths doc processor plugin", function() {
+xdescribe("paths doc processor plugin", function() {
   var outputFolder = 'partials';
 
   beforeEach(function() {

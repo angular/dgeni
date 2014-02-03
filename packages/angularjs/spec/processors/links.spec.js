@@ -2,7 +2,7 @@ var _ = require('lodash');
 var logger = require('winston');
 var rewire = require('rewire');
 var plugin = rewire('../../processors/links');
-var codeName = require('../../../../lib/utils/code-name');
+var PartialNames = require('../../../../lib/utils/partial-name-map').PartialNames;
 
 describe("links doc-processor plugin", function() {
   var doc, links, logLevel, partialNames;
@@ -12,7 +12,7 @@ describe("links doc-processor plugin", function() {
     logger.level = 'warn';
     spyOn(logger, 'warn');
 
-    partialNames = new codeName.PartialNames();
+    partialNames = new PartialNames();
     partialNames.addDoc({ id: 'module:ng.directive:ngInclude', path: 'api/ng/directive/ngInclude', name: 'ngInclude' });
 
     doc = {

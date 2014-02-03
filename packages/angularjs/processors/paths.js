@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var path = require('canonical-path');
 var checkProperty = require('../../../lib/utils/check-property');
-var codeName = require('../../../lib/utils/code-name');
+var PartialNames = require('../../../lib/utils/partial-name-map').PartialNames;
 
 module.exports = {
   name: 'paths',
@@ -16,16 +16,16 @@ module.exports = {
     _.forEach(docs, function(doc) {
       if ( doc.fileType === 'js' ) {
 
-        checkProperty(doc, 'area');
-        checkProperty(doc, 'id');
+        // checkProperty(doc, 'area');
+        // checkProperty(doc, 'id');
 
-        var parts = codeName.getAbsCodeNameParts(doc, doc.id);
+        // var parts = codeName.getAbsCodeNameParts(doc, doc.id);
 
-        doc.path = codeName.getCodePath(doc, parts);
+        // doc.path = codeName.getCodePath(doc, parts);
 
-        // Strip off any hash fragment...
-        // If the parts don't contain a "name" then it is a module, in which case use index.html
-        doc.outputPath = partialFolder + '/' + doc.path.split('#').shift() + (parts.name ? '.html' : '/index.html');
+        // // Strip off any hash fragment...
+        // // If the parts don't contain a "name" then it is a module, in which case use index.html
+        // doc.outputPath = partialFolder + '/' + doc.path.split('#').shift() + (parts.name ? '.html' : '/index.html');
 
       } else {
         var folderName = path.dirname(doc.file);

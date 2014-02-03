@@ -3,7 +3,7 @@ var _ = require('lodash');
 module.exports = {
   name: 'module',
   description: 'Compute module related properties',
-  runAfter: ['id'],
+  runAfter: ['links', 'keywords'],
   init: function(config, injectables) {
     injectables.value('modules', {});
   },

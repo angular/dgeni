@@ -1,17 +1,17 @@
 var plugin = require('../../processors/id');
-var codeName = require('../../../../lib/utils/code-name');
+var PartialNames = require('../../../../lib/utils/partial-name-map').PartialNames;
 
 describe("id doc processor", function() {
   var partialNames;
 
   beforeEach(function() {
-    partialNames = new codeName.PartialNames();
+    partialNames = new PartialNames();
   });
 
   it("should add partialNames to the injectables", function() {
     var injectables = createSpyObj('injectables', ['value']);
     plugin.init({}, injectables);
-    expect(injectables.value).toHaveBeenCalledWith('partialNames', jasmine.any(codeName.PartialNames));
+    expect(injectables.value).toHaveBeenCalledWith('partialNames', jasmine.any(PartialNames));
   });
 
 
@@ -26,8 +26,8 @@ describe("id doc processor", function() {
     var doc2 = {
       fileType: 'js',
       module: 'ng',
-      name: 'get',
-      memberof: 'module:ng.service:$http'
+      name: '$http#get',
+      docType: 'method'
     };
 
     var doc3 = {
@@ -39,7 +39,7 @@ describe("id doc processor", function() {
 
     plugin.process([doc1, doc2, doc3], partialNames);
     expect(doc1.id).toEqual('module:ngRoute.directive:ngView');
-    expect(doc2.id).toEqual('module:ng.service:$http#get');
+    expect(doc2.id).toEqual('module:ng.method:$http#get');
     expect(doc3.id).toEqual('module:ng');
 
   });
@@ -59,7 +59,7 @@ describe("id doc processor", function() {
 
     plugin.process([doc1, doc2], partialNames);
 
-    expect(doc1.id).toEqual('foo.bar');
+    expect(doc1.id).toEqual('abc');
     expect(doc2.id).toEqual('abc.xyz');
   });
 
@@ -83,7 +83,7 @@ describe("id doc processor", function() {
 
       doc3 = {
         fileType: 'ngdoc',
-        name: 'foo.bar',
+        file: 'foo.bar.ngdoc',
       };
 
     });
