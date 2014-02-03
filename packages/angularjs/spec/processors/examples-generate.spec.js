@@ -1,4 +1,4 @@
-var plugin = require('../../processors/examples-docs');
+var plugin = require('../../processors/examples-generate');
 var configurer = require('../../../../lib/utils/config');
 
 describe("examples-docs processor", function() {

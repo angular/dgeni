@@ -94,10 +94,10 @@ function generateExampleDirective(example) {
 }
 
 module.exports = {
-  name: 'parse-examples',
+  name: 'examples-parse',
   description: 'Search the documentation for examples that need to be extracted',
   runAfter: ['files-loaded'],
-  // runBefore: ['parsing-tags'],
+  runBefore: ['parsing-tags'],
   init: function(config, injectables) {
     // Reset the unique name map
     exampleNames = {};

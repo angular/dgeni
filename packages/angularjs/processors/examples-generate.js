@@ -50,7 +50,7 @@ function createFileDoc(example, file) {
 
 
 module.exports = {
-  name: 'parse-examples',
+  name: 'examples-generate',
   description: 'Search the documentation for examples that need to be extracted',
   runAfter: ['adding-extra-docs'],
   runBefore: ['extra-docs-added'],

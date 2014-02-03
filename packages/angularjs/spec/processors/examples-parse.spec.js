@@ -1,5 +1,5 @@
 var rewire = require('rewire');
-var plugin = rewire('../../processors/parse-examples');
+var plugin = rewire('../../processors/examples-parse');
 var configurer = require('../../../../lib/utils/config');
 var log = require('winston');
 
@@ -12,7 +12,7 @@ describe("parse-examples doc processor", function() {
   });
 
   it("should be called examples", function() {
-    expect(plugin.name).toEqual('parse-examples');
+    expect(plugin.name).toEqual('examples-parse');
   });
 
 
