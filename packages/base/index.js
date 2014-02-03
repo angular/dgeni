@@ -3,6 +3,7 @@ module.exports = function(config) {
   config.append('source.extractors', require('./extractors/js'));
   
   config.append('processing.processors', [
+    require('./processors/doc-extractor'),
     require('./processors/doctrine-tag-parser'),
     require('./processors/doctrine-tag-extractor'),
     require('./processors/nunjucks-renderer')

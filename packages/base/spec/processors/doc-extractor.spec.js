@@ -1,7 +1,7 @@
 var Q = require('q');
 var MockFS = require('q-io/fs-mock');
 var rewire = require('rewire');
-var fileReaderFactory = rewire('../lib/doc-extractor');
+var plugin = rewire('../../processors/doc-extractor');
 var _ = require('lodash');
 
 var mockFiles = {
@@ -15,8 +15,8 @@ var mockFiles = {
   }
 };
 
-fileReaderFactory.__set__('fs', MockFS(mockFiles));
-fileReaderFactory.__set__('glob.sync', function(pattern) {
+plugin.__set__('fs', MockFS(mockFiles));
+plugin.__set__('glob.sync', function(pattern) {
   // Strip off the "./" from the start of the pattern
   pattern = pattern.replace(/^\.\//,'');
   return _.keys(mockFiles[pattern]);
@@ -40,8 +40,8 @@ describe('doc-extractor', function() {
 
   it('should traverse the specified folder tree, reading each matching file', function() {
 
-    var readFiles = fileReaderFactory({ source: { extractors: [mockNgDocExtractor, mockJsExtractor] }});
-    readFiles(['./docs', './src']).then(function(docs) {
+    plugin.init({ source: { extractors: [mockNgDocExtractor, mockJsExtractor], files: ['./docs', './src'] }});
+    plugin.before().then(function(docs) {
       expect(docs.length).toEqual(4);
       expect(docs[0]).toEqual({
         file: "docs/a.js",
