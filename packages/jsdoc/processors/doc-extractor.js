@@ -52,8 +52,13 @@ module.exports = {
         _.any(extractors, function(extractor) {
           if ( extractor.pattern.test(file) ) {
             docPromises.push(qfs.read(path.resolve(fileInfo.basePath, file)).then(function(content) {
-              var doc = extractor.processFile(file, content, fileInfo.basePath);
-              doc.fileName = path.basename(doc.file, '.'+doc.fileType);
+              var docs = extractor.processFile(file, content, fileInfo.basePath);
+              
+              _.forEach(docs, function(doc) {
+                doc.fileName = path.basename(doc.file, '.'+doc.fileType);
+              });
+
+              return docs;
             }));
             return true;
           }

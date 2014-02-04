@@ -13,13 +13,10 @@ var plugin = module.exports = {
   runBefore: ['docs-rendered'],
   init: function initialize(config, injectables) {
 
-    if ( !config ) {
-      throw new Error('Configuration missing.  Please provide a valid configuration object');
-    }
     if ( !config.basePath ) {
       throw new Error('Invalid configuration: You must provide a basePath in the configuration object');
     }
-    if ( !config.rendering || !config.rendering.templateFolders || !config.rendering.outputFolder ) {
+    if ( !config.rendering || !config.rendering.templateFolders ) {
       throw new Error('Invalid configuration: You must provide a valid config.rendering object');
     }
 
@@ -50,7 +47,7 @@ var plugin = module.exports = {
     });
 
     // Extract any extra helper functions/data from the config
-    helpers = _.defaults({}, config.helpers);
+    helpers = _.defaults({}, config.rendering.helpers);
   },
   /**
    * Render the set of documents to the output folder and extra data, using the templates found in the given folder
@@ -59,31 +56,16 @@ var plugin = module.exports = {
    *                               been rendered and output
    */
   process: function render(docs, extraData, config, templateFinder) {
-    var fileWritePromises = [];
-
     _.forEach(docs, function(doc) {
-      var data, res, outputFile, err;
-      if ( !doc.outputPath ) {
-        throw new Error('Invalid document "' + doc.id + '" - this document has no outputPath.');
-      }
+      var data, res, err;
       try {
         data = _.defaults({}, { doc: doc, docs: docs }, extraData, helpers);
-        outputFile = path.resolve(config.rendering.outputFolder, doc.outputPath);
         var templateFile = templateFinder(data.doc);
-        res = env.render(templateFile, data);
-
-        log.debug('outputFile', doc.outputPath, outputFile);
-
-        fileWritePromises.push(writer.writeFile(outputFile, res).then(function() {
-          log.debug('Rendered doc', outputFile);
-          return outputFile;
-        }));
+        doc.renderedContent = env.render(templateFile, data);
       } catch(ex) {
         throw new Error('Failed to render doc "' + doc.id + '" from file "' + doc.file + '" line ' + doc.startingLine + '\n Error Message follows:\n' + ex.stack);
       }
-      
     });
 
-    return Q.all(fileWritePromises);
   }
 };

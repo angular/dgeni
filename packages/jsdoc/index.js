@@ -6,7 +6,8 @@ module.exports = function(config) {
     require('./processors/doc-extractor'),
     require('./processors/doctrine-tag-parser'),
     require('./processors/doctrine-tag-extractor'),
-    require('./processors/nunjucks-renderer')
+    require('./processors/nunjucks-renderer'),
+    require('./processors/write-files')
   ]);
   config.append('processing.tagDefinitions', require('./tag-defs'));
 
