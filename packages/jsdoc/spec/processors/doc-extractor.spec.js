@@ -46,22 +46,26 @@ describe('doc-extractor', function() {
       expect(docs[0]).toEqual({
         file: "docs/a.js",
         content: "// Mock code file",
-        fileType: 'js'
+        fileType: 'js',
+        fileName: "a"
       });
       expect(docs[1]).toEqual({
         file: "docs/b.ngdoc",
         content: "mock documentation file",
-        fileType: 'ngdoc'
+        fileType: 'ngdoc',
+        fileName: 'b'
       });
       expect(docs[2]).toEqual({
         file: "src/a.js",
         content: "// Mock code file",
-        fileType: 'js'
+        fileType: 'js',
+        fileName: 'a'
       });
       expect(docs[3]).toEqual({
         file: "src/b.js",
         content: "// Other mock code file",
-        fileType: 'js'
+        fileType: 'js',
+        fileName: 'a'
       }).done();
     });
 
