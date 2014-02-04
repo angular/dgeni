@@ -6,13 +6,13 @@ var INLINE_LINK = /\{@link\s+([^\s\}]+)(?:\s+([^}]+?))?\}/g;
 module.exports = {
   name: 'links',
   description: 'parse inline {@link} tags and check that they are not broken',
-  runAfter: ['id'],
+  runAfter: ['tags-extracted'],
   runBefore: ['processing-docs'],
   process: function parseLinks(docs, partialNames) {
     _.forEach(docs, function(doc) {
 
       // Walk the tags and parse the links
-      walk(doc, function(property, key) {
+      walk(doc, function(property) {
         if ( _.isString(property) ) {
           return property.replace(INLINE_LINK, function(match, url, title) {
             var linkInfo = partialNames.getLink(url, title);
