@@ -11,30 +11,15 @@ module.exports = function(config) {
   config.set('processing.tagDefinitions', require('./tag-defs'));
 
   config.append('processing.processors', [
+    require('./processors/partial-names'),
     require('./processors/filter-ngdocs'),
-    require('./processors/paths'),
-    require('./processors/merge-member-docs'),
-    require('./processors/id'),
-    require('./processors/links'),
-    require('./processors/module'),
     require('./processors/examples-parse'),
+    require('./processors/api-docs'),
+    require('./processors/links'),
     require('./processors/examples-generate'),
-    require('./processors/service-provider-mapping'),
-    require('./processors/component-groups'),
-    require ('./processors/parent')
+    require('./processors/component-groups')
   ]);
 
-
-  config.merge('processing.docPropertyHandlers.api', {
-    'module': {
-      id: 'module:${name}',
-      outputPath: '${area}/${name}/index.html'
-    },
-    '_': {
-      id: 'module:${module}.${docType}:${name}',
-      outputPath: '${area}/${module}/${docType}/${name}.html'
-    }
-  });
 
   config.append('processing.docTypes.code', [
     'directive',
