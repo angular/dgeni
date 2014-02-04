@@ -6,22 +6,7 @@ module.exports = [
   {
     name: 'ngdoc',
     required: true,
-    docProperty: 'docType',
-    transformFn: function(doc, tag) {
-
-      // // compute componentType
-      // var componentTypeMap = {
-      //   directive: 'directive',
-      //   input: 'directive',
-      //   filter: 'filter',
-      //   object: 'global',
-      //   type: 'global',
-      //   function: 'global'
-      // };
-      // doc.componentType = componentTypeMap[tag.description] || '';
-
-      return tag.description;
-    }
+    docProperty: 'docType'
   },
 
 
@@ -43,12 +28,20 @@ module.exports = [
   },
   
 
-  { name: 'id' },
+  {
+    name: 'area',
+    defaultFn: function(doc) {
+      // Code files are put in the 'api' area
+      // Other files compute their area from the first path segment
+      return (doc.fileType === 'js') ? 'api' : doc.file.split('/')[0];
+    }
+  },
+
 
   {
     name: 'module',
     defaultFn: function(doc) {
-      if ( doc.fileType === 'js' ) {
+      if ( doc.area === 'api' ) {
         checkProperty(doc, 'file');
         // Calculate the module from the second segment of the file path
         // (the first being the area)
@@ -59,11 +52,21 @@ module.exports = [
 
 
   {
-    name: 'area',
+    name: 'id',
     defaultFn: function(doc) {
-      // Code files are put in the 'api' area
-      // Other files compute their area from the first path segment
-      return (doc.fileType === 'js') ? 'api' : doc.file.split('/')[0];
+      if ( doc.area === 'api' ) {
+        if ( doc.docType === 'module' ) {
+          doc.id = _.template('module:${name}', doc);
+          doc.outputPath = _.template('${area}/${name}/index.html', doc);
+        } else {
+          console.log(doc.file, doc.module, doc.area);
+          doc.id = _.template('module:${module}.${docType}:${name}', doc);
+          doc.outputPath = _.template('${area}/${module}/${docType}/${name}.html', doc);
+        }
+      } else {
+        doc.id = doc.fileName;
+        doc.outputPath = path.join(doc.area, path.dirname(doc.file), doc.fileName + '.html' );
+      }
     }
   },
 
@@ -204,4 +207,5 @@ module.exports = [
   { name: 'global' },
   { name: 'namespace' },
   { name: 'kind' }
+
 ];
