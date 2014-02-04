@@ -3,11 +3,11 @@ var _ = require('lodash');
 module.exports = {
   name: 'component-groups',
   description: 'Ensure that there is a page generated for all groups of components',
-  runAfter: ['adding-extra-docs', 'module'],
-  process: function(docs, modules) {
+  runAfter: ['adding-extra-docs'],
+  process: function(docs, moduleMap) {
     var componentGroupDocs = [];
 
-    _.forEach(modules, function(module) {
+    _.forEach(moduleMap, function(module) {
 
       module.componentGroups = _(module.components)
         .groupBy('docType')
