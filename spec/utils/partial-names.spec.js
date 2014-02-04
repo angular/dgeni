@@ -1,6 +1,6 @@
-var util = require('../../lib/utils/partial-name-map');
+var util = require('../../lib/utils/partial-names');
 
-describe("partial-name-map", function() {
+describe("partial-name", function() {
 
   describe("PartialNames", function() {
     it("should return an array of partial names for a full code name", function() {
