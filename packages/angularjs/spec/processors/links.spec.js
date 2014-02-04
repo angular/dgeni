@@ -2,7 +2,7 @@ var _ = require('lodash');
 var logger = require('winston');
 var rewire = require('rewire');
 var plugin = rewire('../../processors/links');
-var PartialNames = require('../../../../lib/utils/partial-name-map').PartialNames;
+var PartialNames = require('../../../../lib/utils/partial-names').PartialNames;
 
 describe("links doc-processor plugin", function() {
   var doc, links, logLevel, partialNames;

@@ -1,19 +1,26 @@
 var _ = require('lodash');
+var partialNames = require('../../../lib/utils/partial-names');
 
 module.exports = {
   name: 'parent',
   description: 'Compute the parent document for each document',
-  runAfter: ['id', 'component-groups'],
+  runAfter: ['extra-docs-added'],
+  runBefore: ['rendering-docs'],
   init: function(config, injectables) {
     injectables.value('topLevelDocs', {});
   },
-  process: function(docs, partialNames, topLevelDocs, pathMap) {
+  process: function(docs, partialNames, topLevelDocs) {
     _.forEach(docs, function(doc) {
       if ( !doc.parent ) {
 
         // Compute this doc's parent
-        // The convention is that each segment is delimited by a dot, hash or colon
-        var parentId = doc.id.replace(/^(.*)[#:.][^#:.]+$/, '$1');
+        var parentId;
+        if ( doc.docType === 'componentGroup') {
+          parentId = doc.id.slice(0, -doc.groupType.length-1);
+        } else {
+          parentId = doc.id.slice(0, doc.id.lastIndexOf(doc.docType) + doc.docType.length);
+        }
+
         if ( parentId == doc.id ) {
 
           // This page is top level so record it and bail out
@@ -34,7 +41,7 @@ module.exports = {
       }
 
       if ( !doc.parentDoc ) {
-        throw new Error('Invalid parent id "' + doc.parent);
+        throw new Error('Invalid parent id "' + doc.parent + '"');
       }
 
       // Wire up the childDocs property to link back down from the parent

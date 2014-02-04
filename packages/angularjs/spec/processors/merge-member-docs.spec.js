@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var plugin = require('../../processors/merge-member-docs');
-var PartialNames = require('../../../../lib/utils/partial-name-map').PartialNames;
+var PartialNames = require('../../../../lib/utils/partial-names').PartialNames;
 
 describe('merge-member-docs', function() {
   var docs, mergedDocs;

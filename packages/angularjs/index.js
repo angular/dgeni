@@ -24,6 +24,18 @@ module.exports = function(config) {
     require ('./processors/parent')
   ]);
 
+
+  config.merge('processing.docPropertyHandlers.api', {
+    'module': {
+      id: 'module:${name}',
+      outputPath: '${area}/${name}/index.html'
+    },
+    '_': {
+      id: 'module:${module}.${docType}:${name}',
+      outputPath: '${area}/${module}/${docType}/${name}.html'
+    }
+  });
+
   config.append('processing.docTypes.code', [
     'directive',
     'input',

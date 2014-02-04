@@ -1,5 +1,5 @@
 var plugin = require('../../processors/id');
-var PartialNames = require('../../../../lib/utils/partial-name-map').PartialNames;
+var PartialNames = require('../../../../lib/utils/partial-names').PartialNames;
 
 describe("id doc processor", function() {
   var partialNames;
@@ -49,18 +49,24 @@ describe("id doc processor", function() {
     var doc1 = {
       fileType: 'ngdoc',
       name: 'foo.bar',
-      file: 'guide/abc.ngdoc',
+      file: 'guide/abc.ngdoc'
     };
 
     var doc2 = {
       fileType: 'ngdoc',
-      file: 'guide/abc.xyz.ngdoc',
+      file: 'guide/abc.xyz.ngdoc'
     };
 
-    plugin.process([doc1, doc2], partialNames);
+    var doc3 = {
+      fileType: 'ngdoc',
+      file: 'guide/index.ngdoc'
+    };
+
+    plugin.process([doc1, doc2, doc3], partialNames);
 
     expect(doc1.id).toEqual('abc');
     expect(doc2.id).toEqual('abc.xyz');
+    expect(doc3.id).toEqual('guide');
   });
 
   describe("partialNames", function() {
@@ -83,7 +89,7 @@ describe("id doc processor", function() {
 
       doc3 = {
         fileType: 'ngdoc',
-        file: 'foo.bar.ngdoc',
+        file: 'guide/foo.bar.ngdoc',
       };
 
     });

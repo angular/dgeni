@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var path = require('canonical-path');
 var checkProperty = require('../../../lib/utils/check-property');
-var PartialNames = require('../../../lib/utils/partial-name-map').PartialNames;
+var PartialNames = require('../../../lib/utils/partial-names').PartialNames;
 var log = require('winston');
 
 module.exports = {
@@ -40,7 +40,10 @@ module.exports = {
         checkProperty(doc, 'file');
         checkProperty(doc, 'fileType');
 
-        doc.id = path.basename(doc.file, '.' + doc.fileType);
+        doc.id = doc.fileName;
+        if ( doc.id === 'index' ) {
+          doc.id = path.dirname(doc.file);
+        }
       }
 
       log.debug('Identified document: ', doc.id);
