@@ -7,7 +7,7 @@ var templateFolder, outputFolder;
 
 
 function outputPath(example, fileName) {
-  return path.join(outputFolder, example.id, fileName);
+  return path.join(example.outputFolder, fileName);
 }
 
 function createExampleDoc(example) {
@@ -19,7 +19,7 @@ function createExampleDoc(example) {
     startingLine: example.doc.startingLine,
     example: example,
     path: example.id,
-    outputPath: example.outputPath,
+    outputPath: example.outputFolder + '/index.html',
     scripts: [],
     stylesheets: []
   };

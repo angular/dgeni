@@ -51,10 +51,6 @@ function uniqueName(name) {
   return name;
 }
 
-function outputPath(example, fileName) {
-  return path.join(outputFolder, example.id, fileName);
-}
-
 function generateExampleDirective(example) {
 
   var html = '';
@@ -82,7 +78,7 @@ function generateExampleDirective(example) {
   });
 
   // Write out the iframe that will host the runnable example
-  html += '<iframe class="runnable-example-frame" src="' + example.outputPath + '" name="' + example.id + '"></iframe>\n';
+  html += '<iframe class="runnable-example-frame" src="' + example.outputFolder + '" name="' + example.id + '"></iframe>\n';
 
   html += '</div>';
 
@@ -114,7 +110,7 @@ module.exports = {
         example.files = extractFiles(exampleText);
         example.id = 'example-' + uniqueName(example.name || 'example');
         example.doc = doc;
-        example.outputPath = outputPath(example, 'index.html');
+        example.outputFolder = path.join(outputFolder, example.id);
         
         // store the example information for later
         examples.push(example);

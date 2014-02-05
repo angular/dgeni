@@ -15,9 +15,9 @@ module.exports = function(config) {
     require('./processors/filter-ngdocs'),
     require('./processors/examples-parse'),
     require('./processors/api-docs'),
-    require('./processors/links'),
     require('./processors/examples-generate'),
-    require('./processors/component-groups')
+    require('./processors/component-groups-generate'),
+    require('./processors/links')
   ]);
 
 
@@ -37,6 +37,9 @@ module.exports = function(config) {
 
   config.prepend('rendering.templatePatterns', [
     '${ doc.template }',
+    '${doc.area}/${ doc.id }.${ doc.docType }.template.html',
+    '${doc.area}/${ doc.id }.template.html',
+    '${doc.area}/${ doc.docType }.template.html',
     '${ doc.id }.${ doc.docType }.template.html',
     '${ doc.id }.template.html',
     '${ doc.docType }.template.html'

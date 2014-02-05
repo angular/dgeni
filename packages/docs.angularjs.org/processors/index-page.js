@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var log = require('winston');
+var path = require('canonical-path');
 var deployment;
 
 module.exports = {
@@ -27,11 +28,12 @@ module.exports = {
     _.forEach(deployment.environments, function(environment) {
 
       var indexDoc = _.defaults({
-        docType: 'index',
+        docType: 'indexPage',
         areas: areas
       }, environment);
 
       indexDoc.id = 'index' + (environment.name === 'default' ? '' : '-' + environment.name);
+      // Use .. to put it at the root of the build
       indexDoc.outputPath = indexDoc.id + '.html';
 
       docs.push(indexDoc);

@@ -4,10 +4,6 @@ var log = require('winston');
 module.exports = {
   name: 'link',
   process: function(url, partialNames, title, doc) {
-    var linkInfo = partialNames.getLink(url, title);
-    if ( !linkInfo.valid ) {
-      log.warn('Error rendering link filter\n' + linkInfo.error);
-    }
-    return _.template('<a href="${url}">${title}</a>', linkInfo);
+    return _.template('{@ link ${url} ${title} }', { url: url, title: title });
   }
 };

@@ -11,16 +11,19 @@ module.exports = {
   runAfter:['writing-files'],
   runBefore: ['files-written'],
   init: function(config) {
-    outputFolder = config.get('rendering, outputFolder', 'build');
+    outputFolder = path.resolve(config.basePath, config.rendering.outputFolder);
   },
   process: function(docs) {
     return _.map(docs, function(doc) {
 
       if ( !doc.outputPath ) {
-        log.error('Invalid document "' + doc.id + '" - this document has no outputPath.');
+        console.log(doc);
+        log.error('Invalid document "' + doc.id + ', ' + doc.docType + '" - this document has no outputPath.');
       }
 
       var outputFile = path.resolve(outputFolder, doc.outputPath);
+      log.debug('writing file', outputFile);
+
 
       return writer.writeFile(outputFile, doc.renderedContent).then(function() {
         log.debug('Rendered doc', outputFile);

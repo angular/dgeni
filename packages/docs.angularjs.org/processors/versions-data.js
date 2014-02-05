@@ -7,7 +7,7 @@ module.exports = {
   name: 'versions-data',
   description: 'This plugin will create a new doc that will be rendered as an angularjs module ' +
                'which will contain meta information about the versions of angular',
-  runAfter: ['adding-extra-docs'],
+  runAfter: ['adding-extra-docs', 'pages-data'],
   runBefore: ['extra-docs-added'],
   init: function(config) {
     package = config.source.nodePackage;
@@ -18,7 +18,7 @@ module.exports = {
       docType: 'versions-data',
       id: 'versions-data',
       template: 'versions-data.template.js',
-      outputPath: 'js/versions-data.js'
+      outputPath: 'js/versions-data.js',
     };
 
     versionDoc.currentVersion = gitInfo.getCurrentVersion(package);

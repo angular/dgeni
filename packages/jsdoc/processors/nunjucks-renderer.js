@@ -24,7 +24,6 @@ var plugin = module.exports = {
     config.rendering.templateFolders = _.map(config.rendering.templateFolders, function(templateFolder) {
       return path.resolve(config.basePath, templateFolder);
     });
-    config.rendering.outputFolder = path.resolve(config.basePath, config.rendering.outputFolder);
 
     // Add the template finder to the dependency injector
     injectables.value('templateFinder', templateFinderFactory(config));
@@ -57,12 +56,14 @@ var plugin = module.exports = {
    */
   process: function render(docs, extraData, config, templateFinder) {
     _.forEach(docs, function(doc) {
+      log.debug('Rendering doc', doc.id, doc.name);
       var data, res, err;
       try {
         data = _.defaults({}, { doc: doc, docs: docs }, extraData, helpers);
         var templateFile = templateFinder(data.doc);
         doc.renderedContent = env.render(templateFile, data);
       } catch(ex) {
+        console.log(_.omit(doc, ['content', 'moduleDoc', 'components', 'serviceDoc', 'providerDoc']));
         throw new Error('Failed to render doc "' + doc.id + '" from file "' + doc.file + '" line ' + doc.startingLine + '\n Error Message follows:\n' + ex.stack);
       }
     });

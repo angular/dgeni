@@ -18,6 +18,8 @@ module.exports = {
       if ( doc.docType === 'module' ) {
 
         moduleMap[doc.name] = doc;
+
+        // Create a place to store references to the module's components
         doc.components = [];
 
         // Compute the package name and filename for the module
@@ -29,6 +31,11 @@ module.exports = {
           doc.packageFile = doc.packageName + '.js';
         }
       }
+
+      // Only track this doc if it is not going to be merged as a member of another doc
+      if ( !doc.isMember ) {
+        partialNames.addDoc(doc);
+      }
     });
 
 
@@ -38,41 +45,36 @@ module.exports = {
       property: 'properties',
       event: 'events'
     };
-    docs = _.where(docs, function(doc) {
 
-      var isChild = false;
+    docs = _.filter(docs, function(doc) {
 
-      _.forEach(mergeableTypes, function(containerProperty, memberDocType) {
-        var containerDoc;
+      if ( doc.isMember ) {
+        log.debug('child doc found', doc.id, doc.memberof);
 
-        if ( doc.docType === memberDocType ) {
+        containerDoc = partialNames.getDoc(doc.memberof);
 
-          log.debug('child doc found', doc.id);
-          isChild = true;
-
-          // Convert a name that contains a hash into memberof and id
-          doc.id.replace(/^([^#]+)(?:#([^#]+))?$/, function(match, memberof, id) {
-            doc.memberof = memberof;
-            doc.id = id;
-          });
-
-          containerDoc = partialNames.getDoc(doc.memberof);
-
-          if ( !containerDoc ) {
-            log.warn('Missing container document "'+ doc.memberof + '" referenced by "'+ doc.id + '" in file "' + doc.file + '" at line ' + doc.startingLine);
-            return;
-          }
-          if ( _.isArray(containerDoc) ) {
+        if ( !containerDoc ) {
+          log.warn('Missing container document "'+ doc.memberof + '" referenced by "'+ doc.id + '" in file "' + doc.file + '" at line ' + doc.startingLine);
+          return;
+        }
+        if ( _.isArray(containerDoc) ) {
+          // The memberof field was ambiguous, try prepending the module name too
+          containerDoc = partialNames.getDoc(_.template('${module}.${memberof}', doc));
+          if ( !containerDoc || _.isArray(containerDoc) ) {
             log.warn('Ambiguous container document reference "'+ doc.memberof + '" referenced by "'+ doc.id + '" in file "' + doc.file + '" at line ' + doc.startingLine);
             return;
+          } else {
+            doc.memberof = _.template('${module}.${memberof}', doc);
           }
-
-          var container = containerDoc[containerProperty] = containerDoc[containerProperty] || [];
-          container.push(doc);
         }
-      });
 
-      return !isChild;
+        var containerProperty = mergeableTypes[doc.docType];
+        var container = containerDoc[containerProperty] = containerDoc[containerProperty] || [];
+        container.push(doc);
+
+      } else {
+        return doc;
+      }
     });
 
     // Map services to their providers
@@ -101,5 +103,7 @@ module.exports = {
       }
     });
 
+
+    return docs;
   }
 };

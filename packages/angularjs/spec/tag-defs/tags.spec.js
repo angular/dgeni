@@ -23,46 +23,6 @@ describe('tag definitions', function() {
     };
   });
 
-  describe("ngdoc", function() {
-    beforeEach(function() {
-      tagDef = getTagDef('ngdoc');
-    });
-
-    it("should extract the docType from the ngdoc tag", function() {
-      expect(tagDef.transformFn(doc, tags.getTag('ngdoc'))).toEqual('directive');
-    });
-
-  });
-
-  describe("module", function() {
-    beforeEach(function() {
-      tagDef = getTagDef('module');
-    });
-
-    it("extracts the module from the file name if it is a js file", function() {
-      expect(tagDef.defaultFn(doc)).toEqual('ngRoute');
-
-      doc.file = 'src/ng/compile.js';
-      expect(tagDef.defaultFn(doc)).toEqual('ng');
-    });
-  });
-
-  describe("area", function() {
-    beforeEach(function() {
-      tagDef = getTagDef('area');
-    });
-
-    it("should be 'api' if the fileType is js", function() {
-      expect(tagDef.defaultFn(doc)).toEqual('api');
-    });
-
-    it("should compute the area from the file name", function() {
-      doc.fileType = 'ngdoc';
-      doc.file ='guide/scope/binding.ngdoc';
-      expect(tagDef.defaultFn(doc)).toEqual('guide');
-    });
-  });
-
 
   describe("name", function() {
     beforeEach(function() {
@@ -96,17 +56,49 @@ describe('tag definitions', function() {
   });
 
 
-  describe("memberof", function() {
+  describe("area", function() {
     beforeEach(function() {
-      tagDef = getTagDef('memberof');
+      tagDef = getTagDef('area');
     });
 
-    it("should throw an exception if the tag exists and docType is not 'event', 'method' or 'property'", function() {
-      expect(function() {
-        tagDef.transformFn(doc, {});
-      }).toThrow();
+    it("should be 'api' if the fileType is js", function() {
+      expect(tagDef.defaultFn(doc)).toEqual('api');
     });
 
+    it("should compute the area from the file name", function() {
+      doc.fileType = 'ngdoc';
+      doc.file ='guide/scope/binding.ngdoc';
+      expect(tagDef.defaultFn(doc)).toEqual('guide');
+    });
+  });
+
+
+  describe("module", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('module');
+    });
+
+    it("extracts the module from the file name if it is from the api area", function() {
+      doc.area = 'api';
+      doc.file = 'src/ng/compile.js';
+      expect(tagDef.defaultFn(doc)).toEqual('ng');
+    });
+  });
+
+  describe("id", function() {
+    beforeEach(function() {
+      tagDef = getTagDef('id');
+    });
+    describe("(for api docs)", function() {
+      it("should compute the id from other properties", function() {
+        doc.docType = 'service';
+        doc.name = '$http#get';
+        doc.area = 'api';
+        doc.module = 'ngRoute';
+
+        expect(tagDef.defaultFn(doc)).toEqual('module:ngRoute.service:$http#get');
+      });
+    });
   });
 
   describe("param", function() {

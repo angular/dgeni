@@ -54,30 +54,41 @@ module.exports = [
   {
     name: 'id',
     defaultFn: function(doc) {
-      if ( doc.area === 'api' ) {
+      var partialFolder = 'partials';
+      if ( doc.area === 'api' && doc.docType !== 'overview' ) {
         if ( doc.docType === 'module' ) {
           doc.id = _.template('module:${name}', doc);
           doc.outputPath = _.template('${area}/${name}/index.html', doc);
-        } else {
-          console.log(doc.file, doc.module, doc.area);
+          doc.path = _.template('${area}/${name}', doc);
+
+        } else if ( doc.name.indexOf('#' ) === -1 ) {
           doc.id = _.template('module:${module}.${docType}:${name}', doc);
           doc.outputPath = _.template('${area}/${module}/${docType}/${name}.html', doc);
+          doc.path = _.template('${area}/${module}/${docType}/${name}', doc);
+
+        } else {
+          doc.id = doc.name;
+          doc.isMember = true;
+          doc.memberof = doc.id.split('#')[0];
+          // This is a member of another doc so it doesn't need an output path
         }
       } else {
         doc.id = doc.fileName;
-        doc.outputPath = path.join(doc.area, path.dirname(doc.file), doc.fileName + '.html' );
+        if ( doc.docType === 'error' ) {
+          doc.id = doc.name;
+        }
+        doc.path = path.join(path.dirname(doc.file));
+        if ( doc.fileName !== 'index' ) {
+          doc.path += '/' + doc.fileName;
+        }
+        doc.outputPath = doc.path + '.html';
       }
-    }
-  },
 
-
-  {
-    name: 'memberof',
-    transformFn: function(doc, tag) {
-      if ( !(doc.docType === 'event' || doc.docType === 'property' || doc.docType === 'method') ) {
-        throw new Error('"@'+ tag.name +'" tag found on non-'+ doc.docTyep +' document in file "' + doc.file + '" at line ' + doc.startingLine);
+      if ( doc.outputPath ) {
+        doc.outputPath = partialFolder + '/' + doc.outputPath;
       }
-      return tag.description;
+      
+      return doc.id;
     }
   },
 

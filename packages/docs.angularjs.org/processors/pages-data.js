@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var path = require('canonical-path');
+var log = require('winston');
 
 var AREA_NAMES = {
   api: 'API',
@@ -108,12 +109,17 @@ var navGroupMappers = {
   }
 };
 
+var outputFolder;
+
 module.exports = {
   name: 'pages-data',
   description: 'This plugin will create a new doc that will be rendered as an angularjs module ' +
                'which will contain meta information about the pages and navigation',
-  runAfter: ['adding-extra-docs'],
+  runAfter: ['adding-extra-docs', 'component-groups-generate'],
   runBefore: ['extra-docs-added'],
+  init: function(config) {
+    outputFolder = config.rendering.outputFolder;
+  },
   process: function(docs) {
 
     // We are only interested in docs that are in a area and not landing pages
@@ -151,13 +157,19 @@ module.exports = {
         };
       });
 
+    _.forEach(docs, function(doc) {
+      if ( !doc.path ) {
+        log.warn('Missing path property for ', doc.id);
+      }
+    });
 
     // Extract a list of basic page information for mapping paths to paritals and for client side searching
     var pages = _(docs)
       .map(function(doc) {
-        return _.pick(doc, [
+        var page = _.pick(doc, [
           'docType', 'id', 'name', 'area', 'outputPath', 'path', 'searchTerms'
         ]);
+        return page;
       })
       .indexBy('path')
       .value();
