@@ -11,7 +11,7 @@ module.exports = function(config) {
   config = angularjsPackage(config);
   
   config.append('processing.processors', [
-    // require('./processors/keywords'),
+    require('./processors/keywords'),
     require('./processors/versions-data'),
     require('./processors/pages-data'),
     require('./processors/index-page')

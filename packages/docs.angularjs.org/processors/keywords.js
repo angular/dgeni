@@ -60,7 +60,7 @@ module.exports = {
 
     _.forEach(docs, function(doc) {
 
-      walk(doc, extractWords);
+      _.forEach(doc, extractWords);
 
       doc.searchTerms = {
         titleWords: extractTitleWords(doc.name),
