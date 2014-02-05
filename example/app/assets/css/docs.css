@@ -1,6 +1,14 @@
 body {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(120px%,rgba(0,0,0,0)), color-stop(96%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 120px,rgba(0,0,0,0) 96%); /* Chrome10+,Safari5.1+ */
+  position:relative;
+}
+body:before {
+  content:"";
+  position:absolute;
+  top:0;
+  background:#eee;
+  height:120px;
+  left:0;
+  right:0;
 }
 
 /* Logo */
@@ -55,6 +63,9 @@ h1,h2,h3,h4,h5,h6 {
 
 
 .footer {
+  border-top:20px solid white;
+  position:relative;
+  z-index:100;
   padding-top: 2em;
   background-color: #333;
   color: white;
@@ -101,12 +112,14 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .nav-breadcrumb {
-  padding:0;
+  padding:0 0 20px;
   margin:4px 0 20px;
 }
 
 .nav-breadcrumb-entry {
   font-family: "Open Sans";
+  padding:0;
+  margin:0;
   font-size:18px;
   display:inline-block;
   vertical-align:middle;
@@ -155,9 +168,9 @@ h1,h2,h3,h4,h5,h6 {
 
 pre {
   padding:15px;
-  border:2px solid #ddd;
+  border:1px solid #ddd;
   display:block;
-  border-radius:10px;
+  border-radius:5px;
 }
 
 .aside-nav a,
@@ -309,4 +322,58 @@ iframe.example {
 
 .search-close-icon {
   margin-top:14px;
+}
+
+.variables-matrix {
+  border-collapse:separate;
+  border-radius:5px;
+  border:1px solid #ddd;
+  width:100%;
+}
+
+.variables-matrix td,
+.variables-matrix th {
+  padding:0 10px;
+}
+
+.variables-matrix td {
+  border-top:1px solid #eee;
+}
+
+.variables-matrix td + td,
+.variables-matrix th + th {
+  border-left:1px solid #eee;
+}
+
+.main-body-grid {
+  margin-top:50px;
+  position:relative;
+  min-height:100%;
+}
+.main-body-grid > .grid-right {
+  margin-left:270px;
+  position:relative;
+}
+
+.main-body-grid > .grid-left,
+.main-body-grid > .grid-right {
+  padding:20px 0;
+}
+
+.main-body-grid > .grid-left {
+  position:fixed;
+  top:50px;
+  width:260px;
+  height:100%;
+  overflow:auto;
+}
+
+.version-picker {
+  margin-bottom:30px;
+}
+
+.improve-docs {
+  position:absolute;
+  top:20px;
+  right:20px;
 }
