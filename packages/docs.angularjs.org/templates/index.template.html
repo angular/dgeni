@@ -30,7 +30,7 @@
 </head>
 <body>
   <header class="header">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" ng-controller="DocsSearchCtrl">
       <div class="container">
         <div class="navbar-header">
           <a class="brand navbar-brand" href="http://angularjs.org">
@@ -101,16 +101,22 @@
                    docs-search-input
                    autocomplete="off" />
           </form>
-          <div ng-show="hasResults" class="search-results">
-            <div ng-repeat="(key, value) in results" class="search-group" ng-class="colClassName">
-              <h4>{{ key }}</h4>
-              <div ng-repeat="item in value" class="search-result">
-                <a ng-click="hideResults()" href="{{ item.url }}">{{ item.name }}</a>
+        </div>
+      </div>
+      <div class="search-results-container" ng-show="hasResults">
+        <div class="container">
+          <a href="" ng-click="hideResults()" class="search-close">
+            <span class="glyphicon glyphicon-remove search-close-icon"></span>
+          </a>
+          <div class="search-results-frame">
+            <div ng-repeat="(key, value) in results" class="search-results-group" ng-class="colClassName + ' col-group-' + key">
+              <h4 class="search-results-group-heading">{{ key }}</h4>
+              <div class="search-results">
+                <div ng-repeat="item in value" class="search-result">
+                  - <a ng-click="hideResults()" ng-href="{{ item.path }}">{{ item.name }}</a>
+                </div>
               </div>
             </div>
-            <a href="" ng-click="hideResults()" class="search-close">
-              <span class="icon-remove-sign"></span>
-            </a>
           </div>
         </div>
       </div>

@@ -73,22 +73,32 @@ angular.module('search', [])
     this.field('keywords', { boost : 20 });
   });
 
-  angular.forEach(NG_PAGES, function(page) {
-    index.store({
-      id: page.id,
-      title: page.searchTerms.titleWords,
-      keywords: page.searchTerms.keywords
-    });
+  angular.forEach(NG_PAGES, function(page, key) {
+    if(page.searchTerms) {
+      index.store({
+        id : key,
+        title : page.searchTerms.titleWords,
+        keywords : page.searchTerms.keywords
+      });
+    };
   });
 
   return function(q) {
-    var results = {};
+    var results = {
+      api : [],
+      tutorial : [],
+      guide : [],
+      error : [],
+      misc : []
+    };
     angular.forEach(index.search(q), function(result) {
-      var item = NG_PAGES[result.ref];
+      var key = result.ref;
+      var item = NG_PAGES[key];
       var area = item.area;
+      item.path = '/' + key;
 
-      results[area] = results[area] || [];
-      if(results[area].length < 15) {
+      var limit = area == 'api' ? 40 : 14;
+      if(results[area].length < limit) {
         results[area].push(item);
       }
     });
