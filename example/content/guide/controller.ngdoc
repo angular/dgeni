@@ -57,7 +57,7 @@ myApp.controller('GreetingCtrl', ['$scope', function($scope) {
 
 We have used an **inline injection annotation** to explicitly specify the dependency
 of the Controller on the `$scope` service provided by Angular. See the guide on 
-{@link http://docs.angularjs.org/guide/di Dependency Injection} for more information.
+[Dependency Injection](http://docs.angularjs.org/guide/di) for more information.
 
 
 # Adding Behavior to a Scope Object
@@ -209,7 +209,7 @@ It is common to attach Controllers at different levels of the DOM hierarchy.  Si
 {@link api/ng.directive:ngController ng-controller} directive creates a new child scope, we get a
 hierarchy of scopes that inherit from each other.  The `$scope` that each Controller receives will
 have access to properties and methods defined by Controllers higher up the hierarchy.
-See {@link https://github.com/angular/angular.js/wiki/Understanding-Scopes Understanding Scopes} for
+See [Understanding Scopes](https://github.com/angular/angular.js/wiki/Understanding-Scopes) for
 more information about scope inheritance.
 
 <example module="scopeInheritance">

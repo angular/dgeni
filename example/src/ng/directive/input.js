@@ -976,8 +976,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   /**
    * @ngdoc method
-   * @name $render
-   * @memberof global:ngModel.NgModelController
+   * @name type:ngModel.NgModelController#$render
    *
    * @description
    * Called when the view needs to be updated. It is expected that the user of the ng-model
@@ -987,8 +986,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   /**
    * @ngdoc method
-   * @name $isEmpty
-   * @memberof global:ngModel.NgModelController
+   * @name type:ngModel.NgModelController#$isEmpty
    *
    * @description
    * This is called when we need to determine if the value of the input is empty.
@@ -1023,8 +1021,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   /**
    * @ngdoc method
-   * @name $setValidity
-   * @memberof global:ngModel.NgModelController
+   * @name type:ngModel.NgModelController#$setValidity
    *
    * @description
    * Change the validity state, and notifies the form when the control changes validity. (i.e. it
@@ -1067,8 +1064,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   /**
    * @ngdoc method
-   * @name $setPristine
-   * @memberof global:ngModel.NgModelController
+   * @name type:ngModel.NgModelController#$setPristine
    *
    * @description
    * Sets the control to its pristine state.
@@ -1084,8 +1080,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   /**
    * @ngdoc method
-   * @name $setViewValue
-   * @memberof global:ngModel.NgModelController
+   * @name type:ngModel.NgModelController#$setViewValue
    *
    * @description
    * Update the view value.
@@ -1187,7 +1182,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  *
  * For best practices on using `ngModel`, see:
  *
- *  - {@link https://github.com/angular/angular.js/wiki/Understanding-Scopes}
+ *  - [](https://github.com/angular/angular.js/wiki/Understanding-Scopes)
  *
  * For basic examples, how to use `ngModel`, see:
  *

@@ -44,8 +44,7 @@ function $InterpolateProvider() {
 
   /**
    * @ngdoc method
-  * @name startSymbol
-   * @memberof $interpolateProvider
+  * @name $interpolateProvider#startSymbol
    * @description
    * Symbol to denote start of expression in the interpolated string. Defaults to `{{`.
    *
@@ -63,8 +62,7 @@ function $InterpolateProvider() {
 
   /**
    * @ngdoc method
-  * @name endSymbol
-   * @memberof $interpolateProvider
+  * @name $interpolateProvider#endSymbol
    * @description
    * Symbol to denote the end of expression in the interpolated string. Defaults to `}}`.
    *
@@ -205,8 +203,7 @@ function $InterpolateProvider() {
 
     /**
      * @ngdoc method
-    * @name startSymbol
-     * @memberof $interpolate
+    * @name $interpolate#startSymbol
      * @description
      * Symbol to denote the start of expression in the interpolated string. Defaults to `{{`.
      *
@@ -222,8 +219,7 @@ function $InterpolateProvider() {
 
     /**
      * @ngdoc method
-    * @name endSymbol
-     * @memberof $interpolate
+    * @name $interpolate#endSymbol
      * @description
      * Symbol to denote the end of expression in the interpolated string. Defaults to `}}`.
      *

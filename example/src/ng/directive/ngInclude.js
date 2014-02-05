@@ -16,9 +16,8 @@
  * module:ng.$sce Strict Contextual Escaping}.
  *
  * In addition, the browser's
- * {@link https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_XMLHttpRequest
- * Same Origin Policy} and {@link http://www.w3.org/TR/cors/ Cross-Origin Resource Sharing
- * (CORS)} policy may further restrict whether the template is successfully loaded.
+ * [* Same Origin Policy](https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_XMLHttpRequest) and [Cross-Origin Resource Sharing
+ * (CORS)](http://www.w3.org/TR/cors/) policy may further restrict whether the template is successfully loaded.
  * For example, `ngInclude` won't work for cross-domain requests on all browsers and for `file://`
  * access on some browsers.
  *
@@ -131,8 +130,7 @@
 
 /**
  * @ngdoc event
- * @name $includeContentRequested
- * @memberof directive:ngInclude
+ * @name directive:ngInclude#$includeContentRequested
  * @eventType emit on the scope ngInclude was declared in
  * @description
  * Emitted every time the ngInclude content is requested.
@@ -141,8 +139,7 @@
 
 /**
  * @ngdoc event
- * @name $includeContentLoaded
- * @memberof directive:ngInclude
+ * @name directive:ngInclude#$includeContentLoaded
  * @eventType emit on the current ngInclude scope
  * @description
  * Emitted every time the ngInclude content is reloaded.

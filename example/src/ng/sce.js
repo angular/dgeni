@@ -136,8 +136,7 @@ function $SceDelegateProvider() {
 
   /**
    * @ngdoc method
-   * @name resourceUrlWhitelist
-   * @memberof $sceDelegateProvider
+   * @name $sceDelegateProvider#resourceUrlWhitelist
    * @function
    *
    * @param {Array=} whitelist When provided, replaces the resourceUrlWhitelist with the value
@@ -166,8 +165,7 @@ function $SceDelegateProvider() {
 
   /**
    * @ngdoc method
-  * @name resourceUrlBlacklist
-   * @memberof $sceDelegateProvider
+  * @name $sceDelegateProvider#resourceUrlBlacklist
    * @function
    *
    * @param {Array=} blacklist When provided, replaces the resourceUrlBlacklist with the value
@@ -270,8 +268,7 @@ function $SceDelegateProvider() {
 
     /**
      * @ngdoc method
-    * @name trustAs
-     * @memberof $sceDelegate
+    * @name $sceDelegate#trustAs
      *
      * @description
      * Returns an object that is trusted by angular for use in specified strict
@@ -308,8 +305,7 @@ function $SceDelegateProvider() {
 
     /**
      * @ngdoc method
-    * @name valueOf
-     * @memberof $sceDelegate
+    * @name $sceDelegate#valueOf
      *
      * @description
      * If the passed parameter had been returned by a prior call to {@link $sceDelegate#trustAs
@@ -335,8 +331,7 @@ function $SceDelegateProvider() {
 
     /**
      * @ngdoc method
-    * @name getTrusted
-     * @memberof $sceDelegate
+    * @name $sceDelegate#getTrusted
      *
      * @description
      * Takes the result of a {@link $sceDelegate#trustAs `$sceDelegate.trustAs`} call and
@@ -490,8 +485,7 @@ function $SceDelegateProvider() {
  *
  * *Please note*:
  * The browser's
- * {@link https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_XMLHttpRequest
- * Same Origin Policy} and {@link http://www.w3.org/TR/cors/ Cross-Origin Resource Sharing (CORS)}
+ * [* Same Origin Policy](https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_XMLHttpRequest) and [Cross-Origin Resource Sharing (CORS)](http://www.w3.org/TR/cors/)
  * policy apply in addition to this and may further restrict whether the template is successfully
  * loaded.  This means that without the right CORS policy, loading templates from a different domain
  * won't work on all browsers.  Also, loading templates from `file://` URL does not work on some
@@ -666,8 +660,7 @@ function $SceProvider() {
 
   /**
    * @ngdoc method
-  * @name enabled
-   * @memberof $sceProvider
+  * @name $sceProvider#enabled
    * @function
    *
    * @param {boolean=} value If provided, then enables/disables SCE.
@@ -745,8 +738,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name isEnabled
-     * @memberof $sce
+    * @name $sce#isEnabled
      * @function
      *
      * @return {Boolean} true if SCE is enabled, false otherwise.  If you want to set the value, you
@@ -769,8 +761,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name parse
-     * @memberof $sce
+    * @name $sce#parse
      *
      * @description
      * Converts Angular {@link guide/expression expression} into a function.  This is like {@link
@@ -800,8 +791,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name trustAs
-     * @memberof $sce
+    * @name $sce#trustAs
      *
      * @description
      * Delegates to {@link $sceDelegate#trustAs `$sceDelegate.trustAs`}.  As such,
@@ -820,8 +810,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name trustAsHtml
-     * @memberof $sce
+    * @name $sce#trustAsHtml
      *
      * @description
      * Shorthand method.  `$sce.trustAsHtml(value)` →
@@ -836,8 +825,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name trustAsUrl
-     * @memberof $sce
+    * @name $sce#trustAsUrl
      *
      * @description
      * Shorthand method.  `$sce.trustAsUrl(value)` →
@@ -852,8 +840,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name trustAsResourceUrl
-     * @memberof $sce
+    * @name $sce#trustAsResourceUrl
      *
      * @description
      * Shorthand method.  `$sce.trustAsResourceUrl(value)` →
@@ -868,8 +855,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name trustAsJs
-     * @memberof $sce
+    * @name $sce#trustAsJs
      *
      * @description
      * Shorthand method.  `$sce.trustAsJs(value)` →
@@ -884,8 +870,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name getTrusted
-     * @memberof $sce
+    * @name $sce#getTrusted
      *
      * @description
      * Delegates to {@link $sceDelegate#getTrusted `$sceDelegate.getTrusted`}.  As such,
@@ -903,8 +888,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name getTrustedHtml
-     * @memberof $sce
+    * @name $sce#getTrustedHtml
      *
      * @description
      * Shorthand method.  `$sce.getTrustedHtml(value)` →
@@ -916,8 +900,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name getTrustedCss
-     * @memberof $sce
+    * @name $sce#getTrustedCss
      *
      * @description
      * Shorthand method.  `$sce.getTrustedCss(value)` →
@@ -929,8 +912,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name getTrustedUrl
-     * @memberof $sce
+    * @name $sce#getTrustedUrl
      *
      * @description
      * Shorthand method.  `$sce.getTrustedUrl(value)` →
@@ -942,8 +924,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name getTrustedResourceUrl
-     * @memberof $sce
+    * @name $sce#getTrustedResourceUrl
      *
      * @description
      * Shorthand method.  `$sce.getTrustedResourceUrl(value)` →
@@ -955,8 +936,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name getTrustedJs
-     * @memberof $sce
+    * @name $sce#getTrustedJs
      *
      * @description
      * Shorthand method.  `$sce.getTrustedJs(value)` →
@@ -968,8 +948,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name parseAsHtml
-     * @memberof $sce
+    * @name $sce#parseAsHtml
      *
      * @description
      * Shorthand method.  `$sce.parseAsHtml(expression string)` →
@@ -986,8 +965,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name parseAsCss
-     * @memberof $sce
+    * @name $sce#parseAsCss
      *
      * @description
      * Shorthand method.  `$sce.parseAsCss(value)` →
@@ -1004,8 +982,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name parseAsUrl
-     * @memberof $sce
+    * @name $sce#parseAsUrl
      *
      * @description
      * Shorthand method.  `$sce.parseAsUrl(value)` →
@@ -1022,8 +999,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name parseAsResourceUrl
-     * @memberof $sce
+    * @name $sce#parseAsResourceUrl
      *
      * @description
      * Shorthand method.  `$sce.parseAsResourceUrl(value)` →
@@ -1040,8 +1016,7 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-    * @name parseAsJs
-     * @memberof $sce
+    * @name $sce#parseAsJs
      *
      * @description
      * Shorthand method.  `$sce.parseAsJs(value)` →

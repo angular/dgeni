@@ -156,8 +156,7 @@ function $CacheFactoryProvider() {
 
   /**
    * @ngdoc method
-   * @name info
-   * @memberof $cacheFactory
+   * @name $cacheFactory#info
    *
    * @description
    * Get information about all the of the caches that have been created
@@ -175,8 +174,7 @@ function $CacheFactoryProvider() {
 
   /**
    * @ngdoc method
-   * @name get
-   * @memberof $cacheFactory
+   * @name $cacheFactory#get
    *
    * @description
    * Get access to a cache object by the `cacheId` used when it was created.

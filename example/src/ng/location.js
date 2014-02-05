@@ -289,14 +289,13 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name absUrl
-   * @memberof $location
+  * @name $location#absUrl
    *
    * @description
    * This method is getter only.
    *
    * Return full url representation with all segments encoded according to rules specified in
-   * {@link http://www.ietf.org/rfc/rfc3986.txt RFC 3986}.
+   * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
    *
    * @return {string} full url
    */
@@ -304,8 +303,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name url
-   * @memberof $location
+  * @name $location#url
    *
    * @description
    * This method is getter / setter.
@@ -332,8 +330,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name protocol
-   * @memberof $location
+  * @name $location#protocol
    *
    * @description
    * This method is getter only.
@@ -346,8 +343,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name host
-   * @memberof $location
+  * @name $location#host
    *
    * @description
    * This method is getter only.
@@ -360,8 +356,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name port
-   * @memberof $location
+  * @name $location#port
    *
    * @description
    * This method is getter only.
@@ -374,8 +369,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name path
-   * @memberof $location
+  * @name $location#path
    *
    * @description
    * This method is getter / setter.
@@ -396,8 +390,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name search
-   * @memberof $location
+  * @name $location#search
    *
    * @description
    * This method is getter / setter.
@@ -444,8 +437,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name hash
-   * @memberof $location
+  * @name $location#hash
    *
    * @description
    * This method is getter / setter.
@@ -461,8 +453,7 @@ LocationHashbangInHtml5Url.prototype =
 
   /**
    * @ngdoc method
-  * @name replace
-   * @memberof $location
+  * @name $location#replace
    *
    * @description
    * If called, all changes to $location during current `$digest` will be replacing current history
@@ -504,7 +495,7 @@ function locationGetterSetter(property, preprocess) {
  *
  * @description
  * The $location service parses the URL in the browser address bar (based on the
- * {@link https://developer.mozilla.org/en/window.location window.location}) and makes the URL
+ * [window.location](https://developer.mozilla.org/en/window.location)) and makes the URL
  * available to your application. Changes to the URL in the address bar are reflected into
  * $location service and changes to $location are reflected into the browser address bar.
  *
@@ -535,8 +526,7 @@ function $LocationProvider(){
 
   /**
    * @ngdoc method
-  * @name hashPrefix
-   * @memberof $locationProvider
+  * @name $locationProvider#hashPrefix
    * @description
    * @param {string=} prefix Prefix for hash part (containing path and search)
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
@@ -552,8 +542,7 @@ function $LocationProvider(){
 
   /**
    * @ngdoc method
-  * @name html5Mode
-   * @memberof $locationProvider
+  * @name $locationProvider#html5Mode
    * @description
    * @param {boolean=} mode Use HTML5 strategy if available.
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
@@ -569,8 +558,7 @@ function $LocationProvider(){
 
   /**
    * @ngdoc event
-  * @name $locationChangeStart
-   * @memberof $location
+  * @name $location#$locationChangeStart
    * @eventType broadcast on root scope
    * @description
    * Broadcasted before a URL will change. This change can be prevented by calling
@@ -585,8 +573,7 @@ function $LocationProvider(){
 
   /**
    * @ngdoc event
-  * @name $locationChangeSuccess
-   * @memberof $location
+  * @name $location#$locationChangeSuccess
    * @eventType broadcast on root scope
    * @description
    * Broadcasted after a URL was changed.

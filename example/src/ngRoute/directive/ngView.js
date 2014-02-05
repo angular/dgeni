@@ -160,8 +160,7 @@ ngRouteModule.directive('ngView', ngViewFactory);
 
 /**
  * @ngdoc event
- * @name $viewContentLoaded
- * @memberof directive:ngView
+ * @name directive:ngView#$viewContentLoaded
  * @eventType emit on the current ngView scope
  * @description
  * Emitted every time the ngView content is reloaded.

@@ -152,8 +152,8 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name get
- * @memberof $injector
+ * @name $injector#get
+ * 
  *
  * @description
  * Return an instance of the service.
@@ -164,8 +164,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name invoke
- * @memberof $injector
+ * @name $injector#invoke
  *
  * @description
  * Invoke the method and supply the method arguments from the `$injector`.
@@ -180,8 +179,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name has
- * @memberof $injector
+ * @name $injector#has
  *
  * @description
  * Allows the user to query if the particular service exist.
@@ -192,8 +190,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name instantiate
- * @memberof $injector
+ * @name $injector#instantiate
  * @description
  * Create a new instance of JS type. The method takes a constructor function invokes the new
  * operator and supplies all of the arguments to the constructor function as specified by the
@@ -207,8 +204,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name annotate
- * @memberof $injector
+ * @name $injector#annotate
  *
  * @description
  * Returns an array of service names which the function is requesting for injection. This API is
@@ -297,7 +293,7 @@ function annotate(fn) {
  *
  * The {@link $provide $provide} service has a number of methods for registering components
  * with the {@link $injector $injector}. Many of these functions are also exposed on
- * {@link module:ng.function:angular.Module}.
+ * {@link angular.Module}.
  *
  * An Angular **service** is a singleton object created by a **service factory**.  These **service
  * factories** are functions which, in turn, are created by a **service provider**.
@@ -331,8 +327,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name #provider
- * @memberof $provide
+ * @name $provide##provider
  * @description
  *
  * Register a **provider function** with the {@link $injector $injector}. Provider functions
@@ -430,8 +425,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name factory
- * @memberof $provide
+ * @name $provide#factory
  * @description
  *
  * Register a **service factory**, which will be called to return the service instance.
@@ -465,8 +459,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name service
- * @memberof $provide
+ * @name $provide#service
  * @description
  *
  * Register a **service constructor**, which will be invoked with `new` to create the service
@@ -475,7 +468,7 @@ function annotate(fn) {
  * constructor function that will be used to instantiate the service instance.
  *
  * You should use {@link $provide#service $provide.service(class)} if you define your service
- * as a type/class. This is common when using {@link http://coffeescript.org CoffeeScript}.
+ * as a type/class. This is common when using [CoffeeScript](http://coffeescript.org).
  *
  * @param {string} name The name of the instance.
  * @param {Function} constructor A class (constructor function) that will be instantiated.
@@ -503,8 +496,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name value
- * @memberof $provide
+ * @name $provide#value
  * @description
  *
  * Register a **value service** with the {@link $injector $injector}, such as a string, a
@@ -537,8 +529,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name constant
- * @memberof $provide
+ * @name $provide#constant
  * @description
  *
  * Register a **constant service**, such as a string, a number, an array, an object or a function,
@@ -566,8 +557,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name decorator
- * @memberof $provide
+ * @name $provide#decorator
  * @description
  *
  * Register a **service decorator** with the {@link $injector $injector}. A service decorator

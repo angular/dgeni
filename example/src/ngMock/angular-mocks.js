@@ -70,8 +70,7 @@ angular.mock.$Browser = function() {
 
 
   /**
-   * @name $browser#defer.now
-   * @memberof ngMock.$browser
+   * @name ngMock.$browser#$browser#defer.now
    *
    * @description
    * Current milliseconds mock time.
@@ -96,8 +95,7 @@ angular.mock.$Browser = function() {
 
 
   /**
-   * @name $browser#defer.flush
-   * @memberof $browser
+   * @name $browser#$browser#defer.flush
    *
    * @description
    * Flushes all pending requests and executes the defer callbacks.
@@ -128,8 +126,7 @@ angular.mock.$Browser = function() {
 angular.mock.$Browser.prototype = {
 
 /**
-  * @name $browser#poll
-  * @memberof $browser
+  * @name $browser#$browser#poll
   *
   * @description
   * run all fns in pollFns
@@ -227,8 +224,7 @@ angular.mock.$ExceptionHandlerProvider = function() {
 
   /**
    * @ngdoc method
-   * @name mode
-   * @memberof $exceptionHandlerProvider
+   * @name $exceptionHandlerProvider#mode
    *
    * @description
    * Sets the logging mode.
@@ -240,8 +236,8 @@ angular.mock.$ExceptionHandlerProvider = function() {
    *                make these tests fail.
    *   - `log`: Sometimes it is desirable to test that an error is thrown, for this case the `log`
    *            mode stores an array of errors in `$exceptionHandler.errors`, to allow later
-   *            assertion of them. See {@link $log#assertEmpty assertEmpty()} and
-   *            {@link $log#reset reset()}
+   *            assertion of them. See {@link ngMock.$log#assertEmpty assertEmpty()} and
+   *            {@link ngMock.$log#reset reset()}
    */
   this.mode = function(mode) {
     switch(mode) {
@@ -306,8 +302,7 @@ angular.mock.$LogProvider = function() {
     var $log = {
       /**
        * @ngdoc method
-       * @name log
-       * @memberof $log
+       * @name $log#log
        *
        * @description
        * Write a log message
@@ -315,8 +310,7 @@ angular.mock.$LogProvider = function() {
       log: function() { $log.log.logs.push(concat([], arguments, 0)); },
       /**
        * @ngdoc method
-       * @name warn
-       * @memberof $log
+       * @name $log#warn
        *
        * @description
        * Write a warning message
@@ -324,8 +318,7 @@ angular.mock.$LogProvider = function() {
       warn: function() { $log.warn.logs.push(concat([], arguments, 0)); },
       /**
        * @ngdoc method
-       * @name info
-       * @memberof $log
+       * @name $log#info
        *
        * @description
        * Write an info message
@@ -333,8 +326,7 @@ angular.mock.$LogProvider = function() {
       info: function() { $log.info.logs.push(concat([], arguments, 0)); },
       /**
        * @ngdoc method
-       * @name error
-       * @memberof $log
+       * @name $log#error
        *
        * @description
        * Write an error message
@@ -342,8 +334,7 @@ angular.mock.$LogProvider = function() {
       error: function() { $log.error.logs.push(concat([], arguments, 0)); },
       /**
        * @ngdoc method
-       * @name debug
-       * @memberof $log
+       * @name $log#debug
        *
        * @description
        * Write a debug message
@@ -357,8 +348,7 @@ angular.mock.$LogProvider = function() {
 
     /**
      * @ngdoc method
-     * @name reset
-     * @memberof $log
+     * @name $log#reset
      *
      * @description
      * Reset all of the logging arrays to empty.
@@ -366,8 +356,7 @@ angular.mock.$LogProvider = function() {
     $log.reset = function () {
       /**
        * @ngdoc property
-       * @name logs
-       * @memberof $log#log
+       * @name log#logs#$log
        *
        * @description
        * Array of messages logged using {@link $log#log}.
@@ -381,8 +370,7 @@ angular.mock.$LogProvider = function() {
       $log.log.logs = [];
       /**
        * @ngdoc property
-       * @name logs
-       * @memberof $log#info
+       * @name info#logs#$log
        *
        * @description
        * Array of messages logged using {@link $log#info}.
@@ -396,8 +384,7 @@ angular.mock.$LogProvider = function() {
       $log.info.logs = [];
       /**
        * @ngdoc property
-       * @name logs
-       * @memberof $log#warn
+       * @name warn#logs#$log
        *
        * @description
        * Array of messages logged using {@link $log#warn}.
@@ -411,8 +398,7 @@ angular.mock.$LogProvider = function() {
       $log.warn.logs = [];
       /**
        * @ngdoc property
-       * @name logs
-       * @memberof $log#error
+       * @name error#logs#$log
        *
        * @description
        * Array of messages logged using {@link $log#error}.
@@ -426,8 +412,7 @@ angular.mock.$LogProvider = function() {
       $log.error.logs = [];
         /**
        * @ngdoc property
-       * @name logs
-       * @memberof $log#debug
+       * @name debug#logs#$log
        *
        * @description
        * Array of messages logged using {@link $log#debug}.
@@ -443,8 +428,7 @@ angular.mock.$LogProvider = function() {
 
     /**
      * @ngdoc method
-     * @name assertEmpty
-     * @memberof $log
+     * @name $log#assertEmpty
      *
      * @description
      * Assert that the all of the logging methods have no logged messages. If messages present, an
@@ -561,8 +545,7 @@ angular.mock.$IntervalProvider = function() {
 
     /**
      * @ngdoc method
-     * @name flush
-     * @memberof $interval
+     * @name $interval#flush
      * @description
      *
      * Runs interval tasks scheduled to be run in the next `millis` milliseconds.
@@ -920,8 +903,8 @@ angular.mock.dump = function(object) {
  * development please see {@link module:ngMockE2E.$httpBackend e2e $httpBackend mock}.
  *
  * During unit testing, we want our unit tests to run quickly and have no external dependencies so
- * we don’t want to send {@link https://developer.mozilla.org/en/xmlhttprequest XHR} or
- * {@link http://en.wikipedia.org/wiki/JSONP JSONP} requests to a real server. All we really need is
+ * we don’t want to send [XHR](https://developer.mozilla.org/en/xmlhttprequest) or
+ * [JSONP](http://en.wikipedia.org/wiki/JSONP) requests to a real server. All we really need is
  * to verify whether a certain request has been sent or not, or alternatively just let the
  * application make requests, respond with pre-trained responses and assert that the end result is
  * what we expect it to be.
@@ -1213,8 +1196,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name when
-   * @memberof $httpBackend
+   * @name $httpBackend#when
    * @description
    * Creates a new backend definition.
    *
@@ -1253,8 +1235,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name whenGET
-   * @memberof $httpBackend
+   * @name $httpBackend#whenGET
    * @description
    * Creates a new backend definition for GET requests. For more info see `when()`.
    *
@@ -1266,8 +1247,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name whenHEAD
-   * @memberof $httpBackend
+   * @name $httpBackend#whenHEAD
    * @description
    * Creates a new backend definition for HEAD requests. For more info see `when()`.
    *
@@ -1279,8 +1259,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name whenDELETE
-   * @memberof $httpBackend
+   * @name $httpBackend#whenDELETE
    * @description
    * Creates a new backend definition for DELETE requests. For more info see `when()`.
    *
@@ -1292,8 +1271,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name whenPOST
-   * @memberof $httpBackend
+   * @name $httpBackend#whenPOST
    * @description
    * Creates a new backend definition for POST requests. For more info see `when()`.
    *
@@ -1307,8 +1285,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name whenPUT
-   * @memberof $httpBackend
+   * @name $httpBackend#whenPUT
    * @description
    * Creates a new backend definition for PUT requests.  For more info see `when()`.
    *
@@ -1322,8 +1299,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name whenJSONP
-   * @memberof $httpBackend
+   * @name $httpBackend#whenJSONP
    * @description
    * Creates a new backend definition for JSONP requests. For more info see `when()`.
    *
@@ -1336,8 +1312,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expect
-   * @memberof $httpBackend
+   * @name $httpBackend#expect
    * @description
    * Creates a new request expectation.
    *
@@ -1370,8 +1345,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expectGET
-   * @memberof $httpBackend
+   * @name $httpBackend#expectGET
    * @description
    * Creates a new request expectation for GET requests. For more info see `expect()`.
    *
@@ -1383,8 +1357,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expectHEAD
-   * @memberof $httpBackend
+   * @name $httpBackend#expectHEAD
    * @description
    * Creates a new request expectation for HEAD requests. For more info see `expect()`.
    *
@@ -1396,8 +1369,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expectDELETE
-   * @memberof $httpBackend
+   * @name $httpBackend#expectDELETE
    * @description
    * Creates a new request expectation for DELETE requests. For more info see `expect()`.
    *
@@ -1409,8 +1381,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expectPOST
-   * @memberof $httpBackend
+   * @name $httpBackend#expectPOST
    * @description
    * Creates a new request expectation for POST requests. For more info see `expect()`.
    *
@@ -1425,8 +1396,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expectPUT
-   * @memberof $httpBackend
+   * @name $httpBackend#expectPUT
    * @description
    * Creates a new request expectation for PUT requests. For more info see `expect()`.
    *
@@ -1441,8 +1411,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expectPATCH
-   * @memberof $httpBackend
+   * @name $httpBackend#expectPATCH
    * @description
    * Creates a new request expectation for PATCH requests. For more info see `expect()`.
    *
@@ -1457,8 +1426,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name expectJSONP
-   * @memberof $httpBackend
+   * @name $httpBackend#expectJSONP
    * @description
    * Creates a new request expectation for JSONP requests. For more info see `expect()`.
    *
@@ -1471,8 +1439,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name flush
-   * @memberof $httpBackend
+   * @name $httpBackend#flush
    * @description
    * Flushes all pending requests using the trained responses.
    *
@@ -1500,8 +1467,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name verifyNoOutstandingExpectation
-   * @memberof $httpBackend
+   * @name $httpBackend#verifyNoOutstandingExpectation
    * @description
    * Verifies that all of the requests defined via the `expect` api were made. If any of the
    * requests were not made, verifyNoOutstandingExpectation throws an exception.
@@ -1523,8 +1489,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name verifyNoOutstandingRequest
-   * @memberof $httpBackend
+   * @name $httpBackend#verifyNoOutstandingRequest
    * @description
    * Verifies that there are no outstanding requests that need to be flushed.
    *
@@ -1544,8 +1509,7 @@ function createHttpBackendMock($rootScope, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name resetExpectations
-   * @memberof $httpBackend
+   * @name $httpBackend#resetExpectations
    * @description
    * Resets all request expectations, but preserves all backend definitions. Typically, you would
    * call resetExpectations during a multiple-phase test when you want to reuse the same instance of
@@ -1680,8 +1644,7 @@ angular.mock.$TimeoutDecorator = function($delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name flush
-   * @memberof $timeout
+   * @name $timeout#flush
    * @description
    *
    * Flushes the queue of pending tasks.
@@ -1694,8 +1657,7 @@ angular.mock.$TimeoutDecorator = function($delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name verifyNoPendingTasks
-   * @memberof $timeout
+   * @name $timeout#verifyNoPendingTasks
    * @description
    *
    * Verifies that there are no pending tasks that need to be flushed.
@@ -1821,8 +1783,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name when
- * @memberof $httpBackend
+ * @name $httpBackend#when
  * @description
  * Creates a new backend definition.
  *
@@ -1847,8 +1808,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name whenGET
- * @memberof $httpBackend
+ * @name $httpBackend#whenGET
  * @description
  * Creates a new backend definition for GET requests. For more info see `when()`.
  *
@@ -1861,8 +1821,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name whenHEAD
- * @memberof $httpBackend
+ * @name $httpBackend#whenHEAD
  * @description
  * Creates a new backend definition for HEAD requests. For more info see `when()`.
  *
@@ -1875,8 +1834,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name whenDELETE
- * @memberof $httpBackend
+ * @name $httpBackend#whenDELETE
  * @description
  * Creates a new backend definition for DELETE requests. For more info see `when()`.
  *
@@ -1889,8 +1847,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name whenPOST
- * @memberof $httpBackend
+ * @name $httpBackend#whenPOST
  * @description
  * Creates a new backend definition for POST requests. For more info see `when()`.
  *
@@ -1904,8 +1861,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name whenPUT
- * @memberof $httpBackend
+ * @name $httpBackend#whenPUT
  * @description
  * Creates a new backend definition for PUT requests.  For more info see `when()`.
  *
@@ -1919,8 +1875,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name whenPATCH
- * @memberof $httpBackend
+ * @name $httpBackend#whenPATCH
  * @description
  * Creates a new backend definition for PATCH requests.  For more info see `when()`.
  *
@@ -1934,8 +1889,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
 /**
  * @ngdoc method
  * @module ngMockE2E
- * @name whenJSONP
- * @memberof $httpBackend
+ * @name $httpBackend#whenJSONP
  * @description
  * Creates a new backend definition for JSONP requests. For more info see `when()`.
  *

@@ -44,8 +44,7 @@ function $RouteProvider(){
 
   /**
    * @ngdoc method
-   * @name when
-   * @memberof $routeProvider
+   * @name $routeProvider#when
    *
    * @param {string} path Route path (matched against `$location.path`). If `$location.path`
    *    contains redundant trailing slash or is missing one, the route will still match and the
@@ -207,8 +206,7 @@ function $RouteProvider(){
 
   /**
    * @ngdoc method
-   * @name otherwise
-   * @memberof $routeProvider
+   * @name $routeProvider#otherwise
    *
    * @description
    * Sets route definition that will be used on route change when no other route definition
@@ -365,8 +363,7 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $routeChangeStart
-     * @memberof $route
+     * @name $route#$routeChangeStart
      * @eventType broadcast on root scope
      * @description
      * Broadcasted before a route change. At this  point the route services starts
@@ -382,8 +379,7 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $routeChangeSuccess
-     * @memberof $route
+     * @name $route#$routeChangeSuccess
      * @eventType broadcast on root scope
      * @description
      * Broadcasted after a route dependencies are resolved.
@@ -398,8 +394,7 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $routeChangeError
-     * @memberof $route
+     * @name $route#$routeChangeError
      * @eventType broadcast on root scope
      * @description
      * Broadcasted if any of the resolve promises are rejected.
@@ -412,8 +407,7 @@ function $RouteProvider(){
 
     /**
      * @ngdoc event
-     * @name $routeUpdate
-     * @memberof $route
+     * @name $route#$routeUpdate
      * @eventType broadcast on root scope
      * @description
      *
@@ -427,8 +421,7 @@ function $RouteProvider(){
 
           /**
            * @ngdoc method
-           * @name reload
-           * @memberof $route
+           * @name $route#reload
            *
            * @description
            * Causes `$route` service to reload the current route even if

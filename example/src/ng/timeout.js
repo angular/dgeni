@@ -62,8 +62,7 @@ function $TimeoutProvider() {
 
      /**
       * @ngdoc method
-     * @name cancel
-      * @memberof $timeout
+     * @name $timeout#cancel
       *
       * @description
       * Cancels a task associated with the `promise`. As a result of this, the promise will be

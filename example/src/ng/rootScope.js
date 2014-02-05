@@ -36,8 +36,7 @@
 
 /**
  * @ngdoc method
- * @name digestTtl
- * @memberof $rootScopeProvider
+ * @name $rootScopeProvider#digestTtl
  * @description
  *
  * Sets the number of `$digest` iterations the scope should attempt to execute before giving up and
@@ -139,8 +138,7 @@ function $RootScopeProvider(){
 
     /**
      * @ngdoc property
-     * @name $id
-     * @memberof global:$rootScope.Scope
+     * @name type:$rootScope.Scope#$id
      * @returns {number} Unique scope ID (monotonically increasing alphanumeric sequence) useful for
      *   debugging.
      */
@@ -150,8 +148,7 @@ function $RootScopeProvider(){
       constructor: Scope,
       /**
        * @ngdoc method
-       * @name $new
-       * @memberof global:$rootScope.Scope
+       * @name type:$rootScope.Scope#$new
        * @function
        *
        * @description
@@ -208,8 +205,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $watch
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$watch
        * @function
        *
        * @description
@@ -360,8 +356,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $watchCollection
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$watchCollection
        * @function
        *
        * @description
@@ -500,8 +495,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $digest
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$digest
        * @function
        *
        * @description
@@ -656,8 +650,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc event
-      * @name $destroy
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$destroy
        * @eventType broadcast on scope being destroyed
        *
        * @description
@@ -669,8 +662,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $destroy
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$destroy
        * @function
        *
        * @description
@@ -714,8 +706,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $eval
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$eval
        * @function
        *
        * @description
@@ -747,8 +738,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $evalAsync
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$evalAsync
        * @function
        *
        * @description
@@ -795,8 +785,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $apply
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$apply
        * @function
        *
        * @description
@@ -858,8 +847,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $on
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$on
        * @function
        *
        * @description
@@ -908,8 +896,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $emit
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$emit
        * @function
        *
        * @description
@@ -977,8 +964,7 @@ function $RootScopeProvider(){
 
       /**
        * @ngdoc method
-      * @name $broadcast
-       * @memberof global:$rootScope.Scope
+      * @name type:$rootScope.Scope#$broadcast
        * @function
        *
        * @description

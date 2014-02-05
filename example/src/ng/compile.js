@@ -507,8 +507,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
   /**
    * @ngdoc method
-   * @name directive
-   * @memberof $compileProvider
+   * @name $compileProvider#directive
    * @function
    *
    * @description
@@ -561,8 +560,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
   /**
    * @ngdoc method
-   * @name aHrefSanitizationWhitelist
-   * @memberof $compileProvider
+   * @name $compileProvider#aHrefSanitizationWhitelist
    * @function
    *
    * @description
@@ -592,8 +590,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
   /**
    * @ngdoc method
-   * @name imgSrcSanitizationWhitelist
-   * @memberof $compileProvider
+   * @name $compileProvider#imgSrcSanitizationWhitelist
    * @function
    *
    * @description
@@ -637,8 +634,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
       /**
        * @ngdoc method
-       * @name $addClass
-       * @memberof global:$compile.directive.Attributes
+       * @name type:$compile.directive.Attributes#$addClass
        * @function
        *
        * @description
@@ -655,8 +651,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
       /**
        * @ngdoc method
-       * @name $removeClass
-       * @memberof global:$compile.directive.Attributes
+       * @name type:$compile.directive.Attributes#$removeClass
        * @function
        *
        * @description
@@ -673,8 +668,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
       /**
        * @ngdoc method
-       * @name $updateClass
-       * @memberof global:$compile.directive.Attributes
+       * @name type:$compile.directive.Attributes#$updateClass
        * @function
        *
        * @description
@@ -754,8 +748,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
       /**
        * @ngdoc method
-       * @name $observe
-       * @memberof global:$compile.directive.Attributes
+       * @name type:$compile.directive.Attributes#$observe
        * @function
        *
        * @description
@@ -1939,8 +1932,7 @@ function directiveNormalize(name) {
 
 /**
  * @ngdoc property
- * @name $attr
- * @memberof global:$compile.directive.Attributes
+ * @name type:$compile.directive.Attributes#$attr
  * @returns {object} A map of DOM element attribute names to the normalized name. This is
  *                   needed to do reverse lookup from normalized name back to actual name.
  */
@@ -1948,8 +1940,7 @@ function directiveNormalize(name) {
 
 /**
  * @ngdoc method
- * @name $set
- * @memberof global:$compile.directive.Attributes
+ * @name type:$compile.directive.Attributes#$set
  * @function
  *
  * @description

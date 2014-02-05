@@ -113,8 +113,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc property
            * @module ng
-           * @name requires
-           * @memberof global:angular.Module
+           * @name type:angular.Module#requires
            * @returns {Array.<string>} List of module names which must be loaded before this module.
            * @description
            * Holds the list of modules which the injector will load before the current module is
@@ -125,8 +124,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc property
            * @module ng
-           * @name name
-           * @memberof global:angular.Module
+           * @name type:angular.Module#name
            * @returns {string} Name of the module.
            * @description
            */
@@ -136,8 +134,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name provider
-           * @memberof global:angular.Module
+           * @name type:angular.Module#provider
            * @param {string} name service name
            * @param {Function} providerType Construction function for creating new instance of the
            *                                service.
@@ -149,8 +146,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name factory
-           * @memberof global:angular.Module
+           * @name type:angular.Module#factory
            * @param {string} name service name
            * @param {Function} providerFunction Function for creating new instance of the service.
            * @description
@@ -161,8 +157,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name service
-           * @memberof global:angular.Module
+           * @name type:angular.Module#service
            * @param {string} name service name
            * @param {Function} constructor A constructor function that will be instantiated.
            * @description
@@ -173,8 +168,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name value
-           * @memberof global:angular.Module
+           * @name type:angular.Module#value
            * @param {string} name service name
            * @param {*} object Service instance object.
            * @description
@@ -185,8 +179,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name constant
-           * @memberof global:angular.Module
+           * @name type:angular.Module#constant
            * @param {string} name constant name
            * @param {*} object Constant value.
            * @description
@@ -198,8 +191,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name animation
-           * @memberof global:angular.Module
+           * @name type:angular.Module#animation
            * @param {string} name animation name
            * @param {Function} animationFactory Factory function for creating new instance of an
            *                                    animation.
@@ -233,8 +225,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name filter
-           * @memberof global:angular.Module
+           * @name type:angular.Module#filter
            * @param {string} name Filter name.
            * @param {Function} filterFactory Factory function for creating new instance of filter.
            * @description
@@ -245,8 +236,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name controller
-           * @memberof global:angular.Module
+           * @name type:angular.Module#controller
            * @param {string|Object} name Controller name, or an object map of controllers where the
            *    keys are the names and the values are the constructors.
            * @param {Function} constructor Controller constructor function.
@@ -258,8 +248,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name directive
-           * @memberof global:angular.Module
+           * @name type:angular.Module#directive
            * @param {string|Object} name Directive name, or an object map of directives where the
            *    keys are the names and the values are the factories.
            * @param {Function} directiveFactory Factory function for creating new instance of
@@ -272,8 +261,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name config
-           * @memberof global:angular.Module
+           * @name type:angular.Module#config
            * @param {Function} configFn Execute this function on module load. Useful for service
            *    configuration.
            * @description
@@ -284,8 +272,7 @@ function setupModuleLoader(window) {
           /**
            * @ngdoc method
            * @module ng
-           * @name run
-           * @memberof global:angular.Module
+           * @name type:angular.Module#run
            * @param {Function} initializationFn Execute this function after injector creation.
            *    Useful for application initialization.
            * @description

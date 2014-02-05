@@ -182,8 +182,7 @@ function $HttpProvider() {
      *
      * @description
      * The `$http` service is a core Angular service that facilitates communication with the remote
-     * HTTP servers via the browser's {@link https://developer.mozilla.org/en/xmlhttprequest
-     * XMLHttpRequest} object or via {@link http://en.wikipedia.org/wiki/JSONP JSONP}.
+     * HTTP servers via the browser's [* XMLHttpRequest](https://developer.mozilla.org/en/xmlhttprequest) object or via [JSONP](http://en.wikipedia.org/wiki/JSONP).
      *
      * For unit testing applications that use `$http` service, see
      * {@link module:ngMock.$httpBackend $httpBackend mock}.
@@ -489,9 +488,8 @@ function $HttpProvider() {
      *
      * When designing web applications, consider security threats from:
      *
-     * - {@link http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx
-     *   JSON vulnerability}
-     * - {@link http://en.wikipedia.org/wiki/Cross-site_request_forgery XSRF}
+     * - [*   JSON vulnerability](http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx)
+     * - [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery)
      *
      * Both server and the client must cooperate in order to eliminate these threats. Angular comes
      * pre-configured with strategies that address these issues, but for this to work backend server
@@ -499,9 +497,8 @@ function $HttpProvider() {
      *
      * ## JSON Vulnerability Protection
      *
-     * A {@link http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx
-     * JSON vulnerability} allows third party website to turn your JSON resource URL into
-     * {@link http://en.wikipedia.org/wiki/JSONP JSONP} request under some conditions. To
+     * A [* JSON vulnerability](http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx) allows third party website to turn your JSON resource URL into
+     * [JSONP](http://en.wikipedia.org/wiki/JSONP) request under some conditions. To
      * counter this your server can prefix all JSON requests with following string `")]}',\n"`.
      * Angular will automatically strip the prefix before processing it as JSON.
      *
@@ -521,7 +518,7 @@ function $HttpProvider() {
      *
      * ## Cross Site Request Forgery (XSRF) Protection
      *
-     * {@link http://en.wikipedia.org/wiki/Cross-site_request_forgery XSRF} is a technique by which
+     * [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) is a technique by which
      * an unauthorized site can gain your user's private data. Angular provides a mechanism
      * to counter XSRF. When performing XHR requests, the $http service reads a token from a cookie
      * (by default, `XSRF-TOKEN`) and sets it as an HTTP header (`X-XSRF-TOKEN`). Since only
@@ -535,7 +532,7 @@ function $HttpProvider() {
      * that only JavaScript running on your domain could have sent the request. The token must be
      * unique for each user and must be verifiable by the server (to prevent the JavaScript from
      * making up its own tokens). We recommend that the token is a digest of your site's
-     * authentication cookie with a {@link https://en.wikipedia.org/wiki/Salt_(cryptography) salt}
+     * authentication cookie with a [salt](https://en.wikipedia.org/wiki/Salt_(cryptography))
      * for added security.
      *
      * The name of the headers can be specified using the xsrfHeaderName and xsrfCookieName
@@ -572,8 +569,7 @@ function $HttpProvider() {
      *    - **timeout** – `{number|Promise}` – timeout in milliseconds, or {@link $q promise}
      *      that should abort the request when resolved.
      *    - **withCredentials** - `{boolean}` - whether to to set the `withCredentials` flag on the
-     *      XHR object. See {@link https://developer.mozilla.org/en/http_access_control#section_5
-     *      requests with credentials} for more information.
+     *      XHR object. See [*      requests with credentials](https://developer.mozilla.org/en/http_access_control#section_5) for more information.
      *    - **responseType** - `{string}` - see {@link
      *      https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest#responseType requestType}.
      *
@@ -807,8 +803,7 @@ function $HttpProvider() {
 
     /**
      * @ngdoc method
-    * @name get
-     * @memberof $http
+    * @name $http#get
      *
      * @description
      * Shortcut method to perform `GET` request.
@@ -820,8 +815,7 @@ function $HttpProvider() {
 
     /**
      * @ngdoc method
-    * @name delete
-     * @memberof $http
+    * @name $http#delete
      *
      * @description
      * Shortcut method to perform `DELETE` request.
@@ -833,8 +827,7 @@ function $HttpProvider() {
 
     /**
      * @ngdoc method
-    * @name head
-     * @memberof $http
+    * @name $http#head
      *
      * @description
      * Shortcut method to perform `HEAD` request.
@@ -846,8 +839,7 @@ function $HttpProvider() {
 
     /**
      * @ngdoc method
-    * @name jsonp
-     * @memberof $http
+    * @name $http#jsonp
      *
      * @description
      * Shortcut method to perform `JSONP` request.
@@ -861,8 +853,7 @@ function $HttpProvider() {
 
     /**
      * @ngdoc method
-    * @name post
-     * @memberof $http
+    * @name $http#post
      *
      * @description
      * Shortcut method to perform `POST` request.
@@ -875,8 +866,7 @@ function $HttpProvider() {
 
     /**
      * @ngdoc method
-    * @name put
-     * @memberof $http
+    * @name $http#put
      *
      * @description
      * Shortcut method to perform `PUT` request.
@@ -890,8 +880,7 @@ function $HttpProvider() {
 
         /**
          * @ngdoc property
-         * @name defaults
-         * @memberof $http
+         * @name $http#defaults
          *
          * @description
          * Runtime equivalent of the `$httpProvider.defaults` property. Allows configuration of

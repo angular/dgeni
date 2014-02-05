@@ -134,8 +134,7 @@ function shallowClearAndCopy(src, dst) {
  *   - **`timeout`** – `{number|Promise}` – timeout in milliseconds, or {@link module:ng.$q promise} that
  *     should abort the request when resolved.
  *   - **`withCredentials`** - `{boolean}` - whether to set the `withCredentials` flag on the
- *     XHR object. See {@link https://developer.mozilla.org/en/http_access_control#section_5
- *     requests with credentials} for more information.
+ *     XHR object. See [*     requests with credentials](https://developer.mozilla.org/en/http_access_control#section_5) for more information.
  *   - **`responseType`** - `{string}` - see {@link
  *     https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest#responseType requestType}.
  *   - **`interceptor`** - `{Object=}` - The interceptor object has two optional methods -

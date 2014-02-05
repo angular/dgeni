@@ -1146,8 +1146,7 @@ function $ParseProvider() {
    * @deprecated Promise unwrapping via $parse is deprecated and will be removed in the future.
    *
    * @ngdoc method
-   * @name unwrapPromises
-   * @memberof $parseProvider
+   * @name $parseProvider#unwrapPromises
    * @description
    *
    * **This feature is deprecated, see deprecation notes below for more info**
@@ -1201,8 +1200,7 @@ function $ParseProvider() {
    * @deprecated Promise unwrapping via $parse is deprecated and will be removed in the future.
    *
    * @ngdoc method
-  * @name logPromiseWarnings
-   * @memberof $parseProvider
+  * @name $parseProvider#logPromiseWarnings
    * @description
    *
    * Controls whether Angular should log a warning on any encounter of a promise in an expression.

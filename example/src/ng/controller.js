@@ -17,8 +17,7 @@ function $ControllerProvider() {
 
   /**
    * @ngdoc method
-   * @name register
-   * @memberof $controllerProvider
+   * @name $controllerProvider#register
    * @param {string|Object} name Controller name, or an object map of controllers where the keys are
    *    the names and the values are the constructors.
    * @param {Function|Array} constructor Controller constructor fn (optionally decorated with DI
@@ -56,8 +55,7 @@ function $ControllerProvider() {
      * `$controller` service is responsible for instantiating controllers.
      *
      * It's just a simple call to {@link module:auto.$injector $injector}, but extracted into
-     * a service, so that one can override this service with {@link https://gist.github.com/1649788
-     * BC version}.
+     * a service, so that one can override this service with [* BC version](https://gist.github.com/1649788).
      */
     return function(expression, locals) {
       var instance, match, constructor, identifier;
