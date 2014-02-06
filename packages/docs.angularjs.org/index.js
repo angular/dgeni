@@ -1,7 +1,6 @@
 var _ = require('lodash');
 var fs = require('fs');
 var path = require('canonical-path');
-var gitInfo = require('../../lib/utils/git-info');
 var packagePath = __dirname;
 
 var angularjsPackage = require('../angularjs');
@@ -17,7 +16,9 @@ module.exports = function(config) {
     require('./processors/index-page')
   ]);
 
-  config.processing.tagDefinitions.push(require('./tag-defs/tutorial-step'));
+  config.append('processing.tagDefinitions', [
+    require('./tag-defs/tutorial-step')
+  ]);
 
   config.set('processing.search.ignoreWordsFile', path.resolve(packagePath, 'ignore.words'));
 
