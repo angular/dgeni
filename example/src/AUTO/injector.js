@@ -327,7 +327,7 @@ function annotate(fn) {
 
 /**
  * @ngdoc method
- * @name $provide##provider
+ * @name $provide#provider
  * @description
  *
  * Register a **provider function** with the {@link $injector $injector}. Provider functions
