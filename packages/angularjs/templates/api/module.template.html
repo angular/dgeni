@@ -53,7 +53,7 @@
       </tr>
       {% for component in components.pages %}
       <tr>
-        <td>{$ component.id | link(partialNames, component.name, component) $}</td>
+        <td>{$ component.id | link(component.name, component) $}</td>
         <td>{$ component.description | firstLine | marked $}</td>
       </tr>
       {% endfor %}
