@@ -33,7 +33,7 @@ var navGroupMappers = {
       .groupBy('module')
 
       .map(function(modulePages, moduleName) {
-        
+        console.log('moduleName', moduleName);
         var navItems = [];
         var modulePage;
 
@@ -42,6 +42,7 @@ var navGroupMappers = {
           .groupBy('docType')
 
           .tap(function(docTypes) {
+            console.log(_.keys(docTypes));
             // Extract the module page from the collection
             modulePage = docTypes.module[0];
             delete docTypes.module;
@@ -121,6 +122,15 @@ module.exports = {
     outputFolder = config.rendering.outputFolder;
   },
   process: function(docs) {
+
+    _(docs)
+    .filter(function(doc) { return doc.area === 'api'; })
+    .filter(function(doc) { return doc.docType === 'module'; })
+    .map(function(doc) { return _.pick(doc, ['id', 'module', 'docType', 'area']); })
+    .tap(function(docs) {
+      console.log(docs);
+    });
+
 
     // We are only interested in docs that are in a area and not landing pages
     var navPages = _.filter(docs, function(page) {
