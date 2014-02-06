@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var log = require('winston');
-var INLINE_LINK = /\{@link\s+([^\s\}]+)(?:\s+([^}]+?))?\}/g;
+var INLINE_LINK = /\{@link\s+([^\s\}]+)\s*(?:\s+([^}]+?))?\s*\}/g;
 
 module.exports = {
   name: 'links',
