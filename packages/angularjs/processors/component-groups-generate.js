@@ -10,6 +10,10 @@ module.exports = {
 
       module.componentGroups = _(module.components)
         .groupBy('docType')
+        .tap(function(docTypes) {
+          // We don't want the overview docType to be represented as a componentGroup
+          delete docTypes.overview;
+        })
         .map(function(docs, docType) {
           return {
             id: module.id + '.' + docType,
