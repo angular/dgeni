@@ -6,6 +6,8 @@ var path = require('canonical-path');
 
 // Keywords to ignore
 var wordsToIgnore = [];
+var propertiesToIgnore;
+var areasToSearch;
 
 // Keywords start with "ng:" or one of $, _ or a letter
 var KEYWORD_REGEX = /^((ng:|[\$_a-z])[\w\-_]+)/;
@@ -23,13 +25,20 @@ module.exports = {
       var ignoreWordsPath = path.resolve(config.basePath, config.processing.search.ignoreWordsFile);
       wordsToIgnore = fs.readFileSync(ignoreWordsPath, 'utf8').toString().split(/[,\s\n\r]+/gm);
 
+      log.debug('Loaded ignore words from "' + ignoreWordsPath + '"');
+      log.silly(wordsToIgnore);
+
     }
+
+    areasToSearch = _.indexBy(config.get('processing.search.areasToSearch', ['api', 'guide', 'misc', 'error', 'tutorial']));
+
+    propertiesToIgnore = _.indexBy(config.get('processing.search.propertiesToIgnore', []));
+    log.debug('Properties to ignore', propertiesToIgnore);
+
   },
   process: function(docs) {
 
-    // keywordMap holds a map of words that have been found already
-    var keywordMap = _.indexBy(wordsToIgnore);
-    var words = [];
+    var ignoreWordsMap = _.indexBy(wordsToIgnore);
 
     // If the title contains a name starting with ng, e.g. "ngController", then add the module name
     // without the ng to the title text, e.g. "controller".
@@ -41,31 +50,43 @@ module.exports = {
       return title;
     }
 
-    function extractWords(text) {
-      if (_.isString(text)) {
-        var tokens = text.toLowerCase().split(/[\.\s,`'"#]+/mg);
-        _.forEach(tokens, function(token){
-          var match = token.match(KEYWORD_REGEX);
-          if (match){
-            key = match[1];
-            if ( !keywordMap[key]) {
-              keywordMap[key] = true;
-              words.push(key);
-            }
+    function extractWords(text, words, keywordMap) {
+
+      var tokens = text.toLowerCase().split(/[\.\s,`'"#]+/mg);
+      _.forEach(tokens, function(token){
+        var match = token.match(KEYWORD_REGEX);
+        if (match){
+          key = match[1];
+          if ( !keywordMap[key]) {
+            keywordMap[key] = true;
+            words.push(key);
           }
-        });
-      }
-      return text;
+        }
+      });
     }
+
+
+    // We are only interested in docs that live in the right area
+    docs = _.filter(docs, function(doc) { return areasToSearch[doc.area]; });
 
     _.forEach(docs, function(doc) {
 
-      _.forEach(doc, extractWords);
+      var words = [];
+      var keywordMap = _.clone(ignoreWordsMap);
+
+      // Search each top level property of the document for search terms
+      _.forEach(doc, function(value, key) {
+        if ( _.isString(value) && !propertiesToIgnore[key] ) {
+          extractWords(value, words, keywordMap);
+        }
+      });
 
       doc.searchTerms = {
         titleWords: extractTitleWords(doc.name),
         keywords: _.sortBy(words).join(' ')
       };
+
     });
+
   }
 };
