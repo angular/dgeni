@@ -1,5 +1,5 @@
 {
-  "name": "angular-doc-gen",
+  "name": "bike-shed",
   "version": "0.0.0",
   "description": "Generate the angularjs documentation",
   "main": "index.js",
