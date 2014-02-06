@@ -1,7 +1,7 @@
 var _ = require('lodash');
-var gitInfo = require('../../../lib/utils/git-info');
 
 var version;
+var versions;
 
 module.exports = {
   name: 'versions-data',
@@ -10,10 +10,14 @@ module.exports = {
   runAfter: ['adding-extra-docs', 'pages-data'],
   runBefore: ['extra-docs-added'],
   init: function(config) {
-    version = config.source.version;
+    version = config.source.currentVersion;
+    versions = config.source.previousVersions;
 
     if ( !version ) {
-      throw new Error('Invalid configuration.  versions-data processor needs config.source.version');
+      throw new Error('Invalid configuration.  Please provide a valid `source.currentVersion` property');
+    }
+    if ( !versions ) {
+      throw new Error('Invalid configuration.  Please provide a valid `source.previousVersions` property');
     }
   },
   process: function(docs) {
@@ -27,9 +31,9 @@ module.exports = {
 
     versionDoc.currentVersion = version;
 
-    versionDoc.versions = _(gitInfo.getVersions())
+    versionDoc.versions = _(versions)
       .filter(function(version) { return version.major > 0; })
-      .push(versionDoc.currentVersion)
+      .push(version)
       .reverse()
       .value();
 

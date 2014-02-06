@@ -14,18 +14,28 @@ module.exports = function(config) {
     { pattern: '**/*.ngdoc', basePath: path.resolve(packagePath, 'content') }
   ]);
 
-  var package = require('./package.json');
-  var version = gitInfo.getCurrentVersion(package);
-  config.set('source.version', version);
+  var currentVersion = { full: '1.2.10', major: '1', minor: '2', dot: '10', codeName: 'BruceBogTrotter', cdn: '1.2.10' };
+
+  var previousVersions = [
+    { full: '1.2.9', major: '1', minor: '2', dot: '9', codeName: 'BruceBogTrotter', cdn: '1.2.9' },
+    { full: '1.2.8', major: '1', minor: '2', dot: '8', codeName: 'HarryHoudini', cdn: '1.2.8' },
+    { full: '1.2.7', major: '1', minor: '2', dot: '7', codeName: 'RolandFromGrangeHill', cdn: '1.2.7' },
+    { full: '1.2.6', major: '1', minor: '2', dot: '6', codeName: 'IceIceBaby', cdn: '1.2.6' },
+    { full: '1.1.5', major: '1', minor: '1', dot: '5', codeName: 'StepToeAndSon', cdn: '1.1.5' },
+    { full: '1.1.4', major: '1', minor: '1', dot: '4', codeName: 'XFactorChamp', cdn: '1.1.4' },
+    { full: '1.1.3', major: '1', minor: '1', dot: '3', codeName: 'MastersOfTheUniverse', cdn: '1.1.3' }
+  ];
+
+  config.set('source.currentVersion', currentVersion);
+  config.set('source.previousVersions', previousVersions);
 
   config.set('rendering.outputFolder', 'build');
-  config.set('rendering.cleanOutputFolder', true);
 
   config.set('logging.level', 'info');
 
   config.merge('rendering.extra', {
-    git: gitInfo.getGitInfo(package.repository.url),
-    version: version
+    git: { owner: 'angular', repo: 'angular.js' },
+    version: currentVersion
   });
 
   config.merge('deployment', {
