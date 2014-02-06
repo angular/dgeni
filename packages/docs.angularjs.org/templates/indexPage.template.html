@@ -11,22 +11,50 @@
   <title ng-bind-template="AngularJS: {{ currentArea.name }}: {{ currentPage.name || 'Error: Page not found'}}">AngularJS</title>
 
   <script type="text/javascript">
-    var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1],
-        rUrl = /(#!\/{% for area in doc.areas %}|{$ area $}{% endfor %}|index[^\.]*\.html).*$/,
-        baseUrl = location.href.replace(rUrl, indexFile),
-        headEl = document.getElementsByTagName('head')[0];
+    // dynamically add base tag as well as css and javascript files.
+    // we can't add css/js the usual way, because some browsers (FF) eagerly prefetch resources
+    // before the base attribute is added, causing 404 and terribly slow loading of the docs app.
+    (function() {
+      var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1],
+          rUrl = /(#!\/|api|guide|misc|tutorial|error|index[^\.]*\.html).*$/,
+          baseUrl = location.href.replace(rUrl, indexFile),
+          production = location.hostname === 'docs.angularjs.org',
+          headEl = document.getElementsByTagName('head')[0],
+          sync = true;
 
-    var baseTag = document.createElement('base');
-    baseTag.setAttribute('href', baseUrl);
-    headEl.appendChild(baseTag);
+      addTag('base', {href: baseUrl});
 
+
+      {% for stylesheet in doc.stylesheets %}addTag('link', {rel: 'stylesheet', href: '{$ stylesheet $}', type: 'text/css'});
+      {% endfor %}
+
+      {% for script in doc.scripts %}addTag('script', {src: '{$ script $}' }, sync);
+      {% endfor %}
+
+      function addTag(name, attributes, sync) {
+        var el = document.createElement(name),
+            attrName;
+
+        for (attrName in attributes) {
+          el.setAttribute(attrName, attributes[attrName]);
+        }
+
+        sync ? document.write(outerHTML(el)) : headEl.appendChild(el);
+      }
+
+      function outerHTML(node){
+        // if IE, Chrome take the internal method otherwise build one
+        return node.outerHTML || (
+            function(n){
+                var div = document.createElement('div'), h;
+                div.appendChild(n);
+                h = div.innerHTML;
+                div = null;
+                return h;
+            })(node);
+      }
+    })();
   </script>
-
-  {% for stylesheet in doc.stylesheets %}<link href="{$ stylesheet $}" rel="stylesheet" type="text/css">
-  {% endfor %}
-
-  {% for script in doc.scripts %}<script src="{$ script $}"></script>
-  {% endfor %}
 </head>
 <body>
   <header class="header">
