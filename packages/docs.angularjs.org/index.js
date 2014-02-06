@@ -25,13 +25,5 @@ module.exports = function(config) {
     path.resolve(packagePath, 'templates')
   ]);
 
-  var nodePackage = JSON.parse(fs.readFileSync('package.json', 'UTF-8'));
-  config.set('source.nodePackage', nodePackage);
-  
-  config.set('rendering.extra', {
-    git: gitInfo.getGitInfo(nodePackage.repository.url),
-    version: gitInfo.getCurrentVersion(nodePackage)
-  });
-
   return config;
 };

@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var path = require('canonical-path');
+var gitInfo = require('../lib/utils/git-info');
 var packagePath = __dirname;
 
 var basePackage = require('../packages/docs.angularjs.org');
@@ -13,10 +14,19 @@ module.exports = function(config) {
     { pattern: '**/*.ngdoc', basePath: path.resolve(packagePath, 'content') }
   ]);
 
+  var package = require('./package.json');
+  var version = gitInfo.getCurrentVersion(package);
+  config.set('source.version', version);
+
   config.set('rendering.outputFolder', 'build');
   config.set('rendering.cleanOutputFolder', true);
 
   config.set('logging.level', 'info');
+
+  config.merge('rendering.extra', {
+    git: gitInfo.getGitInfo(package.repository.url),
+    version: version
+  });
 
   config.merge('deployment', {
     environments: [{

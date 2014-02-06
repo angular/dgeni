@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var gitInfo = require('../../../lib/utils/git-info');
 
-var package;
+var version;
 
 module.exports = {
   name: 'versions-data',
@@ -10,7 +10,11 @@ module.exports = {
   runAfter: ['adding-extra-docs', 'pages-data'],
   runBefore: ['extra-docs-added'],
   init: function(config) {
-    package = config.source.nodePackage;
+    version = config.source.version;
+
+    if ( !version ) {
+      throw new Error('Invalid configuration.  versions-data processor needs config.source.version');
+    }
   },
   process: function(docs) {
 
@@ -21,7 +25,7 @@ module.exports = {
       outputPath: 'js/versions-data.js',
     };
 
-    versionDoc.currentVersion = gitInfo.getCurrentVersion(package);
+    versionDoc.currentVersion = version;
 
     versionDoc.versions = _(gitInfo.getVersions())
       .filter(function(version) { return version.major > 0; })
