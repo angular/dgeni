@@ -18,7 +18,7 @@ var plugin = module.exports = {
   },
   process: function(docs) {
     _.forEach(docs, function(doc) {
-      log.debug('extracting tags from  ' + doc.file);
+      log.debug('extracting tags from "' + doc.file + '"" at line #' + doc.startingLine);
       extractTags(doc);
     });
   }
