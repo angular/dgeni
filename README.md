@@ -1,7 +1,6 @@
-angular-doc-gen
-===============
+# Dgeni - Documentation Generator
 
-The documentation generation utility for angular.js
+The node.js documentation generation utility by angular.js and other projects.
 
 ## Getting started
 

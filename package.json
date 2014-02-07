@@ -1,12 +1,12 @@
 {
-  "name": "bike-shed",
+  "name": "dgeni",
   "version": "0.0.0",
-  "description": "Generate the angularjs documentation",
-  "main": "index.js",
+  "description": "Flexible JavaScript documentation generator used by AngularJS",
+  "main": "lib/index.js",
   "scripts": {
     "test": "node ./node_modules/jasmine-node/bin/jasmine-node spec packages/*/spec"
   },
-  "repository": "",
+  "repository": "https://github.com/angular/bike-shed.git",
   "author": "Pete Bacon Darwin",
   "licenses": [
     {
@@ -30,11 +30,15 @@
     "shelljs": "~0.2.6",
     "dependency-graph": "~0.1.0",
     "node-html-encoder": "0.0.2",
-    "di": "0.0.1"
+    "di": "0.0.1",
+    "semver": "~2.2.1"
   },
   "devDependencies": {
     "jasmine-node": "~1.12.0",
-    "rewire": "~2.0.0",
-    "semver": "~2.2.1"
-  }
+    "rewire": "~2.0.0"
+  },
+  "contributors": [
+    "Pete Bacon Darwin",
+    "Matias Niemala"
+  ]
 }

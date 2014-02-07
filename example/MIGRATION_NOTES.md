@@ -1,6 +1,6 @@
 # Migration Notes
 
-This document contains things that need to be done to migrate the current docs to bike-shed
+This document contains things that need to be done to migrate the current docs to Dgeni.
 
 * All ` ``` ` tagged code should have the language added (e.g.) ` ```html ` or ` ```js `
 * All `<pre>` tagged code should be converted to ``` back-ticked markdown
