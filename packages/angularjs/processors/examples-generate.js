@@ -3,7 +3,7 @@ var log = require('winston');
 var path = require('canonical-path');
 var trimIndentation = require('../../../lib/utils/trim-indentation');
 var code = require('../../../lib/utils/code');
-var templateFolder, outputFolder;
+var templateFolder, outputFolder, commonFiles;
 
 
 function outputPath(example, fileName) {
@@ -19,10 +19,12 @@ function createExampleDoc(example) {
     startingLine: example.doc.startingLine,
     example: example,
     path: example.id,
-    outputPath: example.outputFolder + '/index.html',
-    scripts: [],
-    stylesheets: []
+    outputPath: example.outputFolder + '/index.html'
   };
+
+  // Copy in the common scripts
+  exampleDoc.scripts = _.map(commonFiles.scripts || [], function(script) { return { path: script }; });
+  exampleDoc.stylesheets = _.map(commonFiles.stylesheets || [], function(stylesheet) { return { path: stylesheet }; });
 
   // If there is an index.html file specified then use it contents for this doc
   // and remove it from the files property
@@ -56,6 +58,7 @@ module.exports = {
   runBefore: ['extra-docs-added'],
   init: function(config, injectables) {
     exampleNames = {};
+    commonFiles = config.get('processing.examples.commonFiles');
     templateFolder = config.get('processing.examples.templateFolder', 'examples');
     outputFolder = config.get('processing.examples.outputFolder', 'examples');
   },

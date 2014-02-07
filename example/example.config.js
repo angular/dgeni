@@ -37,6 +37,11 @@ module.exports = function(config) {
     version: currentVersion
   });
 
+  config.set('processing.examples.commonFiles', {
+    scripts: [ '../../angular.js' ],
+    stylesheets: []
+  });
+
   config.merge('deployment', {
     environments: [{
       name: 'debug',

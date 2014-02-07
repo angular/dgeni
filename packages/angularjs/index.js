@@ -33,6 +33,11 @@ module.exports = function(config) {
     'interface'
   ]);
 
+  config.set('processing.examples.commonFiles', {
+    scripts: [],
+    stylesheets: []
+  });
+
   config.prepend('rendering.templateFolders', path.resolve(packagePath, 'templates'));
 
   config.prepend('rendering.templatePatterns', [
