@@ -6,7 +6,10 @@
   "scripts": {
     "test": "node ./node_modules/jasmine-node/bin/jasmine-node spec packages/*/spec"
   },
-  "repository": "https://github.com/angular/bike-shed.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angular/bike-shed.git"
+  },
   "author": "Pete Bacon Darwin",
   "licenses": [
     {
