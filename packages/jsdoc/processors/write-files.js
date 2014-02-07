@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var path = require('canonical-path');
 var log = require('winston');
+var Q = require('q');
 var writer = require('../../../lib/utils/doc-writer');
 
 var outputFolder;
@@ -14,7 +15,7 @@ module.exports = {
     outputFolder = path.resolve(config.basePath, config.rendering.outputFolder);
   },
   process: function(docs) {
-    return _.map(docs, function(doc) {
+    return Q.all(_.map(docs, function(doc) {
 
       if ( !doc.outputPath ) {
         console.log(doc);
@@ -29,6 +30,6 @@ module.exports = {
         log.debug('Rendered doc', outputFile);
         return outputFile;
       });
-    });
+    }));
   }
 };
