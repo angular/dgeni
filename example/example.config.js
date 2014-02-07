@@ -1,6 +1,5 @@
 var _ = require('lodash');
 var path = require('canonical-path');
-var gitInfo = require('../lib/utils/git-info');
 var packagePath = __dirname;
 
 var basePackage = require('../packages/docs.angularjs.org');
