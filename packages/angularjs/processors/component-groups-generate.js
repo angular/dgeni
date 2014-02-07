@@ -8,7 +8,7 @@ module.exports = {
   process: function(docs, moduleMap) {
     _.forEach(moduleMap, function(module) {
 
-      module.componentGroups = _(module.components)
+      _(module.components)
         .groupBy('docType')
         .tap(function(docTypes) {
           // We don't want the overview docType to be represented as a componentGroup
@@ -19,6 +19,7 @@ module.exports = {
             id: module.id + '.' + docType,
             docType: 'componentGroup',
             groupType: docType,
+            module: module.name,
             moduleDoc: module,
             area: module.area,
             components: docs,
