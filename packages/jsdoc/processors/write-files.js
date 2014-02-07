@@ -23,11 +23,10 @@ module.exports = {
       }
 
       var outputFile = path.resolve(outputFolder, doc.outputPath);
-      log.debug('writing file', outputFile);
 
-
+      log.silly('writing file', outputFile);
       return writer.writeFile(outputFile, doc.renderedContent).then(function() {
-        log.debug('Rendered doc', outputFile);
+        log.debug('written file', outputFile);
         return outputFile;
       });
     }));
