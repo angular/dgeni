@@ -1,14 +1,14 @@
 {
   "name": "dgeni",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node ./node_modules/jasmine-node/bin/jasmine-node spec packages/*/spec"
+    "test": "node ./node_modules/jasmine-node/bin/jasmine-node spec"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular/bike-shed.git"
+    "url": "https://github.com/dgeni/dgeni.git"
   },
   "author": "Pete Bacon Darwin",
   "licenses": [
@@ -18,21 +18,18 @@
     }
   ],
   "dependencies": {
-    "q": "~0.9.7",
-    "q-io": "~1.10.6",
-    "lodash": "~2.4.1",
-    "canonical-path": "~0.0.2",
-    "marked": "~0.2.10",
-    "optimist": "~0.6.0",
-    "nunjucks": "~1.0.1",
     "winston": "~0.7.2",
-    "graceful-fs": "~2.0.1",
     "rimraf": "~2.2.5",
-    "glob": "~3.2.7",
-    "doctrine": "~0.2.0",
+    "optimist": "~0.6.0",
+    "lodash": "~2.4.1",
     "dependency-graph": "~0.1.0",
+    "q": "~0.9.7",
+    "di": "0.0.1",
     "node-html-encoder": "0.0.2",
-    "di": "0.0.1"
+    "canonical-path": "~0.0.2",
+    "q-io": "~1.10.6",
+    "marked": "~0.2.10",
+    "glob": "~3.2.7"
   },
   "devDependencies": {
     "jasmine-node": "~1.12.0",
@@ -41,5 +38,8 @@
   "contributors": [
     "Pete Bacon Darwin",
     "Matias Niemala"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/dgeni/dgeni/issues"
+  }
 }
