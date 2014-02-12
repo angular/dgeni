@@ -1,6 +1,6 @@
 {
   "name": "dgeni",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dgeni/dgeni.git"
+    "url": "https://github.com/angular/dgeni.git"
   },
   "author": "Pete Bacon Darwin",
   "licenses": [
@@ -40,6 +40,6 @@
     "Matias Niemala"
   ],
   "bugs": {
-    "url": "https://github.com/dgeni/dgeni/issues"
+    "url": "https://github.com/angular/dgeni/issues"
   }
 }
