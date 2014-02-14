@@ -51,23 +51,23 @@ ng/global/form.FormController
 ng/$http#methods_head
 ```
 
-### Relative Names
-Links can reference code relatively if they are in the same module and so on.  With this scheme
-it is easy to achieve this.  Assume that we are looking at the `ngClass` directive, which is in the
-`ng` module, the id of this component is `module:ng.directive:ngClass`.  In order to reference the
-`ngShow` directive from here we can use any of:
+### Links to Code
+Since we have all the documents in a single collection during processing, we can do clever matching
+of links against code names. This means that you only have to provide enough of a components id to
+identify it unambiguously relative to other components in the collection.
+For example, in the AngularJS code we can refer to many components simply by their "name":
 
 ```
 ngShow
-directive:ngShow
-module:ng.directive:ngShow
+$route
+ngSanitize
 ```
 
-To reference a filter from the same page we would need to specify the filter type as a minimum:
+But were there is ambiguity we need to add progressively more information:
 
 ```
-filter:currency
-module:ng.filter:currency
+ngMock:$log
+ngMockE2E:$httpBackend
 ```
 
 
