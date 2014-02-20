@@ -46,6 +46,28 @@ The `before` and `after` handlers can be synchronous or asynchronous.  If they a
 they should return undefined or a new array of documents. If they are asynchronous then they must
 return a promise, which will resolve to undefined or a new collection of documents.
 
+#### Pseudo Marker Processors
+
+There are a number of processors that don't do anything but act as markers for stages of the
+processing.  You can use these markers in `runBefore` and `runAfter` properties to ensure that your
+processor is run at the right time.  Here is the list of these marker processors in order:
+
+* loading-files
+* files-loaded
+* parsing-tags
+* tags-parsed
+* extracting-tags
+* tags-extracted
+* processing-docs
+* docs-processed
+* adding-extra-docs
+* extra-docs-added
+* rendering-docs
+* docs-rendered
+* writing-files
+* files-written
+
+
 ## Packages
 
 Document processors, templates and other configuration can be bundled into a `package`.  Packages
