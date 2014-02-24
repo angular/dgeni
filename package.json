@@ -1,6 +1,6 @@
 {
   "name": "dgeni",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/index.js",
   "scripts": {
