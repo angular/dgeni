@@ -38,7 +38,9 @@
   },
   "contributors": [
     "Pete Bacon Darwin",
-    "Matias Niemala"
+    "Matias Niemelä",
+    "Pascal Precht",
+    "Jeff Cross"
   ],
   "bugs": {
     "url": "https://github.com/angular/dgeni/issues"
