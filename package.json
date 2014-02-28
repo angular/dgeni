@@ -4,7 +4,8 @@
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node ./node_modules/jasmine-node/bin/jasmine-node spec"
+    "test": "node ./node_modules/jasmine-node/bin/jasmine-node spec",
+    "cover": "istanbul cover ./node_modules/jasmine-node/bin/jasmine-node -- spec"
   },
   "repository": {
     "type": "git",
