@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v0.2.0 (28th February 2014)
+
+Breaking Changes
+
+* extractTagFactory (lib/extract-tags.js) is moved to the dgeni-packages project.
+
+
 ## v0.1.1 (24th February 2014)
 
 Bug fixes
