@@ -35,6 +35,25 @@ describe("doc-processor", function() {
     }).toThrow();
   });
 
+  it("should call init on processors that have the method", function() {
+    var config = { processing: {} };
+    processor = { name: 'init-test', init: jasmine.createSpy('init') };
+    config.processing.processors = [processor];
+    var process = docProcessorFactory(config);
+    process();
+    expect(processor.init).toHaveBeenCalledWith(config, jasmine.any(Object));
+  });
+
+  it("should add items to the injectables", function() {
+    var config = { processing: {} };
+    processor = { name: 'injectables-test', process: function(extraData, injector) {
+      expect(extraData).toBe(jasmine.any(Object));
+      expect(injector).toBe(jasmine.any(Object));
+    } };
+    config.processing.processors = [processor];
+    var process = docProcessorFactory(config);
+    process();
+  });
 
   it("should call each of the processors in turn, passing the docs object to each", function() {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];

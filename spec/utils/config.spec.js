@@ -106,6 +106,12 @@ describe("config utility", function() {
     expect(requireSpy).toHaveBeenCalledWith(path.resolve('configFile.js'));
   });
 
+  it("should fail with a nice message if loading the config file fails", function() {
+    requireSpy.andCallFake(function() { throw new Error('Random Error'); });
+    expect(function() {
+      configurer.load('configFile.js', defaultConfig);
+    }).toThrow();
+  });
 
   it("should override the defaultConfig", function() {
     var newConfig = configurer.load('configFile.js', defaultConfig);
