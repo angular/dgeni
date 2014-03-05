@@ -2,6 +2,7 @@ var Q = require('q');
 var docProcessorFactory = require('../lib/doc-processor');
 var tagParser = jasmine.createSpyObj('tagParser', ['parse', 'getTags']);
 var tagDefs = [];
+var log = require('winston');
 
 describe("doc-processor", function() {
 
@@ -77,24 +78,43 @@ describe("doc-processor", function() {
 
   // AGH this is a pain to test when async...
   describe("bad-processor", function() {
-    var process, doc;
+    var process, doc, badProcessor;
 
     beforeEach(function() {
-      var badProcessor = {
+      badProcessor = {
         name: 'bad-processor',
         process: function() { throw new Error('processor failed'); }
       };
-      process = docProcessorFactory({ processing: { processors: [badProcessor]} });
       doc = {};
     });
 
-    it("should wrap exceptions thrown by processors", function() {
-      return process([doc]).then(function() {
-        throw 'Expected an error.';
-      }, function() {
-        return 'Error caught';
-      }).then(function(result) {
-        expect(result).toEqual('Error caught');
+    describe('config.processing.stopOnError', function() {
+
+      it("should fail if stopOnError is true a processor throws an Error", function() {
+        process = docProcessorFactory({ processing: {stopOnError: true,  processors: [badProcessor]} });
+        spyOn(log, 'error');
+        var error;
+        return process([doc])
+          .catch(function(e) {
+            error = e;
+          })
+          .finally(function() {
+            expect(error).toBeDefined();
+          });
+      });
+
+      it("should not fail but log the error if stopOnError is false a processor throws an Error", function() {
+        process = docProcessorFactory({ processing: {stopOnError: false,  processors: [badProcessor]} });
+        spyOn(log, 'error');
+        var error;
+        return process([doc])
+          .catch(function(e) {
+            error = e;
+          })
+          .finally(function() {
+            expect(error).toBeUndefined();
+            expect(log.error).toHaveBeenCalled();
+          });
       });
     });
   });
