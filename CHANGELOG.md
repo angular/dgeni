@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v0.2.1 (5th March 2014)
+
+Bug fixes
+
+* fix(doc-processor): handle errors thrown in processors better
+
 ## v0.2.0 (28th February 2014)
 
 Breaking Changes
