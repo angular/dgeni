@@ -116,6 +116,27 @@ describe("doc-processor", function() {
             expect(log.error).toHaveBeenCalled();
           });
       });
+
+      it("should continue to process the subsequent processors after a bad-processor if stopOnError is false", function() {
+        var testDocs = [];
+        var checkProcessor = {
+          name: 'checkProcessor',
+          process: function(docs) {
+            expect(docs).toBe(testDocs);
+            checkProcessor.called = true;
+          }
+        };
+        process = docProcessorFactory({
+          processing: {
+            stopOnError: false,
+            processors: [ badProcessor, checkProcessor ]
+          }
+        });
+
+        return process(testDocs).finally(function() {
+          expect(checkProcessor.called).toEqual(true);
+        });
+      });
     });
   });
 
