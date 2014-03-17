@@ -1,39 +1,22 @@
 var rewire = require('rewire');
-var configurer = rewire('../../lib/utils/config');
+var configurer = rewire('../lib/config');
+var loadConfig = configurer.load;
+var Config = configurer.Config;
 var log = require('winston');
 var path = require('canonical-path');
 
-describe("default-config", function() {
+describe("Config", function() {
   var config;
 
   beforeEach(function() {
     var level = log.level;
     log.level = 'error';
-    config = configurer.load();
+    config = new Config();
     log.level = level;
   });
 
-  it("should have some default values", function() {
-    expect(config.source).toEqual({
-      files : [],
-      extractors: []
-    });
-
-    expect(config.processing).toEqual({
-      processors: [],
-      tagDefinitions: []
-    });
-
-    expect(config.rendering).toEqual({
-      templateFolders: [],
-      templatePatterns: [],
-      filters: [],
-      tags: []
-    });
-
-    expect(config.logging).toEqual({
-      level: 'info'
-    });
+  it("should be an instance of Config", function() {
+    expect(config instanceof Config);
   });
 
   it("should have functions for changing properties", function() {
@@ -77,14 +60,14 @@ describe("default-config", function() {
   });
 });
 
-describe("config utility", function() {
+describe("load", function() {
   var defaultConfig, oldRequire, requireSpy, logLevel;
 
   beforeEach(function() {
     logLevel = log.level;
     log.level = 'warn';
 
-    defaultConfig = { array: [ 'a', 'b' ] };
+    defaultConfig = new Config({ array: [ 'a', 'b' ] });
     mockConfigFile = function(config) {
       config.a = 'x';
       config.array[1] = 'y';
@@ -102,23 +85,37 @@ describe("config utility", function() {
   });
 
   it("should call require to load the config", function() {
-    configurer.load('configFile.js', defaultConfig);
+    loadConfig('configFile.js', defaultConfig);
     expect(requireSpy).toHaveBeenCalledWith(path.resolve('configFile.js'));
+  });
+
+  it("should fail if no configFile is specified", function() {
+    expect(function() {
+      loadConfig();
+    }).toThrow('No config file specified.');
   });
 
   it("should fail with a nice message if loading the config file fails", function() {
     requireSpy.andCallFake(function() { throw new Error('Random Error'); });
     expect(function() {
-      configurer.load('configFile.js', defaultConfig);
+      loadConfig('configFile.js', defaultConfig);
+    }).toThrow();
+  });
+
+
+  it("should fail with a nice message if the config file function does not return an instance of Config", function() {
+    requireSpy.andReturn(function() { return function() { return { some: 'object' }; }; });
+    expect(function() {
+      loadConfig('configFile.js', defaultConfig);
     }).toThrow();
   });
 
   it("should override the defaultConfig", function() {
-    var newConfig = configurer.load('configFile.js', defaultConfig);
-    expect(newConfig).toEqual({
+    var newConfig = loadConfig('configFile.js', defaultConfig);
+    expect(newConfig).toEqual(new Config({
       a: 'x',
       array: [ 'a', 'y'],
       basePath : path.resolve('.')
-    });
+    }));
   });
 });

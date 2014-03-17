@@ -92,7 +92,6 @@ describe("doc-processor", function() {
 
       it("should fail if stopOnError is true a processor throws an Error", function() {
         process = docProcessorFactory({ processing: {stopOnError: true,  processors: [badProcessor]} });
-        spyOn(log, 'error');
         var error;
         return process([doc])
           .catch(function(e) {
@@ -105,7 +104,6 @@ describe("doc-processor", function() {
 
       it("should not fail but log the error if stopOnError is false a processor throws an Error", function() {
         process = docProcessorFactory({ processing: {stopOnError: false,  processors: [badProcessor]} });
-        spyOn(log, 'error');
         var error;
         return process([doc])
           .catch(function(e) {
