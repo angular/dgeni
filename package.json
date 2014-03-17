@@ -34,7 +34,9 @@
   },
   "devDependencies": {
     "jasmine-node": "~1.12.0",
-    "rewire": "~2.0.0"
+    "rewire": "~2.0.0",
+    "dgeni": "^0.2.2",
+    "dgeni-packages": "^0.6.0"
   },
   "contributors": [
     "Pete Bacon Darwin",
