@@ -29,7 +29,6 @@
     "node-html-encoder": "0.0.2",
     "canonical-path": "~0.0.2",
     "q-io": "~1.10.6",
-    "marked": "~0.2.10",
     "glob": "~3.2.7"
   },
   "devDependencies": {
