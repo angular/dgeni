@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var path = require('canonical-path');
-var dgeni = require('./lib');
+var dgeni = require('../lib');
 var jsdocPackage = require('dgeni-packages/jsdoc');
 
 var basePath = path.resolve(__dirname);
@@ -11,7 +11,7 @@ module.exports = function(config) {
   config.set('source.projectPath', basePath);
 
   config.set('source.files', [
-    { pattern: 'lib/**/*.js', basePath: basePath }
+    { pattern: '../lib/**/*.js', basePath: basePath }
   ]);
 
   config.set('processing.stopOnError', true);
