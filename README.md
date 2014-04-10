@@ -1,4 +1,4 @@
-# Dgeni - Documentation Generator
+# Dgeni - Documentation Generator [![Build Status](https://travis-ci.org/angular/dgeni.svg?branch=master)](https://travis-ci.org/angular/dgeni)
 
 The node.js documentation generation utility by angular.js and other projects.
 
