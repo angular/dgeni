@@ -73,7 +73,7 @@ describe("load", function() {
       config.array[1] = 'y';
       return config;
     };
-    
+
     requireSpy = jasmine.createSpy('require').andReturn(mockConfigFile);
     oldRequire = configurer.__get__('require');
     configurer.__set__('require', requireSpy);
@@ -87,6 +87,10 @@ describe("load", function() {
   it("should call require to load the config", function() {
     loadConfig('configFile.js', defaultConfig);
     expect(requireSpy).toHaveBeenCalledWith(path.resolve('configFile.js'));
+  });
+
+  it("should fail if the base config is not a Config instance", function() {
+    expect(function() { loadConfig('configFile.js', {}); }).toThrow();
   });
 
   it("should fail if no configFile is specified", function() {
