@@ -1,1 +1,0 @@
-# Templates, Filters and Tags
