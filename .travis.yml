@@ -7,3 +7,4 @@
 
  script:
   - npm test
+  - npm run cover
