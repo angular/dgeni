@@ -56,6 +56,33 @@ describe("doc-processor", function() {
     process();
   });
 
+  it("should add exports to the di module", function() {
+    var processCalled = false;
+    var process = function(export1, export2) {
+      expect(export1).toEqual('export1 value');
+      expect(export2).toEqual('export2 vqlue');
+      processCalled = true;
+    };
+    var config = {
+      processing: {
+        processors: [
+          {
+            name: 'test-processor',
+            exports: {
+              export1: [ 'value', 'export1 value'],
+              export2: [ 'factory', function() { return 'export2 value'; }]
+            },
+            process: process
+          }
+        ]
+      }
+    };
+    var processDocs = docProcessorFactory(config);
+    return processDocs([]).then(function() {
+      expect(processCalled).toEqual(true);
+    });
+  });
+
   it("should call each of the processors in turn, passing the docs object to each", function() {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];
     before = { name: 'before', process: function(docs) { log.push('before'); } };
