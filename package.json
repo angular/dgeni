@@ -1,6 +1,6 @@
 {
   "name": "dgeni",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/index.js",
   "scripts": {
@@ -31,15 +31,14 @@
   "devDependencies": {
     "jasmine-node": "~1.12.0",
     "rewire": "~2.0.0",
-    "dgeni": "^0.2.2",
-    "dgeni-packages": "^0.6.0",
     "istanbul": "^0.2.7"
   },
   "contributors": [
     "Pete Bacon Darwin",
     "Matias Niemelä",
     "Pascal Precht",
-    "Jeff Cross"
+    "Jeff Cross",
+    "Stéphane Reynaud"
   ],
   "bugs": {
     "url": "https://github.com/angular/dgeni/issues"

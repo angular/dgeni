@@ -4,20 +4,18 @@ The node.js documentation generation utility by angular.js and other projects.
 
 ## Getting started
 
-To get started, install the dependencies and then try out the example.
+Try out the Dgeni example project at https://github.com/petebacondarwin/dgeni-example
 
-## Install Dependencies
+## Installation
 
 You'll need node.js and a bunch of npm modules installed to run this tool.  Get node.js from here:
-http://nodejs.org/.  Then, in the root folder of the project run:
+http://nodejs.org/.  Then, in your project folder run:
 
 ```
-npm install
+npm install dgeni --save
 ```
 
-This will install the npm modules needed for documentation generation.  If you want to run the
-example you'll need to install more dependencies - see below.
-
+This will install Dgeni and any modules that Dgeni depends upon.
 
 
 ## Architecture
