@@ -10,11 +10,11 @@ This is a "Spring Clean" release
   https://github.com/angular/dgeni/tree/master/docs/en_GB/guide.
 * The API has been cleaned up to make it easier to use Dgeni without having to look inside.
 
-** New Stuff **
+**New Stuff**
 
 * feat(doc-processor): processors can declare injectable exports  cfd19f08
 
-** Breaking Changes **
+**Breaking Changes**
 
 * refactor(index): provide a cleaner API surface  3c78776d
 * refact(doc-processor): move pseudo processors to dgeni-packages  c198f651
