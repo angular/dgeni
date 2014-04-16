@@ -50,8 +50,8 @@ There are a number of processors that don't do anything but act as markers for s
 processing.  You can use these markers in `runBefore` and `runAfter` properties to ensure that your
 processor is run at the right time.  Here is the list of these marker processors in order:
 
-* loading-files
-* files-loaded
+* reading-files
+* files-read
 * parsing-tags
 * tags-parsed
 * extracting-tags
