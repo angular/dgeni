@@ -18,3 +18,5 @@ node_modules
 .agignore
 
 coverage
+
+compiled
