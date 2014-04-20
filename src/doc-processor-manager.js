@@ -43,8 +43,8 @@ export class DocProcessorManager {
 
     // There is a bug with es6-shim / traceur that means iterating directly
     // over `this.processors.keys()` fails
-    var processorNames = Array.from(this.processors.keys());
-    processorNames.forEach((name)=>{
+
+    this.processors.forEach((processor, name) => {
       depGraph.addNode(name);
     });
 
