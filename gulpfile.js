@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var traceur = require('gulp-traceur');
 var jasmine = require('jasmine-node');
+var rimraf = require('rimraf');
 
 var path = {
   src: './src/**/*.js',
@@ -39,4 +40,8 @@ gulp.task('test', ['build'], function(done) {
   });
 });
 
-gulp.task('default', ['build']);
+gulp.task('clean', function(done) {
+  rimraf('./compiled', done);
+});
+
+gulp.task('default', ['clean', 'build']);

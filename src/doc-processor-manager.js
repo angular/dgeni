@@ -24,7 +24,7 @@ export class DocProcessorManager {
   run() {
     var processors = this._orderProcessors();
     var config = this._getConfig(processors);
-    var injector = new Injector[processors];
+    var injector = new Injector(processors);
     var docs = [];
     var providers = new Map;
     providers.set('config', config);
@@ -40,11 +40,15 @@ export class DocProcessorManager {
   // Ensure that we are running the processors in the right order
   _orderProcessors() {
     var depGraph = new DepGraph;
-    this.processors.keys.forEach((name)=> {
+
+    // There is a bug with es6-shim / traceur that means iterating directly
+    // over `this.processors.keys()` fails
+    var processorNames = Array.from(this.processors.keys());
+    processorNames.forEach((name)=>{
       depGraph.addNode(name);
     });
-    this.processors.forEach((processor) => {
 
+    this.processors.forEach((processor) => {
       if ( processor.runBefore ) {
         if ( Array.isArray(processor.runBefore) ) {
           processor.runBefore.forEach((name)=>{
@@ -64,12 +68,13 @@ export class DocProcessorManager {
           throw new Error('Error in processor "' + processor.name + '" - runAfter must be an array');
         }
       }
-
-      return depGraph.overallOrder().map((name)=>{
-        return this.processors.get(name);
-      });
-
     });
+
+    var orderedProcessors = depGraph.overallOrder().map((name)=>{
+      return this.processors.get(name);
+    });
+
+    return orderedProcessors;
   }
 
   // Get a new config object that has been processed on by the processors and configFns
