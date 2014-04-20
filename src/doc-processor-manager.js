@@ -22,7 +22,7 @@ export class DocProcessorManager {
   }
 
   run() {
-    var processors = this._orderProcessors();
+    var processors = this._sortProcessors();
     var config = this._getConfig(processors);
     var injector = new Injector(processors);
     var docs = [];
@@ -38,7 +38,7 @@ export class DocProcessorManager {
   }
 
   // Ensure that we are running the processors in the right order
-  _orderProcessors() {
+  _sortProcessors() {
     var depGraph = new DepGraph;
 
     // There is a bug with es6-shim / traceur that means iterating directly
