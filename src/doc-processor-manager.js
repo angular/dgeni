@@ -5,6 +5,19 @@ import { DepGraph } from 'dependency-graph';
 module log from 'winston';
 module Q from 'q';
 
+// ValueProvider just provides an instance.
+class ValueProvider {
+  constructor(value, isPromise = false) {
+    this.provider = value;
+    this.params = [];
+    this.isPromise = isPromise;
+  }
+
+  create(args) {
+    return this.provider;
+  }
+}
+
 export class DocProcessorManager {
 
   constructor(processors) {
@@ -27,10 +40,11 @@ export class DocProcessorManager {
     var injector = new Injector(processors);
     var docs = [];
     var providers = new Map;
-    providers.set('config', config);
+    providers.set('config', new ValueProvider(config));
     processors.forEach(function(processor) {
-      providers.set('docs', docs);
+      providers.set('docs', new ValueProvider(docs));
       var childInjector = new Injector([], injector, providers);
+      console.log(childInjector.dump());
       // This will invoke the processor function
       childInjector.get(processor);
       // TODO: deal with async processors (with promises)
@@ -92,5 +106,7 @@ export class DocProcessorManager {
     this.configFns.forEach((configFn)=>{
       configFn(config);
     });
+
+    return config;
   }
 }

@@ -126,7 +126,6 @@ class FactoryProvider {
   }
 }
 
-
 export function createProviderFromFnOrClass(fnOrClass, annotations) {
   if (isClass(fnOrClass)) {
     return new ClassProvider(fnOrClass, annotations.params, annotations.provide.isPromise);

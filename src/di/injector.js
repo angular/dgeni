@@ -110,7 +110,7 @@ class Injector {
 
 
   // Return an instance for given token.
-  get(token, resolving = [], wantPromise = false, wantLazy = false) {
+  get(token, resolving = [], wantPromise = false, wantLazy = false, originalInjector = this) {
     var resolvingMsg = '';
     var instance;
     var injector = this;
@@ -189,7 +189,7 @@ class Injector {
         throw new Error(`No provider for ${toString(token)}!${resolvingMsg}`);
       }
 
-      return this.parent.get(token, resolving, wantPromise, wantLazy);
+      return this.parent.get(token, resolving, wantPromise, wantLazy, originalInjector);
     }
 
     if (resolving.indexOf(token) !== -1) {
@@ -213,8 +213,8 @@ class Injector {
       if (delayingInstantiation) {
         return this.get(param.token, resolving, true, param.isLazy);
       }
-
-      return this.get(param.token, resolving, param.isPromise, param.isLazy);
+      console.log('getting params', originalInjector);
+      return (originalInjector || this).get(param.token, resolving, param.isPromise, param.isLazy, originalInjector);
     });
 
     // Delaying the instantiation - return a promise.

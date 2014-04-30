@@ -7,9 +7,9 @@ describe("DocProcessorManager", () => {
     expect(docProcessor.processors.get('testProcessor')).toEqual(testProcessor);
   });
 
-  it("should order the processors", () => {
+  it("should sort the processors by runBefore and runAfter dependencies", () => {
     var docProcessor = new DocProcessorManager([testProcessor]);
-    var processors = docProcessor._orderProcessors();
+    var processors = docProcessor._sortProcessors();
     expect(processors).toEqual([testProcessor]);
   });
 
