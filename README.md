@@ -20,29 +20,55 @@ This will install Dgeni and any modules that Dgeni depends upon.
 
 ## Architecture
 
-The tool is modular.  There are three main phases of document generation:
+The tool is modular. It is simply a collection of **document processors** that are run in a pipeline
+on a set of documents.
+
+### Document Processors
+
+Processors provide information about where in the pipeline they should be run and a `process` method
+which is called with the current set of documents.
+
+```
+process(docs) { ... do stuff with the docs ... }
+```
+
+The processors' `process` method is invoked via a dependency injection framework, which enables each
+processor to have additional tools and data injected into it at runtime.
+
+
+```
+process(docs, examples, config) { ... use the examples and config too ... }
+```
+
+Processors can be synchronous or asynchronous:
+
+* If they are synchronous then they should return
+`undefined` or a new array of documents. If they return a new array of docs then this array will
+replace the previous docs array.
+
+* If they are asynchronous then they must return a promise, which will resolve to undefined or a new collection of documents. By returning a promise, the processor tells Dgeni that it is asynchronous
+and Dgeni will wait for the promise to resolve before calling the next processor.
+
+```
+process(docs) {
+  return qfs.readFile(...).then(function(response) {
+    docs.push(response.data);
+  });
+}
+```
+
+The [dgeni-packages repository](https://github.com/angular/dgeni-packages) contains a number of processors - from basic essentials to complex,
+angular.js specific.  These processors are collected together with configuration into folders,
+which we called packages.
+
+The dgeni-packages/base folder contains a package that is the basis for most Dgeni setups.  This
+packages provides processors that define four main phases of document generation:
 
 * File Reading - reading docs from files.
 * Doc Processing - parsing ngdocs and calculating meta data
 * HTML Rendering - converting the parsed docs into HTML
+* File Writing - writing the rendered docs to files
 
-Each of these phases will execute a set of plugins (extractors, processors and renderers) to
-generate the documentation.
-
-### Document Processors
-
-In practice all these phases are executed by a pipeline of **document processors**. Each processor
-can provide a list of other processors that it must come before or after, and it can provide zero or
-more of the following handlers:
-
-* `init(config, injectables) { ... }` - gives the processor and opportunity to initialize itself
-based on the configuration object and also add items to the dependency injection container.
-* `process(docs, ...) { ... }` - invoked by the dependency injector.  Each processor's process
-handler is called an order that fits with the declared `runBefore` and `runAfter` dependencies.
-
-The `before` and `after` handlers can be synchronous or asynchronous.  If they are synchronous then
-they should return undefined or a new array of documents. If they are asynchronous then they must
-return a promise, which will resolve to undefined or a new collection of documents.
 
 #### Pseudo Marker Processors
 
@@ -71,8 +97,5 @@ processor is run at the right time.  Here is the list of these marker processors
 Document processors, templates and other configuration can be bundled into a `package`.  Packages
 can load up and extend other packages.  In this way you can build up your custom configuration on
 top of an existing configuration.
-
-There are some initial packages defined in the
-[dgeni-packages repository](https://github.com/angular/dgeni-packages).
 
 
