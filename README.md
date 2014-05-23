@@ -65,7 +65,7 @@ The dgeni-packages/base folder contains a package that is the basis for most Dge
 packages provides processors that define four main phases of document generation:
 
 * File Reading - reading docs from files.
-* Doc Processing - parsing ngdocs and calculating meta data
+* Doc Processing - parsing docs and calculating meta data
 * HTML Rendering - converting the parsed docs into HTML
 * File Writing - writing the rendered docs to files
 
