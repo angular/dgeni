@@ -22,9 +22,9 @@ describe("doc-generator", function() {
   });
 
   it("should try to load a config file if passed a string", function() {
-    spyOn(configurer, 'load').andReturn(createConfig());
+    spyOn(Config, 'load').andReturn(createConfig());
     docGenerator('someFileName');
-    expect(configurer.load).toHaveBeenCalled();
+    expect(Config.load).toHaveBeenCalled();
   });
 
   it("should raise an error if config is not a Config", function() {
