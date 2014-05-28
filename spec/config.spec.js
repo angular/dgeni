@@ -122,5 +122,26 @@ describe("Config", function() {
     });
   });
 
+  describe("restricted config", function() {
+    it("should provide access only to the restricted config properties", function() {
+      config.set('section1', {
+        prop1: 'section1 - prop1',
+        prop2: 'section1 - prop2',
+        prop3: 'section1 - prop3'
+      });
+      config.set('section2', {
+        prop1: 'section2 - prop1',
+        prop2: 'section2 - prop2',
+        prop3: 'section2 - prop3'
+      });
+
+      var config2 = new Config(config, 'section1');
+      expect(config2.get('prop1')).toEqual('section1 - prop1');
+
+      config2.set('prop2', 'section1 - prop2 (new)');
+      expect(config.get('section1.prop2')).toEqual('section1 - prop2 (new)');
+    });
+  });
+
 });
 
