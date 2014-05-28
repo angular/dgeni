@@ -3,12 +3,17 @@ var docProcessorFactory = require('../lib/doc-processor');
 var tagParser = jasmine.createSpyObj('tagParser', ['parse', 'getTags']);
 var tagDefs = [];
 var log = require('winston');
+var Config = require('../lib/config').Config;
 
 describe("doc-processor", function() {
 
   it("should throw error if the config is invalid", function() {
     expect(function() {
       docProcessorFactory({});
+    }).toThrow('Invalid config - you must provide an instance of Config');
+
+    expect(function() {
+      docProcessorFactory(new Config());
     }).toThrow('Invalid config - you must provide a config object with a "processing" property');
 
     expect(function() {
@@ -37,21 +42,22 @@ describe("doc-processor", function() {
   });
 
   it("should call init on processors that have the method", function() {
-    var config = { processing: {} };
-    processor = { name: 'init-test', init: jasmine.createSpy('init') };
-    config.processing.processors = [processor];
+    var processor = { name: 'init-test', init: jasmine.createSpy('init') };
+    var config = new Config({ processing: {
+      processors: [processor]
+    } });
     var process = docProcessorFactory(config);
     process();
     expect(processor.init).toHaveBeenCalledWith(config, jasmine.any(Object));
   });
 
   it("should add items to the injectables", function() {
-    var config = { processing: {} };
+    var config = new Config({ processing: {} });
     processor = { name: 'injectables-test', process: function(extraData, injector) {
       expect(extraData).toBe(jasmine.any(Object));
       expect(injector).toBe(jasmine.any(Object));
     } };
-    config.processing.processors = [processor];
+    config.set('processing.processors', [processor]);
     var process = docProcessorFactory(config);
     process();
   });
@@ -63,7 +69,7 @@ describe("doc-processor", function() {
       expect(export2).toEqual('export2 vqlue');
       processCalled = true;
     };
-    var config = {
+    var config = new Config({
       processing: {
         processors: [
           {
@@ -76,7 +82,7 @@ describe("doc-processor", function() {
           }
         ]
       }
-    };
+    });
     var processDocs = docProcessorFactory(config);
     return processDocs([]).then(function() {
       expect(processCalled).toEqual(true);
@@ -90,11 +96,11 @@ describe("doc-processor", function() {
     after = { name: 'after', process: function(docs) { log.push('after'); } };
 
 
-    var config = {
+    var config = new Config({
       processing: {
         processors: [before, middle, after]
       }
-    };
+    });
 
     var process = docProcessorFactory(config);
     return process(docs).then(function(docs) {
@@ -115,10 +121,10 @@ describe("doc-processor", function() {
       doc = {};
     });
 
-    describe('config.processing.stopOnError', function() {
+    describe('config: processing.stopOnError', function() {
 
       it("should fail if stopOnError is true a processor throws an Error", function() {
-        process = docProcessorFactory({ processing: {stopOnError: true,  processors: [badProcessor]} });
+        process = docProcessorFactory(new Config({ processing: {stopOnError: true,  processors: [badProcessor]} }));
         var error;
         return process([doc])
           .catch(function(e) {
@@ -130,7 +136,7 @@ describe("doc-processor", function() {
       });
 
       it("should not fail but log the error if stopOnError is false a processor throws an Error", function() {
-        process = docProcessorFactory({ processing: {stopOnError: false,  processors: [badProcessor]} });
+        process = docProcessorFactory(new Config({ processing: {stopOnError: false,  processors: [badProcessor]} }));
         var error;
         return process([doc])
           .catch(function(e) {
@@ -151,12 +157,12 @@ describe("doc-processor", function() {
             checkProcessor.called = true;
           }
         };
-        process = docProcessorFactory({
+        process = docProcessorFactory(new Config({
           processing: {
             stopOnError: false,
             processors: [ badProcessor, checkProcessor ]
           }
-        });
+        }));
 
         return process(testDocs).finally(function() {
           expect(checkProcessor.called).toEqual(true);
@@ -167,7 +173,7 @@ describe("doc-processor", function() {
 
   it("should order the processors by dependency", function() {
     var log = [], docs = { content: 'x' };
-    var config = { processing: {
+    var config = new Config({ processing: {
       processors: [
         { name: 'a', runAfter: ['c'], process: function(docs) { log.push('a'); } },
         { name: 'b', runAfter: ['c','e','a'], process: function(docs) { log.push('b'); } },
@@ -175,7 +181,7 @@ describe("doc-processor", function() {
         { name: 'd', runAfter: ['a'], process: function(docs) { log.push('d'); } },
         { name: 'e', runAfter: [], process: function(docs) { log.push('e'); } }
       ]
-    } };
+    } });
     var process = docProcessorFactory(config);
     return process(docs).then(function(docs) {
       expect(log).toEqual(['c', 'e', 'a', 'b', 'd']);
