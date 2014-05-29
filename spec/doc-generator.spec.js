@@ -1,34 +1,31 @@
-var docGenerator = require('../lib/doc-generator');
-var configurer = require('../lib/config');
-var Config = configurer.Config;
+var DocGenerator = require('../lib/doc-generator');
+var Package = require('../lib/package');
 
-function createConfig() {
-  return new Config({
-    processing: {
-      processors: []
-    }
-  });
-}
+describe("DocGenerator", function() {
+  var docGenerator;
 
-describe("doc-generator", function() {
-
-
-  it("should return a generator function", function() {
-    var generator = docGenerator(createConfig());
-    expect(generator).toEqual(jasmine.any(Function));
-
-    var docs = [];
-    docs = generator(docs);
+  beforeEach(function() {
+    docGenerator = new DocGenerator();
   });
 
-  it("should try to load a config file if passed a string", function() {
-    spyOn(Config, 'load').andReturn(createConfig());
-    docGenerator('someFileName');
-    expect(Config.load).toHaveBeenCalled();
+  describe("package", function() {
+    it("should add the package to the packages property", function() {
+      docGenerator.package(new Package('test-package'));
+      expect(docGenerator.packages['test-package']).toEqual(new Package('test-package'));
+    });
+    it("should create a new package if passed a string", function() {
+      var newPackage = docGenerator.package('test-package');
+      expect(newPackage instanceof Package).toBeTruthy();
+    });
+    it("should throw an error if the not passed an instance of Package or a string name", function() {
+      expect(function() {
+        docGenerator.usePackage({});
+      }).toThrow();
+    });
   });
 
-  it("should raise an error if config is not a Config", function() {
-    expect(function() { docGenerator({}); }).toThrow();
+  describe("generate", function() {
+
   });
 
 });
