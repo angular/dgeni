@@ -3,7 +3,7 @@ var docProcessorFactory = require('../lib/doc-processor');
 var tagParser = jasmine.createSpyObj('tagParser', ['parse', 'getTags']);
 var tagDefs = [];
 var log = require('winston');
-var Config = require('../lib/config').Config;
+var Config = require('../lib/config');
 
 describe("doc-processor", function() {
 

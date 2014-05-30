@@ -1,6 +1,5 @@
 var rewire = require('rewire');
-var configurer = rewire('../lib/config');
-var Config = configurer.Config;
+var Config = rewire('../lib/config');
 var log = require('winston');
 var path = require('canonical-path');
 
@@ -73,12 +72,12 @@ describe("Config", function() {
       };
 
       requireSpy = jasmine.createSpy('require').andReturn(mockConfigFile);
-      oldRequire = configurer.__get__('require');
-      configurer.__set__('require', requireSpy);
+      oldRequire = Config.__get__('require');
+      Config.__set__('require', requireSpy);
     });
 
     afterEach(function() {
-      configurer.__set__('require', oldRequire);
+      Config.__set__('require', oldRequire);
       log.level = logLevel;
     });
 
