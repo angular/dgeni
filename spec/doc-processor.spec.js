@@ -31,7 +31,7 @@ describe("doc-processor", function() {
     }).toThrow();
   });
 
-  it("should add extraData and injector to the injectables", function() {
+  it("should add extraData and injector to the injectables", function(done) {
     var injected = {};
     var process = docProcessorFactory([
       {
@@ -41,13 +41,14 @@ describe("doc-processor", function() {
         }
       }
     ]);
-    process().then(function() {
-      expect(injected.extraData).toBe(jasmine.any(Object));
-      expect(injected.injector).toBe(jasmine.any(Object));
+    process([{}]).then(function() {
+      expect(injected.extraData).toEqual(jasmine.any(Object));
+      expect(injected.injector).toEqual(jasmine.any(Object));
+      done();
     });
   });
 
-  it("should add services to the di module", function() {
+  it("should add services to the di module", function(done) {
     var log = [];
 
     var processors = [{
@@ -64,12 +65,13 @@ describe("doc-processor", function() {
     };
 
     var processDocs = docProcessorFactory(processors, services);
-    return processDocs([]).then(function() {
+    return processDocs([]).finally(function() {
       expect(log).toEqual(['service1 value', 'service1 value service2 value']);
+      done();
     });
   });
 
-  it("should call each of the processors in turn, passing the docs object to each", function() {
+  it("should call each of the processors in turn, passing the docs object to each", function(done) {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];
     before = { name: 'before', process: function(docs) { log.push('before'); } };
     middle = { name:'middle', process: function(docs) { log.push('middle'); } };
@@ -79,10 +81,11 @@ describe("doc-processor", function() {
     var processors = [before, middle, after];
 
     var process = docProcessorFactory(processors);
-    return process(docs).then(function(docs) {
+    return process(docs).finally(function(docs) {
       expect(log).toEqual(['before', 'middle', 'after']);
       expect(docs).toEqual(docs);
-    }).done();
+      done();
+    });
   });
 
   // AGH this is a pain to test when async...
@@ -97,34 +100,34 @@ describe("doc-processor", function() {
       doc = {};
     });
 
-    describe('config: processing.stopOnError', function() {
+    describe('config: processing.stopOnError', function(done) {
 
       it("should fail if stopOnError is true a processor throws an Error", function() {
         process = docProcessorFactory([badProcessor], {}, new Config({ processing: {stopOnError: true} }));
         var error;
-        return process([doc])
+        process([doc])
           .catch(function(e) {
-            error = e;
-          })
-          .finally(function() {
-            expect(error).toBeDefined();
+            expect(e).toBeDefined();
+            done();
           });
       });
 
-      it("should not fail but log the error if stopOnError is false a processor throws an Error", function() {
+      it("should not fail but log the error if stopOnError is false a processor throws an Error", function(done) {
         process = docProcessorFactory([badProcessor], new Config({ processing: {stopOnError: false} }));
         var error;
-        return process([doc])
+        spyOn(log, 'error');
+        process([doc])
           .catch(function(e) {
             error = e;
           })
           .finally(function() {
             expect(error).toBeUndefined();
             expect(log.error).toHaveBeenCalled();
+            done();
           });
       });
 
-      it("should continue to process the subsequent processors after a bad-processor if stopOnError is false", function() {
+      it("should continue to process the subsequent processors after a bad-processor if stopOnError is false", function(done) {
         var testDocs = [];
         var checkProcessor = {
           name: 'checkProcessor',
@@ -142,12 +145,13 @@ describe("doc-processor", function() {
         return process(testDocs).finally(function() {
           expect(checkProcessor.called).toEqual(true);
           expect(checkProcessor.docs).toBe(testDocs);
+          done();
         });
       });
     });
   });
 
-  it("should order the processors by dependency", function() {
+  it("should order the processors by dependency", function(done) {
     var log = [], docs = { content: 'x' };
     var processors = [
         { name: 'a', runAfter: ['c'], process: function(docs) { log.push('a'); } },
@@ -157,9 +161,10 @@ describe("doc-processor", function() {
         { name: 'e', runAfter: [], process: function(docs) { log.push('e'); } }
       ];
     var process = docProcessorFactory(processors);
-    return process(docs).then(function(docs) {
+    return process(docs).finally(function(docs) {
       expect(log).toEqual(['c', 'e', 'a', 'b', 'd']);
-    }).done();
+      done();
+    });
   });
 
 });

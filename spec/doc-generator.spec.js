@@ -22,6 +22,10 @@ describe("DocGenerator", function() {
         docGenerator.usePackage({});
       }).toThrow();
     });
+    it("should pass dependencies through to the new package", function() {
+      var newPackage = docGenerator.package('test-package', ['dep1', 'dep2']);
+      expect(newPackage.dependencies).toEqual(['dep1', 'dep2']);
+    });
   });
 
   describe("generate", function() {
@@ -36,10 +40,11 @@ describe("DocGenerator", function() {
           name: 'test3-processor',
           process: function(testValue) { log.push(testValue); }
         });
-      return docGenerator.generate().then(function() {
-        expect(log).toEqual(['test 1']);
-        done();
-      });
+      docGenerator.generate()
+        .then(function() {
+          expect(log).toEqual(['test 1']);
+        })
+        .finally(done);
     });
 
 
@@ -54,10 +59,12 @@ describe("DocGenerator", function() {
           name: 'test3-processor',
           process: function(config) { log.push(config.get('testValue')); }
         });
-      return docGenerator.generate().then(function() {
-        expect(log).toEqual([1]);
-        done();
-      });
+      docGenerator.generate()
+        .then(function() {
+          expect(log).toEqual([1]);
+        })
+        .finally(done);
+    });
     });
   });
 
