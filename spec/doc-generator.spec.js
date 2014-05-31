@@ -96,5 +96,39 @@ describe("DocGenerator", function() {
       }).toThrow();
 
     });
+
+    it("should apply processor config defaults", function(done) {
+      var log = [];
+      docGenerator.package('test')
+        .processor({
+          name: 'a',
+          config: { 'x.y':  { default: 'some value' } },
+          process: function(config) {
+            log.push(config.get('a.x.y'));
+          }
+        });
+      docGenerator.generate()
+        .finally(function() {
+          expect(log).toEqual(['some value']);
+          done();
+        });
+    });
+
+    it("should apply validators to config values", function() {
+      docGenerator.package('test')
+        .processor({
+          name: 'a',
+          config: { 'x.y': {
+            validate: function(value) {
+              expect(value).toEqual('some value');
+              throw new Error('bad value');
+            }
+          } }
+        })
+        .config(function(config) { config.set('a.x.y', 'some value'); });
+      expect(function() {
+        docGenerator.generate();
+      }).toThrow();
+    });
   });
 });
