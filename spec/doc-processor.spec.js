@@ -63,6 +63,22 @@ describe("doc-processor", function() {
     });
   });
 
+  it("should add each of the processor's config values to the child injector", function(done) {
+    var log = [];
+    var processor = {
+      name: 'a',
+      config: { 'x.y': { } },
+      process: function(x_y) {
+        log.push(x_y);
+      }
+    };
+    var process = docProcessorFactory([processor], null, new Config({ a: {x: { y: 'some value' }}}));
+    process({}).finally(function() {
+      expect(log).toEqual(['some value']);
+      done();
+    });
+  });
+
   it("should call each of the processors in turn, passing the docs object to each", function(done) {
     var log = [], docs = [ { content: 'a'}, { content: 'b'}];
     before = { name: 'before', process: function(docs) { log.push('before'); } };
@@ -80,7 +96,6 @@ describe("doc-processor", function() {
     });
   });
 
-  // AGH this is a pain to test when async...
   describe("bad-processor", function() {
     var process, doc, badProcessor;
 
