@@ -65,7 +65,36 @@ describe("DocGenerator", function() {
         })
         .finally(done);
     });
+
+
+    it("should order the processors by dependency", function(done) {
+      var log = [];
+      docGenerator.package('test1')
+        .processor({ name: 'a', runAfter: ['c'], process: function(docs) { log.push('a'); } })
+        .processor({ name: 'b', runAfter: ['c','e','a'], process: function(docs) { log.push('b'); } })
+        .processor({ name: 'c', runBefore: ['e'], process: function(docs) { log.push('c'); } })
+        .processor({ name: 'd', runAfter: ['a'], process: function(docs) { log.push('d'); } })
+        .processor({ name: 'e', runAfter: [], process: function(docs) { log.push('e'); } });
+      docGenerator.generate()
+        .finally(function(docs) {
+          expect(log).toEqual(['c', 'e', 'a', 'b', 'd']);
+          done();
+        });
+    });
+
+    it("should throw an error if the processor dependencies are invalid", function() {
+      expect(function() {
+        docGenerator.package('test')
+          .processor({ name: 'bad-runAfter-processor', runAfter: 'tags-processed' });
+        docGenerator.generate();
+      }).toThrow();
+
+      expect(function() {
+        docGenerator.package('test')
+          .processor({ name: 'bad-runBefore-processor', runBefore: 'tags-processed' });
+        docGenerator.generate();
+      }).toThrow();
+
     });
   });
-
 });

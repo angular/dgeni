@@ -15,14 +15,6 @@ describe("doc-processor", function() {
     expect(function() {
       docProcessorFactory([]);
     }).toThrow();
-
-    expect(function() {
-      docProcessorFactory([{ name: 'bad-runAfter-processor', runAfter: 'tags-processed' }]);
-    }).toThrow();
-
-    expect(function() {
-      docProcessorFactory([{ name: 'bad-runBefore-processor', runAfter: 'tags-processed' }]);
-    }).toThrow();
   });
 
   it("should throw error if the config is defined but not an instance of Config", function() {
@@ -150,21 +142,4 @@ describe("doc-processor", function() {
       });
     });
   });
-
-  it("should order the processors by dependency", function(done) {
-    var log = [], docs = { content: 'x' };
-    var processors = [
-        { name: 'a', runAfter: ['c'], process: function(docs) { log.push('a'); } },
-        { name: 'b', runAfter: ['c','e','a'], process: function(docs) { log.push('b'); } },
-        { name: 'c', runBefore: ['e'], process: function(docs) { log.push('c'); } },
-        { name: 'd', runAfter: ['a'], process: function(docs) { log.push('d'); } },
-        { name: 'e', runAfter: [], process: function(docs) { log.push('e'); } }
-      ];
-    var process = docProcessorFactory(processors);
-    return process(docs).finally(function(docs) {
-      expect(log).toEqual(['c', 'e', 'a', 'b', 'd']);
-      done();
-    });
-  });
-
 });
