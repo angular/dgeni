@@ -72,6 +72,9 @@ describe("doc-processor", function() {
         log.push(x_y);
       }
     };
+    // Since x.y is not a valid paramater identifier, we must annotate it.
+    processor.process.$inject = ['x.y'];
+
     var process = docProcessorFactory([processor], null, new Config({ a: {x: { y: 'some value' }}}));
     process({}).finally(function() {
       expect(log).toEqual(['some value']);
