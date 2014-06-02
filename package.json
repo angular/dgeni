@@ -2,7 +2,7 @@
   "name": "dgeni",
   "version": "0.3.0",
   "description": "Flexible JavaScript documentation generator used by AngularJS",
-  "main": "lib/index.js",
+  "main": "lib/Dgeni.js",
   "scripts": {
     "test": "jasmine-node spec",
     "cover": "istanbul cover jasmine-node -- spec"
@@ -19,14 +19,15 @@
     }
   ],
   "dependencies": {
-    "winston": "~0.7.2",
-    "rimraf": "~2.2.5",
-    "optimist": "~0.6.0",
-    "lodash": "~2.4.1",
+    "canonical-path": "~0.0.2",
     "dependency-graph": "~0.1.0",
-    "q": "~0.9.7",
     "di": "0.0.1",
-    "canonical-path": "~0.0.2"
+    "lodash": "~2.4.1",
+    "optimist": "~0.6.0",
+    "q": "~0.9.7",
+    "rimraf": "~2.2.5",
+    "validate.js": "^0.2.0",
+    "winston": "~0.7.2"
   },
   "devDependencies": {
     "jasmine-node": "~1.12.0",
