@@ -6,7 +6,8 @@ describe("Dgeni", function() {
   beforeEach(function() {
     mockLogger = jasmine.createSpyObj('log', ['error', 'warning', 'info', 'debug', 'silly']);
     dgeni = new Dgeni();
-    dgeni.package('mockLogger').factory('log', function() { return mockLogger; });
+    var mockLoggerPackage = dgeni.package('mockLogger');
+    mockLoggerPackage.factory(function log() { return mockLogger; });
   });
 
   describe("constructor", function() {
@@ -14,8 +15,8 @@ describe("Dgeni", function() {
       var package1 = new Dgeni.Package('package1');
       var package2 = new Dgeni.Package('package2');
       dgeni = new Dgeni([package1, package2]);
-      expect(dgeni.packages.package1).toBe(package1);
-      expect(dgeni.packages.package2).toBe(package2);
+      expect(dgeni.packages.get('package1')).toBe(package1);
+      expect(dgeni.packages.get('package2')).toBe(package2);
     });
   });
 
@@ -23,7 +24,7 @@ describe("Dgeni", function() {
     it("should add the package to the packages property", function() {
       var testPackage = new Dgeni.Package('test-package');
       dgeni.package(testPackage);
-      expect(dgeni.packages['test-package']).toEqual(testPackage);
+      expect(dgeni.packages.get('test-package')).toEqual(testPackage);
     });
     it("should create a new package if passed a string", function() {
       var newPackage = dgeni.package('test-package');
@@ -38,6 +39,20 @@ describe("Dgeni", function() {
       var newPackage = dgeni.package('test-package', ['dep1', 'dep2']);
       expect(newPackage.dependencies).toEqual(['dep1', 'dep2']);
     });
+
+    it("should load up package dependencies that are defined inline", function(done) {
+      var log = [];
+      var a = new Dgeni.Package('a').processor(function aProcessor() {
+        return { $process: function() { log.push('a'); } };
+      });
+      var b = new Dgeni.Package('b', [a]);
+      dgeni.package(b);
+      expect(b.dependencies).toEqual(['a']);
+      dgeni.generate().then(function() {
+        expect(log).toEqual(['a']);
+        done();
+      });
+    });
   });
 
   describe("generate()", function() {
@@ -47,13 +62,14 @@ describe("Dgeni", function() {
       it("should add services from packages in the correct package dependency order", function(done) {
         var log = [];
         dgeni.package('test1', ['test2'])
-          .factory('testValue', function() { return 'test 1'; });
+          .factory(function testValue() { return 'test 1'; });
         dgeni.package('test2')
-          .factory('testValue', function() { return 'test 2'; });
+          .factory(function testValue() { return 'test 2'; });
         dgeni.package('test3', ['test1', 'test2'])
-          .processor('test3-processor', function(testValue) {
+          .processor(function test3Processor(testValue) {
             return {
-              $process: function(docs) { log.push(testValue); }
+              $process: function(docs) {
+                log.push(testValue); }
             };
           });
         dgeni.generate()
@@ -78,7 +94,7 @@ describe("Dgeni", function() {
       it("should run the config functions in the correct package dependency order", function(done) {
         var log = [];
         dgeni.package('test')
-          .processor('testProcessor', function() {
+          .processor(function testProcessor() {
             return {
               $process: function() { log.push(this.testValue); }
             };
@@ -90,8 +106,8 @@ describe("Dgeni", function() {
         dgeni.generate()
           .then(function() {
             expect(log).toEqual([1]);
-          })
-          .finally(done);
+            done();
+          });
       });
 
       it("should provide access to the injector", function(done) {
@@ -105,15 +121,43 @@ describe("Dgeni", function() {
           done();
         });
       });
+
+      it("should add some basic shared services to the injector", function(done) {
+        var _config, _log;
+        dgeni.package('testPackage').config(function(config, log) {
+          _config = config;
+          _log = log;
+        });
+        dgeni.generate().finally(function() {
+          expect(dgeni).toBeDefined();
+          expect(log).toBeDefined();
+          done();
+        });
+      });
+
+      it("should set stop on error defaults", function(done) {
+        var stopOnProcessingError, stopOnValidationError;
+        dgeni.package('testPackage').config(function(config) {
+          stopOnProcessingError = config.stopOnProcessingError;
+          stopOnValidationError = config.stopOnValidationError;
+        });
+        dgeni.generate().finally(function() {
+          expect(stopOnProcessingError).toBe(true);
+          expect(stopOnValidationError).toBe(true);
+          done();
+        });
+      });
     });
 
 
     describe("services", function() {
+
+
       it("should add services to the injector", function(done) {
         var log = [];
 
         dgeni.package('test-package')
-          .processor('testProcessor', function(service1, service2) {
+          .processor(function testProcessor(service1, service2) {
             return {
               $process: function(docs) {
                 log.push(service1);
@@ -121,8 +165,8 @@ describe("Dgeni", function() {
               }
             };
           })
-          .factory('service1', function() { return 'service1 value'; })
-          .factory('service2', function(service1) { return service1 + ' service2 value'; });
+          .factory(function service1() { return 'service1 value'; })
+          .factory(function service2(service1) { return service1 + ' service2 value'; });
 
         dgeni.generate().finally(function() {
           expect(log).toEqual(['service1 value', 'service1 value service2 value']);
@@ -140,11 +184,11 @@ describe("Dgeni", function() {
         it("should order the processors by dependency", function(done) {
           var log = [];
           dgeni.package('test1')
-            .processor('a', function() { return { $runAfter: ['c'], $process: function() { log.push('a'); } }; })
-            .processor('b', function() { return { $runAfter: ['c','e','a'], $process: function() { log.push('b'); } }; })
-            .processor('c', function() { return { $runBefore: ['e'], $process: function() { log.push('c'); } }; })
-            .processor('d', function() { return { $runAfter: ['a'], $process: function() { log.push('d'); } }; })
-            .processor('e', function() { return { $runAfter: [], $process: function() { log.push('e'); } }; });
+            .processor(function a() { return { $runAfter: ['c'], $process: function() { log.push('a'); } }; })
+            .processor(function b() { return { $runAfter: ['c','e','a'], $process: function() { log.push('b'); } }; })
+            .processor(function c() { return { $runBefore: ['e'], $process: function() { log.push('c'); } }; })
+            .processor(function d() { return { $runAfter: ['a'], $process: function() { log.push('d'); } }; })
+            .processor(function e() { return { $runAfter: [], $process: function() { log.push('e'); } }; });
           dgeni.generate()
             .finally(function() {
               expect(log).toEqual(['c', 'e', 'a', 'b', 'd']);
@@ -152,15 +196,19 @@ describe("Dgeni", function() {
             });
         });
 
-        it("should throw an error if the processor dependencies are invalid", function() {
+        it("should throw an error if the $runAfter dependencies are invalid", function() {
+          dgeni.package('test')
+            .processor(function badRunAfterProcessor() { return { $runAfter: 'tags-processed' }; });
           expect(function() {
-            dgeni.package('test')
-              .processor('bad-runAfter-processor', { runAfter: 'tags-processed' });
+            dgeni.generate();
           }).toThrow();
+        });
 
+        it("should throw an error if the $runBefore dependencies are invalid", function() {
+          dgeni.package('test')
+            .processor(function badRunBeforeProcessor() { return { $runBefore: 'tags-processed' }; });
           expect(function() {
-            dgeni.package('test')
-              .processor({ name: 'bad-runBefore-processor', runBefore: 'tags-processed' });
+            dgeni.generate();
           }).toThrow();
 
         });
@@ -170,7 +218,7 @@ describe("Dgeni", function() {
 
         it("should fail if processor has an invalid property", function(done) {
           dgeni.package('test')
-            .processor('testProcessor', function() {
+            .processor(function testProcessor() {
               return {
                 $validate: { x: { presence: true } }
               };
@@ -186,7 +234,7 @@ describe("Dgeni", function() {
         it("should not fail if all the processors properties are valid", function(done) {
           var log = [];
           dgeni.package('test')
-            .processor('testProcessor', function() {
+            .processor(function testProcessor() {
               return {
                 $validate: { x: { presence: true } },
                 $process: function() { log.push(this.x); }
@@ -202,11 +250,13 @@ describe("Dgeni", function() {
           });
         });
 
-        it("should not fail if stopOnValidationError is false", function() {
-          dgeni.stopOnValidationError = false;
+        it("should not fail if stopOnValidationError is false", function(done) {
 
           dgeni.package('test')
-            .processor('testProcessor', function() {
+            .config(function(config) {
+              config.stopOnValidationError = false;
+            })
+            .processor(function testProcessor() {
               return {
                 $validate: { x: { presence: true } }
               };
@@ -231,7 +281,7 @@ describe("Dgeni", function() {
 
         beforeEach(function() {
           testPackage = dgeni.package('test')
-            .processor('badProcessor', function() {
+            .processor(function badProcessor() {
               return {
                 $process: function() { throw new Error('processor failed'); }
               };
@@ -250,9 +300,13 @@ describe("Dgeni", function() {
           });
 
           it("should not fail but log the error if stopOnProcessingError is false a processor throws an Error", function(done) {
-            dgeni.stopOnProcessingError = false;
 
             var error;
+            testPackage
+              .config(function(config) {
+                config.stopOnProcessingError = false;
+              });
+
             dgeni.generate()
               .catch(function(e) {
                 error = e;
@@ -265,17 +319,20 @@ describe("Dgeni", function() {
           });
 
           it("should continue to process the subsequent processors after a bad-processor if stopOnProcessingError is false", function(done) {
-            dgeni.stopOnProcessingError = false;
             var called = false;
 
-            testPackage.processor('checkProcessor', function() {
-              return {
-                $runAfter: ['badProcessor'],
-                $process: function() {
-                  called = true;
-                }
-              };
-            });
+            testPackage
+              .config(function(config) {
+                config.stopOnProcessingError = false;
+              })
+              .processor(function checkProcessor() {
+                return {
+                  $runAfter: ['badProcessor'],
+                  $process: function() {
+                    called = true;
+                  }
+                };
+              });
 
             dgeni.generate().finally(function() {
               expect(called).toEqual(true);
