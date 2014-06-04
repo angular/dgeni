@@ -1,24 +1,15 @@
-var _ = require('lodash');
 var path = require('canonical-path');
-var dgeni = require('../lib');
-var jsdocPackage = require('dgeni-packages/jsdoc');
+var Package = require('dgeni').Package;
 
-var basePath = path.resolve(__dirname);
+module.exports = new Package('dgeniDocsPackage', ['jsdoc'])
+  .config(function(log, readFilesProcessor, renderDocsProcessor) {
+    var basePath = path.resolve(__dirname);
 
-module.exports = function(config) {
-  config = jsdocPackage(config);
+    readFilesProcessor.projectPath = basePath;
+    readFilesProcessor.sourceFiles.push({ pattern: '../lib/**/*.js', basePath: basePath });
 
-  config.set('source.projectPath', basePath);
+    renderDocsProcessor.outputFolder = 'build';
+    renderDocsProcessor.contentsFolder = 'docs';
 
-  config.set('source.files', [
-    { pattern: '../lib/**/*.js', basePath: basePath }
-  ]);
-
-  config.set('processing.stopOnError', true);
-  config.set('rendering.outputFolder', 'build');
-  config.set('rendering.contentsFolder', 'docs');
-
-  config.set('logging.level', 'debug');
-
-  return config;
-};
+    log.level = 'debug';
+  });

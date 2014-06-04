@@ -1,28 +1,24 @@
 #!/usr/bin/env node
-var rimraf = require('rimraf');
+var path = require('canonical-path');
 var myArgs = require('optimist')
-  .usage('Usage: $0 path/to/config')
+  .usage('Usage: $0 path/to/mainPackage [path/to/other/packages ...]')
   .demand(1)
   .argv;
 
-var dgeni = require('../lib/index');
-var log = dgeni.log;
+var Dgeni = require('dgeni');
 
-// Set up logging to look nice on the command line
-log.cli();
+// Extract the paths to the packages from the command line arguments
+var packagePaths = myArgs._;
 
-// Load in the config file and run it over the top of the default config
-var config = dgeni.loadConfig(myArgs._[0]);
+// Require each of these packages and then create a new dgeni using them
+var dgeni = new Dgeni(packagePaths.map(function(packagePath) {
+  if ( packagePath.startsWith('.') ) { packagePath = path.resolve(packagePath); }
+  return require(packagePath);
+}));
 
-var outputFolder = config.get('rendering.outputFolder');
-if ( config.get('rendering.cleanOutputFolder') && outputFolder ) {
-  // Delete the previous output
-  rimraf.sync(outputFolder);
-  log.info('Removed previous output files from "' + outputFolder + '"');
-}
-
-var generateDocs = dgeni.generator(config);
-
-generateDocs().then(function() {
-  log.info('Finished generating docs');
-}).done();
+// Run the document generation
+dgeni.generate()
+  .then(function() {
+    console.log('Finished generating docs');
+  })
+  .done();
