@@ -18,6 +18,12 @@ describe("Dgeni", function() {
       expect(dgeni.packages.get('package1')).toBe(package1);
       expect(dgeni.packages.get('package2')).toBe(package2);
     });
+
+    it("should complain if the packages parameter is not an array", function() {
+      expect(function() {
+        new new Dgeni('bad-param');
+      }).toThrow();
+    });
   });
 
   describe("package()", function() {
@@ -50,6 +56,27 @@ describe("Dgeni", function() {
       expect(b.dependencies).toEqual(['a']);
       dgeni.generate().then(function() {
         expect(log).toEqual(['a']);
+        done();
+      });
+    });
+
+    it("should not load a dependency that is already loaded", function() {
+      var log = [];
+
+      // Load package a1, with name 'a'
+      var a1 = new Dgeni.Package('a').processor({ name: 'a', $process: function() { log.push('a1');} });
+      dgeni.package(a1);
+
+      // Load package b with inline depencency on a2, which also has name 'a'
+      // This second 'a' package (i.e. a2) should nt get loaded
+      var a2 = new Dgeni.Package('a').processor({ name: 'a', $process: function() { log.push('a2');} });
+      var b = new Dgeni.Package('b', [a2]);
+
+      dgeni.package(b);
+
+      expect(b.dependencies).toEqual(['a']);
+      dgeni.generate().then(function() {
+        expect(log).toEqual(['a1']);
         done();
       });
     });
