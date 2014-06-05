@@ -21,6 +21,12 @@ describe("Package", function() {
       var package = new Package('packageName');
       expect(package.dependencies).toEqual([]);
     });
+
+    it("should complain if dependencies is not an array", function() {
+      expect(function() {
+        new Package('somePackage', {});
+      }).toThrow();
+    });
   });
 
   describe("processor()", function() {
@@ -37,13 +43,6 @@ describe("Package", function() {
       expect(package.processors[0]).toEqual('testProcessor');
     });
 
-    it("should complain if the processorFactory is not a function or an object", function() {
-      var package = new Package('packageName');
-      expect(function() {
-        package.processor("Some bad-processor-definition");
-      }).toThrow();
-    });
-
     it("should complain if the processorFactory does not have a name", function() {
       var package = new Package('packageName');
       expect(function() {
@@ -53,6 +52,12 @@ describe("Package", function() {
       expect(function() {
         package.processor({ missing: 'name'});
       }).toThrow();
+    });
+
+    it("should use the first param as the name if it is a string", function() {
+      var package = new Package('packageName');
+      package.processor('testProcessor', { $process: function(docs) { } });
+      expect(package.processors[0]).toEqual('testProcessor');
     });
 
     it("should add the processor to the DI module", function() {
@@ -71,7 +76,7 @@ describe("Package", function() {
     it("should complain if the factory is not a function", function() {
       var package = new Package('packageName');
       expect(function() {
-        package.factory({ some: 'non-function'});
+        package.factory({ name: 'bad factory'});
       }).toThrow();
     });
 
@@ -80,6 +85,18 @@ describe("Package", function() {
       expect(function() {
         package.factory(function() {});
       }).toThrow();
+    });
+
+    it("should use the first param as the name if it is a string", function() {
+      var package = new Package('packageName');
+      var count = 0;
+      var testServiceFactory = function() {};
+      package.factory('testService', testServiceFactory);
+      package.module.forEach(function(value) {
+        count += 1;
+        expect(value).toEqual(['testService', 'factory', testServiceFactory]);
+      });
+      expect(count).toEqual(1);
     });
 
     it("should add the service to the DI module", function() {
@@ -99,7 +116,7 @@ describe("Package", function() {
     it("should complain if the constructor is not a function", function() {
       var package = new Package('packageName');
       expect(function() {
-        package.type({ some: 'non-function'});
+        package.type({ name: 'bad type'});
       }).toThrow();
     });
 
@@ -108,6 +125,18 @@ describe("Package", function() {
       expect(function() {
         package.type(function() {});
       }).toThrow();
+    });
+
+    it("should use the first param as the name if it is a string", function() {
+      var package = new Package('packageName');
+      var count = 0;
+      var TestService = function() {};
+      package.type('testService', TestService);
+      package.module.forEach(function(value) {
+        count += 1;
+        expect(value).toEqual(['testService', 'type', TestService]);
+      });
+      expect(count).toEqual(1);
     });
 
     it("should add the service to the DI module", function() {
