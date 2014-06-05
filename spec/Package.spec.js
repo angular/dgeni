@@ -24,23 +24,34 @@ describe("Package", function() {
   });
 
   describe("processor()", function() {
-    it("should add the processor to the processors property", function() {
+
+    it("should add processors defined by an object to the processors property", function() {
+      var package = new Package('packageName');
+      package.processor({ name: 'testProcessor'});
+      expect(package.processors[0]).toEqual('testProcessor');
+    });
+
+    it("should add processors defined by a factory function to the processors property", function() {
       var package = new Package('packageName');
       package.processor(function testProcessor() {});
       expect(package.processors[0]).toEqual('testProcessor');
     });
 
-    it("should complain if the factory is not a function", function() {
+    it("should complain if the processorFactory is not a function or an object", function() {
       var package = new Package('packageName');
       expect(function() {
-        package.processor({ some: 'non-function'});
+        package.processor("Some bad-processor-definition");
       }).toThrow();
     });
 
-    it("should complain if the factory does not have a name", function() {
+    it("should complain if the processorFactory does not have a name", function() {
       var package = new Package('packageName');
       expect(function() {
         package.processor(function() {});
+      }).toThrow();
+
+      expect(function() {
+        package.processor({ missing: 'name'});
       }).toThrow();
     });
 
