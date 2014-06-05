@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jasmine-node spec",
     "cover": "istanbul cover jasmine-node -- spec",
+    "XXpredocsXX": "npm install dgeni-packages",
     "docs": "bin/gen-docs.js ./docs/dgeni.conf.js"
   },
   "repository": {
@@ -23,10 +24,8 @@
     "canonical-path": "~0.0.2",
     "dependency-graph": "~0.1.0",
     "di": "0.0.1",
-    "lodash": "~2.4.1",
     "optimist": "~0.6.0",
     "q": "~0.9.7",
-    "rimraf": "~2.2.5",
     "validate.js": "^0.2.0",
     "winston": "~0.7.2"
   },
