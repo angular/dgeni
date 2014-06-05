@@ -1,7 +1,7 @@
 var path = require('canonical-path');
 var Package = require('dgeni').Package;
 
-module.exports = new Package('dgeniDocsPackage', ['jsdoc'])
+module.exports = new Package('dgeniDocsPackage', [require('dgeni-packages/jsdoc')])
   .config(function(log, readFilesProcessor, renderDocsProcessor) {
     var basePath = path.resolve(__dirname);
 

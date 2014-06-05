@@ -5,7 +5,8 @@
   "main": "lib/Dgeni.js",
   "scripts": {
     "test": "jasmine-node spec",
-    "cover": "istanbul cover jasmine-node -- spec"
+    "cover": "istanbul cover jasmine-node -- spec",
+    "docs": "bin/gen-docs.js ./docs/dgeni.conf.js"
   },
   "repository": {
     "type": "git",
