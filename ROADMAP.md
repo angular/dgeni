@@ -1,13 +1,23 @@
 # Roadmap
 
-## v0.4.0 (6/29/14)
+## dgeni - The Tool
 
-**Merge the 'no-config' Architecture and Documentation** 
+### Releases
+* 0.3.1 - Bug fixes
+* 0.4.0 - no-config (should we push on and get di.js into this release?)
+* 0.5.0 - di.js (es6?) - this is up for discussion
 
-* (petebacondarwin) Merge 'no-config' branch into the 'master' branch **Involves Breaking Changes!**
-* (nate-wilkins) Update documentation 'guide/01 - Getting Started/05 - Simple Dgeni Example.md'
-* (nate-wilkins) Update documentation 'guide/02 - Architecture/*.md'
-* (nate-wilkins) Update documentation 'guide/03 - Using Dgeni/01 - Configuration.md'
+### Additional Work
+* Write guides for dgeni
+* Generate API documentation for dgeni the tool
+* Build a dgeni documentation website
 
+## dgeni-packages
 
-[What's been done?](https://github.com/angular/dgeni/master/CHANGELOG.md
+### Releases
+
+### Additional Work
+
+## dgeni-example
+
+## angular.js docs
