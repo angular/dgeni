@@ -21,7 +21,11 @@ dgeni its document processing super-powers.
 ### Releases
 * 0.9.4 - bug fixes
 * 0.10.0 - no-config (to match the dgeni 0.4.0 release)
-* 0.11.0 - better jsdoc processing, coffeescript & es6 support, better guide-style docs
+* 0.11.0
+    - better jsdoc processing
+    - coffeescript & es6 file support
+    - better guide-style docs
+    - i18n support
 * 0.12.0 - di.js?
 
 ### Additional Work
