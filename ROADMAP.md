@@ -1,13 +1,20 @@
 # Roadmap
 
+This document gives you a high level overview of where we are going with dgeni and what to 
+expect in future releases.  If you would like to get involved, take a look at the
+[contributing](contributing) document.
+
+Each release has an associated milestone that contains all the issues and PRs that must be
+closed before we can publish that version.
+
 ## dgeni
 
 The bare documentation generator tool.
 
 ### Releases
-* 0.3.1 - Bug fixes
-* 0.4.0 - no-config (should we push on and get di.js into this release?)
-* 0.5.0 - di.js (es6?) - this is up for discussion
+* [v0.3.1](dgeni-v0.3.1) - Bug fixes
+* [v0.4.0](dgeni-v0.4.0) - no-config (should we push on and get di.js into this release?)
+* [v0.5.0](dgeni-v0.5.0) - di.js (es6?) - this is up for discussion
 
 ### Additional Work
 * Write guides for dgeni
@@ -57,3 +64,9 @@ searching and display of the hosted docs.
 The angular.js docs website and the original consumer of dgeni.  We need to keep this updated with
 the latest changes to dgeni.  Moving forward AngularJS V2 consists of multiple interdependent projects,
 written in ES6, which will all need a website (see dgeni-docs) to display their documentation.
+
+
+[contributing]: https://github.com/angular/dgeni/blob/master/CONTRIBUTING.md
+[dgeni-v0.3.1]: https://github.com/angular/dgeni/issues?milestone=1&state=open
+[dgeni-v0.4.0]: https://github.com/angular/dgeni/issues?milestone=2&state=open
+[dgeni-v0.5.0]: https://github.com/angular/dgeni/issues?milestone=3&state=open
