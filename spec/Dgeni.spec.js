@@ -82,6 +82,7 @@ describe("Dgeni", function() {
     });
   });
 
+
   describe("generate()", function() {
 
     describe("packages", function() {
@@ -150,14 +151,17 @@ describe("Dgeni", function() {
       });
 
       it("should add some basic shared services to the injector", function(done) {
-        var _config, _log;
-        dgeni.package('testPackage').config(function(config, log) {
+        var _config, _log, _getInjectables;
+        dgeni.package('testPackage').config(function(config, log, getInjectables) {
           _config = config;
           _log = log;
+          _getInjectables = getInjectables;
         });
-        dgeni.generate().finally(function() {
-          expect(dgeni).toBeDefined();
-          expect(log).toBeDefined();
+        dgeni.generate().then(function() {
+          expect(_config).toEqual(jasmine.any(Object));
+          expect(_log).toEqual(jasmine.any(Object));
+          expect(_log.debug).toEqual(jasmine.any(Function));
+          expect(_getInjectables).toEqual(jasmine.any(Function));
           done();
         });
       });
