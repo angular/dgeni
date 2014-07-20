@@ -100,9 +100,16 @@ describe("Dgeni", function() {
                 log.push(testValue); }
             };
           });
+        dgeni.package('test4', ['test3'])
+          .processor(function test3Processor(testValue) {
+            return {
+              $process: function(docs) {
+                log.push(testValue + '(overridden)'); }
+            };
+          });
         dgeni.generate()
           .then(function() {
-            expect(log).toEqual(['test 1']);
+            expect(log).toEqual(['test 1(overridden)']);
           })
           .finally(done);
       });
