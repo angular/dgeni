@@ -248,7 +248,22 @@ describe("Dgeni", function() {
           expect(function() {
             dgeni.generate();
           }).toThrow();
+        });
 
+        it("should allow config blocks to change the order of the processors", function(done) {
+          log = [];
+          dgeni.package('test')
+            .processor(function a() { return { $runBefore: ['b'], $process: function(docs) { log.push('a' ); } }; })
+            .processor(function b() { return { $runBefore: ['c'], $process: function(docs) { log.push('b' ); } }; })
+            .processor(function c() { return { $process: function(docs) { log.push('c' ); } }; })
+            .config(function(a, b, c) {
+              b.$runBefore = [];
+              c.$runBefore = ['b'];
+            });
+          dgeni.generate([]).then(function() {
+              expect(log).toEqual(['a', 'c', 'b']);
+              done();
+            });
         });
       });
 
