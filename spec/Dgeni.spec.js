@@ -228,8 +228,21 @@ describe("Dgeni", function() {
             .processor(function d() { return { $runAfter: ['a'], $process: function() { log.push('d'); } }; })
             .processor(function e() { return { $runAfter: [], $process: function() { log.push('e'); } }; });
           dgeni.generate()
-            .finally(function() {
+            .then(function() {
               expect(log).toEqual(['c', 'e', 'a', 'b', 'd']);
+              done();
+            });
+        });
+
+        it("should ignore processors that have $enabled set to false", function(done) {
+          var log = [];
+          dgeni.package('test1')
+            .processor(function a() { return { $process: function() { log.push('a'); } }; })
+            .processor(function b() { return { $enabled: false, $process: function() { log.push('b'); } }; })
+            .processor(function c() { return { $process: function() { log.push('c'); } }; });
+          dgeni.generate()
+            .then(function() {
+              expect(log).toEqual(['a', 'c']);
               done();
             });
         });
