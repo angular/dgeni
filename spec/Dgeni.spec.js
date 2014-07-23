@@ -158,14 +158,14 @@ describe("Dgeni", function() {
       });
 
       it("should add some basic shared services to the injector", function(done) {
-        var _config, _log, _getInjectables;
-        dgeni.package('testPackage').config(function(config, log, getInjectables) {
-          _config = config;
+        var _dgeni, _log, _getInjectables;
+        dgeni.package('testPackage').config(function(dgeni, log, getInjectables) {
+          _dgeni = dgeni;
           _log = log;
           _getInjectables = getInjectables;
         });
         dgeni.generate().then(function() {
-          expect(_config).toEqual(jasmine.any(Object));
+          expect(_dgeni).toEqual(jasmine.any(Object));
           expect(_log).toEqual(jasmine.any(Object));
           expect(_log.debug).toEqual(jasmine.any(Function));
           expect(_getInjectables).toEqual(jasmine.any(Function));
@@ -175,9 +175,9 @@ describe("Dgeni", function() {
 
       it("should set stop on error defaults", function(done) {
         var stopOnProcessingError, stopOnValidationError;
-        dgeni.package('testPackage').config(function(config) {
-          stopOnProcessingError = config.stopOnProcessingError;
-          stopOnValidationError = config.stopOnValidationError;
+        dgeni.package('testPackage').config(function(dgeni) {
+          stopOnProcessingError = dgeni.stopOnProcessingError;
+          stopOnValidationError = dgeni.stopOnValidationError;
         });
         dgeni.generate().finally(function() {
           expect(stopOnProcessingError).toBe(true);
@@ -291,8 +291,8 @@ describe("Dgeni", function() {
         it("should not fail if stopOnValidationError is false", function(done) {
 
           dgeni.package('test')
-            .config(function(config) {
-              config.stopOnValidationError = false;
+            .config(function(dgeni) {
+              dgeni.stopOnValidationError = false;
             })
             .processor(function testProcessor() {
               return {
@@ -341,8 +341,8 @@ describe("Dgeni", function() {
 
             var error;
             testPackage
-              .config(function(config) {
-                config.stopOnProcessingError = false;
+              .config(function(dgeni) {
+                dgeni.stopOnProcessingError = false;
               });
 
             dgeni.generate()
@@ -360,8 +360,8 @@ describe("Dgeni", function() {
             var called = false;
 
             testPackage
-              .config(function(config) {
-                config.stopOnProcessingError = false;
+              .config(function(dgeni) {
+                dgeni.stopOnProcessingError = false;
               })
               .processor(function checkProcessor() {
                 return {
