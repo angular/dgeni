@@ -57,7 +57,7 @@ Dgeni provides a `Package` type that you instantiate.  This instance has methods
 var Package = require('dgeni').Package;
 var myPackage = new Package('myPackage', ['packageDepencency1', 'packageDependency2']);
 
-myPackage.processor(requre('./processors/processor1'));
+myPackage.processor(require('./processors/processor1'));
 myPackage.processor(require('./processors/processor2'));
 
 myPackage.factory(require('./services/service1'));
