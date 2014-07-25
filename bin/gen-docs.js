@@ -11,14 +11,16 @@ var Dgeni = require('dgeni');
 var packagePaths = myArgs._;
 
 // Require each of these packages and then create a new dgeni using them
-var dgeni = new Dgeni(packagePaths.map(function(packagePath) {
-  if ( packagePath.startsWith('.') ) { packagePath = path.resolve(packagePath); }
+var packages = packagePaths.map(function(packagePath) {
+  if ( packagePath.startsWith('.') ) {
+    packagePath = path.resolve(packagePath);
+  }
   return require(packagePath);
-}));
+});
+
+var dgeni = new Dgeni(packages);
 
 // Run the document generation
-dgeni.generate()
-  .then(function() {
-    console.log('Finished generating docs');
-  })
-  .done();
+dgeni.generate().then(function() {
+  console.log('Finished generating docs');
+}).done();
