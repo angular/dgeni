@@ -1,13 +1,12 @@
 {
   "name": "dgeni",
-  "version": "0.3.0",
+  "version": "0.4.0-beta.1",
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/Dgeni.js",
   "scripts": {
     "test": "jasmine-node spec",
     "cover": "istanbul cover jasmine-node -- spec",
-    "XXpredocsXX": "npm install dgeni-packages",
-    "docs": "bin/gen-docs.js ./docs/dgeni.conf.js"
+    "docs": "bin/gen-docs.js ./docs/dgeni-docs.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,7 @@
     "winston": "~0.7.2"
   },
   "devDependencies": {
+    "dgeni-packages": "^0.10.0",
     "istanbul": "^0.2.7",
     "jasmine-node": "^2.0.0",
     "rewire": "~2.0.0"

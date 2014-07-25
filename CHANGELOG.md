@@ -1,5 +1,44 @@
 # ChangeLog
 
+## v0.4.0-beta.1 (25th July 2014)
+
+This is a major re-architecting of how Dgeni uses Dependency Injection and configuration.
+
+This version of Dgeni is compatible with dgeni-packages@^0.10.0
+
+* Dgeni is now configured by **Packages**, which can depend on other **Packages**.
+* **Packages** contain **Services**, **Processors** and **Config Blocks**, which are all
+instantiated or invoked by the DI system.
+* **Processors** themselves are special instances of DI **Service** rather than the
+**process()** being invoked by the DI system.
+* Dgeni specific properties on **Processors** are now prefixed with a `$`. E.g. `$process()`,
+`$runBefore`, `$runAfter`.
+* **Processors** can now be "validated" using [validatejs.org](validatejs.org) constraints,
+specified in the `processor.$validate` property.
+* **Processors** can now be disabled by setting `processor.$enabled = false`.
+* **Processors** with the same name will override previously registered **Processors**, say
+from a Package dependency.
+* New injectable helper services have been provided: `dgeni`, `log`, `getInjectables`.
+* Use injectable `log` service in your Processors and Services instead of requiring `winston`.
+* Test coverage of the source files is now at 100%.
+
+The most significant commits are listed below:
+
+* fix(Dgeni): allow config blocks to change $enabled on a Processor   d231c244
+* feat(Dgeni): allow processors to be disabled by setting `$enabled: false`      d390fcd3
+* feat(Dgeni): allow config blocks to make changes to processor order      604fcbfb
+* feat(Dgeni): add package info to processors to help with error reporting       81184052
+* fix(Dgeni): processors with the same name should override previous ones      ff7ec049
+* feat(getInjectables): add new shared service       6d9cef0a
+* test(mock/log): add simple mock log service for testing      51a8dc92
+* feat(Package): allow processors and service to override their name       a9584fd2
+* test(Dgeni): add tests to improve code coverage      7b4a757b
+* feat(Package): allow processors to be defined as an object       a75e9181
+* feat(Dgeni): add new (no config - DI based) Dgeni      e8d30958
+* feat(Package): add Package type      87cbf122
+* feat(log): add wrapper around winston      c303a9a6
+* refact(*): remove previous Dgeni implementation      1cf67e2d
+
 ## v0.3.0 (11th April 2014)
 
 This is a "Spring Clean" release
