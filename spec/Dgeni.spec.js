@@ -247,6 +247,23 @@ describe("Dgeni", function() {
             });
         });
 
+        it("should allow config blocks to change $enabled on a processor", function() {
+          var log = [];
+          dgeni.package('test1')
+            .processor(function a() { return { $process: function() { log.push('a'); } }; })
+            .processor(function b() { return { $enabled: false, $process: function() { log.push('b'); } }; })
+            .processor(function c() { return { $process: function() { log.push('c'); } }; })
+            .config(function(a,b,c) {
+              a.$enabled = false;
+              b.$enabled = true;
+            });
+          dgeni.generate()
+            .then(function() {
+              expect(log).toEqual(['b', 'c']);
+              done();
+            });
+        });
+
         it("should throw an error if the $runAfter dependencies are invalid", function() {
           dgeni.package('test')
             .processor(function badRunAfterProcessor() { return { $runAfter: 'tags-processed' }; });
