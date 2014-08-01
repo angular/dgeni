@@ -53,7 +53,8 @@ describe("Dgeni", function() {
       });
       var b = new Dgeni.Package('b', [a]);
       dgeni.package(b);
-      expect(b.dependencies).toEqual(['a']);
+      expect(b.dependencies).toEqual([a]);
+      expect(b.namedDependencies).toEqual(['a']);
       dgeni.generate().then(function() {
         expect(log).toEqual(['a']);
         done();
@@ -74,13 +75,24 @@ describe("Dgeni", function() {
 
       dgeni.package(b);
 
-      expect(b.dependencies).toEqual(['a']);
+      expect(b.dependencies).toEqual([a2]);
+      expect(b.namedDependencies).toEqual(['a']);
       dgeni.generate().then(function() {
         expect(log).toEqual(['a1']);
         done();
       });
     });
+
+    it("should not modify the `dependencies` property of a package", function() {
+      var a = new Dgeni.Package('a').processor({ name: 'a', $process: function() { } });
+      var b = new Dgeni.Package('b', [a]).processor({ name: 'a', $process: function() { } });
+      dgeni.package(b);
+      expect(b.dependencies).toEqual([a]);
+      expect(b.namedDependencies).toEqual(['a']);
+
+    });
   });
+
 
 
   describe("generate()", function() {
