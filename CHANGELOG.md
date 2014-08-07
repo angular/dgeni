@@ -1,5 +1,13 @@
 # ChangeLog
 
+## v0.4.0-beta.2 (7th August 2014)
+
+Minor bug fixes
+
+* fix(Dgeni): require Package not package    fc2be818
+* fix(Dgeni): do not modify `package.dependencies` property    61449389
+
+
 ## v0.4.0-beta.1 (25th July 2014)
 
 This is a major re-architecting of how Dgeni uses Dependency Injection and configuration.
