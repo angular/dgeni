@@ -15,8 +15,8 @@ describe("Dgeni", function() {
       var package1 = new Dgeni.Package('package1');
       var package2 = new Dgeni.Package('package2');
       dgeni = new Dgeni([package1, package2]);
-      expect(dgeni.packages.get('package1')).toBe(package1);
-      expect(dgeni.packages.get('package2')).toBe(package2);
+      expect(dgeni.packages.package1).toBe(package1);
+      expect(dgeni.packages.package2).toBe(package2);
     });
 
     it("should complain if the packages parameter is not an array", function() {
@@ -30,7 +30,7 @@ describe("Dgeni", function() {
     it("should add the package to the packages property", function() {
       var testPackage = new Dgeni.Package('test-package');
       dgeni.package(testPackage);
-      expect(dgeni.packages.get('test-package')).toEqual(testPackage);
+      expect(dgeni.packages['test-package']).toEqual(testPackage);
     });
     it("should create a new package if passed a string", function() {
       var newPackage = dgeni.package('test-package');
