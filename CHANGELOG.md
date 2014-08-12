@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v0.4.0-beta.3 (12th August 2014)
+
+Minor refactoring
+
+* refact(Dgeni): remove dependency on 'es6-shim' and `Map`    a8fa07eb
+
+
 ## v0.4.0-beta.2 (7th August 2014)
 
 Minor bug fixes
