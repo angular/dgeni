@@ -192,13 +192,17 @@ engine.
 AngularJS extensions to jsdoc.
 * `examples` - depends upon `jsdoc` and provides Processors for extracting examples from jsdoc
 comments and converting them to files that can be run.
+* `dgeni` - support for documenting dgeni Packages.
 
 
 ### Pseudo Marker Processors
 
-There are a number of processors that don't do anything but act as markers for stages of the
+You can define processors that don't do anything but act as markers for stages of the
 processing.  You can use these markers in `$runBefore` and `$runAfter` properties to ensure
-that your Processor is run at the right time.  Here is a list of these marker processors in order:
+that your Processor is run at the right time.
+
+The **Packages** is dgeni-packages define some of these marker processors. Here is a list
+of these in the order that Dgeni will add them to the processing pipeline:
 
 
 * reading-files *(defined in base)*
@@ -211,6 +215,8 @@ that your Processor is run at the right time.  Here is a list of these marker pr
 * docs-processed *(defined in base)*
 * adding-extra-docs *(defined in base)*
 * extra-docs-added *(defined in base)*
+* computing-paths *(defined in base)*
+* paths-computed *(defined in base)*
 * rendering-docs *(defined in base)*
 * docs-rendered *(defined in base)*
 * writing-files *(defined in base)*
