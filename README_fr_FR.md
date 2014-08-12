@@ -192,13 +192,17 @@ l'extraction de balise de commentaires jsdoc dans le code.
 extensions d'AngularJS à jsdoc.
 * `examples` - dépend de `jsdoc` et fournit les processeurs pour extraire des exemples des commentaires
 de jsdoc et les convertir en fichiers qui peuvent être exécutés.
+* `dgeni` - support pour la documentation des Packages de dgeni.
 
 
 ### Processeurs pseudo marqueurs
 
-Il y a un certain nombre de processeurs qui ne font rien mais qui agissent comme des marqueurs pour les différentes étapes
+Vous pouvez définir des processeurs qui ne font rien mais qui agissent comme des marqueurs pour les différentes étapes
 du traitement. Vous pouvez utiliser ces marqueurs dans les propriétés `$runBefore` et `$runAfter` pour s'assurer que votre
-processeur soit lancé au bon moment. Voici la liste de ces processeurs marqueurs dans l'ordre :
+processeur soit lancé au bon moment.
+
+Les ****Packages** de dgeni-packages définissent certains processeurs marqueurs. Voici la liste
+dans l'ordre que Dgeni les ajoutera à la pipeline du traitement :
 
 
 * reading-files (lecture des fichiers) *(défini dans base)*
@@ -211,6 +215,8 @@ processeur soit lancé au bon moment. Voici la liste de ces processeurs marqueur
 * docs-processed (documents traités) *(défini dans base)*
 * adding-extra-docs (ajout des documents supplémentaires) *(défini dans base)*
 * extra-docs-added (documents supplémentaires ajoutés) *(défini dans base)*
+* computing-paths Détermination des chemins *(défini dans base)*
+* paths-computed Chemins déterminés *(défini dans base)*
 * rendering-docs (rendu des documents) *(défini dans base)*
 * docs-rendered (documents rendus) *(défini dans base)*
 * writing-files (écriture des fichiers) *(défini dans base)*
