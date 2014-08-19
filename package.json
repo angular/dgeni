@@ -24,6 +24,7 @@
     "dependency-graph": "~0.1.0",
     "di": "0.0.1",
     "optimist": "~0.6.0",
+    "lodash": "^2.4.1",
     "q": "~0.9.7",
     "validate.js": "^0.2.0",
     "winston": "~0.7.2"
@@ -32,7 +33,6 @@
     "dgeni-packages": "^0.10.0",
     "istanbul": "^0.2.7",
     "jasmine-node": "^2.0.0",
-    "lodash": "^2.4.1",
     "rewire": "~2.0.0"
   },
   "contributors": [
