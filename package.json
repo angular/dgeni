@@ -8,6 +8,9 @@
     "cover": "istanbul cover jasmine-node -- spec",
     "docs": "bin/gen-docs.js ./docs/dgeni-docs.js"
   },
+  "bin": {
+    "dgeni": "bin/gen-docs.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/angular/dgeni.git"
