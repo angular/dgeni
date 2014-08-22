@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var path = require('canonical-path');
 var myArgs = require('optimist')
-  .usage('Usage: $0 path/to/mainPackage [path/to/other/packages ...]')
+  .usage('Usage: $0 path/to/mainPackage [path/to/other/packages ...] [--log level]')
   .demand(1)
   .argv;
 
@@ -17,6 +17,15 @@ var packages = packagePaths.map(function(packagePath) {
   }
   return require(packagePath);
 });
+
+var logLevel = myArgs.log || myArgs.l;
+if ( logLevel ) {
+  // Add CLI package (to override settings from other packages)
+  packages.push(new Dgeni.Package('cli-package', ['base']).config(function(log) {
+    // override log settings
+    log.level = logLevel;
+  }));
+}
 
 var dgeni = new Dgeni(packages);
 
