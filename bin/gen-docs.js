@@ -12,7 +12,7 @@ var packagePaths = myArgs._;
 
 // Require each of these packages and then create a new dgeni using them
 var packages = packagePaths.map(function(packagePath) {
-  if ( packagePath.startsWith('.') ) {
+  if ( packagePath.indexOf('.') === 0 ) {
     packagePath = path.resolve(packagePath);
   }
   return require(packagePath);

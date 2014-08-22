@@ -93,7 +93,33 @@ describe("Dgeni", function() {
     });
   });
 
+  describe("configureInjector", function() {
 
+    it("should return the configured injector", function() {
+      var injector = dgeni.configureInjector();
+      expect(injector.get).toEqual(jasmine.any(Function));
+    });
+
+    it("should add some basic shared services to the injector", function() {
+      var injector = dgeni.configureInjector();
+
+      expect(injector.get('dgeni')).toEqual(jasmine.any(Object));
+      expect(injector.get('log')).toEqual(jasmine.any(Object));
+      expect(injector.get('log').debug).toEqual(jasmine.any(Function));
+      expect(injector.get('getInjectables')).toEqual(jasmine.any(Function));
+    });
+
+    it("should set stop on error defaults", function() {
+      var stopOnProcessingError, stopOnValidationError;
+      dgeni.package('testPackage').config(function(dgeni) {
+        stopOnProcessingError = dgeni.stopOnProcessingError;
+        stopOnValidationError = dgeni.stopOnValidationError;
+      });
+      var injector = dgeni.configureInjector();
+      expect(stopOnProcessingError).toBe(true);
+      expect(stopOnValidationError).toBe(true);
+    });
+  });
 
   describe("generate()", function() {
 
@@ -165,35 +191,6 @@ describe("Dgeni", function() {
           });
         dgeni.generate().finally(function() {
           expect(localInjector.get('injector')).toBe(localInjector);
-          done();
-        });
-      });
-
-      it("should add some basic shared services to the injector", function(done) {
-        var _dgeni, _log, _getInjectables;
-        dgeni.package('testPackage').config(function(dgeni, log, getInjectables) {
-          _dgeni = dgeni;
-          _log = log;
-          _getInjectables = getInjectables;
-        });
-        dgeni.generate().then(function() {
-          expect(_dgeni).toEqual(jasmine.any(Object));
-          expect(_log).toEqual(jasmine.any(Object));
-          expect(_log.debug).toEqual(jasmine.any(Function));
-          expect(_getInjectables).toEqual(jasmine.any(Function));
-          done();
-        });
-      });
-
-      it("should set stop on error defaults", function(done) {
-        var stopOnProcessingError, stopOnValidationError;
-        dgeni.package('testPackage').config(function(dgeni) {
-          stopOnProcessingError = dgeni.stopOnProcessingError;
-          stopOnValidationError = dgeni.stopOnValidationError;
-        });
-        dgeni.generate().finally(function() {
-          expect(stopOnProcessingError).toBe(true);
-          expect(stopOnValidationError).toBe(true);
           done();
         });
       });
