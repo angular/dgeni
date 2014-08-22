@@ -25,6 +25,7 @@
   "dependencies": {
     "canonical-path": "~0.0.2",
     "dependency-graph": "~0.1.0",
+    "dgeni-packages": "^0.10.0",
     "di": "0.0.1",
     "optimist": "~0.6.0",
     "lodash": "^2.4.1",
