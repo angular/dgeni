@@ -21,7 +21,7 @@ var packages = packagePaths.map(function(packagePath) {
 var logLevel = myArgs.log || myArgs.l;
 if ( logLevel ) {
   // Add CLI package (to override settings from other packages)
-  packages.push(new Dgeni.Package('cli-package', ['base']).config(function(log) {
+  packages.push(new Dgeni.Package('cli-package').config(function(log) {
     // override log settings
     log.level = logLevel;
   }));
