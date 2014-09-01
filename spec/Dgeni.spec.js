@@ -317,7 +317,7 @@ describe("Dgeni", function() {
             });
 
           dgeni.generate().catch(function(errors) {
-            expect(errors).toEqual({ x : ["X can't be blank" ] });
+            expect(errors).toEqual([{ processor : "testProcessor", package : "test", errors : { x : [ "X can't be blank" ] } }]);
             done();
           });
         });
