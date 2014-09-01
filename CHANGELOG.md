@@ -1,5 +1,15 @@
 # ChangeLog
 
+## v0.4.0-beta.4 (1st September 2014)
+
+Minor refactoring and fixes
+
+* feat(Dgeni): add `configureInjector` method     6a37dada
+* fix(gen-docs.js): remove unnecessary reference to base package      b7d7185e
+* feat(gen-docs): add log option to CLI      062ca137
+* fix(gen-docs.js): `startsWith()` is not ES5 compatible      22e11630
+
+
 ## v0.4.0-beta.3 (12th August 2014)
 
 Minor refactoring
