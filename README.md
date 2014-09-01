@@ -42,6 +42,49 @@ dgeni.generate().then(function(docs) {
 });
 ```
 
+### Running from the Command Line
+
+Dgeni is normally used from a build tool such as Gulp or Grunt but it does also come with a
+command line tool.
+
+If you install Dgeni globally then you can run it from anywhere:
+
+```bash
+npm install -g dgeni
+dgeni some/package.js
+```
+
+If Dgeni is only installed locally then you either have to specify the path explicitly:
+
+```bash
+npm install dgeni
+node_modules/.bin/dgeni some/package.js
+```
+
+or you can run the tool in an npm script:
+
+```js
+{
+  ...
+  scripts: {
+    docs: 'dgeni some/package.js'
+  }
+  ...
+}
+```
+
+
+The usage is:
+
+
+```bash
+dgeni path/to/mainPackage [path/to/other/packages ...] [--log level]
+```
+
+You must provide the path to one or more Dgeni Packages to load. You can, optionally, set
+the logging level.
+
+
 ## Packages
 
 **Services**, **Processors**, configuration values and templates are be bundled into a `Package`.  Packages
