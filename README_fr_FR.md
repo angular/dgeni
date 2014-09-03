@@ -42,6 +42,49 @@ dgeni.generate().then(function(docs) {
 });
 ```
 
+### Exécution depuis la ligne de commande
+
+Dgeni est normalement utilisé avec un outil de construction tels que Gulp ou Grunt, mais il peut être utilisé également
+avec un outil de ligne de commande.
+
+Si vous installez Dgeni globalement, alors vous pouvez l'exécuter de n'importe où :
+
+```bash
+npm install -g dgeni
+dgeni some/package.js
+```
+
+Si Dgeni n'est installé que localement, alors vous devez spécifier explicitement le chemin :
+
+```bash
+npm install dgeni
+node_modules/.bin/dgeni some/package.js
+```
+
+ou vous pouvez exécuter l'outil dans un script npm :
+
+```js
+{
+  ...
+  scripts: {
+    docs: 'dgeni some/package.js'
+  }
+  ...
+}
+```
+
+
+L'utilisation est le suivant :
+
+
+```bash
+dgeni chemin/du/packagePrincipal [chemin/pour/unAutre/package ...] [--log level]
+```
+
+Vous devez fournir le chemin pour charger un ou plusieurs Packages Dgeni. Vous pouvez
+définir le niveau de journalisation (facultatif).
+
+
 ## Packages
 
 Les **Services**, les **Processeurs**, les valeurs de configuration et les templates sont regroupés dans un `Package`. Les Packages
@@ -57,7 +100,7 @@ des **Processeurs** et permet de configurer les propriétés des **Processeurs**
 var Package = require('dgeni').Package;
 var myPackage = new Package('myPackage', ['packageDepencency1', 'packageDependency2']);
 
-myPackage.processor(requre('./processors/processor1'));
+myPackage.processor(require('./processors/processor1'));
 myPackage.processor(require('./processors/processor2'));
 
 myPackage.factory(require('./services/service1'));
