@@ -172,7 +172,7 @@ Vous définissez les Processeurs comme vous le feriez pour un Service :
 ```js
 module.exports = function myDocProcessor(dependency1, dependency2) {
   return {
-    $process(docs) { ... faire des choses avec les docs ... }
+    $process: function (docs) { ... faire des choses avec les docs ... }
     $runAfter: ['otherProcessor1'],
     $runBefore: ['otherProcessor2', 'otherProcessor3'],
     $validate: {
