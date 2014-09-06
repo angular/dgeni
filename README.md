@@ -258,6 +258,8 @@ of these in the order that Dgeni will add them to the processing pipeline:
 * docs-processed *(defined in base)*
 * adding-extra-docs *(defined in base)*
 * extra-docs-added *(defined in base)*
+* computing-ids *(defined in base)*
+* ids-computed *(defined in base)*
 * computing-paths *(defined in base)*
 * paths-computed *(defined in base)*
 * rendering-docs *(defined in base)*
