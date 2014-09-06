@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v0.4.0-rc.1 (6th September 2014)
+
+Minor refactoring
+
+* fix(Dgeni): handle validation and processor errors better   b452b472
+
 ## v0.4.0-beta.4 (1st September 2014)
 
 Minor refactoring and fixes
