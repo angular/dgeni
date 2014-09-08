@@ -4,8 +4,8 @@
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/Dgeni.js",
   "scripts": {
-    "test": "jasmine-node spec",
-    "cover": "istanbul cover jasmine-node -- spec",
+    "test": "jasmine-node lib",
+    "cover": "istanbul cover jasmine-node -- lib",
     "docs": "bin/gen-docs.js ./docs/dgeni-docs.js"
   },
   "bin": {
