@@ -258,6 +258,8 @@ dans l'ordre que Dgeni les ajoutera à la pipeline du traitement :
 * docs-processed (documents traités) *(défini dans base)*
 * adding-extra-docs (ajout des documents supplémentaires) *(défini dans base)*
 * extra-docs-added (documents supplémentaires ajoutés) *(défini dans base)*
+* computing-ids (détermination d'un id) *(défini dans base)*
+* ids-computed (Id déterminé) *(défini dans base)*
 * computing-paths Détermination des chemins *(défini dans base)*
 * paths-computed Chemins déterminés *(défini dans base)*
 * rendering-docs (rendu des documents) *(défini dans base)*
