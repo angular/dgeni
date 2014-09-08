@@ -1,5 +1,7 @@
 # Dgeni - Générateur de documentation [![Build Status](https://travis-ci.org/angular/dgeni.svg?branch=master)](https://travis-ci.org/angular/dgeni)
 
+![](assets/dgeni-logo-600x400.png)
+
 L'utilitaire de génération de documentation de node.js par angular.js et d'autres projets.
 
 ## Mise en route
