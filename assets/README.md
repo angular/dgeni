@@ -4,7 +4,7 @@ This folder contains assets for the dgeni project.  In particular it has the dge
 
 ## Dgeni Logo
 
-![](dgeni-logo.svg)
+![](dgeni-logo-600x400.png)
 
 
 ### Fonts
