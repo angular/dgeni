@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v0.4.0-rc.2 (10th September 2014)
+
+Minor refactoring
+
+* chore(tests): move tests into lib folder     607037fe
+
+
 ## v0.4.0-rc.1 (6th September 2014)
 
 Minor refactoring
