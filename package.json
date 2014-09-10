@@ -39,11 +39,15 @@
     "rewire": "~2.0.0"
   },
   "contributors": [
-    "Pete Bacon Darwin",
-    "Matias Niemelä",
-    "Pascal Precht",
-    "Jeff Cross",
-    "Stéphane Reynaud"
+    "Pete Bacon Darwin <pete@bacondarwin.com>",
+    "forresst <forresst@voila.fr>",
+    "Pascal Precht <pascal.precht@googlemail.com>",
+    "Matias Niemelä <matias@yearofmoo.com>",
+    "nate-wilkins <nwilkins2012@gmail.com>",
+    "Donald Pipowitch <pipo@senaeh.de>",
+    "thorn0 <thorn.mailbox@gmail.com>",
+    "Jeff Cross <middlefloor@gmail.com>",
+    "Andres Dominguez <andresdominguez@users.noreply.github.com>"
   ],
   "bugs": {
     "url": "https://github.com/angular/dgeni/issues"
