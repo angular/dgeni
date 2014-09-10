@@ -1,5 +1,51 @@
 # ChangeLog
 
+
+## v0.4.0 (10th September 2014)
+
+**Major New Release**
+
+This is a major re-architecting from v0.3.0 of how Dgeni uses Dependency Injection and configuration.
+
+This version of Dgeni is compatible with dgeni-packages v0.10.0
+
+* Dgeni is now configured by **Packages**, which can depend on other **Packages**. You create an
+instance of `Dgeni`, passing in the **Packages** that are to be loaded.
+
+* **Packages** contain **Services**, **Processors** and **Config Blocks**, which are all
+instantiated or invoked by the DI system.
+
+* Dgeni specific properties on **Processors** are now prefixed with a `$`. E.g. `$process()`,
+`$runBefore`, `$runAfter`.
+
+* **Processors** themselves are special instances of DI **Services**. In the previous versions
+of dgeni the **process()** method was being invoked by the DI system instead. Now since the
+processor itself is created by a factory function that can be injected with **Services**, much
+more can be done to configure the **Processor** before the `$process(docs)` method is called.
+
+* **Processors** can now be "validated" using [validatejs.org](validatejs.org) constraints,
+specified in the `processor.$validate` property.
+
+* **Processors** can now be disabled by setting `processor.$enabled = false`.
+
+* **Services** and **Processors** with the same name will override previously registered ones, say
+from a Package dependency. This enables custom **Packages** to provide alternate components
+and makes mocking much easier in tests.
+
+* New injectable helper services have been provided: `dgeni`, `log`, `getInjectables`.
+
+* Each instance of `Dgeni` now exposes a `configureInjector()` method, which returns the configured
+dgeni DI injector. This is useful in unit testing to easily get access to the **Services** and
+**Processors** to be tested.
+
+* Now use the injectable `log` service in your **Processors** and **Services** instead of requiring
+`winston`. This also means that it is easier to replace the logger implementation both in the future
+and for testing. Dgeni provides a "mock" logger at `dgeni/lib/mocks/log`, which you can require to
+override the standard winston logger.
+
+* Test coverage of the source files is now at 100%.
+
+
 ## v0.4.0-rc.2 (10th September 2014)
 
 Minor refactoring
