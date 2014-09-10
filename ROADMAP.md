@@ -1,6 +1,6 @@
 # Roadmap
 
-This document gives you a high level overview of where we are going with dgeni and what to 
+This document gives you a high level overview of where we are going with dgeni and what to
 expect in future releases.  If you would like to get involved, take a look at the
 [contributing][contributing] document.
 
@@ -26,14 +26,15 @@ The main store of dgeni packages containing all the processors and services that
 dgeni its document processing super-powers.
 
 ### Releases
-* 0.9.4 - bug fixes
-* 0.10.0 - no-config (to match the dgeni 0.4.0 release)
-* 0.11.0
+* v0.9.4 - bug fixes
+* v0.10.0 - no-config (to match the dgeni 0.4.0 release)
+* v0.11.0 - packages to support easy documenting of angular apps
+* v0.12.0
     - better jsdoc processing
     - coffeescript & es6 file support
     - better guide-style docs
     - i18n support
-* 0.12.0 - di.js?
+* v0.13.0 - di.js? to match (dgeni v0.5.0)
 
 ### Additional Work
 * Write API docs for each package and processor/service therein
@@ -43,10 +44,9 @@ dgeni its document processing super-powers.
 
 A very simple example of how to get dgeni up and running.
 
-## Releases
-* 0.1.0 - tag a release for the current state of dgeni
-* 0.2.0 - no-config (to match the dgeni 0.4.0 release)
-* 0.3.0 - ...
+## Branches
+* dgeni-0.3.0 - A version of the example app that works with dgeni 0.3.0
+* master - works with dgeni 0.4.0
 
 ## dgeni-docs
 
