@@ -127,6 +127,7 @@ par `myPackage.factory(factoryFn)`.
 Les paramètres d'une fonction factory sont des dépendances sur d'autres services que le système de DI doit trouver
 ou instancier et fournir à la fonction factory.
 
+**car.js** :
 ```js
 module.exports = function car(function(engine, wheels) {
   return {
@@ -145,6 +146,36 @@ définies. Il s'appuie sur le système de DI pour leur fournir en cas de besoin.
 Le service `car` renvoyé par la fonction factory est un objet contenant une méthode, `drive()`,
 qui à son tour appelle des méthodes sur `engine` et `wheels`.
 
+
+### Enregistrement d'un Service
+
+Vous pouvez ensuite enregistrer le service avec un Package :
+
+**myPackage.js**:
+```jsv
+var Package = require('dgeni').Package;
+
+module.exports = new Package('myPackage')
+  .factory(require('./car'));
+```
+
+Ce Service de car est maintenant disponible pour n'importe quel autre bloc de service, de processeur ou de configuration :
+
+```js
+var Package = require('dgeni').Package;
+
+module.exports = new Package('greenTaxiPackage', ['myPackage'])
+
+  .factory(function taxi(car) {
+    return {
+      orderTaxi: function(place) { car.driveTo(place); }
+    };
+  })
+
+  .config(function(car) {
+    car.fuel = 'hybrid';
+  });
+```
 
 
 ## Processeurs
@@ -224,19 +255,24 @@ module.exports = function readFileProcessor() {
 
 ### Les Packages Dgeni Standard
 
-Le [dépôt dgeni-packages](https://github.com/angular/dgeni-packages) contient un grand nombre de Processeurs
-- de première necessité au plus complexe spécifique à angular.js. Ces processeurs sont regroupés dans des Packages :
+Le [dépôt dgeni-packages](https://github.com/angular/dgeni-packages) contient un grand nombre de Processeurs -
+de première necessité au plus complexe spécifique à angular.js. Ces processeurs sont regroupés dans des Packages :
 
 * `base` -  contient des processeurs basiques de lecture et d'écriture de fichier, ainsi qu'un processeur
 de rendu abstrait.
+
 * `jsdoc` - dépend de `base` et ajoute des processeurs et des services pour supporter l'analyse et
 l'extraction de balise de commentaires jsdoc dans le code.
+
 * `nunjucks` - fournit un moteur de rendu bsé sur
 [nunjucks](http://mozilla.github.io/nunjucks/).
+
 * `ngdoc` - dépend de `jsdoc` et `nunjucks` et ajoute un traitement supplémentaire pour les
 extensions d'AngularJS à jsdoc.
+
 * `examples` - dépend de `jsdoc` et fournit les processeurs pour extraire des exemples des commentaires
 de jsdoc et les convertir en fichiers qui peuvent être exécutés.
+
 * `dgeni` - support pour la documentation des Packages de dgeni.
 
 
