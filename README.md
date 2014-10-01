@@ -28,7 +28,7 @@ Dgeni on its own doesn't do much.  You much configure it with **Packages** that 
 and **Processors**. It is the **Processors** that actually convert your source files to
 documentation files.
 
-To the run the processors we create a new instance of `Dgeni`, providing to it an array of **Packages**
+To run the processors we create a new instance of `Dgeni`, providing to it an array of **Packages**
 to load.  Then simply call the `generate()` method on this instance.  The `generate()` method runs the
 processors asynchronously and returns a **Promise** to the generated documents.
 
