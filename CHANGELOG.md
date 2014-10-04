@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v0.4.1 (4th October 2014)
+
+Minor Bug Fix
+
+* fix(Package): allow use of `npm link` with dgeni      6698fe9f
+
 
 ## v0.4.0 (10th September 2014)
 
