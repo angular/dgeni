@@ -6,7 +6,7 @@ The node.js documentation generation utility by angular.js and other projects.
 
 ## Getting started
 
-Try out the Dgeni example project at https://github.com/petebacondarwin/dgeni-example
+Try out the Dgeni [example project](https://github.com/petebacondarwin/dgeni-example). Or maybe you're looking for an example [using AngularJS](https://github.com/petebacondarwin/dgeni-angular).
 
 ## Installation
 
