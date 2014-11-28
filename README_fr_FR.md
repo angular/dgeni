@@ -6,7 +6,10 @@ L'utilitaire de génération de documentation de node.js par angular.js et d'aut
 
 ## Mise en route
 
-Essayez l'exemple de projet avec Dgeni https://github.com/petebacondarwin/dgeni-example
+Essayez [l'exemple de projet](https://github.com/petebacondarwin/dgeni-example) avec Dgeni. Ou vous cherchez peut-être un exemple qui [utilise AngularJS](https://github.com/petebacondarwin/dgeni-angular).
+
+Regardez la présentation de Pete sur Dgeni (En anglais) :
+[![ScreenShot](http://img.youtube.com/vi/PQNROxXajyQ/0.jpg)](http://youtu.be/PQNROxXajyQ)
 
 ## Installation
 
