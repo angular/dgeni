@@ -133,14 +133,14 @@ or instantiate and provide to the factory function.
 
 **car.js**:
 ```js
-module.exports = function car(function(engine, wheels) {
+module.exports = function car(engine, wheels) {
   return {
     drive: function() {
       engine.start();
       wheels.turn();
     }
   };
-})
+};
 ```
 
 Here we have defined a `car` service, which depends upon two other services, `engine` and `wheels`
