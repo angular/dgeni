@@ -34,7 +34,7 @@ documentation files.
 
 To run the processors we create a new instance of `Dgeni`, providing to it an array of **Packages**
 to load.  Then simply call the `generate()` method on this instance.  The `generate()` method runs the
-processors asynchronously and returns a **Promise** that gets fulfulled with the generated documents.
+processors asynchronously and returns a **Promise** that gets fulfilled with the generated documents.
 
 ```js
 var Dgeni = require('dgeni');
