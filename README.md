@@ -20,7 +20,7 @@ http://nodejs.org/.
 In the project you want to document you install Dgeni by running:
 
 ```
-npm install dgeni --save
+npm install dgeni --save-dev
 ```
 
 This will install Dgeni and any modules that Dgeni depends upon.
@@ -28,13 +28,13 @@ This will install Dgeni and any modules that Dgeni depends upon.
 
 ## Running Dgeni
 
-Dgeni on its own doesn't do much.  You much configure it with **Packages** that contain **Services**
+Dgeni on its own doesn't do much.  You must configure it with **Packages** that contain **Services**
 and **Processors**. It is the **Processors** that actually convert your source files to
 documentation files.
 
 To run the processors we create a new instance of `Dgeni`, providing to it an array of **Packages**
 to load.  Then simply call the `generate()` method on this instance.  The `generate()` method runs the
-processors asynchronously and returns a **Promise** to the generated documents.
+processors asynchronously and returns a **Promise** that gets fulfulled with the generated documents.
 
 ```js
 var Dgeni = require('dgeni');
@@ -99,7 +99,7 @@ top of an existing configuration.
 
 ### Defining a Package
 
-Dgeni provides a `Package` type that you instantiate.  This instance has methods to register **Services** and
+Dgeni provides a `Package` constructor to create new Packages.  A Package instance has methods to register **Services** and
 **Processors**, and to configure the properties of **Processors**:
 
 ```js
@@ -262,7 +262,7 @@ module.exports = function readFileProcessor() {
 
 ### Standard Dgeni Packages
 
-The [dgeni-packages repository](https://github.com/angular/dgeni-packages) contains a many Processors -
+The [dgeni-packages repository](https://github.com/angular/dgeni-packages) contains many Processors -
 from basic essentials to complex, angular.js specific.  These processors are grouped into Packages:
 
 * `base` -  contains the basic file reading and writing Processors as well as an abstract
@@ -289,7 +289,7 @@ You can define processors that don't do anything but act as markers for stages o
 processing.  You can use these markers in `$runBefore` and `$runAfter` properties to ensure
 that your Processor is run at the right time.
 
-The **Packages** is dgeni-packages define some of these marker processors. Here is a list
+The **Packages** in dgeni-packages define some of these marker processors. Here is a list
 of these in the order that Dgeni will add them to the processing pipeline:
 
 
