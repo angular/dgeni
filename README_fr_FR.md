@@ -34,7 +34,7 @@ en fichiers de documentation.
 
 Pour exécuter les processeurs, nous créons une nouvelle instance de `Dgeni`, en lui fournissant des **Packages**
 à charger. Ensuite, il suffit d'appeler la méthode `generate()` sur cette instance. La méthode `generate()` exécute les
-processeurs de manière asynchrone et renvoie une **Promise** qui renvoit le contenu des documents générés.
+processeurs de manière asynchrone et renvoie une **Promise** qui renvoie le contenu des documents générés.
 
 ```js
 var Dgeni = require('dgeni');
@@ -99,7 +99,7 @@ par dessus une configuration existante.
 
 ### Définition d'un Package
 
-Dgeni fournit un constructeur de `Package` pour créer de nouveaux Packages. Un instance de Package a des méthodes pour enregistrer des **Services** et
+Dgeni fournit un constructeur de `Package` pour créer de nouveaux Packages. Une instance de Package a des méthodes pour enregistrer des **Services** et
 des **Processeurs** et permet de configurer les propriétés des **Processeurs** :
 
 ```js
@@ -263,7 +263,7 @@ module.exports = function readFileProcessor() {
 ### Les Packages Dgeni Standard
 
 Le [dépôt dgeni-packages](https://github.com/angular/dgeni-packages) contient plusieurs Processeurs -
-de première necessité au plus complexe spécifique à angular.js. Ces processeurs sont regroupés dans des Packages :
+de première nécessité au plus complexe spécifique à angular.js. Ces processeurs sont regroupés dans des Packages :
 
 * `base` -  contient des processeurs basiques de lecture et d'écriture de fichier, ainsi qu'un processeur
 de rendu abstrait.
@@ -315,7 +315,7 @@ dans l'ordre que Dgeni les ajoutera à la pipeline du traitement :
 
 ## Configuration des Blocs
 
-Vous pouvez configurer les **Services** et les **Processeurs** definis dans un **Package** ou ses dépendances
+Vous pouvez configurer les **Services** et les **Processeurs** définis dans un **Package** ou ses dépendances
 en enregistrant des **blocs de configuration** avec le **Package**. Ce sont des fonctions qui peuvent être
 injectées avec des **Services** et des **Processors** par le système de DI. Ceci vous donne la possibilité de
 de définir, sur eux, des propriétés.
