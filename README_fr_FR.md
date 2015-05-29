@@ -20,7 +20,7 @@ http://nodejs.org/. Ensuite, dans le dossier de votre projet exécutez :
 Dans le projet que vous souhaitez documenter, veuillez installez Dgeni en exécutant :
 
 ```
-npm install dgeni --save
+npm install dgeni --save-dev
 ```
 
 Cela permet d'installer Dgeni et tous ses modules dépendants.
@@ -34,7 +34,7 @@ en fichiers de documentation.
 
 Pour exécuter les processeurs, nous créons une nouvelle instance de `Dgeni`, en lui fournissant des **Packages**
 à charger. Ensuite, il suffit d'appeler la méthode `generate()` sur cette instance. La méthode `generate()` exécute les
-processeurs de manière asynchrone et renvoie une **Promise** aux documents générés.
+processeurs de manière asynchrone et renvoie une **Promise** qui renvoit le contenu des documents générés.
 
 ```js
 var Dgeni = require('dgeni');
@@ -99,7 +99,7 @@ par dessus une configuration existante.
 
 ### Définition d'un Package
 
-Dgeni fournit un type `Package` que vous instanciez.  Cette instance a des méthodes pour enregistrer des **Services** et
+Dgeni fournit un constructeur de `Package` pour créer de nouveaux Packages. Un instance de Package a des méthodes pour enregistrer des **Services** et
 des **Processeurs** et permet de configurer les propriétés des **Processeurs** :
 
 ```js
@@ -262,7 +262,7 @@ module.exports = function readFileProcessor() {
 
 ### Les Packages Dgeni Standard
 
-Le [dépôt dgeni-packages](https://github.com/angular/dgeni-packages) contient un grand nombre de Processeurs -
+Le [dépôt dgeni-packages](https://github.com/angular/dgeni-packages) contient plusieurs Processeurs -
 de première necessité au plus complexe spécifique à angular.js. Ces processeurs sont regroupés dans des Packages :
 
 * `base` -  contient des processeurs basiques de lecture et d'écriture de fichier, ainsi qu'un processeur
@@ -289,7 +289,7 @@ Vous pouvez définir des processeurs qui ne font rien mais qui agissent comme de
 du traitement. Vous pouvez utiliser ces marqueurs dans les propriétés `$runBefore` et `$runAfter` pour s'assurer que votre
 processeur soit lancé au bon moment.
 
-Les ****Packages** de dgeni-packages définissent certains processeurs marqueurs. Voici la liste
+Les ****Packages** dans dgeni-packages définissent certains processeurs marqueurs. Voici la liste
 dans l'ordre que Dgeni les ajoutera à la pipeline du traitement :
 
 
