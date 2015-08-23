@@ -22,6 +22,7 @@
     "dependency-graph": "~0.4.1",
     "di": "0.0.1",
     "lodash": "^3.10.1",
+    "objectdiff": "^1.1.0",
     "optimist": "~0.6.1",
     "q": "~1.4.1",
     "validate.js": "^0.9.0",
