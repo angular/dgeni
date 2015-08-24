@@ -201,6 +201,10 @@ how to validate the configuration of the Processor.
 to validate the properties of this Processor.
 
 
+** Note that the validation feature has been moved to its own Dgeni Package `processorValidation`.
+Currently dgeni automatically adds this new package to a new instance of dgeni so that is still available
+for backward compatibility. In a future release this package will be moved to `dgeni-packages`.**
+
 ### Defining a Processor
 
 You define Processors just like you would a Service:
@@ -330,3 +334,57 @@ myPackage.config(function(readFilesProcessor) {
   readFilesProcessor.sourceFiles = ['src/**/*.js'];
 });
 ```
+
+## Dgeni Events
+
+In Dgeni you can trigger and handle **events** to allow packages to take part in the processing
+lifecycle of the documentation generation.
+
+
+### Triggering Events
+
+You trigger an event simply by calling `triggerEvent(eventName, ...)` on a `Dgeni` instance.
+
+The `eventName` is a string that identifies the event to be triggered, which is used to wire up
+event handlers. Additional arguments are passed through to the handlers.
+
+Each handler that is registered for the event is called in series. The return value
+from the call is a promise to the event being handled. This allows event handlers to be async.
+If any handler returns a rejected promise the event triggering is cancelled and the rejected
+promise is returned.
+
+For example:
+
+```js
+var eventPromise = dgeni.triggerEvent('someEventName', someArg, otherArg);
+```
+
+### Handling Events
+
+You register an event handler in a `Package`, by calling `handleEvent(eventName, handlerFactory)` on
+the package instance. The handlerFactory will be used by the DI system to get the handler, which allows
+you to inject services to be available to the handler.
+
+The handler factory should return the handler function. This function will receive all the arguments passed
+to the `triggerHandler` method. As a minimum this will include the `eventName`.
+
+For example:
+
+```js
+myPackage.eventHandler('generationStart', function validateProcessors(log, dgeni) {
+  return function validateProcessorsImpl(eventName) {
+    ...
+  };
+});
+
+```
+
+### Built-in Events
+
+Dgeni itself triggers the following events during documentation generation:
+
+* `generationStart`: triggered after the injector has been configured and before the processors begin
+  their work.
+* `generationEnd`: triggered after the processors have all completed their work successfully.
+* `processorStart`: triggered just before the call to `$process`, for each processor.
+* `processorEnd`: triggered just after `$process` has completed successfully, for each processor.
