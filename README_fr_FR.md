@@ -203,6 +203,10 @@ dans le pipeline **après** ce Processeur
 pour valider les propriétés de ce processeur.
 
 
+**Notez que la fonctionnalité de validation a été déplacé dans son propre Package Dgeni : `processorValidation`.
+Actuellement dgeni ajoute automatiquement ce nouveau package dans une nouvelle instance de dgeni afin qu'il soit toujours disponible
+pour être compatible avec les versions antérieures. Dans une prochaine version, ce packge sera déplacé dans `dgeni-packages`.**
+
 ### Définition d'un Processeur
 
 Vous définissez les Processeurs comme vous le feriez pour un Service :
@@ -332,3 +336,57 @@ myPackage.config(function(readFilesProcessor) {
   readFilesProcessor.sourceFiles = ['src/**/*.js'];
 });
 ```
+
+## Evénements de Dgeni
+
+Dans Dgeni vous pouvez déclencher et gérer des **évènements** pour permettre aux packages de participer au cycle
+du traitement de la génération de la documentation.
+
+
+### Déclenchement des évènements
+
+Vous déclenchez un événement tout simplement en appelant `triggerEvent(eventName, ...)` sur une instance `Dgeni`.
+
+Le `eventName` est une chaîne qui identifie l'événement qui doit être déclenché, ce qui permet de connecter
+des gestionnaires d'événements. Les arguments supplémentaires sont passés dans les gestionnaires.
+
+Chaque gestionnaire qui est enregistré pour l'événement est appelé en série. La valeur de retour
+de l'appel est une promise à l'événement géré. Cela permet à des gestionnaires d'événements d'être asynchrone.
+Si un gestionnaire retourne une promise rejetée, l'événement déclencheur est annulé et la promise rejeté
+est retourné.
+
+Par exemple:
+
+```js
+var eventPromise = dgeni.triggerEvent('someEventName', someArg, otherArg);
+```
+
+### Gestion des évènements
+
+Vous enregistrez un gestionnaire d'événement dans un `Package`, en appelant `handleEvent(eventName, handlerFactory)` sur
+l'instance du package. Le handlerFactory sera utilisé par le système DI (injection de dépendance) pour récupérer le gestionnaire, ce qui vous
+permet d'injecter des services qui seront disponibles pour le gestionnaire.
+
+La factory de gestionnaire devrait retourner la fonction du gestionnaire. Cette fonction recevra tous les arguments passés
+à la méthode `triggerHandler. Au minimum, elle aura `eventName`.
+
+Par exemple:
+
+```js
+myPackage.eventHandler('generationStart', function validateProcessors(log, dgeni) {
+  return function validateProcessorsImpl(eventName) {
+    ...
+  };
+});
+
+```
+
+### Evénements intégrés
+
+Dgeni déclenche lui-même les événements suivants au cours de la génération de documentation :
+
+* `generationStart` : déclenché après que l'injecteur ait été configuré et avant que les processeurs
+  commencent leur travail.
+* `generationEnd`: déclenché après que les processeurs aient tous terminé leur travail avec succès.
+* `processorStart`: déclenché juste avant l'appel de `$process` pour chaque processeur.
+* `processorEnd`: déclenché juste après que `$process` soit terminé avec succès pour chaque processeur.

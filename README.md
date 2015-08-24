@@ -204,7 +204,7 @@ how to validate the configuration of the Processor.
 to validate the properties of this Processor.
 
 
-** Note that the validation feature has been moved to its own Dgeni Package `processorValidation`.
+**Note that the validation feature has been moved to its own Dgeni Package `processorValidation`.
 Currently dgeni automatically adds this new package to a new instance of dgeni so that is still available
 for backward compatibility. In a future release this package will be moved to `dgeni-packages`.**
 
