@@ -330,3 +330,7 @@ myPackage.config(function(readFilesProcessor) {
   readFilesProcessor.sourceFiles = ['src/**/*.js'];
 });
 ```
+
+## License
+
+Apache 2
