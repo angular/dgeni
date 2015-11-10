@@ -26,11 +26,11 @@
     "canonical-path": "~0.0.2",
     "dependency-graph": "~0.1.0",
     "di": "0.0.1",
-    "optimist": "~0.6.0",
     "lodash": "^2.4.1",
+    "optimist": "~0.6.0",
     "q": "~0.9.7",
     "validate.js": "^0.2.0",
-    "winston": "~0.7.2"
+    "winston": "^1.1.2"
   },
   "devDependencies": {
     "dgeni-packages": "^0.10.0",
