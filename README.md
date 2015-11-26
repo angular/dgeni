@@ -4,6 +4,9 @@
 
 The node.js documentation generation utility by angular.js and other projects.
 
+Dgeni is pronounced like the name girl's Jenny ([/ˈdʒɛni/](https://en.wikipedia.org/wiki/Help:IPA_for_English)),
+i.e the 'd' is silent and the `g` is soft.
+
 ## Getting started
 
 Try out the Dgeni [example project](https://github.com/petebacondarwin/dgeni-example). Or maybe you're looking for an example [using AngularJS](https://github.com/petebacondarwin/dgeni-angular).
