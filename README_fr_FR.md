@@ -4,7 +4,7 @@
 
 L'utilitaire de génération de documentation de node.js par angular.js et d'autres projets.
 
-Dgeni se prononce comme Jenny le nom de jeune fille ([/ˈdʒɛni/](https://en.wikipedia.org/wiki/Help:IPA_for_English)), à savoir le «d» est silencieux et le «g» est doux.
+Dgeni se prononce comme le prénom féminin Jenny ([/ˈdʒɛni/](https://en.wikipedia.org/wiki/Help:IPA_for_English)), à savoir le «d» est silencieux et le «g» est doux.
 
 ## Mise en route
 
