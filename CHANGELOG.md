@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v0.4.2 (6th January 2016)
+
+Node dependency update - dgeni now cleanly support node 4 and 5 (and so npm 3)
+
 ## v0.4.1 (4th October 2014)
 
 Minor Bug Fix

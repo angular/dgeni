@@ -1,6 +1,6 @@
 {
   "name": "dgeni",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Flexible JavaScript documentation generator used by AngularJS",
   "main": "lib/Dgeni.js",
   "scripts": {
@@ -44,7 +44,8 @@
     "Jeff Cross <middlefloor@gmail.com>",
     "Andres Dominguez <andresdominguez@users.noreply.github.com>",
     "Jeremy Attali <jeremy.attali@gmail.com>",
-    "Michael J. Zoidl <me@michaelzoidl.com>"
+    "Michael J. Zoidl <me@michaelzoidl.com>",
+    "Ivan Vorobkalo <ivan.vorobkalo@matrix42.com>"
   ],
   "bugs": {
     "url": "https://github.com/angular/dgeni/issues"
