@@ -24,19 +24,19 @@
   ],
   "dependencies": {
     "canonical-path": "~0.0.2",
-    "dependency-graph": "~0.1.0",
+    "dependency-graph": "~0.4.1",
     "di": "0.0.1",
-    "lodash": "^2.4.1",
-    "optimist": "~0.6.0",
-    "q": "~0.9.7",
-    "validate.js": "^0.2.0",
-    "winston": "^1.1.2"
+    "lodash": "^3.10.1",
+    "optimist": "~0.6.1",
+    "q": "~1.4.1",
+    "validate.js": "^0.9.0",
+    "winston": "^2.1.1"
   },
   "devDependencies": {
-    "dgeni-packages": "^0.10.0",
-    "istanbul": "^0.2.7",
+    "dgeni-packages": "^0.11.1",
+    "istanbul": "^0.4.1",
     "jasmine-node": "^2.0.0",
-    "rewire": "~2.0.0"
+    "rewire": "~2.5.1"
   },
   "contributors": [
     "Pete Bacon Darwin <pete@bacondarwin.com>",
