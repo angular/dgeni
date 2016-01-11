@@ -16,7 +16,7 @@
     "url": "https://github.com/angular/dgeni.git"
   },
   "author": "Pete Bacon Darwin",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "dependencies": {
     "canonical-path": "~0.0.2",
     "dependency-graph": "~0.4.1",
