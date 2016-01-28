@@ -182,6 +182,7 @@ Processors 可以设置一些属性，告诉 Dgeni 它们应该在管道的哪�
 **晚于** 该 Processor。
 * `$validate` - Dgeni 用于验证该 Processor 属性的约束对象 [http://validatejs.org/](http://validatejs.org/)。
 
+** 注意: 验证功能已经被移动到它自己的 Dgeni package `processorValidation` 中。目前 dgeni 会为新建 dgeni 实例自动添加该 package，因此它是向后兼容的。未来的版本中，该 package 将会被移动到 `dgeni-packages` 中。**
 
 ### 定义 Processor
 
@@ -297,3 +298,49 @@ myPackage.config(function(readFilesProcessor) {
   readFilesProcessor.sourceFiles = ['src/**/*.js'];
 });
 ```
+
+## Dgeni 事件(Dgeni Events)
+
+在 Dgeni 中你可以触发和处理 **事件(events)** ，从而使 packages 成为文档生成生命周期中的一环。
+
+### 触发事件
+
+你可以在 `Dgeni` 实例上通过调用 `triggerEvent(eventName, ...)` 来触发事件。
+
+字符串格式的 `eventName`，用于在封装事件句柄中标识被触发事件。其它参数则会被传递给句柄。
+
+注册到该事件的句柄将会被依次调用。调用的返回值是一个 promise 。因此事件句柄是异步的。
+如果其中某个句柄返回值是 rejected promise 的话，那么事件则中止(cancelled)并且该 rejected
+promise 会作为返回值返回。
+
+比如:
+
+```js
+var eventPromise = dgeni.triggerEvent('someEventName', someArg, otherArg);
+```
+
+### 处理事件
+
+为 `Package` 注册事件句柄, 需要在 package 实例上调用 `handleEvent(eventName, handlerFactory)`。然后 handlerFactory 会被 DI 系统调用，从而获取到该句柄，之后允许你将服务注入该句柄中。
+
+工厂的返回值是句柄函数。该函数会获得所有从 `triggerHandler` 传递过来的参数。其中至少会包含有 `eventName`。
+
+比如:
+
+```js
+myPackage.eventHandler('generationStart', function validateProcessors(log, dgeni) {
+  return function validateProcessorsImpl(eventName) {
+    ...
+  };
+});
+
+```
+
+### 内置事件
+
+Dgeni 在文档生成流程中，会触发以下内置事件:
+
+* `generationStart`: 在注入器(injector)被配置完成，而 processor 被执行之前触发。
+* `generationEnd`: 在所有的 processor 都被成功执行完毕之后触发。
+* `processorStart`: 在 `$process` 执行之前被触发，每个 processor 都有。
+* `processorEnd`: 在 `$process` 执行成功之后被触发，每个 processor 都有。
