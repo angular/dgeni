@@ -4,6 +4,9 @@
 
 用 angular.js 和其他工程构建的 node.js 文档生成工具。
 
+Dgeni 念起来有点类似女生名字 Jenny([/ˈdʒɛni/](https://en.wikipedia.org/wiki/Help:IPA_for_English)) 的发音，
+也就是 'd' 不发音，而 `g` 轻音。
+
 ## 入门
 
 试试看 Dgeni [示例项目](https://github.com/petebacondarwin/dgeni-example)。或者你在找的是[用 AngularJS](https://github.com/petebacondarwin/dgeni-angular)的例子。
