@@ -344,3 +344,7 @@ Dgeni 在文档生成流程中，会触发以下内置事件:
 * `generationEnd`: 在所有的 processor 都被成功执行完毕之后触发。
 * `processorStart`: 在 `$process` 执行之前被触发，每个 processor 都有。
 * `processorEnd`: 在 `$process` 执行成功之后被触发，每个 processor 都有。
+
+## License
+
+Apache 2
