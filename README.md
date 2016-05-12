@@ -15,6 +15,17 @@ Watch Pete's ng-europe talk on Dgeni :
 
 [![ScreenShot](http://img.youtube.com/vi/PQNROxXajyQ/0.jpg)](http://youtu.be/PQNROxXajyQ)
 
+
+## Documenting Angular 1 Apps
+
+There are two projects out there that build upon dgeni to help create documentation for Angular 1 apps:
+
+* dgeni-alive: https://github.com/wingedfox/dgeni-alive
+* sia: https://github.com/boundstate/sia
+
+Do check them out and thanks to [Ilya](https://github.com/wingedfox) and [Bound State Software](https://github.com/boundstate)
+for putting these projects together.
+
 ## Installation
 
 You'll need node.js and a bunch of npm modules installed to use Dgeni.  Get node.js from here:
