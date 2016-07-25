@@ -4,7 +4,8 @@
 
 L'utilitaire de génération de documentation de node.js par angular.js et d'autres projets.
 
-Dgeni se prononce comme le prénom féminin Jenny ([/ˈdʒɛni/](https://en.wikipedia.org/wiki/Help:IPA_for_English)), à savoir le «d» est silencieux et le «g» est doux.
+Dgeni se prononce comme le prénom féminin Jenny ([/ˈdʒɛni/](https://en.wikipedia.org/wiki/Help:IPA_for_English)),
+à savoir le «d» est silencieux et le «g» est doux.
 
 ## Mise en route
 
@@ -13,6 +14,17 @@ Essayez [l'exemple de projet](https://github.com/petebacondarwin/dgeni-example) 
 Regardez la présentation de Pete sur Dgeni (En anglais) :
 
 [![ScreenShot](http://img.youtube.com/vi/PQNROxXajyQ/0.jpg)](http://youtu.be/PQNROxXajyQ)
+
+
+## Documenter les applications Angular 1
+
+Il existe deux projets qui s'appuient sur dgeni pour vous aider à créer la documentation pour les applications Angular 1 :
+
+* dgeni-alive: https://github.com/wingedfox/dgeni-alive
+* sia: https://github.com/boundstate/sia
+
+Consultez-les et merci à [Ilya](https://github.com/wingedfox) et [Bound State Software](https://github.com/boundstate)
+de nous avoir concocter ces projects.
 
 ## Installation
 
@@ -276,6 +288,9 @@ de rendu abstrait.
 
 * `jsdoc` - dépend de `base` et ajoute des processeurs et des services pour supporter l'analyse et
 l'extraction de balise de commentaires jsdoc dans le code.
+
+* `typescript` - dépend de `base` et ajoute des processeurs et des services pour supporter l'analyse et
+l'extraction des balises de style jsdoc depuis les commentaires du code en TypeScript (*.ts).
 
 * `nunjucks` - fournit un moteur de rendu bsé sur
 [nunjucks](http://mozilla.github.io/nunjucks/).
