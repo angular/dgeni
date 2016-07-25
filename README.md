@@ -289,6 +289,9 @@ rendering Processor.
 * `jsdoc` - depends upon `base` and adds Processors and Services to support parsing and
 extracting jsdoc style tags from comments in code.
 
+* `typescript` - depends upon `base` and adds Processors and Services to support parsing and
+extracting jsdoc style tags from comments in TypeScript (*.ts) code.
+
 * `nunjucks` - provides a [nunjucks](http://mozilla.github.io/nunjucks/) based rendering
 engine.
 
