@@ -8,11 +8,10 @@ module.exports = new Package('dgeniDocsPackage', [
 ])
 
 .config(function(log, readFilesProcessor, writeFilesProcessor, templateFinder, debugDumpProcessor) {
-
   log.level = 'info';
 
   readFilesProcessor.basePath = path.resolve(__dirname, '..');
-  readFilesProcessor.sourceFiles = [{ include: 'lib/**/*.js', basePath: 'lib' }];
+  readFilesProcessor.sourceFiles = [{ include: 'lib/**/Package.js', basePath: 'lib' }];
   writeFilesProcessor.outputFolder = 'docs/build';
 
   templateFinder.templateFolders.unshift('docs/templates');

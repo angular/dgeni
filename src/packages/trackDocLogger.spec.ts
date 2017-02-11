@@ -1,14 +1,15 @@
-/*eslint-disable no-console */
-var Dgeni = require('../Dgeni');
-var trackDocLoggerPackage = require('./trackDocLogger');
-var _ = require('lodash');
+import {describe, it, beforeEach} from 'mocha';
+const {expect, spy} = require('chai').use(require('chai-spies'));
+
+import {Dgeni} from '../Dgeni';
+import {trackDocLoggerPackage} from './trackDocLogger';
 
 describe('trackDocLogger', function() {
 
-  var dgeni, mockLogger;
+  let dgeni, mockLogger;
 
   beforeEach(function() {
-    mockLogger = jasmine.createSpyObj('log', ['error', 'warning', 'info', 'debug', 'silly']);
+    mockLogger = spy.object('log', ['error', 'warning', 'info', 'debug', 'silly']);
     dgeni = new Dgeni();
 
     dgeni.package('mockLogger')
@@ -48,12 +49,10 @@ describe('trackDocLogger', function() {
   });
 
 
-  it('should log each generation of changes to the tracked doc', function(done) {
+  it('should log each generation of changes to the tracked doc', function() {
 
     function trackDocWithIdOne(docs) {
-      return _.filter(docs, function(doc) {
-        return doc.id === 1;
-      });
+      return docs.filter((doc) => doc.id === 1);
     }
 
     dgeni.package('testConfig')
@@ -61,18 +60,13 @@ describe('trackDocLogger', function() {
         trackDocLoggerOptions.docsToTrackFn = trackDocWithIdOne;
       });
 
-    dgeni.generate()
+    return dgeni.generate()
       .then(function() {
-        expect(mockLogger.info).toHaveBeenCalledWith('trackDocLogger settings:', { docsToTrackFn : trackDocWithIdOne });
-        expect(mockLogger.info).toHaveBeenCalledWith('trackDocLogger tracked changes:', [
+        expect(mockLogger.info).to.have.been.called.with('trackDocLogger settings:', { docsToTrackFn : trackDocWithIdOne });
+        expect(mockLogger.info).to.have.been.called.with('trackDocLogger tracked changes:', [
           { processor : 'initial', docs : [ { id : 1, name : 'one' } ] },
           { processor : 'second', docs : [ { id : 1, name : 'one', path : '/1' } ] }
         ]);
-        done();
-      })
-      .catch(function(error) {
-        console.log(error.stack);
-        done(error);
       });
   });
 });

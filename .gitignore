@@ -21,3 +21,5 @@ coverage
 .idea/
 
 docs/build
+lib
+typings

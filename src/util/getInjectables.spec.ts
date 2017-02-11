@@ -1,13 +1,15 @@
-var getInjectablesFactory = require('./getInjectables');
+import {describe, it, beforeEach} from 'mocha';
+const {expect, spy} = require('chai').use(require('chai-spies'));
+
+import {getInjectablesFactory} from './getInjectables';
 
 describe('getInjectables', function() {
 
-  var mockInjector;
-  var getInjectables;
+  let mockInjector;
+  let getInjectables;
 
   beforeEach(function() {
-    mockInjector = jasmine.createSpyObj('injector', ['invoke']);
-    mockInjector.invoke.and.callFake(function(fn) { return fn(); });
+    mockInjector = spy.object({ invoke: fn => fn() });
     getInjectables = getInjectablesFactory(mockInjector);
   });
 
@@ -18,7 +20,7 @@ describe('getInjectables', function() {
     function c() { return {}; }
 
     getInjectables([a, b, c]);
-    expect(mockInjector.invoke.calls.count()).toEqual(3);
+    expect(mockInjector.invoke).to.have.been.called.exactly(3);
   });
 
   it('should get the name from the instance, then the factory', function() {
@@ -26,9 +28,9 @@ describe('getInjectables', function() {
     function b() { return function b2() {}; }
     function c() { return { name: 'c2' }; }
 
-    var instances = getInjectables([a, b, c]);
-    expect(instances[0].name).toEqual('a');
-    expect(instances[1].name).toEqual('b2');
-    expect(instances[2].name).toEqual('c2');
+    const instances = getInjectables([a, b, c]);
+    expect(instances[0].name).to.equal('a');
+    expect(instances[1].name).to.equal('b2');
+    expect(instances[2].name).to.equal('c2');
   });
 });

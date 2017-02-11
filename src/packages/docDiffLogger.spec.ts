@@ -1,13 +1,15 @@
-/*eslint-disable no-console */
-var Dgeni = require('../Dgeni');
-var docDiffLoggerPackage = require('./docDiffLogger');
+import {describe, it, beforeEach} from 'mocha';
+const {expect, spy} = require('chai').use(require('chai-spies'));
+
+import {Dgeni} from '../Dgeni';
+import {docDiffLoggerPackage} from './docDiffLogger';
 
 describe('docDiffLogger', function() {
 
-  var dgeni, mockLogger;
+  let dgeni, mockLogger;
 
   beforeEach(function() {
-    mockLogger = jasmine.createSpyObj('log', ['error', 'warning', 'info', 'debug', 'silly']);
+    mockLogger = spy.object('log', ['error', 'warning', 'info', 'debug', 'silly']);
     dgeni = new Dgeni();
 
     dgeni.package('mockLogger')
@@ -38,71 +40,61 @@ describe('docDiffLogger', function() {
       });
   });
 
-  it('should log the difference between the first and last processor', function(done) {
-    dgeni.generate()
+  it('should log the difference between the first and last processor', function() {
+    return dgeni.generate()
       .then(function() {
-        expect(mockLogger.info).toHaveBeenCalledWith(jasmine.objectContaining({ changed: 'object change' }));
-        done();
-      })
-      .catch(function(error) {
-        console.log(error.stack);
-        done(error);
+        expect(mockLogger.info).to.have.been.called.with({
+          changed: 'object change',
+          value : {
+            0 : { changed : 'added', value : { id : 'doc-1', extra : 'stuff' } },
+            1: { changed : 'added', value : { id : 'doc-2' } }
+          }});
       });
   });
 
-  it('should log the difference between the start and last processor', function(done) {
+  it('should log the difference between the start and last processor', function() {
     dgeni.package('testConfig')
       .config(function(docDiffLoggerOptions) {
         docDiffLoggerOptions.start = 'first';
       });
-    dgeni.generate()
+    return dgeni.generate()
       .then(function() {
-        expect(mockLogger.info).toHaveBeenCalledWith({
+        expect(mockLogger.info).to.have.been.called.with({
           changed: 'object change',
           value : {
             0 : { changed : 'added', value : { id : 'doc-1', extra : 'stuff' } },
             1: { changed : 'added', value : { id : 'doc-2' } }
           }
         });
-        done();
-      })
-      .catch(function(error) {
-        console.log(error.stack);
-        done(error);
       });
   });
 
-  it('should log the difference between the first and end processor', function(done) {
+  it('should log the difference between the first and end processor', function() {
     dgeni.package('testConfig')
       .config(function(docDiffLoggerOptions) {
         docDiffLoggerOptions.end = 'first';
       });
-    dgeni.generate()
+    return dgeni.generate()
       .then(function() {
-        expect(mockLogger.info).toHaveBeenCalledWith({
+        expect(mockLogger.info).to.have.been.called.with({
           changed: 'object change',
           value : {
             0 : { changed : 'added', value : { id : 'doc-1' } },
             1: { changed : 'added', value : { id : 'doc-2' } }
           }
         });
-        done();
-      })
-      .catch(function(error) {
-        console.log(error.stack);
-        done(error);
       });
   });
 
-  it('should log the difference between the start and end processor', function(done) {
+  it('should log the difference between the start and end processor', function() {
     dgeni.package('testConfig')
       .config(function(docDiffLoggerOptions) {
         docDiffLoggerOptions.start = 'second';
         docDiffLoggerOptions.end = 'second';
       });
-    dgeni.generate()
+    return dgeni.generate()
       .then(function() {
-        expect(mockLogger.info).toHaveBeenCalledWith({
+        expect(mockLogger.info).to.have.been.called.with({
           changed: 'object change',
           value : {
             0 : {
@@ -118,11 +110,6 @@ describe('docDiffLogger', function() {
             }
           }
         });
-        done();
-      })
-      .catch(function(error) {
-        console.log(error.stack);
-        done(error);
       });
   });
 });

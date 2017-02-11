@@ -4,11 +4,13 @@
  * @description
  * Use the injector to get a collection of service instances from a collection of injectable factories
  */
-module.exports = function getInjectables(injector) {
+export function getInjectablesFactory(injector) {
   return function(factories) {
     return factories.map(function(factory) {
-      var instance = injector.invoke(factory);
-      instance.name = instance.name || factory.name;
+      const instance = injector.invoke(factory);
+      if (!instance.name) {
+        instance.name = factory.name;
+      }
       return instance;
     });
   };

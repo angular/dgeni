@@ -1,5 +1,5 @@
-var _ = require('lodash');
-var DepGraph = require('dependency-graph').DepGraph;
+const _ = require('lodash');
+const {DepGraph} = require('dependency-graph');
 
 /**
  * @name  sortByDependency
@@ -16,14 +16,12 @@ var DepGraph = require('dependency-graph').DepGraph;
  *                                      defaults to 'name'.
  * @return {Array}                      A new array containing the sorted collection of items.
  */
-module.exports = function sortByDependency(items, afterProp, beforeProp, nameProp) {
+export function sortByDependency(items: Object | any[], afterProp?: string, beforeProp?: string, nameProp: string = 'name') {
 
-  nameProp = nameProp || 'name';
+  let map = {};
+  let depGraph = new DepGraph();
 
-  var map = {};
-  var depGraph = new DepGraph();
-
-  var addDependencies = function(item, dependencyProp, addBefore) {
+  let addDependencies = function(item, dependencyProp, addBefore: boolean = false) {
     if ( dependencyProp && item[dependencyProp]) {
       if ( !Array.isArray(item[dependencyProp]) ) {
         throw new Error('Error in item "' + item[nameProp] + '" - ' + dependencyProp + ' must be an array');
@@ -43,7 +41,7 @@ module.exports = function sortByDependency(items, afterProp, beforeProp, namePro
 
   _.forEach(items, function(item, index) {
     if ( !item[nameProp] ) {
-      throw new Error('Missing ' + nameProp + ' property on item #' + (index+1));
+      throw new Error('Missing ' + nameProp + ' property on item #' + (index + 1));
     }
     map[item[nameProp]] = item;
     depGraph.addNode(item[nameProp]);

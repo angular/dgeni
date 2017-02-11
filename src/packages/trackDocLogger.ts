@@ -1,13 +1,13 @@
-var _ = require('lodash');
-var Package = require('../Package');
-var options = {
-  docsToTrackFn: function() {}
+const _ = require('lodash');
+import {Package} from '../Package';
+const options = {
+  docsToTrackFn: function(docs) {}
 };
 
-var generations = [];
-var previousTrackedDocs;
+const generations = [];
+let previousTrackedDocs;
 
-module.exports = new Package('trackDocLogger')
+export const trackDocLoggerPackage = new Package('trackDocLogger')
 
 .factory('trackDocLoggerOptions', function() {
   return options;
@@ -15,7 +15,7 @@ module.exports = new Package('trackDocLogger')
 
 .eventHandler('processorEnd', function() {
   return function(event, processor, docs) {
-    var trackedDocs = options.docsToTrackFn(docs);
+    let trackedDocs = options.docsToTrackFn(docs);
     if ( trackedDocs ) {
       if ( !_.isEqual(trackedDocs, previousTrackedDocs) ) {
         trackedDocs = _.cloneDeep(trackedDocs);

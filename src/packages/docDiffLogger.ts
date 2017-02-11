@@ -1,13 +1,13 @@
-var _ = require('lodash');
-var Package = require('../Package');
-var diff = require('objectdiff').diff;
-var firstDocs, startDocs, endDocs, lastDocs;
-var options = {
+const _ = require('lodash');
+const {diff} = require('objectdiff');
+import {Package} from '../Package';
+let firstDocs, startDocs, endDocs, lastDocs;
+const options = {
   start: null,
   end: null
 };
 
-module.exports = new Package('docDiffLogger')
+export const docDiffLoggerPackage = new Package('docDiffLogger')
 
 .factory('docDiffLoggerOptions', function() {
   return options;
@@ -50,7 +50,7 @@ module.exports = new Package('docDiffLogger')
 
 
 function logDiff(log) {
-  var changes = diff(startDocs || firstDocs, endDocs || lastDocs);
+  const changes = diff(startDocs || firstDocs, endDocs || lastDocs);
   log.info(options);
   log.info(changes);
 }
