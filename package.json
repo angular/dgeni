@@ -1,7 +1,7 @@
 {
   "name": "dgeni",
-  "version": "0.4.2",
-  "description": "Flexible JavaScript documentation generator used by AngularJS",
+  "version": "0.4.3",
+  "description": "Flexible JavaScript documentation generator used by Angular",
   "main": "lib/Dgeni.js",
   "types": "lib/index.d.ts",
   "bin": {
@@ -11,13 +11,11 @@
     "lib"
   ],
   "scripts": {
-    "postinstall": "rm -rf typings && typings install",
     "prepublish": "npm build",
     "prebuild": "rm -rf lib",
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "mocha -r ts-node/register -R spec 'src/**/*.spec.ts'",
-    "cover": "istanbul cover mocha -- -r ts-node/register -R spec src/**/*.spec.ts",
+    "test": "mocha --compilers ts:ts-node/register -R spec src/**/*.spec.ts",
     "docs": "node lib/gen-docs.js ./docs/dgeni-docs.js"
   },
   "repository": {
@@ -27,6 +25,7 @@
   "author": "Pete Bacon Darwin",
   "license": "MIT",
   "dependencies": {
+    "@types/mocha": "^2.2.39",
     "canonical-path": "~0.0.2",
     "dependency-graph": "~0.4.1",
     "di": "0.0.1",
@@ -43,13 +42,10 @@
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
     "dgeni-packages": "^0.16.0",
-    "istanbul": "^0.4.1",
     "mocha": "^3.2.0",
-    "rewire": "~2.5.1",
     "ts-node": "^2.1.0",
     "tslint": "^4.4.2",
-    "typescript": "^2.1.6",
-    "typings": "^2.1.0"
+    "typescript": "^2.1.6"
   },
   "contributors": [
     "Pete Bacon Darwin <pete@bacondarwin.com>",

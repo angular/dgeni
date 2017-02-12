@@ -1,4 +1,3 @@
-import {describe, it, beforeEach} from 'mocha';
 const {expect, spy} = require('chai').use(require('chai-spies'));
 
 import {Dgeni} from '../Dgeni';
