@@ -1,5 +1,14 @@
 # ChangeLog
 
+## v0.4.4 (13th February 2017)
+
+Minor docs and chores updates
+
+## v0.4.3 (12th February 2017)
+
+Various docs and refactorings including a complete rewrite in typescript,
+which enables API typings for TypeScript users.
+
 ## v0.4.2 (6th January 2016)
 
 Node dependency update - dgeni now cleanly support node 4 and 5 (and so npm 3)
