@@ -1,5 +1,13 @@
 # ChangeLog
 
+## v0.4.6 (14th February 2017)
+
+* fix(Dgeni): ensure that the typings are exposed correctly	a0fc03c9
+
+## v0.4.5 (14th February 2017)
+
+False start!
+
 ## v0.4.4 (13th February 2017)
 
 Minor docs and chores updates; in particular the `@types/mocha` dependency was moved
