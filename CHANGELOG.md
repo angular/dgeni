@@ -2,7 +2,9 @@
 
 ## v0.4.4 (13th February 2017)
 
-Minor docs and chores updates
+Minor docs and chores updates; in particular the `@types/mocha` dependency was moved
+to devDependencies to prevent unwanted leakage into client projects.
+
 
 ## v0.4.3 (12th February 2017)
 
