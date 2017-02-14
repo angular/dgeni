@@ -255,8 +255,3 @@ export class Dgeni {
     });
   };
 }
-
-// This is a hack so that you can still require Dgeni
-// in CommonJS as: `var Dgeni = require('dgeni');`
-module.exports = Dgeni;
-module.exports.Dgeni = Dgeni;
