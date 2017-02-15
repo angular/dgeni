@@ -1,6 +1,7 @@
-/* eslint-disable no-console */
+declare const jasmine;
+
 module.exports = function createMockLog(logToConsole) {
-  var mockLog = jasmine.createSpyObj('mockLog', ['silly', 'debug', 'info', 'warn', 'error']);
+  const mockLog = jasmine.createSpyObj('mockLog', ['silly', 'debug', 'info', 'warn', 'error']);
   if ( logToConsole ) {
     mockLog.silly.and.callFake(console.log);
     mockLog.debug.and.callFake(console.log);
