@@ -1,6 +1,6 @@
 {
   "name": "dgeni",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Flexible JavaScript documentation generator used by Angular",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -8,7 +8,8 @@
     "dgeni": "lib/gen-docs.js"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "prepublish": "npm build",

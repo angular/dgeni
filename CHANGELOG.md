@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 0.4.7 15 February 2017
+
+* fix(mocks): ensure mock logger is available in the published package	ca43a807
+
+
 ## v0.4.6 (14th February 2017)
 
 * fix(Dgeni): ensure that the typings are exposed correctly	a0fc03c9
