@@ -16,9 +16,9 @@ Regardez la présentation de Pete sur Dgeni (En anglais) :
 [![ScreenShot](http://img.youtube.com/vi/PQNROxXajyQ/0.jpg)](http://youtu.be/PQNROxXajyQ)
 
 
-## Documenter les applications Angular 1
+## Documenter les applications AngularJS
 
-Il existe deux projets qui s'appuient sur dgeni pour vous aider à créer la documentation pour les applications Angular 1 :
+Il existe deux projets qui s'appuient sur dgeni pour vous aider à créer la documentation pour les applications AngularJS :
 
 * dgeni-alive: https://github.com/wingedfox/dgeni-alive
 * sia: https://github.com/boundstate/sia

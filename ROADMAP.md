@@ -28,7 +28,7 @@ dgeni its document processing super-powers.
 ### Releases
 * v0.9.4 - bug fixes
 * v0.10.0 - no-config (to match the dgeni 0.4.0 release)
-* v0.11.0 - packages to support easy documenting of angular apps
+* v0.11.0 - packages to support easy documenting of AngularJS apps
 * v0.12.0
     - better jsdoc processing
     - coffeescript & es6 file support
@@ -59,11 +59,11 @@ searching and display of the hosted docs.
 * It should be able to host multiple versions of a project
 * It should allow linking between components in different projects/versions
 
-## angular.js docs
+## AngularJS docs
 
-The angular.js docs website and the original consumer of dgeni.  We need to keep this updated with
-the latest changes to dgeni.  Moving forward AngularJS V2 consists of multiple interdependent projects,
-written in ES6, which will all need a website (see dgeni-docs) to display their documentation.
+The AngularJS docs website and the original consumer of dgeni.  We need to keep this updated with
+the latest changes to dgeni.  Moving forward Angular consists of multiple interdependent projects,
+written in TypeScript, which will all need a website (see dgeni-docs) to display their documentation.
 
 
 [contributing]: https://github.com/angular/dgeni/blob/master/CONTRIBUTING.md
