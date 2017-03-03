@@ -131,7 +131,7 @@ changes to be accepted, the CLA must be signed. It's a quick process, we promise
 
 * [General GitHub documentation](http://help.github.com/)
 * [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
-* [Angular.js Contributing Doc](https://github.com/angular/angular.js/blob/CONTRIBUTING.md)
+* [AngularJS Contributing Doc](https://github.com/angular/angular.js/blob/CONTRIBUTING.md)
 
 [roadmap]: http://github.com/angular/dgeni/blob/master/ROADMAP.md
 [issues]: https://github.com/angular/dgeni/issues?state=open

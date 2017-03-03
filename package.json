@@ -1,7 +1,7 @@
 {
   "name": "dgeni",
   "version": "0.4.7",
-  "description": "Flexible JavaScript documentation generator used by Angular",
+  "description": "Flexible JavaScript documentation generator used by both AngularJS and Angular",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
