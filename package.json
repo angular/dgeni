@@ -19,6 +19,9 @@
     "test": "mocha --compilers ts:ts-node/register -R spec src/**/*.spec.ts",
     "docs": "node lib/gen-docs.js ./docs/dgeni-docs.js"
   },
+  "bin": {
+    "dgeni": "bin/gen-docs.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/angular/dgeni.git"
