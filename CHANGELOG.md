@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.4.9 15 June 2017
+
+Chore release
+
 ## 0.4.8 15 June 2017
 
 * fix(processor): add missing fields to Processor type definition	 b4ed72f0
