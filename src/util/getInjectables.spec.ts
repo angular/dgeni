@@ -8,7 +8,7 @@ describe('getInjectables', function() {
   let getInjectables;
 
   beforeEach(function() {
-    mockInjector = spy.object({ invoke: fn => fn() });
+    mockInjector = spy.interface({ invoke: fn => fn() });
     getInjectables = getInjectablesFactory(mockInjector);
   });
 
