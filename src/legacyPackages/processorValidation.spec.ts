@@ -8,7 +8,7 @@ describe('processorValidation', () => {
   let dgeni, mockLogger;
 
   beforeEach(() => {
-    mockLogger = spy.object('log', ['error', 'warning', 'info', 'debug', 'silly']);
+    mockLogger = spy.interface('log', ['error', 'warning', 'info', 'debug', 'silly']);
     dgeni = new Dgeni();
     const mockLoggerPackage = dgeni.package('mockLogger');
     mockLoggerPackage.factory(function log() { return mockLogger; });

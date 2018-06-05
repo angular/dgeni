@@ -8,7 +8,7 @@ describe('docDiffLogger', function() {
   let dgeni, mockLogger;
 
   beforeEach(function() {
-    mockLogger = spy.object('log', ['error', 'warning', 'info', 'debug', 'silly']);
+    mockLogger = spy.interface('log', ['error', 'warning', 'info', 'debug', 'silly']);
     dgeni = new Dgeni();
 
     dgeni.package('mockLogger')

@@ -16,7 +16,7 @@
     "prebuild": "rm -rf lib",
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "mocha --compilers ts:ts-node/register -R spec src/**/*.spec.ts",
+    "test": "mocha --require ts-node/register -R spec src/**/*.spec.ts",
     "docs": "node lib/gen-docs.js ./docs/dgeni-docs.js"
   },
   "repository": {
@@ -27,26 +27,26 @@
   "license": "MIT",
   "dependencies": {
     "canonical-path": "~0.0.2",
-    "dependency-graph": "~0.4.1",
+    "dependency-graph": "^0.7.0",
     "di": "0.0.1",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.10",
     "objectdiff": "^1.1.0",
     "optimist": "~0.6.1",
-    "q": "~1.4.1",
-    "validate.js": "^0.9.0",
+    "q": "^1.5.1",
+    "validate.js": "^0.12.0",
     "winston": "^2.1.1"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.34",
-    "@types/mocha": "^2.2.39",
-    "@types/node": "^7.0.5",
-    "chai": "^3.5.0",
-    "chai-spies": "^0.7.1",
-    "dgeni-packages": "^0.16.0",
-    "mocha": "^3.2.0",
-    "ts-node": "^2.1.0",
-    "tslint": "^4.4.2",
-    "typescript": "^2.1.6"
+    "@types/chai": "^4.1.3",
+    "@types/mocha": "^5.2.1",
+    "@types/node": "^10.3.1",
+    "chai": "^4.1.2",
+    "chai-spies": "^1.0.0",
+    "dgeni-packages": "^0.26.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^6.1.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.1"
   },
   "contributors": [
     "Pete Bacon Darwin <pete@bacondarwin.com>",
