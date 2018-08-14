@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.4.10 14 August 2018
+
+Chore release - updating dependencies
+
 ## 0.4.9 15 June 2017
 
 Chore release
