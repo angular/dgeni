@@ -12,7 +12,7 @@
     "src"
   ],
   "scripts": {
-    "prepublish": "npm build",
+    "prepublish": "tsc",
     "prebuild": "rm -rf lib",
     "build": "tsc",
     "watch": "tsc -w",
