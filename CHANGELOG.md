@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.4.11 17 December 2018
+
+Chore release - updating TypeScript dependency
+
 ## 0.4.10 14 August 2018
 
 Chore release - updating dependencies
