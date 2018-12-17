@@ -1,7 +1,11 @@
 const _ = require('lodash');
 import {Package} from '../Package';
-const options = {
-  docsToTrackFn: function(docs) {}
+
+interface TrackDocLoggerOptions {
+  docsToTrackFn(docs: any[]): any[]|undefined;
+}
+const options: TrackDocLoggerOptions = {
+  docsToTrackFn(docs) { return undefined; }
 };
 
 const generations = [];
