@@ -1,15 +1,28 @@
 #!/usr/bin/env node
 import {Dgeni} from './Dgeni';
+import {register, Options} from 'ts-node';
 
 const path = require('canonical-path');
 const myArgs = require('optimist')
-  .usage('Usage: $0 path/to/mainPackage [path/to/other/packages ...] [--log level]')
+  .usage('Usage: $0 path/to/mainPackage [path/to/other/packages ...] [--log level] [--project]')
   .demand(1)
   .argv;
 
 
 // Extract the paths to the packages from the command line arguments
-const packagePaths = myArgs._;
+const packagePaths: string[] = myArgs._;
+
+const containsTypeScript = packagePaths.some(packagePath => packagePath.endsWith('.ts'));
+// In case a package is a TypeScript file, transpile it before hand
+if ( containsTypeScript ) {
+  let typeScriptOptions: Partial<Options> = {};
+  if ( myArgs.project ) {
+    typeScriptOptions.project = myArgs.project;
+  } else {
+    typeScriptOptions.transpileOnly = true;
+  }
+  register(typeScriptOptions);
+}
 
 // Require each of these packages and then create a new dgeni using them
 const packages = packagePaths.map((packagePath) => {
