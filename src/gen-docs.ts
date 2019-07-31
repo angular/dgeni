@@ -29,7 +29,9 @@ const packages = packagePaths.map((packagePath) => {
   if ( packagePath.indexOf('.') === 0 ) {
     packagePath = path.resolve(packagePath);
   }
-  return require(packagePath);
+
+  const pkg = require(packagePath);
+  return pkg.default || pkg;
 });
 
 const logLevel = myArgs.log || myArgs.l;
