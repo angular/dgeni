@@ -1,8 +1,6 @@
 const {expect, spy} = require('chai').use(require('chai-spies'));
 
-const Q = require('q');
 import {Dgeni} from './Dgeni';
-import {Processor} from './Processor';
 import {DocCollection} from './DocCollection';
 
 
@@ -375,9 +373,9 @@ describe('Dgeni', () => {
       function handler1() { }
       function handler2() { return true; }
       function handler3() { return { message: 'info' }; }
-      function handler4() { return Q(); }
-      function handler5() { return Q(true); }
-      function handler6() { return Q({ message: 'info async'}); }
+      function handler4() { return Promise.resolve(); }
+      function handler5() { return Promise.resolve(true); }
+      function handler6() { return Promise.resolve({ message: 'info async'}); }
 
       dgeni.package('test1', [])
         .eventHandler('testEvent', () => { return handler1; })

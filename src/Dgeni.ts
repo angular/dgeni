@@ -1,6 +1,5 @@
 /* tslint globals: require: true */
 const di = require('di');
-const Q = require('q');
 
 import {Package, PackageRef} from './Package';
 import {Injector} from './Injector';
@@ -189,7 +188,7 @@ export class Dgeni {
 
   runProcessor(processor, docs) {
     const log = this.injector.get('log');
-    const promise = Q(docs);
+    const promise = Promise.resolve(docs);
 
     if ( !processor.$process ) {
       return promise;
@@ -212,7 +211,7 @@ export class Dgeni {
       .catch((error) => {
         error.message = 'Error running processor "' + processor.name + '":\n' + error.message;
         if ( this.stopOnProcessingError ) {
-          return Q.reject(error);
+          return Promise.reject(error);
         } else {
           log.error(error.message);
         }
@@ -228,12 +227,12 @@ export class Dgeni {
    */
   triggerEvent(eventName: string, ...extras: any[]) {
     const handlers = this.handlerMap[eventName];
-    let handlersPromise = Q();
+    let handlersPromise = Promise.resolve();
     const results = [];
     if (handlers) {
       handlers.forEach(handler => {
         handlersPromise = handlersPromise.then(() => {
-          const handlerPromise = Q(handler(eventName, ...extras));
+          const handlerPromise = Promise.resolve(handler(eventName, ...extras));
           handlerPromise.then(result => results.push(result));
           return handlerPromise;
         });
