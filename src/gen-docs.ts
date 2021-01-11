@@ -34,4 +34,4 @@ const dgeni = new Dgeni(packages);
 dgeni.generate().then(
   () => console.log('Finished generating docs'),
   err => process.exit(1)
-).done();
+);

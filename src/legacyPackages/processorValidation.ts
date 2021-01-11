@@ -1,4 +1,3 @@
-const Q = require('q');
 const validate = require('validate.js');
 import {Package} from '../Package';
 
@@ -12,7 +11,7 @@ export const processorValidationPackage = new Package('processorValidation')
   return function validateProcessorsImpl() {
     const validationErrors = [];
 
-    let validationPromise = Q();
+    let validationPromise = Promise.resolve();
 
     // Apply the validations on each processor
     dgeni.processors.forEach(function(processor) {
@@ -31,7 +30,7 @@ export const processorValidationPackage = new Package('processorValidation')
 
     validationPromise = validationPromise.then(function() {
       if ( validationErrors.length > 0 && dgeni.stopOnValidationError ) {
-        return Q.reject(validationErrors);
+        return Promise.reject(validationErrors);
       }
     });
 
