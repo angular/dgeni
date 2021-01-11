@@ -1,6 +1,7 @@
-const _ = require('lodash');
-const {diff} = require('objectdiff');
+import cloneDeep from 'clonedeep';
+import {diff} from 'objectdiff';
 import {Package} from '../Package';
+
 let firstDocs, startDocs, endDocs, lastDocs;
 const options = {
   start: null,
@@ -15,20 +16,20 @@ export const docDiffLoggerPackage = new Package('docDiffLogger')
 
 .eventHandler('processorStart', function() {
   return function capturePreviousDocs(event, processor, docs) {
-    firstDocs = firstDocs || _.cloneDeep(docs);
+    firstDocs = firstDocs || cloneDeep(docs);
 
     if ( options.start === processor.name ) {
-      startDocs = _.cloneDeep(docs);
+      startDocs = cloneDeep(docs);
     }
   };
 })
 
 .eventHandler('processorEnd', function(log) {
-  return function(event, processor, docs) {
+  return function(_event, processor, docs) {
     lastDocs = docs;
 
     if ( options.end === processor.name ) {
-      endDocs = _.cloneDeep(docs);
+      endDocs = cloneDeep(docs);
       logDiff(log);
     }
   };

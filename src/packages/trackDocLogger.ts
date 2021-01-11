@@ -1,4 +1,5 @@
-const _ = require('lodash');
+import cloneDeep from 'clonedeep';
+import deepEqual from 'fast-deep-equal';
 import {Package} from '../Package';
 
 interface TrackDocLoggerOptions {
@@ -21,8 +22,8 @@ export const trackDocLoggerPackage = new Package('trackDocLogger')
   return function(event, processor, docs) {
     let trackedDocs = options.docsToTrackFn(docs);
     if ( trackedDocs ) {
-      if ( !_.isEqual(trackedDocs, previousTrackedDocs) ) {
-        trackedDocs = _.cloneDeep(trackedDocs);
+      if ( !deepEqual(trackedDocs, previousTrackedDocs) ) {
+        trackedDocs = cloneDeep(trackedDocs);
         generations.push({ processor: processor.name, docs: trackedDocs });
         previousTrackedDocs = trackedDocs;
       }
