@@ -15,6 +15,7 @@
     "prepublish": "tsc",
     "prebuild": "rm -rf lib",
     "build": "tsc",
+    "postbuild": "chmod +x lib/gen-docs.js",
     "watch": "tsc -w",
     "test": "mocha --require ts-node/register -R spec src/**/*.spec.ts",
     "docs": "node lib/gen-docs.js ./docs/dgeni-docs.js"
