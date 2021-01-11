@@ -1,5 +1,4 @@
-const _ = require('lodash');
-const {DepGraph} = require('dependency-graph');
+import {DepGraph} from 'dependency-graph';
 
 /**
  * @name  sortByDependency
@@ -16,17 +15,17 @@ const {DepGraph} = require('dependency-graph');
  *                                      defaults to 'name'.
  * @return {Array}                      A new array containing the sorted collection of items.
  */
-export function sortByDependency(items: Object | any[], afterProp?: string, beforeProp?: string, nameProp: string = 'name') {
+export function sortByDependency<T>(items: Record<string, T>|T[], afterProp?: string, beforeProp?: string, nameProp: string = 'name'): T[] {
 
-  let map = {};
-  let depGraph = new DepGraph();
+  const map: Record<string, T> = {};
+  const depGraph = new DepGraph();
 
-  let addDependencies = function(item, dependencyProp, addBefore: boolean = false) {
+  function addDependencies(item: T, dependencyProp: string, addBefore: boolean = false) {
     if ( dependencyProp && item[dependencyProp]) {
       if ( !Array.isArray(item[dependencyProp]) ) {
         throw new Error('Error in item "' + item[nameProp] + '" - ' + dependencyProp + ' must be an array');
       }
-      item[dependencyProp].forEach(function(dependency) {
+      item[dependencyProp].forEach(dependency => {
         if ( !map[dependency] ) {
           throw new Error('Missing dependency: "' + dependency + '"  on "' + item[nameProp] + '"');
         }
@@ -37,23 +36,21 @@ export function sortByDependency(items: Object | any[], afterProp?: string, befo
         }
       });
     }
-  };
+  }
 
-  _.forEach(items, function(item, index) {
+  Object.keys(items).forEach(itemKey => {
+    const item = items[itemKey];
     if ( !item[nameProp] ) {
-      throw new Error('Missing ' + nameProp + ' property on item #' + (index + 1));
+      throw new Error('Missing ' + nameProp + ' property on item ' + itemKey);
     }
     map[item[nameProp]] = item;
     depGraph.addNode(item[nameProp]);
   });
 
-
-  _.forEach(items, function(item) {
+  Object.values(items).forEach(item => {
     addDependencies(item, afterProp);
     addDependencies(item, beforeProp, true);
   });
 
-  return depGraph.overallOrder().map(function(itemName) {
-    return map[itemName];
-  });
+  return depGraph.overallOrder().map(itemName => map[itemName]);
 };

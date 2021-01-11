@@ -1,5 +1,4 @@
 /* tslint globals: require: true */
-const _ = require('lodash');
 const di = require('di');
 const Q = require('q');
 
@@ -21,7 +20,7 @@ export class Dgeni {
   static Package = Package;
 
   injector: Injector;
-  packages: { [key: string]: Package } = {};
+  packages: Record<string, Package>|Package[] = {};
   processors: Processor[];
   stopOnProcessingError: boolean;
   handlerMap: {[key: string]: Function[]};
