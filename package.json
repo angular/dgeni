@@ -43,7 +43,7 @@
     "@types/node": "^10.3.1",
     "chai": "^4.1.2",
     "chai-spies": "^1.0.0",
-    "dgeni-packages": "^0.26.0",
+    "dgeni-packages": "^0.28.4",
     "mocha": "^5.2.0",
     "ts-node": "^6.1.0",
     "tslint": "^5.10.0",
