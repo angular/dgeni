@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.4.13 11 January 2021
+
+fix(Dgeni): do not print stack trace on error unless debugging (a3c870d)
+
 ## 0.4.12 14 March 2019
 
 Chore release - updating dependencies
