@@ -31,6 +31,7 @@ if ( logLevel ) {
 const dgeni = new Dgeni(packages);
 
 // Run the document generation
-dgeni.generate().then(() => {
-  console.log('Finished generating docs');
-}).done();
+dgeni.generate().then(
+  () => console.log('Finished generating docs'),
+  err => process.exit(1)
+).done();

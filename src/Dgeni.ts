@@ -173,7 +173,13 @@ export class Dgeni {
       processingPromise = processingPromise.then(docs => this.runProcessor(processor, docs));
     });
 
-    processingPromise.catch(error => log.error('Error processing docs: ', error.stack || error.message || error ));
+    processingPromise.catch(error => {
+      log.error(error.message);
+      if (error.stack) {
+        log.debug(error.stack);
+      }
+      log.error('Failed to process the docs');
+    });
 
     return processingPromise.then(docs => {
       this.triggerEvent('generationEnd');
@@ -206,8 +212,11 @@ export class Dgeni {
 
       .catch((error) => {
         error.message = 'Error running processor "' + processor.name + '":\n' + error.message;
-        log.error(error.stack || error.message);
-        if ( this.stopOnProcessingError ) { return Q.reject(error); }
+        if ( this.stopOnProcessingError ) {
+          return Q.reject(error);
+        } else {
+          log.error(error.message);
+        }
         return docs;
       });
   }
@@ -253,5 +262,5 @@ export class Dgeni {
       log.info((index + 1) + ': ' + processor.name, processor.$process ? '' : '(abstract)', ' from ', processor.$package);
       if ( processor.description ) { log.info('   ', processor.description); }
     });
-  };
+  }
 }
