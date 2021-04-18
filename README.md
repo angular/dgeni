@@ -405,7 +405,3 @@ Dgeni itself triggers the following events during documentation generation:
 * `generationEnd`: triggered after the processors have all completed their work successfully.
 * `processorStart`: triggered just before the call to `$process`, for each processor.
 * `processorEnd`: triggered just after `$process` has completed successfully, for each processor.
-
-## License
-
-Apache 2
