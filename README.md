@@ -258,10 +258,10 @@ The `$process(docs)` method can be synchronous or asynchronous:
 
 * If synchronous then it should return `undefined` or a new array of documents.
 If it returns a new array of docs then this array will replace the previous `docs` array.
-* If asynchronous then it must return a **Promise**, which should resolve to `undefined`
-or a new collection of documents. By returning a **Promise**, the processor tells Dgeni
-that it is asynchronous and Dgeni will wait for the promise to resolve before calling the
-next processor.
+* If asynchronous then it must return a **Promise**, which should resolve to an array of
+documents that will replace the previous array. By returning a **Promise**, the processor
+tells Dgeni that it is asynchronous and Dgeni will wait for the promise to resolve before
+calling the next processor.
 
 
 Here is an example of an asynchronous **Processor**
@@ -273,6 +273,7 @@ module.exports = function readFileProcessor() {
     $process(docs) {
       return qfs.readFile(this.filePath).then(function(response) {
         docs.push(response.data);
+        return docs;
       });
     }
   };
